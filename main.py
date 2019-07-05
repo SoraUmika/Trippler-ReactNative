@@ -1,9 +1,9 @@
 from kivy.app import App
-
-from widgets import Root
 from lib.iconfonts import register
 
-register("font-awesome", "font/fa-regular-400.ttf", "font/font-awesome.fontd")
+from widgets import Root
+
+register("material", "font/MaterialIcons-Regular.ttf", "font/material-icons-regular.fontd")
 
 
 class TripplerApp(App):
