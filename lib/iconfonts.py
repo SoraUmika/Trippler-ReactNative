@@ -70,7 +70,7 @@ def _parse(data):
     for i in re.finditer(pat_keys, data):
         start = i.start()
         end = data.find('}', start)
-        key = i.group().replace(':before', '')
+        key = '_'.join(i.group().replace(':before', '').split('-')[2:])
         try:
             value = int(data[start:end].split('"')[1], 0)
         except (IndexError, ValueError):
