@@ -127,21 +127,27 @@ dispatch({'type': 'SET_SEPARATOR', 'new_value': '*'})
 
 """
 from kivy.event import EventDispatcher
+from dataclasses import dataclass
 
 
 def action(cls):
     """
     Class wrapper that creates an action class.
-    The type of action is derived from the class name.
-    Example, a class named 'ChangePageNum' will have type of 'CHANGED_PAGE_NUM'
-    !!! IMPORTANT !!!
-    This wrapper only work when there is a dataclasses.dataclass wrapper applied after it.
+    The type of action is derived from the class name,
+    for example, a class named `ChangePageNum` will have type of 'CHANGED_PAGE_NUM'.
+    The payload of action derived from the class's static fields,
+    The names and types of the static fields are the names and types of the payload parameters,
+    for example, a static field of `num: int` is a parameter of the payload named 'num', typed `int`.
+    Example of using this wrapper:
     `
-    @dataclass
     @action
     class ChangePageNum:
-        new_page_num: int
+        num: int
+        update: bool
     `
+    This __init__ of the class will become __init__(num: int, update: bool).
+    And an instance of the class will be an action object, with the attributes of
+    {type: 'CHANGED_PAGE_NUM', num: 10, update: False}
     :param cls: The class to be wrapped.
     :return: A class with modified __str__, and new method __post_init__ for dataclass wrapper.
     """
@@ -163,7 +169,7 @@ def action(cls):
 
     cls.__post_init__ = __post_init__
     cls.__str__ = __str__
-    return cls
+    return dataclass(cls)
 
 
 def create_store(init_state: dict, reducer_collection):
@@ -242,6 +248,7 @@ def create_store(init_state: dict, reducer_collection):
         """
         if not hasattr(action, "type"):
             raise TypeError(f"{action} does not have attribute 'type'.")
+        print(action)
         nonlocal state
         for key, reducer in reducers.items():
             setattr(state, key, reducer(getattr(state, key), action))
@@ -262,7 +269,6 @@ def create_store(init_state: dict, reducer_collection):
         else:
             for listener_list in listeners.values():  # subscribe to all states.
                 listener_list.append(func)
-        print(f"listeners updated: {listeners}")
 
         def un_subscribe():
             """
