@@ -32,7 +32,7 @@ Example of a reducer of a state name 'test_state'.
 `
 @staticmethod
 def test_state(value, action):
-    if action == "TEST_ACTION":
+    if action.type == "TEST_ACTION":
         return value + 1
     return value
 `
@@ -47,8 +47,8 @@ class Reducers:
 
     @staticmethod
     def bar(val, act):
-        if act == "A_SIMPLE_ACTION":
-            return 123
+        if act.type == "A_SIMPLE_ACTION":
+            return act.value
         return val
 `
 
