@@ -13,7 +13,7 @@ Builder.load_string("""
                     size: root.size
 
             Image:
-                source: 'firstIMG.jpg'
+                source: 'image/firstIMG.jpg'
                 allow_stretch: False
                 keep_ratio: False
                 size: 666, 500
@@ -37,7 +37,7 @@ Builder.load_string("""
                         Rectangle:
                             pos: self.pos
                             size: self.size
-                            source: 'icon_account.png'
+                            source: 'image/icon_account.png'
                 Button:
                     pos_hint: {'top': 1, 'left': 1}
                     #pos: self.parent.pos
@@ -47,7 +47,7 @@ Builder.load_string("""
                         Rectangle:
                             pos: self.pos
                             size: self.size
-                            source: 'icon_list.png'
+                            source: 'image/icon_list.png'
                 Label:
                     text: '[u][i][b]Trippler[/b][/i][/u]'
                     markup: True
