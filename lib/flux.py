@@ -129,6 +129,43 @@ dispatch({'type': 'SET_SEPARATOR', 'new_value': '*'})
 from kivy.event import EventDispatcher
 
 
+def action(cls):
+    """
+    Class wrapper that creates an action class.
+    The type of action is derived from the class name.
+    Example, a class named 'ChangePageNum' will have type of 'CHANGED_PAGE_NUM'
+    !!! IMPORTANT !!!
+    This wrapper only work when there is a dataclasses.dataclass wrapper applied after it.
+    `
+    @dataclass
+    @action
+    class ChangePageNum:
+        new_page_num: int
+    `
+    :param cls: The class to be wrapped.
+    :return: A class with modified __str__, and new method __post_init__ for dataclass wrapper.
+    """
+    name = "".join([
+        letter.upper() if letter.islower() else (
+            ("_" if index else "") + letter
+        )
+        for index, letter in enumerate(
+            str(cls).split(".")[1].split("'")[0]
+        )
+    ])
+
+    def __post_init__(self):
+        self.type = name
+
+    def __str__(self):
+        s = super(cls, self).__str__()
+        return name + ": " + s[s.index("("):]
+
+    cls.__post_init__ = __post_init__
+    cls.__str__ = __str__
+    return cls
+
+
 def create_store(init_state: dict, reducer_collection):
     """
     Create a store and return its methods.
@@ -198,14 +235,13 @@ def create_store(init_state: dict, reducer_collection):
         except KeyError:
             raise KeyError(f"The state {name} does not exist in store.")
 
-    def dispatcher(action: dict):
+    def dispatcher(action: object):
         """
-        Dispatch an action of the format of {"type": "action-type", ... }
-        :param action: An action of the format of {"type": "action-type", ... }
-        :return: `None`
+        Dispatch an action, which is a object with attribute of 'type'
+        :param action: A object with attribute of 'type'
         """
-        if "type" not in action:
-            raise TypeError(f"{action} does not have a 'type' key.")
+        if not hasattr(action, "type"):
+            raise TypeError(f"{action} does not have attribute 'type'.")
         nonlocal state
         for key, reducer in reducers.items():
             setattr(state, key, reducer(getattr(state, key), action))
