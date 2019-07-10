@@ -1,10 +1,17 @@
-from kivy.uix.gridlayout import GridLayout
+from kivy.uix.screenmanager import ScreenManager
 from kivy.lang.builder import Builder
 
-Builder.load_string("""
+from .mainscreen import MainScreen
+from .loginscreen import LoginScreen
 
+Builder.load_string("""
+<Root>:
+    LoginScreen:
+        name: 'login'
+    MainScreen:
+        name: 'main'
 """)
 
 
-class Root(GridLayout):
+class Root(ScreenManager):
     pass
