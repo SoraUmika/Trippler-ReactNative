@@ -156,7 +156,7 @@ def action(cls):
             ("_" if index else "") + letter
         )
         for index, letter in enumerate(
-            str(cls).split(".")[1].split("'")[0]
+            str(cls).split(".")[-1].split("'")[0]
         )
     ])
 
@@ -244,7 +244,7 @@ def create_store(init_state: dict, reducer_collection):
     def dispatcher(act: object):
         """
         Dispatch an action, which is a object with attribute of 'type'
-        :param action: A object with attribute of 'type'
+        :param act: A object with attribute of 'type'
         """
         if not hasattr(act, "type"):
             raise TypeError(f"{act} does not have attribute 'type'.")

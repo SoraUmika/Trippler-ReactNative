@@ -1,6 +1,8 @@
 from kivy.lang.builder import Builder
 from kivy.uix.screenmanager import Screen
 
+import store
+
 Builder.load_string("""
 <LoginScreen>:
     canvas.before:
@@ -22,9 +24,11 @@ Builder.load_string("""
                 text: "password"
             Button:
                 text: "Login"
-                on_release: root.manager.current = 'MainWidget'
+                on_release: root.on_login_button_release()
 """)
 
 
 class LoginScreen(Screen):
-    pass
+
+    def on_login_button_release(self, *pargs):
+        store.dispatch(store.SetCurrentScreen('main'))
