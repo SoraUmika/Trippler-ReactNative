@@ -1,0 +1,4 @@
+screen_default_size: 312, 670
+default_font: 'Arial'
+main_theme_color: 0, 0, 0, 1
+server_host_ip: None
