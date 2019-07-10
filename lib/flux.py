@@ -64,7 +64,10 @@ Dispatch action
 ===============
 
 Dispatch action using the second function returned by create_store.
-`dispatch({type: 'UPDATE_NUM', new_val: 10})`
+An action is any object that has the attribute of 'type'.
+(see `action` function, a class wrapper that helps to generate an action class easily)
+
+`dispatch(action_object)`
 
 
 Subscribe a listener
@@ -98,16 +101,16 @@ class Reducers:
 
     @staticmethod
     def words(value, action):
-        if action == 'PUSH_WORD':
-            return value + [action['new_word']]
-        elif action == 'POP_WORD':
+        if action.type == 'PUSH_WORD':
+            return value + [action.new_word]
+        elif action.type == 'POP_WORD':
             return value[:-1]
         return value
 
     @staticmethod
     def separator(value, action):
-        if action == 'SET_SEPARATOR':
-            return action['new_value']
+        if action.type == 'SET_SEPARATOR':
+            return action.new_value
         return value
 
 
