@@ -1,0 +1,24 @@
+#:kivy 1.10.1
+<LoginPage>:
+    Widget:
+        canvas.before:
+            Color:
+                rgba: 30/255, 144/255, 1, 1
+            Rectangle:
+                size: root.width, root.height
+
+        BoxLayout:
+            pos: root.width/2-(self.width/2), root.height/2-(self.height/2)
+            orientation: 'vertical'
+            size: root.width * 0.5, root.height*0.2
+
+            TextInput:
+                id: account_inputbox
+                text: "user ID"
+
+            TextInput:
+                id: password_inputbox
+                text: "password"
+            Button:
+                text: "Login"
+                on_release: root.manager.current = 'MainWidget'
