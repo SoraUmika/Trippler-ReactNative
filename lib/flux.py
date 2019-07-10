@@ -241,17 +241,17 @@ def create_store(init_state: dict, reducer_collection):
         except KeyError:
             raise KeyError(f"The state {name} does not exist in store.")
 
-    def dispatcher(action: object):
+    def dispatcher(act: object):
         """
         Dispatch an action, which is a object with attribute of 'type'
         :param action: A object with attribute of 'type'
         """
-        if not hasattr(action, "type"):
-            raise TypeError(f"{action} does not have attribute 'type'.")
-        print(action)
+        if not hasattr(act, "type"):
+            raise TypeError(f"{act} does not have attribute 'type'.")
+        print(act)
         nonlocal state
         for key, reducer in reducers.items():
-            setattr(state, key, reducer(getattr(state, key), action))
+            setattr(state, key, reducer(getattr(state, key), act))
         States.call_listeners()
 
     def subscribe(func, *listening_states):
