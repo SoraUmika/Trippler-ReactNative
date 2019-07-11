@@ -23,6 +23,7 @@ class MainApp(App):
         return sm
 
 
+# Loads the default settings from config.txt
 def load_configuration(application):
     with open('config.txt', 'r') as config_file:
         config_dict = {}
@@ -43,7 +44,7 @@ def load_configuration(application):
         Config.set('graphics', 'width', config_dict['application_default_width'])
         Config.set('graphics', 'height', config_dict['application_default_height'])
         Config.set('graphics', 'fullscreen', config_dict['full_screen'])
-        Config.set('graphics', 'fullscreen', int(config_dict['max_fps']))
+        Config.set('graphics', 'maxfps', int(config_dict['max_fps']))
 
 
 if __name__ == "__main__":
