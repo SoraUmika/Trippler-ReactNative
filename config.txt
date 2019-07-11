@@ -1,3 +1,9 @@
+application_title: Trippler
+application_default_width: 312
+application_default_height: 670
+full_screen: False
+max_fps: 60
+logo_image: img_src/icon/icon_list.png
 screen_default_size: 312, 670
 default_font: 'Arial'
 main_theme_color: 0, 0, 0, 1
