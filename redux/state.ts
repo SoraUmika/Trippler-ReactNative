@@ -1,1 +1,7 @@
-export default interface State {}
+export default interface State {
+    theme: Theme
+}
+
+export interface Theme {
+    accentColor: string
+} 

@@ -2,12 +2,8 @@ import { createStore } from "redux";
 import { devToolsEnhancer } from "redux-devtools-extension"; //* Dev only
 
 import State from "./state";
+import RootAction from "./action";
+import reducer from "./reducer";
 
-const init_state: State = {};
-
-function reducer(state: State = init_state, action: any) {
-	return state;
-}
-
-const store = createStore<State, any, {}, {}>(reducer, devToolsEnhancer({}));
+const store = createStore<State, RootAction, {}, {}>(reducer, devToolsEnhancer({}));
 export default store;
