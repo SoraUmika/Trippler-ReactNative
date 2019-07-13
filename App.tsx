@@ -3,24 +3,12 @@ import { StyleSheet, View } from "react-native";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 
-import Button from "./components/Button";
-import Input from "./components/Input";
+import LoginPage from "./components/LoginPage"
 
 export default function App() {
 	return (
 		<Provider store={store}>
-			<View style={styles.container}>
-				<Input placeholder="input" width={100}/>
-			</View>
+			<LoginPage/>
 		</Provider>
 	);
 }
-
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		backgroundColor: "#fff",
-		alignItems: "center",
-		justifyContent: "center"
-	}
-});
