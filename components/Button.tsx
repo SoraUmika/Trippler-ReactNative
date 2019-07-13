@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { TouchableOpacity, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, BackAndroid } from "react-native";
 
 interface Props {
 	text: string;
@@ -20,8 +20,8 @@ export default class Button_ extends Component<Props, State> {
 	};
 
 	onTouchDown = () => {
-        this.setState({ down: true });
-        this.props.onPress && this.props.onPress()
+		this.setState({ down: true });
+		this.props.onPress && this.props.onPress();
 	};
 
 	onTouchUp = () => this.setState({ down: false });
@@ -30,13 +30,13 @@ export default class Button_ extends Component<Props, State> {
 		const { text, bgColor, width, height, shadowColor } = this.props;
 		const { down } = this.state;
 		return (
-			<View>
+			<View style={{ width: width, height: height }}>
 				<View
 					style={{
 						...styles.button,
 						backgroundColor: bgColor,
-						width: width,
-						height: height
+						height: height - 8,
+						top: down ? 8 : 0
 					}}
 					onTouchStart={this.onTouchDown}
 					onTouchEnd={this.onTouchUp}
@@ -48,7 +48,7 @@ export default class Button_ extends Component<Props, State> {
 				{!down && (
 					<View
 						style={{
-							...styles.shadow,
+                            ...styles.shadow,
 							backgroundColor: shadowColor
 						}}
 					/>
@@ -65,19 +65,16 @@ const styles = StyleSheet.create({
 	},
 	textContainer: {
 		flex: 1,
-		justifyContent: "center",
-		shadowColor: "#000",
-		shadowOffset: { width: 0, height: 100 },
-		shadowOpacity: 1
+		justifyContent: "center"
 	},
 	text: {
 		textAlign: "center"
 	},
 	shadow: {
 		height: 16,
-		borderBottomLeftRadius: 8,
-		borderBottomRightRadius: 8,
 		top: -8,
-		zIndex: 1
+		zIndex: 1,
+		borderBottomLeftRadius: 8,
+		borderBottomRightRadius: 8
 	}
 });
