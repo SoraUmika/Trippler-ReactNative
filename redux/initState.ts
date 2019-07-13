@@ -2,7 +2,7 @@ import State from "./state";
 
 const init_state: State = {
 	theme: {
-		accentColor: "#f00"
+		accentColor: "#058ED9"
 	}
 };
 
