@@ -1,15 +1,16 @@
 import React, { FC, useState } from "react";
-import { StyleSheet, TextInput, View, TextInputProps } from "react-native";
+import { StyleSheet, TextInput, View } from "react-native";
 import { useSelector } from "react-redux";
 
 import State from "../redux/state";
 
-interface Props extends TextInputProps {
+interface Props {
 	width: number | string;
+	placeholder: string;
 }
 
 const Input: FC<Props> = props => {
-	const { placeholder, width } = props;
+	const { placeholder, width, ...inputProps } = props;
 	const accentColor = useSelector((state: State) => state.theme.accentColor);
 	const [focus, setFocus] = useState(false);
 	return (
@@ -22,9 +23,7 @@ const Input: FC<Props> = props => {
 				placeholder={placeholder}
 				onFocus={() => setFocus(true)}
 				onEndEditing={() => setFocus(false)}
-				style={{
-					width: width
-				}}
+				style={styles.input}
 			/>
 			<View
 				style={{
@@ -38,7 +37,11 @@ const Input: FC<Props> = props => {
 
 const styles = StyleSheet.create({
 	underline: {
-		height: 3
+        height: 3,
+        top: -3
+	},
+	input: {
+        width: "100%",
 	}
 });
 
