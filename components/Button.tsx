@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, TextProps } from "react-native";
 interface Props {
 	text: string;
 	color: string;
-	width?: number;
+	width?: number | string;
 	height?: number;
 	onPress?: Function;
 	textProps?: TextProps;

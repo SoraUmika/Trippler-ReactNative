@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import State from "../redux/state";
 
 interface Props extends TextInputProps {
-	width: number;
+	width: number | string;
 }
 
 const Input: FC<Props> = props => {
