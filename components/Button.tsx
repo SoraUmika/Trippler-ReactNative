@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, TextProps} from "react-native";
+import { StyleSheet, Text, View, TextProps } from "react-native";
 
 interface Props {
 	text: string;
@@ -7,7 +7,7 @@ interface Props {
 	width?: number;
 	height?: number;
 	onPress?: Function;
-	textProps?: TextProps
+	textProps?: TextProps;
 }
 
 interface State {
@@ -42,13 +42,18 @@ export default class Button_ extends Component<Props, State> {
 					onTouchEnd={this.onTouchUp}
 				>
 					<View style={styles.textContainer}>
-						<Text style={styles.text} {...textProps}>{text}</Text>
+						<Text
+							{...textProps}
+							style={{ ...styles.text, ...textProps.style.valueOf() }}
+						>
+							{text}
+						</Text>
 					</View>
 				</View>
 				{!down && (
 					<View
 						style={{
-                            ...styles.shadow,
+							...styles.shadow,
 							backgroundColor: color,
 							opacity: 0.2
 						}}
