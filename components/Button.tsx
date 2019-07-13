@@ -24,13 +24,19 @@ export default class Button_ extends Component<Props, State> {
 		this.props.onPress && this.props.onPress();
 	};
 
-	onTouchUp = () => this.setState({ down: false });
+	onTouchUp = () => {
+		this.setState({ down: false });
+	};
 
 	render() {
 		const { text, color, width, height, textProps } = this.props;
 		const { down } = this.state;
 		return (
-			<View style={{ width: width, height: height }}>
+			<View
+				style={{ width: width, height: height }}
+				onTouchStart={this.onTouchDown}
+				onTouchEnd={this.onTouchUp}
+			>
 				<View
 					style={{
 						...styles.button,
@@ -38,8 +44,6 @@ export default class Button_ extends Component<Props, State> {
 						height: height - 8,
 						top: down ? 8 : 0
 					}}
-					onTouchStart={this.onTouchDown}
-					onTouchEnd={this.onTouchUp}
 				>
 					<View style={styles.textContainer}>
 						<Text
@@ -50,15 +54,13 @@ export default class Button_ extends Component<Props, State> {
 						</Text>
 					</View>
 				</View>
-				{!down && (
-					<View
-						style={{
-							...styles.shadow,
-							backgroundColor: color,
-							opacity: 0.2
-						}}
-					/>
-				)}
+				<View
+					style={{
+						...styles.shadow,
+						backgroundColor: color,
+						opacity: 0.2
+					}}
+				/>
 			</View>
 		);
 	}
