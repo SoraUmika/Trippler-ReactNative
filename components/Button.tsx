@@ -1,13 +1,13 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, BackAndroid } from "react-native";
+import { StyleSheet, Text, View, TextProps} from "react-native";
 
 interface Props {
 	text: string;
-	bgColor: string;
-	shadowColor: string;
+	color: string;
 	width?: number;
 	height?: number;
 	onPress?: Function;
+	textProps?: TextProps
 }
 
 interface State {
@@ -27,14 +27,14 @@ export default class Button_ extends Component<Props, State> {
 	onTouchUp = () => this.setState({ down: false });
 
 	render() {
-		const { text, bgColor, width, height, shadowColor } = this.props;
+		const { text, color, width, height, textProps } = this.props;
 		const { down } = this.state;
 		return (
 			<View style={{ width: width, height: height }}>
 				<View
 					style={{
 						...styles.button,
-						backgroundColor: bgColor,
+						backgroundColor: color,
 						height: height - 8,
 						top: down ? 8 : 0
 					}}
@@ -42,14 +42,15 @@ export default class Button_ extends Component<Props, State> {
 					onTouchEnd={this.onTouchUp}
 				>
 					<View style={styles.textContainer}>
-						<Text style={styles.text}>{text}</Text>
+						<Text style={styles.text} {...textProps}>{text}</Text>
 					</View>
 				</View>
 				{!down && (
 					<View
 						style={{
                             ...styles.shadow,
-							backgroundColor: shadowColor
+							backgroundColor: color,
+							opacity: 0.2
 						}}
 					/>
 				)}
