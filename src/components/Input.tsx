@@ -44,7 +44,8 @@ const Input: FC<Props> = props => {
 const styles = StyleSheet.create({
 	underline: {
         height: 3,
-        top: -3
+		top: -3,
+		borderRadius: 1.5
 	},
 	input: {
         width: "100%",

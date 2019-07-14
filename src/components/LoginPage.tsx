@@ -2,7 +2,7 @@
  * Login page component.
  */
 import React, { FC, useState } from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, KeyboardAvoidingView } from "react-native";
 
 import Button from "./Button";
 import Input from "./Input";
@@ -17,7 +17,7 @@ const LoginPage: FC<Props> = props => {
 			{/* Logo */}
 			<View style={styles.top} />
 			{/* Login form */}
-			<View style={styles.form}>
+			<KeyboardAvoidingView style={styles.form} enabled behavior="padding">
 				{/* User name input */}
 				<Input
 					width="80%"
@@ -39,7 +39,7 @@ const LoginPage: FC<Props> = props => {
 					textStyle={{ color: "white" }}
 					onPress={() => console.log(`user name = ${userName}, password = ${password}`)}
 				/>
-			</View>
+			</KeyboardAvoidingView>
 			{/* Sign up button */}
 			<View style={styles.bottom}>
 				<Text style={styles.signUpText}>sign up</Text>
