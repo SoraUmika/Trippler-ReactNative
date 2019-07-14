@@ -10,6 +10,7 @@ import Input from "./Input";
 interface Props {}
 
 const LoginPage: FC<Props> = props => {
+	console.log("login");
 	const [userName, setUserName] = useState("");
 	const [password, setPassword] = useState("");
 	return (

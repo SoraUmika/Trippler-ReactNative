@@ -1,14 +1,14 @@
 /**
  * Button component.
- * 
+ *
  * @precondition The height prop >= 8.
- * 
+ *
  * @param {string} text The text displayed inside the button.
  * @param {string} color The color of the button.
  * @param {number|string} [width] The width of the button.
  * @param {number} height The height of the button.
  * @param {function} [onPress] The callback when pressed.
- * @param {StyleProp<TextStyle>} [textStyle] The style applied to the text in the button. 
+ * @param {StyleProp<TextStyle>} [textStyle] The style applied to the text in the button.
  */
 import React, { Component } from "react";
 import { StyleSheet, Text, View, TextStyle, StyleProp } from "react-native";
@@ -40,7 +40,12 @@ export default class Button_ extends Component<Props, State> {
 		this.setState({ down: false });
 	};
 
+	shouldComponentUpdate(nextProps: Props, nextState: State) {
+		return nextState.down !== this.state.down;
+	}
+
 	render() {
+		console.log("button");
 		const { text, color, width, height, textStyle } = this.props;
 		const { down } = this.state;
 		return (
@@ -64,7 +69,7 @@ export default class Button_ extends Component<Props, State> {
 						<Text
 							style={{
 								...styles.text,
-								...(textStyle ? textStyle : {}) as object
+								...((textStyle ? textStyle : {}) as object)
 							}}
 						>
 							{text}
