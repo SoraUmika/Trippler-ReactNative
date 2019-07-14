@@ -4,26 +4,18 @@
  * @param {number|string} width The width of the input.
  */
 import React, { FC, useState, memo } from "react";
-import {
-	StyleSheet,
-	TextInput,
-	View,
-	NativeSyntheticEvent,
-	TextInputChangeEventData
-} from "react-native";
+import { StyleSheet, TextInput, View, TextInputProps } from "react-native";
 import { useSelector } from "react-redux";
 
 import State from "../redux/state";
 
-interface Props {
+interface Props extends TextInputProps {
 	width: number | string;
-	placeholder: string;
-	onChange: (e: NativeSyntheticEvent<TextInputChangeEventData>) => void;
 }
 
 const Input: FC<Props> = props => {
 	console.log("input");
-	const { width, placeholder, onChange } = props;
+	const { width, ...inputProps } = props;
 	const accentColor = useSelector((state: State) => state.theme.accentColor);
 	const [focus, setFocus] = useState(false);
 	return (
@@ -34,8 +26,7 @@ const Input: FC<Props> = props => {
 		>
 			{/* Input itself */}
 			<TextInput
-				placeholder={placeholder}
-				onChange={onChange}
+				{...inputProps}
 				onFocus={() => setFocus(true)}
 				onEndEditing={() => setFocus(false)}
 				style={styles.input}

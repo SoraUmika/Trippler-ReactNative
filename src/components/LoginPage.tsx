@@ -24,12 +24,17 @@ const LoginPage: FC<Props> = props => {
 					width="80%"
 					placeholder="User name"
 					onChange={e => setUserName(e.nativeEvent.text)}
+					textContentType="username"
+					autoCompleteType="username"
 				/>
 				{/* Password input */}
 				<Input
 					width="80%"
 					placeholder="Password"
 					onChange={e => setPassword(e.nativeEvent.text)}
+					textContentType="password"
+					autoCompleteType="password"
+					secureTextEntry
 				/>
 				{/* Login button */}
 				<Button
