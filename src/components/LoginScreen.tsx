@@ -9,7 +9,7 @@ import Input from "./Input";
 
 interface Props {}
 
-const LoginPage: FC<Props> = props => {
+const LoginScreen: FC<Props> = props => {
 	const [userName, setUserName] = useState("");
 	const [password, setPassword] = useState("");
 	return (
@@ -79,4 +79,4 @@ const styles = StyleSheet.create({
 	}
 });
 
-export default LoginPage;
+export default LoginScreen;

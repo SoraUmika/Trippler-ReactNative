@@ -3,12 +3,13 @@ import { Provider } from "react-redux";
 import { createStackNavigator, createAppContainer } from "react-navigation";
 import store from "./src/redux/store";
 
-import LoginPage from "./src/components/LoginPage";
+import LoginScreen from "./src/components/LoginScreen";
 
 const Navigator = createAppContainer(
 	createStackNavigator(
 		{
-			Login: { screen: LoginPage }
+			// Register screens here.
+			Login: { screen: LoginScreen }
 		},
 		{
 			defaultNavigationOptions: {
