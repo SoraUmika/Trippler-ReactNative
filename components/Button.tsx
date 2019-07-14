@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, TextProps } from "react-native";
+import { StyleSheet, Text, View, TextStyle, StyleProp } from "react-native";
 
 interface Props {
 	text: string;
@@ -7,7 +7,7 @@ interface Props {
 	width?: number | string;
 	height?: number;
 	onPress?: Function;
-	textProps?: TextProps;
+	textStyle?: StyleProp<TextStyle>;
 }
 
 interface State {
@@ -29,7 +29,7 @@ export default class Button_ extends Component<Props, State> {
 	};
 
 	render() {
-		const { text, color, width, height, textProps } = this.props;
+		const { text, color, width, height, textStyle } = this.props;
 		const { down } = this.state;
 		return (
 			<View
@@ -47,8 +47,10 @@ export default class Button_ extends Component<Props, State> {
 				>
 					<View style={styles.textContainer}>
 						<Text
-							{...textProps}
-							style={{ ...styles.text, ...textProps.style.valueOf() }}
+							style={{
+								...styles.text,
+								...(textStyle ? textStyle : {}) as object
+							}}
 						>
 							{text}
 						</Text>

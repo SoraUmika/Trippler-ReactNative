@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 
 import Button from "./Button";
 import Input from "./Input";
@@ -18,29 +18,40 @@ const LoginPage: FC<Props> = props => {
 					height={50}
 					text="Login"
 					color="black"
-					textProps={{ style: { color: "white" } }}
+					textStyle={{ color: "white" }}
 				/>
 			</View>
-			<View style={styles.bottom} />
+			<View style={styles.bottom}>
+				<Text style={styles.signUpText} onPress={() => console.log("?")}>sign up</Text>
+			</View>
 		</View>
 	);
 };
 
 const styles = StyleSheet.create({
 	container: {
-		flex: 1,
+		flex: 1
 	},
 	top: {
 		flex: 2
 	},
 	form: {
 		flex: 1,
-        justifyContent: "space-around",
-        alignItems: "center"
+		justifyContent: "space-around",
+		alignItems: "center"
 	},
 	bottom: {
-		flex: 1,
-	}
+        flex: 1,
+        flexDirection: "column-reverse",
+    },
+    signUpText: {
+        textDecorationLine: "underline",
+        textAlign: "right",
+        right: "10%",
+        bottom: "-20%",
+        marginLeft: "auto",
+        fontSize: 20
+    }
 });
 
 export default LoginPage;
