@@ -1,3 +1,6 @@
+/**
+ * Login page component.
+ */
 import React, { FC, useState } from "react";
 import { StyleSheet, View, Text } from "react-native";
 
@@ -11,18 +14,23 @@ const LoginPage: FC<Props> = props => {
 	const [password, setPassword] = useState("");
 	return (
 		<View style={styles.container}>
+			{/* Logo */}
 			<View style={styles.top} />
+			{/* Login form */}
 			<View style={styles.form}>
+				{/* User name input */}
 				<Input
 					width="80%"
 					placeholder="User name"
 					onChange={e => setUserName(e.nativeEvent.text)}
 				/>
+				{/* Password input */}
 				<Input
 					width="80%"
 					placeholder="Password"
 					onChange={e => setPassword(e.nativeEvent.text)}
 				/>
+				{/* Login button */}
 				<Button
 					width="80%"
 					height={50}
@@ -32,6 +40,7 @@ const LoginPage: FC<Props> = props => {
 					onPress={() => console.log(`user name = ${userName}, password = ${password}`)}
 				/>
 			</View>
+			{/* Sign up button */}
 			<View style={styles.bottom}>
 				<Text style={styles.signUpText}>sign up</Text>
 			</View>

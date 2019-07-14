@@ -1,3 +1,8 @@
+/**
+ * Input component. Prop extends TextInputProps.
+ * 
+ * @param {number|string} width The width of the input.
+ */
 import React, { FC, useState } from "react";
 import { StyleSheet, TextInput, View, TextInputProps } from "react-native";
 import { useSelector } from "react-redux";
@@ -18,12 +23,14 @@ const Input: FC<Props> = props => {
 				width: width
 			}}
 		>
+			{/* Input itself */}
 			<TextInput
                 {...InputProps}
 				onFocus={() => setFocus(true)}
                 onEndEditing={() => setFocus(false)}
 				style={styles.input}
 			/>
+			{/* The underline */}
 			<View
 				style={{
 					...styles.underline,

@@ -1,3 +1,13 @@
+/**
+ * Button component.
+ * 
+ * @param {string} text The text displayed inside the button.
+ * @param {string} color The color of the button.
+ * @param {number|string} [width] The width of the button.
+ * @param {number} [height] The height of the button.
+ * @param {function} [onPress] The callback when pressed.
+ * @param {StyleProp<TextStyle>} [textStyle] The style applied to the text in the button. 
+ */
 import React, { Component } from "react";
 import { StyleSheet, Text, View, TextStyle, StyleProp } from "react-native";
 
@@ -37,6 +47,7 @@ export default class Button_ extends Component<Props, State> {
 				onTouchStart={this.onTouchDown}
 				onTouchEnd={this.onTouchUp}
 			>
+				{/* The button itself */}
 				<View
 					style={{
 						...styles.button,
@@ -45,7 +56,9 @@ export default class Button_ extends Component<Props, State> {
 						top: down ? 8 : 0
 					}}
 				>
+					{/* The text container. */}
 					<View style={styles.textContainer}>
+						{/* The text */}
 						<Text
 							style={{
 								...styles.text,
@@ -56,6 +69,7 @@ export default class Button_ extends Component<Props, State> {
 						</Text>
 					</View>
 				</View>
+				{/* Shadow */}
 				<View
 					style={{
 						...styles.shadow,
