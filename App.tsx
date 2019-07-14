@@ -1,14 +1,27 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
 import { Provider } from "react-redux";
+import { createStackNavigator, createAppContainer } from "react-navigation";
 import store from "./src/redux/store";
 
-import LoginPage from "./src/components/LoginPage"
+import LoginPage from "./src/components/LoginPage";
+
+const Navigator = createAppContainer(
+	createStackNavigator(
+		{
+			Login: { screen: LoginPage }
+		},
+		{
+			defaultNavigationOptions: {
+				header: null
+			}
+		}
+	)
+);
 
 export default function App() {
 	return (
 		<Provider store={store}>
-			<LoginPage/>
+			<Navigator />
 		</Provider>
 	);
 }

@@ -45,7 +45,6 @@ export default class Button_ extends Component<Props, State> {
 	}
 
 	render() {
-		console.log("button");
 		const { text, color, width, height, textStyle } = this.props;
 		const { down } = this.state;
 		return (
