@@ -1,10 +1,12 @@
 /**
  * Button component.
  * 
+ * @precondition The height prop >= 8.
+ * 
  * @param {string} text The text displayed inside the button.
  * @param {string} color The color of the button.
  * @param {number|string} [width] The width of the button.
- * @param {number} [height] The height of the button.
+ * @param {number} height The height of the button.
  * @param {function} [onPress] The callback when pressed.
  * @param {StyleProp<TextStyle>} [textStyle] The style applied to the text in the button. 
  */
@@ -15,7 +17,7 @@ interface Props {
 	text: string;
 	color: string;
 	width?: number | string;
-	height?: number;
+	height: number;
 	onPress?: Function;
 	textStyle?: StyleProp<TextStyle>;
 }

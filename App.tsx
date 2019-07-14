@@ -1,9 +1,9 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import { Provider } from "react-redux";
-import store from "./redux/store";
+import store from "./src/redux/store";
 
-import LoginPage from "./components/LoginPage"
+import LoginPage from "./src/components/LoginPage"
 
 export default function App() {
 	return (
