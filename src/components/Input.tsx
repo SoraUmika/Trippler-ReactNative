@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
 });
 
 function areEqual(prevProps: Props, nextProps: Props) {
-	return true;
+	return prevProps.error === nextProps.error;
 }
 
 export default memo(Input, areEqual);

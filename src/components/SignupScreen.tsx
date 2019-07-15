@@ -6,25 +6,28 @@ import Input from "./Input";
 
 const SignupScreen: FC<any> = props => {
 	const [userName, setUserName] = useState("");
-    const [password, setPassword] = useState("");
-    const [rePassword, setRePassword] = useState("");
-    const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const [rePassword, setRePassword] = useState("");
+	const [email, setEmail] = useState("");
 
-    const { navigate } = props.navigation;
+	const { navigate } = props.navigation;
+
+	const passwordError = rePassword && password !== rePassword;
+	const confirmEnable = userName && email && rePassword && password === rePassword;
 
 	return (
-		<ScrollView style={styles.container}>
+		<View style={styles.container}>
 			<View style={styles.titleContainer}>
 				<Text style={styles.title}>Sign Up</Text>
 			</View>
-			<KeyboardAvoidingView style={styles.formContainer} enabled behavior="padding">
+			<View style={styles.formContainer}>
 				<Input
 					width="80%"
 					placeholder="User name"
 					onChange={e => setUserName(e.nativeEvent.text)}
 					textContentType="username"
 				/>
-                <Input
+				<Input
 					width="80%"
 					placeholder="Email"
 					onChange={e => setEmail(e.nativeEvent.text)}
@@ -37,55 +40,52 @@ const SignupScreen: FC<any> = props => {
 					textContentType="newPassword"
 					secureTextEntry
 				/>
-                <Input
+				<Input
 					width="80%"
 					placeholder="Re-enter password"
 					onChange={e => setRePassword(e.nativeEvent.text)}
 					textContentType="password"
 					secureTextEntry
+					error={passwordError}
 				/>
-                <Button
+				<Button
 					width="80%"
 					height={50}
 					text="Confirm"
-					color="black"
-                    textStyle={{ color: "white" }}
-                    style={styles.confirmButton}
-					onPress={() => console.log(`${userName}, ${email}, ${password}`)}
+					color={confirmEnable ? "black" : "gray"}
+					textStyle={{ color: "white" }}
+					style={styles.confirmButton}
+                    onPress={() => console.log(`${userName}, ${email}, ${password}`)}
+                    disable={!confirmEnable}
 				/>
-                <Button
-					width="80%"
-					height={50}
-					text="Cancel"
-					color="white"
-                    textStyle={{ color: "black", fontWeight: "bold" }}
-					onPress={() => navigate("Login")}
-				/>
-			</KeyboardAvoidingView>
-		</ScrollView>
-	);
+				<Text onPress={() => navigate("Login")}>Cancel</Text>
+			</View>
+		</View>
+    );
 };
 
 const styles = StyleSheet.create({
-	container: {},
+	container: {
+        flex: 1
+    },
 	titleContainer: {
 		flex: 1,
-		height: 100,
 		justifyContent: "center"
 	},
 	title: {
-		fontSize: 32,
+        fontSize: 32,
+        // marginLeft: "10%"
 		textAlign: "center"
 	},
 	formContainer: {
 		flex: 1,
-        justifyContent: "space-around",
-        alignItems: "center",
+		justifyContent: "space-around",
+		alignItems: "center",
 		height: 400
-    },
-    confirmButton: {
-        marginTop: 20
-    }
+	},
+	confirmButton: {
+		marginTop: 20
+	}
 });
 
 export default SignupScreen;
