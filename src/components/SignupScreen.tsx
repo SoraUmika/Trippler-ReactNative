@@ -1,5 +1,5 @@
-import React, { FC, useState, useEffect } from "react";
-import { StyleSheet, View, Text, KeyboardAvoidingView, ScrollView, StatusBar } from "react-native";
+import React, { FC, useState } from "react";
+import { StyleSheet, View, Text, KeyboardAvoidingView, ScrollView } from "react-native";
 
 import Button from "./Button";
 import Input from "./Input";
@@ -11,11 +11,6 @@ const SignupScreen: FC<any> = props => {
     const [email, setEmail] = useState("");
 
     const { navigate } = props.navigation;
-
-	useEffect(() => {
-		StatusBar.setBackgroundColor("#ffffff");
-		StatusBar.setBarStyle("dark-content");
-	});
 
 	return (
 		<ScrollView style={styles.container}>

@@ -2,6 +2,7 @@
  * Input component. Prop extends TextInputProps.
  *
  * @param {number|string} width The width of the input.
+ * @param {boolean} [error] Is true, the underline will be red.
  */
 import React, { FC, useState, memo } from "react";
 import { StyleSheet, TextInput, View, TextInputProps } from "react-native";
@@ -11,10 +12,11 @@ import State from "../redux/state";
 
 interface Props extends TextInputProps {
 	width: number | string;
+	error?: boolean;
 }
 
 const Input: FC<Props> = props => {
-	const { width, ...inputProps } = props;
+	const { width, error, ...inputProps } = props;
 
 	const accentColor = useSelector((state: State) => state.theme.accentColor);
 
@@ -35,7 +37,7 @@ const Input: FC<Props> = props => {
 			<View
 				style={{
 					...styles.underline,
-					backgroundColor: focus ? accentColor : "#808080"
+					backgroundColor: error ? "#DD1C1A" : focus ? accentColor : "#808080"
 				}}
 			/>
 		</View>
