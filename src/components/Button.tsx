@@ -10,9 +10,12 @@
  * @param {function} [onPress] The callback when pressed.
  * @param {StyleProp<ViewStyle>} [style] The style applied to the button.
  * @param {StyleProp<TextStyle>} [textStyle] The style applied to the text in the button.
+ * @param {boolean} [disable] If true, the button won't respond to touch.
  */
 import React, { Component } from "react";
 import { StyleSheet, Text, View, TextStyle, StyleProp, ViewStyle } from "react-native";
+
+import { objectsEqual } from "../util";
 
 interface Props {
 	text: string;
@@ -22,6 +25,7 @@ interface Props {
 	onPress?: Function;
 	style?: StyleProp<ViewStyle>;
 	textStyle?: StyleProp<TextStyle>;
+	disable?: boolean;
 }
 
 interface State {
@@ -34,16 +38,20 @@ export default class Button_ extends Component<Props, State> {
 	};
 
 	onTouchDown = () => {
-		this.setState({ down: true });
-		this.props.onPress && this.props.onPress();
+		if (!this.props.disable) {
+			this.setState({ down: true });
+			this.props.onPress && this.props.onPress();
+		}
 	};
 
 	onTouchUp = () => {
-		this.setState({ down: false });
+		if (!this.props.disable) {
+			this.setState({ down: false });
+		}
 	};
 
 	shouldComponentUpdate(nextProps: Props, nextState: State) {
-		return nextState.down !== this.state.down;
+		return nextState.down !== this.state.down || !objectsEqual(nextProps, this.props);
 	}
 
 	render() {
@@ -51,7 +59,7 @@ export default class Button_ extends Component<Props, State> {
 		const { down } = this.state;
 		return (
 			<View
-				style={{ ...style as object, width: width, height: height }}
+				style={{ ...(style as object), width: width, height: height }}
 				onTouchStart={this.onTouchDown}
 				onTouchEnd={this.onTouchUp}
 			>
