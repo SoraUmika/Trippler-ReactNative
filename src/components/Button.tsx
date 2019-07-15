@@ -8,10 +8,11 @@
  * @param {number|string} [width] The width of the button.
  * @param {number} height The height of the button.
  * @param {function} [onPress] The callback when pressed.
+ * @param {StyleProp<ViewStyle>} [style] The style applied to the button.
  * @param {StyleProp<TextStyle>} [textStyle] The style applied to the text in the button.
  */
 import React, { Component } from "react";
-import { StyleSheet, Text, View, TextStyle, StyleProp } from "react-native";
+import { StyleSheet, Text, View, TextStyle, StyleProp, ViewStyle } from "react-native";
 
 interface Props {
 	text: string;
@@ -19,6 +20,7 @@ interface Props {
 	width?: number | string;
 	height: number;
 	onPress?: Function;
+	style?: StyleProp<ViewStyle>;
 	textStyle?: StyleProp<TextStyle>;
 }
 
@@ -45,15 +47,14 @@ export default class Button_ extends Component<Props, State> {
 	}
 
 	render() {
-		const { text, color, width, height, textStyle } = this.props;
+		const { text, color, width, height, textStyle, style } = this.props;
 		const { down } = this.state;
 		return (
 			<View
-				style={{ width: width, height: height }}
+				style={{ ...style as object, width: width, height: height }}
 				onTouchStart={this.onTouchDown}
 				onTouchEnd={this.onTouchUp}
 			>
-				{/* The button itself */}
 				<View
 					style={{
 						...styles.button,
@@ -62,9 +63,7 @@ export default class Button_ extends Component<Props, State> {
 						top: down ? 8 : 0
 					}}
 				>
-					{/* The text container. */}
 					<View style={styles.textContainer}>
-						{/* The text */}
 						<Text
 							style={{
 								...styles.text,
@@ -75,7 +74,6 @@ export default class Button_ extends Component<Props, State> {
 						</Text>
 					</View>
 				</View>
-				{/* Shadow */}
 				<View
 					style={{
 						...styles.shadow,

@@ -15,11 +15,8 @@ const LoginScreen: FC<any> = props => {
 
 	return (
 		<View style={styles.container}>
-			{/* Logo */}
 			<View style={styles.top} />
-			{/* Login form */}
 			<KeyboardAvoidingView style={styles.form} enabled behavior="padding">
-				{/* User name input */}
 				<Input
 					width="80%"
 					placeholder="User name"
@@ -27,7 +24,6 @@ const LoginScreen: FC<any> = props => {
 					textContentType="username"
 					autoCompleteType="username"
 				/>
-				{/* Password input */}
 				<Input
 					width="80%"
 					placeholder="Password"
@@ -36,7 +32,6 @@ const LoginScreen: FC<any> = props => {
 					autoCompleteType="password"
 					secureTextEntry
 				/>
-				{/* Login button */}
 				<Button
 					width="80%"
 					height={50}
@@ -46,7 +41,6 @@ const LoginScreen: FC<any> = props => {
 					onPress={() => console.log(`user name = ${userName}, password = ${password}`)}
 				/>
 			</KeyboardAvoidingView>
-			{/* Sign up button */}
 			<View style={styles.bottom}>
 				<Text style={styles.signUpText} onPress={() => navigate("Signup")}>
 					sign up

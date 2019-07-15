@@ -55,6 +55,7 @@ const SignupScreen: FC<any> = props => {
 					text="Confirm"
 					color="black"
                     textStyle={{ color: "white" }}
+                    style={styles.confirmButton}
 					onPress={() => console.log(`${userName}, ${email}, ${password}`)}
 				/>
                 <Button
@@ -85,7 +86,10 @@ const styles = StyleSheet.create({
 		flex: 1,
         justifyContent: "space-around",
         alignItems: "center",
-		height: 350
+		height: 400
+    },
+    confirmButton: {
+        marginTop: 20
     }
 });
 

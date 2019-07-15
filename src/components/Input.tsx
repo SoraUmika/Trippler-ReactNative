@@ -17,7 +17,7 @@ const Input: FC<Props> = props => {
 	const { width, ...inputProps } = props;
 
 	const accentColor = useSelector((state: State) => state.theme.accentColor);
-	
+
 	const [focus, setFocus] = useState(false);
 
 	return (
@@ -26,14 +26,12 @@ const Input: FC<Props> = props => {
 				width: width
 			}}
 		>
-			{/* Input itself */}
 			<TextInput
 				{...inputProps}
 				onFocus={() => setFocus(true)}
 				onEndEditing={() => setFocus(false)}
 				style={styles.input}
 			/>
-			{/* The underline */}
 			<View
 				style={{
 					...styles.underline,
