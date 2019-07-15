@@ -4,14 +4,17 @@ import { createStackNavigator, createAppContainer } from "react-navigation";
 import store from "./src/redux/store";
 
 import LoginScreen from "./src/components/LoginScreen";
+import SignupScreen from "./src/components/SignupScreen";
 
 const Navigator = createAppContainer(
 	createStackNavigator(
 		{
 			// Register screens here.
-			Login: { screen: LoginScreen }
+			Login: { screen: LoginScreen },
+			Signup: { screen: SignupScreen }
 		},
 		{
+			initialRouteName: "Login",
 			defaultNavigationOptions: {
 				header: null
 			}

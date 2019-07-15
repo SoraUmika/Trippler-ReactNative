@@ -4,11 +4,13 @@ import { StyleSheet, View, Text, KeyboardAvoidingView, ScrollView, StatusBar } f
 import Button from "./Button";
 import Input from "./Input";
 
-const SignupScreen: FC = props => {
+const SignupScreen: FC<any> = props => {
 	const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
     const [rePassword, setRePassword] = useState("");
     const [email, setEmail] = useState("");
+
+    const { navigate } = props.navigation;
 
 	useEffect(() => {
 		StatusBar.setBackgroundColor("#ffffff");
@@ -54,6 +56,14 @@ const SignupScreen: FC = props => {
 					color="black"
                     textStyle={{ color: "white" }}
 					onPress={() => console.log(`${userName}, ${email}, ${password}`)}
+				/>
+                <Button
+					width="80%"
+					height={50}
+					text="Cancel"
+					color="white"
+                    textStyle={{ color: "black", fontWeight: "bold" }}
+					onPress={() => navigate("Login")}
 				/>
 			</KeyboardAvoidingView>
 		</ScrollView>

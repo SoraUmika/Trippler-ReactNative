@@ -15,8 +15,11 @@ interface Props extends TextInputProps {
 
 const Input: FC<Props> = props => {
 	const { width, ...inputProps } = props;
+
 	const accentColor = useSelector((state: State) => state.theme.accentColor);
+	
 	const [focus, setFocus] = useState(false);
+
 	return (
 		<View
 			style={{

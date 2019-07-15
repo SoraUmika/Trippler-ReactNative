@@ -7,11 +7,12 @@ import { StyleSheet, View, Text, KeyboardAvoidingView } from "react-native";
 import Button from "./Button";
 import Input from "./Input";
 
-interface Props {}
+const LoginScreen: FC<any> = props => {
+	const { navigate } = props.navigation;
 
-const LoginScreen: FC<Props> = props => {
 	const [userName, setUserName] = useState("");
 	const [password, setPassword] = useState("");
+
 	return (
 		<View style={styles.container}>
 			{/* Logo */}
@@ -47,7 +48,9 @@ const LoginScreen: FC<Props> = props => {
 			</KeyboardAvoidingView>
 			{/* Sign up button */}
 			<View style={styles.bottom}>
-				<Text style={styles.signUpText}>sign up</Text>
+				<Text style={styles.signUpText} onPress={() => navigate("Signup")}>
+					sign up
+				</Text>
 			</View>
 		</View>
 	);
