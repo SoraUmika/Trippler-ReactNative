@@ -11,8 +11,8 @@ import KeyboardAvoidView from "./KeyboardAvoidView";
 const LoginScreen: FC<any> = props => {
 	const { navigate } = props.navigation;
 
-	const [userName, setUserName] = useState("");
-	const [password, setPassword] = useState("");
+	const [userName, setUserName] = useState({value: "", error: false});
+	const [password, setPassword] = useState({value: "", error: false});
 
 	return (
 		<KeyboardAvoidView style={styles.container}>
@@ -21,17 +21,19 @@ const LoginScreen: FC<any> = props => {
 				<Input
 					width="80%"
 					placeholder="User name"
-					onChange={e => setUserName(e.nativeEvent.text)}
+					onChange={e => setUserName({value: e.nativeEvent.text, error: false})}
 					textContentType="username"
 					autoCompleteType="username"
+					error={userName.error}
 				/>
 				<Input
 					width="80%"
 					placeholder="Password"
-					onChange={e => setPassword(e.nativeEvent.text)}
+					onChange={e => setPassword({value: e.nativeEvent.text, error: false})}
 					textContentType="password"
 					autoCompleteType="password"
 					secureTextEntry
+					error={password.error}
 				/>
 				<Button
 					width="80%"
@@ -39,7 +41,13 @@ const LoginScreen: FC<any> = props => {
 					text="Login"
 					color="black"
 					textStyle={{ color: "white" }}
-					onPress={() => console.log(`user name = ${userName}, password = ${password}`)}
+					onPress={() => {
+						setUserName({value: userName.value, error: !userName.value.trim()})
+						setPassword({value: password.value, error: !password.value.trim()})
+						if (!(userName.error || password.error)){
+							console.log(userName.value, password.value);
+						}
+					}}
 				/>
 			</View>
 			<View style={styles.bottom}>
