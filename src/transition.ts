@@ -1,7 +1,9 @@
 import { TransitionConfig } from "react-navigation";
 import { Animated, Easing } from "react-native";
 
-export const slide = (): TransitionConfig => {
+export type TransitionTypes = "slideUp";
+
+const transitionCOnfig = (): TransitionConfig => {
 	return {
 		transitionSpec: {
 			duration: 750,
@@ -10,16 +12,28 @@ export const slide = (): TransitionConfig => {
 			useNativeDriver: true
 		},
 		screenInterpolator: sceneProps => {
-			const { position, scene, layout } = sceneProps;
-			const thisIndex = scene.index;
+			const {
+				position,
+				scene: {
+					index,
+					route: { params = {} }
+				},
+				layout
+			} = sceneProps;
 			const height = layout.initHeight;
+			const transition: TransitionTypes = params.transition || "slideUp";
 
-			const translateY = position.interpolate({
-				inputRange: [thisIndex - 1, thisIndex],
-				outputRange: [height, 0]
-			});
+			switch (transition) {
+				case "slideUp":
+					const translateY = position.interpolate({
+						inputRange: [index - 1, index],
+						outputRange: [height, 0]
+					});
 
-			return { transform: [{ translateY }] };
+					return { transform: [{ translateY }] };
+			}
 		}
 	};
 };
+
+export default transitionCOnfig;
