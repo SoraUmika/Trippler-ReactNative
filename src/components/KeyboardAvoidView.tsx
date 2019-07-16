@@ -1,3 +1,9 @@
+/**
+ * Same as KeyboardAvidingView, but flexbox friendly :3
+ * It is defaulted to flex display.
+ * 
+ * @param {StyleProp<ViewStyle>} style The style applied to the view.
+ */
 import React, { Component } from "react";
 import {
 	Animated,
@@ -45,9 +51,12 @@ export default class KeyboardAvoidView extends Component<Props, State> {
 		const currentFocusField = TextInputState.currentlyFocusedField();
 		UIManager.measure(currentFocusField, (originX, originY, width, height, pageX, pageY) => {
 			const fieldHeight = height;
-			const fieldTop = pageY;
+            const fieldTop = pageY;
+            // windowHeight - keyboardHeight = the height of display minus the keyboard.
+            // fieldTop + fieldHeight = The y value of the bottom of field.
+            // The difference of those two values is the gap between focused field and keyboard.
 			const gap = windowHeight - keyboardHeight - (fieldTop + fieldHeight);
-			if (gap >= 0) {
+			if (gap >= 0) {  // If the field is not being overlapped by keyboard.
 				return;
 			}
 			Animated.timing(this.state.shift, {
