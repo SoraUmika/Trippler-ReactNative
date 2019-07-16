@@ -6,15 +6,14 @@ import Input from "./Input";
 import KeyboardAvoidView from "./KeyboardAvoidView";
 
 const SignupScreen: FC<any> = props => {
-	const [userName, setUserName] = useState("");
-	const [password, setPassword] = useState("");
+	const [userName, setUserName] = useState({ value: "", error: false });
+	const [password, setPassword] = useState({ value: "", error: false });
 	const [rePassword, setRePassword] = useState("");
-	const [email, setEmail] = useState("");
+	const [email, setEmail] = useState({ value: "", error: false });
 
 	const { navigate } = props.navigation;
 
-	const passwordError = rePassword && password !== rePassword;
-	const confirmEnable = userName && email && rePassword && password === rePassword;
+	const rePasswordError = rePassword && password.value !== rePassword;
 
 	return (
 		<KeyboardAvoidView style={styles.container}>
@@ -25,21 +24,24 @@ const SignupScreen: FC<any> = props => {
 				<Input
 					width="80%"
 					placeholder="User name"
-					onChange={e => setUserName(e.nativeEvent.text)}
+					onChange={e => setUserName({ value: e.nativeEvent.text, error: false })}
 					textContentType="username"
+					error={userName.error}
 				/>
 				<Input
 					width="80%"
 					placeholder="Email"
-					onChange={e => setEmail(e.nativeEvent.text)}
+					onChange={e => setEmail({ value: e.nativeEvent.text, error: false })}
 					textContentType="emailAddress"
+					error={email.error}
 				/>
 				<Input
 					width="80%"
 					placeholder="Password"
-					onChange={e => setPassword(e.nativeEvent.text)}
+					onChange={e => setPassword({ value: e.nativeEvent.text, error: false })}
 					textContentType="newPassword"
 					secureTextEntry
+					error={password.error}
 				/>
 				<Input
 					width="80%"
@@ -47,17 +49,25 @@ const SignupScreen: FC<any> = props => {
 					onChange={e => setRePassword(e.nativeEvent.text)}
 					textContentType="password"
 					secureTextEntry
-					error={passwordError}
+					error={rePasswordError}
 				/>
 				<Button
 					width="80%"
 					height={50}
 					text="Confirm"
-					color={confirmEnable ? "black" : "gray"}
+					color="black"
 					textStyle={{ color: "white" }}
 					style={styles.confirmButton}
-					onPress={() => console.log(`${userName}, ${email}, ${password}`)}
-					disable={!confirmEnable}
+					onPress={() => {
+						setUserName({ value: userName.value, error: !userName.value.trim() });
+						setEmail({ value: email.value, error: !email.value.trim() });
+						setPassword({ value: password.value, error: !password.value.trim() });
+						if (
+							!(userName.error || email.error || password.error || rePasswordError)
+						) {
+							console.log(userName.value, email.value, password.value, rePassword);
+						}
+					}}
 				/>
 			</View>
 			<View style={styles.cancelContainer}>
