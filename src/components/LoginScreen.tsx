@@ -6,6 +6,7 @@ import { StyleSheet, View, Text, KeyboardAvoidingView } from "react-native";
 
 import Button from "./Button";
 import Input from "./Input";
+import KeyboardAvoidView from "./KeyboardAvoidView";
 
 const LoginScreen: FC<any> = props => {
 	const { navigate } = props.navigation;
@@ -14,9 +15,9 @@ const LoginScreen: FC<any> = props => {
 	const [password, setPassword] = useState("");
 
 	return (
-		<View style={styles.container}>
+		<KeyboardAvoidView style={styles.container}>
 			<View style={styles.top} />
-			<KeyboardAvoidingView style={styles.form} enabled behavior="padding">
+			<View style={styles.form}>
 				<Input
 					width="80%"
 					placeholder="User name"
@@ -40,20 +41,18 @@ const LoginScreen: FC<any> = props => {
 					textStyle={{ color: "white" }}
 					onPress={() => console.log(`user name = ${userName}, password = ${password}`)}
 				/>
-			</KeyboardAvoidingView>
+			</View>
 			<View style={styles.bottom}>
 				<Text style={styles.signUpText} onPress={() => navigate("Signup")}>
 					sign up
 				</Text>
 			</View>
-		</View>
+		</KeyboardAvoidView>
 	);
 };
 
 const styles = StyleSheet.create({
-	container: {
-		flex: 1
-	},
+	container: {},
 	top: {
 		flex: 2
 	},
