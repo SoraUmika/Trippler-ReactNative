@@ -6,10 +6,11 @@ import store from "./src/redux/store";
 
 import LoginScreen from "./src/components/LoginScreen";
 import SignupScreen from "./src/components/SignupScreen";
+import transitionConfig from "./src/transition";
 
 StatusBar.setBarStyle("dark-content");
 
-const Navigator = createAppContainer(
+const MainNavigator = createAppContainer(
 	createStackNavigator(
 		{
 			// Register screens here.
@@ -20,7 +21,8 @@ const Navigator = createAppContainer(
 			initialRouteName: "Login",
 			defaultNavigationOptions: {
 				header: null
-			}
+			},
+			transitionConfig: transitionConfig
 		}
 	)
 );
@@ -28,7 +30,7 @@ const Navigator = createAppContainer(
 export default function App() {
 	return (
 		<Provider store={store}>
-			<Navigator />
+			<MainNavigator />
 		</Provider>
 	);
 }
