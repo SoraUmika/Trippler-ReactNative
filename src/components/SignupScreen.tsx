@@ -17,9 +17,9 @@ const SignupScreen: FC<any> = props => {
 
 	return (
 		<View style={styles.container}>
-			<View style={styles.titleContainer}>
-				<Text style={styles.title}>Sign Up</Text>
-			</View>
+            <View style={styles.titleContainer}>
+                <Text style={styles.title}>Sign Up</Text>
+            </View>
 			<View style={styles.formContainer}>
 				<Input
 					width="80%"
@@ -58,8 +58,10 @@ const SignupScreen: FC<any> = props => {
                     onPress={() => console.log(`${userName}, ${email}, ${password}`)}
                     disable={!confirmEnable}
 				/>
-				<Text onPress={() => navigate("Login")}>Cancel</Text>
 			</View>
+            <View style={styles.cancelContainer}>
+                <Text onPress={() => navigate("Login")} style={styles.cancelText}>Cancel</Text>
+            </View>
 		</View>
     );
 };
@@ -74,7 +76,6 @@ const styles = StyleSheet.create({
 	},
 	title: {
         fontSize: 32,
-        // marginLeft: "10%"
 		textAlign: "center"
 	},
 	formContainer: {
@@ -84,8 +85,20 @@ const styles = StyleSheet.create({
 		height: 400
 	},
 	confirmButton: {
-		marginTop: 20
-	}
+        marginTop: 20
+    },
+    cancelContainer: {
+        flex: 0.5,
+        flexDirection: "column-reverse"
+    },
+    cancelText: {
+        textDecorationLine: "underline",
+		textAlign: "right",
+		right: "10%",
+		bottom: "-20%",
+		marginLeft: "auto",
+		fontSize: 20
+    }
 });
 
 export default SignupScreen;
