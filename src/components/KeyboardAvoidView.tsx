@@ -85,6 +85,7 @@ export default class KeyboardAvoidView extends Component<Props, State> {
 					...(style as object),
 					transform: [{ translateY: shift }]
 				}}
+				onTouchStart={() => Keyboard.dismiss()}
 			>
 				{this.props.children}
 			</Animated.View>

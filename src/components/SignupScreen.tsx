@@ -62,9 +62,7 @@ const SignupScreen: FC<any> = props => {
 						setUserName({ value: userName.value, error: !userName.value.trim() });
 						setEmail({ value: email.value, error: !email.value.trim() });
 						setPassword({ value: password.value, error: !password.value.trim() });
-						if (
-							!(userName.error || email.error || password.error || rePasswordError)
-						) {
+						if (!(userName.error || email.error || password.error || rePasswordError)) {
 							console.log(userName.value, email.value, password.value, rePassword);
 						}
 					}}

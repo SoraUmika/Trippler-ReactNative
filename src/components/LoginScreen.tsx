@@ -2,7 +2,7 @@
  * Login page component.
  */
 import React, { FC, useState } from "react";
-import { StyleSheet, View, Text, KeyboardAvoidingView } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 
 import Button from "./Button";
 import Input from "./Input";
@@ -11,8 +11,8 @@ import KeyboardAvoidView from "./KeyboardAvoidView";
 const LoginScreen: FC<any> = props => {
 	const { navigate } = props.navigation;
 
-	const [userName, setUserName] = useState({value: "", error: false});
-	const [password, setPassword] = useState({value: "", error: false});
+	const [userName, setUserName] = useState({ value: "", error: false });
+	const [password, setPassword] = useState({ value: "", error: false });
 
 	return (
 		<KeyboardAvoidView style={styles.container}>
@@ -21,7 +21,7 @@ const LoginScreen: FC<any> = props => {
 				<Input
 					width="80%"
 					placeholder="User name"
-					onChange={e => setUserName({value: e.nativeEvent.text, error: false})}
+					onChange={e => setUserName({ value: e.nativeEvent.text, error: false })}
 					textContentType="username"
 					autoCompleteType="username"
 					error={userName.error}
@@ -29,7 +29,7 @@ const LoginScreen: FC<any> = props => {
 				<Input
 					width="80%"
 					placeholder="Password"
-					onChange={e => setPassword({value: e.nativeEvent.text, error: false})}
+					onChange={e => setPassword({ value: e.nativeEvent.text, error: false })}
 					textContentType="password"
 					autoCompleteType="password"
 					secureTextEntry
@@ -42,9 +42,9 @@ const LoginScreen: FC<any> = props => {
 					color="black"
 					textStyle={{ color: "white" }}
 					onPress={() => {
-						setUserName({value: userName.value, error: !userName.value.trim()})
-						setPassword({value: password.value, error: !password.value.trim()})
-						if (!(userName.error || password.error)){
+						setUserName({ value: userName.value, error: !userName.value.trim() });
+						setPassword({ value: password.value, error: !password.value.trim() });
+						if (!(userName.error || password.error)) {
 							console.log(userName.value, password.value);
 						}
 					}}
