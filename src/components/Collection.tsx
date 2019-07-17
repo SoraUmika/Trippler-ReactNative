@@ -8,7 +8,7 @@ const Collection: FC = props => {
 		<View style={styles.container}>
 			<View style={styles.mainAction} />
 			<View style={styles.title}>
-				<TopBar title="Collection"/>
+				<TopBar title="Collection" />
 			</View>
 			<View style={styles.list} />
 		</View>
@@ -17,11 +17,11 @@ const Collection: FC = props => {
 
 const styles = StyleSheet.create({
 	container: {
-        flex: 1,
-        backgroundColor: "black"
+		flex: 1,
+		backgroundColor: "black"
 	},
 	mainAction: {
-		flex: 1,
+		flex: 1
 		// backgroundColor: "red"
 	},
 	title: {

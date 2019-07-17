@@ -78,10 +78,10 @@ def format_jsx(jsx_tags_):
 SVG_FILE_NAME = sys.argv[1]
 if not SVG_FILE_NAME.endswith(".svg"):
     SVG_FILE_NAME += ".svg"
-SVG_FILE_PATH = to_abs_path("svg", SVG_FILE_NAME)
+SVG_FILE_PATH = to_abs_path("src", "svg", SVG_FILE_NAME)
 
 COMPONENT_NAME = get_component_name(SVG_FILE_NAME)
-COMPONENT_FILE_PATH = to_abs_path("svg", COMPONENT_NAME + ".tsx")
+COMPONENT_FILE_PATH = to_abs_path("src", "svg", COMPONENT_NAME + ".tsx")
 
 template = """import React, {Component} from "react";
 import Svg, {Path, SvgProps} from "react-native-svg";
