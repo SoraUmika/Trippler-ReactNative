@@ -15,9 +15,18 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1
 	},
-	mainAction: {},
-	title: {},
-	list: {}
+	mainAction: {
+		flex: 1,
+		backgroundColor: "red"
+	},
+	title: {
+		flex: 1,
+		backgroundColor: "green"
+	},
+	list: {
+		flex: 8,
+		backgroundColor: "blue"
+	}
 });
 
 export default Collection;

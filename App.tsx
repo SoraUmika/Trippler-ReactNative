@@ -5,7 +5,8 @@ import store from "./src/redux/store";
 
 import LoginScreen from "./src/components/LoginScreen";
 import SignupScreen from "./src/components/SignupScreen";
-import MainScreen from  "./src/components/MainScreen";
+import MainScreen from "./src/components/MainScreen";
+import StatusBar from "./src/components/StatusBar";
 import transitionConfig from "./src/transition";
 
 const MainNavigator = createAppContainer(
@@ -14,7 +15,7 @@ const MainNavigator = createAppContainer(
 			// Register screens here.
 			Login: { screen: LoginScreen },
 			Signup: { screen: SignupScreen },
-			Main: {screen: MainScreen}
+			Main: { screen: MainScreen }
 		},
 		{
 			initialRouteName: "Main",
@@ -29,6 +30,7 @@ const MainNavigator = createAppContainer(
 export default function App() {
 	return (
 		<Provider store={store}>
+			<StatusBar backgroundColor="#FFFFFF" barStyle="dark-content"/>
 			<MainNavigator />
 		</Provider>
 	);
