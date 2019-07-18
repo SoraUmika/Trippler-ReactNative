@@ -32,8 +32,11 @@ def svg_tag_to_jsx(svg_tags):
         if not i:  # if it is the start svg tag.
             for prop in props:
                 prop_name, val = prop.split("=")
-                if prop_name not in ["xmlns", "viewBox"]:  # skip those props.
-                    val = "{" + val + "}"  # 12 -> {12}
+                if not prop_name == "xmlns":  # skip those props.
+                    if prop_name == "viewBox":
+                        val = '"' + val + '"'
+                    else:
+                        val = "{" + val + "}"  # 12 -> {12}
                     new_props.append("=".join((prop_name, val)))
             new_props.append("{...this.props}>")
         else:
