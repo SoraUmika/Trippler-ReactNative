@@ -36,6 +36,7 @@ const styles = StyleSheet.create({
 	},
 	actions: {
 		flex: 1,
-		flexDirection: "row-reverse"
+		flexDirection: "row-reverse",
+		alignItems: "center"
 	}
 });
