@@ -4,10 +4,9 @@ import { StyleSheet, View } from "react-native";
 import TopBar from "./TopBar";
 import MoreHoriz from "../svg/MoreHoriz";
 import FilterList from "../svg/FilterList";
+import CollectionList from "./CollectionList";
 
-interface Props {
-	
-}
+interface Props {}
 
 const Collection: FC = props => {
 	return (
@@ -19,7 +18,9 @@ const Collection: FC = props => {
 					<FilterList style={styles.actionIcon} fill="white" width={32} height={32} />
 				</TopBar>
 			</View>
-			<View style={styles.list} />
+			<View style={styles.list}>
+				<CollectionList />
+			</View>
 		</View>
 	);
 };
@@ -33,13 +34,13 @@ const styles = StyleSheet.create({
 		flex: 1
 	},
 	title: {
-		flex: 1,
+		flex: 1
 	},
 	list: {
 		flex: 8
 	},
 	actionIcon: {
-		margin: 8,
+		margin: 8
 	}
 });
 
