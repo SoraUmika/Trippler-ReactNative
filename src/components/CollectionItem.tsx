@@ -2,25 +2,30 @@ import React, { Component } from "react";
 import { View, StyleSheet, Text } from "react-native";
 
 import ArrowUpward from "../svg/ArrowUpward";
+import CenterView from "./CenterView"
 
-export default class CollectionItem extends Component {
+interface Props {
+    businessId: string
+}
+
+export default class CollectionItem extends Component<Props> {
 	render() {
 		return (
 			<View style={styles.root}>
 				<View style={styles.container}>
 					<View style={styles.avatar} />
 					<View style={styles.description}>
-						<View style={styles.textContainer}>
+						<CenterView main>
 							<Text style={styles.name}>Name</Text>
                             <ArrowUpward fill="white" style={styles.pinIcon} opacity={0.75}/>
-						</View>
+						</CenterView>
 						<View style={styles.statContainer}>
-							<View style={styles.textContainer}>
+							<CenterView main>
                                 <Text style={styles.status}>Status</Text>
-                            </View>
-							<View style={styles.textContainer}>
+                            </CenterView>
+							<CenterView main>
                                 <Text style={styles.rating}>Rating</Text>
-                            </View>
+                            </CenterView>
 						</View>
 					</View>
 				</View>
@@ -40,7 +45,7 @@ const styles = StyleSheet.create({
 		flexDirection: "row"
 	},
 	avatar: {
-		backgroundColor: "red",
+		backgroundColor: "gray",
 		width: 80,
 		height: 80
 	},
@@ -75,10 +80,6 @@ const styles = StyleSheet.create({
 		flex: 1,
         flexDirection: "row",
         marginTop: 16
-    },
-    textContainer: {
-        flex: 1,
-        justifyContent: "center"
     },
     pinIcon: {
         position: "absolute",

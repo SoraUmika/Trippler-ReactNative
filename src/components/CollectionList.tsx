@@ -7,7 +7,7 @@ export default class CollectionList extends Component {
 	render() {
 		return (
 			<View style={styles.container}>
-				<CollectionItem />
+				<CollectionItem businessId="test"/>
 			</View>
 		);
 	}
