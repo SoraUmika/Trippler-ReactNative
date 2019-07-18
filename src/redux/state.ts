@@ -1,7 +1,12 @@
+import Business from "../Business";
+
 export default interface State {
-    theme: Theme
+	theme: Theme;
+	businesses: Businesses;
 }
 
 export interface Theme {
-    accentColor: string
-} 
+	accentColor: string;
+}
+
+export type Businesses = { [index: string]: Business };
