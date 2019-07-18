@@ -9,6 +9,14 @@ const init_state: State = {
 		"test": new Business("test", "Egg", "open", 4.3, 123),
 		"hello": new Business("hello", "Foo", "close", 3.1, 10),
 		":)": new Business(":)", "Bar", "open", 4.7, 2031)
+	},
+	collection: {
+		appliedFilters: [],
+		items: [
+			{pinned: true, businessId: ":)"},
+			{pinned: false, businessId: "hello"},
+			{pinned: false, businessId: "test"},
+		]
 	}
 };
 

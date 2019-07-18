@@ -1,8 +1,9 @@
-import Business from "../Business";
+import Business, { BusinessId } from "../Business";
 
 export default interface State {
 	theme: Theme;
 	businesses: Businesses;
+	collection: Collection;
 }
 
 export interface Theme {
@@ -10,3 +11,8 @@ export interface Theme {
 }
 
 export type Businesses = { [index: string]: Business };
+
+export interface Collection {
+	appliedFilters: string[];
+	items: { pinned: boolean; businessId: BusinessId }[];
+}
