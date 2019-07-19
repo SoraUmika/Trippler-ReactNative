@@ -8,7 +8,6 @@
  * @param {number} height The height of the button.
  * @param {function} [onPress] The callback when pressed.
  * @param {StyleProp<ViewStyle>} [style] The style applied to the button.
- * @param {StyleProp<ViewStyle>} [contentStyle] The style of the View that contains the content.
  */
 import React, { Component } from "react";
 import { StyleSheet, View, StyleProp, ViewStyle } from "react-native";
@@ -21,7 +20,6 @@ interface Props {
 	height: number | string;
 	onPress?: Function;
 	style?: StyleProp<ViewStyle>;
-	contentStyle?: StyleProp<ViewStyle>;
 }
 
 interface State {
@@ -47,7 +45,7 @@ export default class Button_ extends Component<Props, State> {
 	}
 
 	render() {
-		const { color, width, height, style, children, contentStyle } = this.props;
+		const { color, width, height, style, children } = this.props;
 		const { down } = this.state;
 		return (
 			<View
@@ -58,7 +56,6 @@ export default class Button_ extends Component<Props, State> {
 				<View
 					style={{
 						...styles.button,
-						...contentStyle as object,
 						backgroundColor: color,
 						flex: 1,
 						top: down ? 8 : 0
