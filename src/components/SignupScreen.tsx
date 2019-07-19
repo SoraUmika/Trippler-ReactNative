@@ -65,7 +65,7 @@ const SignupScreen: FC<any> = props => {
 						}
 					}}
 				>
-					<Text style={{ color: "white" }}>Confirm</Text>
+					<Text style={{ color: "white", textAlign: "center" }}>Confirm</Text>
 				</Button>
 			</View>
 			<View style={styles.cancelContainer}>

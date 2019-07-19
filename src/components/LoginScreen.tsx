@@ -47,7 +47,7 @@ const LoginScreen: FC<any> = props => {
 						}
 					}}
 				>
-					<Text style={{ color: "white" }}>Login</Text>
+					<Text style={{ color: "white", textAlign: "center" }}>Login</Text>
 				</Button>
 			</View>
 			<View style={styles.bottom}>
