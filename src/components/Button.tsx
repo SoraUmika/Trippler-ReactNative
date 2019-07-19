@@ -3,17 +3,15 @@
  *
  * @precondition The height prop >= 8.
  *
- * @param {string} text The text displayed inside the button.
  * @param {string} color The color of the button.
  * @param {number|string} [width] The width of the button.
  * @param {number} height The height of the button.
  * @param {function} [onPress] The callback when pressed.
  * @param {StyleProp<ViewStyle>} [style] The style applied to the button.
- * @param {StyleProp<TextStyle>} [textStyle] The style applied to the text in the button.
- * @param {boolean} [disable] If true, the button won't respond to touch.
+ * @param {StyleProp<ViewStyle>} [contentStyle] The style of the View that contains the content.
  */
 import React, { Component } from "react";
-import { StyleSheet, Text, View, StyleProp, ViewStyle } from "react-native";
+import { StyleSheet, View, StyleProp, ViewStyle } from "react-native";
 
 import { objectsEqual } from "../util";
 
@@ -23,7 +21,7 @@ interface Props {
 	height: number | string;
 	onPress?: Function;
 	style?: StyleProp<ViewStyle>;
-	disable?: boolean;
+	contentStyle?: StyleProp<ViewStyle>;
 }
 
 interface State {
@@ -36,16 +34,12 @@ export default class Button_ extends Component<Props, State> {
 	};
 
 	onTouchDown = () => {
-		if (!this.props.disable) {
-			this.setState({ down: true });
-			this.props.onPress && this.props.onPress();
-		}
+		this.setState({ down: true });
+		this.props.onPress && this.props.onPress();
 	};
 
 	onTouchUp = () => {
-		if (!this.props.disable) {
-			this.setState({ down: false });
-		}
+		this.setState({ down: false });
 	};
 
 	shouldComponentUpdate(nextProps: Props, nextState: State) {
@@ -53,25 +47,24 @@ export default class Button_ extends Component<Props, State> {
 	}
 
 	render() {
-		const { color, width, height, style, children } = this.props;
+		const { color, width, height, style, children, contentStyle } = this.props;
 		const { down } = this.state;
 		return (
 			<View
-				style={{ ...(style as object), width: width, height: height, flex: 0 }}
+				style={[style, { width: width, height: height, flex: 0 }]}
 				onTouchStart={this.onTouchDown}
 				onTouchEnd={this.onTouchUp}
 			>
 				<View
 					style={{
 						...styles.button,
+						...contentStyle as object,
 						backgroundColor: color,
 						flex: 1,
 						top: down ? 8 : 0
 					}}
 				>
-					<View style={styles.textContainer}>
-						{children}
-					</View>
+					<View style={styles.textContainer}>{children}</View>
 				</View>
 				<View
 					style={{
