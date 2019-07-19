@@ -7,20 +7,25 @@ import BookmarkBorder from "../svg/BookmarkBorder";
 import CenterView from "./CenterView";
 import CircleOff from "../svg/CircleOff";
 import State from "../redux/state";
+import Share from "../svg/Share";
+import Feedback from "../svg/Feedback";
 
 const MainActionBar: FC = props => {
 	const accentColor = useSelector<State, string>(state => state.theme.accentColor);
 
 	return (
 		<View style={styles.root}>
-			<View style={styles.subAction} />
+			<View style={styles.subAction}>
+				<Feedback fill="white" style={styles.subButton} />
+				<Share fill="white" style={styles.subButton} />
+			</View>
 			<View style={styles.mainAction}>
-				<Button height="100%" width={60} color={accentColor} style={styles.acceptButton}>
+				<Button height="100%" width={80} color={accentColor} style={styles.acceptButton}>
 					<CenterView>
 						<BookmarkBorder fill="white" />
 					</CenterView>
 				</Button>
-				<Button height="100%" width={60} color="white">
+				<Button height="100%" width={80} color="white">
 					<CenterView>
 						<CircleOff />
 					</CenterView>
@@ -38,7 +43,9 @@ const styles = StyleSheet.create({
 		paddingBottom: 0
 	},
 	subAction: {
-		flex: 1
+		flex: 1,
+        flexDirection: "row",
+        alignItems: "center",
 	},
 	mainAction: {
 		flex: 1,
@@ -48,6 +55,13 @@ const styles = StyleSheet.create({
 	},
 	acceptButton: {
 		marginLeft: 16
+	},
+	subButton: {
+		flex: 0,
+		// width: 60,
+        height: "100%",
+        marginLeft: 16,
+        marginRight: 16
 	}
 });
 
