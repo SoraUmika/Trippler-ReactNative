@@ -8,6 +8,20 @@ export default class CollectionList extends Component {
 		return (
 			<ScrollView style={styles.container}>
 				<CollectionItem businessId=":)"/>
+				<CollectionItem businessId="hello"/>
+				<CollectionItem businessId="test"/>
+				<CollectionItem businessId=":)"/>
+				<CollectionItem businessId="hello"/>
+				<CollectionItem businessId="test"/>
+				<CollectionItem businessId=":)"/>
+				<CollectionItem businessId="hello"/>
+				<CollectionItem businessId="test"/>
+				<CollectionItem businessId=":)"/>
+				<CollectionItem businessId="hello"/>
+				<CollectionItem businessId="test"/>
+				<CollectionItem businessId=":)"/>
+				<CollectionItem businessId="hello"/>
+				<CollectionItem businessId="test"/>
 			</ScrollView>
 		);
 	}

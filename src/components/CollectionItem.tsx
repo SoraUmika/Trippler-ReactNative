@@ -46,7 +46,8 @@ const styles = StyleSheet.create({
 	root: {
 		backgroundColor: "#0D0D0D",
 		margin: 16,
-		height: 80
+        height: 80,
+        marginTop: 0
 	},
 	container: {
 		flex: 1,
