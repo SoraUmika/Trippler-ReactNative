@@ -1,7 +1,8 @@
 import React, { FC } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Text } from "react-native";
 
 import Button from "./Button";
+import BookmarkBorder from "../svg/BookmarkBorder";
 
 const MainActionBar: FC = props => {
 	return (
@@ -9,7 +10,7 @@ const MainActionBar: FC = props => {
 			<View style={styles.subAction} />
 			<View style={styles.mainAction}>
 				<Button height="100%" width={60} color="white" >
-                    hi
+                    <BookmarkBorder/>
                 </Button>
 			</View>
 		</View>

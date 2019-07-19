@@ -70,7 +70,7 @@ export default class Button_ extends Component<Props, State> {
 					}}
 				>
 					<View style={styles.textContainer}>
-						<Text style={styles.text}>{children}</Text>
+						{children}
 					</View>
 				</View>
 				<View
@@ -93,9 +93,6 @@ const styles = StyleSheet.create({
 	textContainer: {
 		flex: 1,
 		justifyContent: "center"
-	},
-	text: {
-		textAlign: "center"
 	},
 	shadow: {
 		height: 16,
