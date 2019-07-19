@@ -13,7 +13,7 @@
  * @param {boolean} [disable] If true, the button won't respond to touch.
  */
 import React, { Component } from "react";
-import { StyleSheet, Text, View, TextStyle, StyleProp, ViewStyle } from "react-native";
+import { StyleSheet, Text, View, StyleProp, ViewStyle } from "react-native";
 
 import { objectsEqual } from "../util";
 

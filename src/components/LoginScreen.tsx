@@ -37,10 +37,8 @@ const LoginScreen: FC<any> = props => {
 				/>
 				<Button
 					width="80%"
-					height={50}
-					text="Login"
+					height={60}
 					color="black"
-					textStyle={{ color: "white" }}
 					onPress={() => {
 						setUserName({ value: userName.value, error: !userName.value.trim() });
 						setPassword({ value: password.value, error: !password.value.trim() });
@@ -48,7 +46,9 @@ const LoginScreen: FC<any> = props => {
 							console.log(userName.value, password.value);
 						}
 					}}
-				/>
+				>
+					<Text style={{ color: "white" }}>Login</Text>
+				</Button>
 			</View>
 			<View style={styles.bottom}>
 				<Text style={styles.signUpText} onPress={() => navigate("Signup")}>

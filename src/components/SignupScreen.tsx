@@ -53,10 +53,8 @@ const SignupScreen: FC<any> = props => {
 				/>
 				<Button
 					width="80%"
-					height={50}
-					text="Confirm"
+					height={60}
 					color="black"
-					textStyle={{ color: "white" }}
 					style={styles.confirmButton}
 					onPress={() => {
 						setUserName({ value: userName.value, error: !userName.value.trim() });
@@ -66,7 +64,9 @@ const SignupScreen: FC<any> = props => {
 							console.log(userName.value, email.value, password.value, rePassword);
 						}
 					}}
-				/>
+				>
+					<Text style={{ color: "white" }}>Confirm</Text>
+				</Button>
 			</View>
 			<View style={styles.cancelContainer}>
 				<Text onPress={() => navigate("Login")} style={styles.cancelText}>
