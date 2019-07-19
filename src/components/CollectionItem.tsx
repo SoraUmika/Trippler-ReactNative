@@ -44,7 +44,7 @@ const CollectionItem: FC<Props> = props => {
 
 const styles = StyleSheet.create({
 	root: {
-		backgroundColor: "#0D0D0D",
+		backgroundColor: "rgba(0, 0, 0, 0.05)",
 		margin: 16,
         height: 80,
         marginTop: 0
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
 		flexDirection: "row"
 	},
 	avatar: {
-		backgroundColor: "gray",
+		backgroundColor: "rgba(255, 255, 255, 0.5)",
 		width: 80,
 		height: 80
 	},
