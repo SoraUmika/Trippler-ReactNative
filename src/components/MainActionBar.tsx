@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { useSelector } from "react-redux";
 
 import Button from "./Button";
@@ -16,8 +16,12 @@ const MainActionBar: FC = props => {
 	return (
 		<View style={styles.root}>
 			<View style={styles.subAction}>
-				<Feedback fill="white" style={styles.subButton} />
-				<Share fill="white" style={styles.subButton} />
+				<TouchableOpacity>
+					<Feedback fill="white" style={styles.subButton} />
+				</TouchableOpacity>
+				<TouchableOpacity>
+					<Share fill="white" style={styles.subButton} />
+				</TouchableOpacity>
 			</View>
 			<View style={styles.mainAction}>
 				<Button height="100%" width={80} color={accentColor} style={styles.acceptButton}>
@@ -44,8 +48,8 @@ const styles = StyleSheet.create({
 	},
 	subAction: {
 		flex: 1,
-        flexDirection: "row",
-        alignItems: "center",
+		flexDirection: "row",
+		alignItems: "center"
 	},
 	mainAction: {
 		flex: 1,
@@ -59,9 +63,9 @@ const styles = StyleSheet.create({
 	subButton: {
 		flex: 0,
 		// width: 60,
-        height: "100%",
-        marginLeft: 16,
-        marginRight: 16
+		height: "100%",
+		marginLeft: 16,
+		marginRight: 16
 	}
 });
 

@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, TouchableOpacity } from "react-native";
 
 import TopBar from "./TopBar";
 import MoreHoriz from "../svg/MoreHoriz";
@@ -21,8 +21,12 @@ const Collection: FC = props => {
 			</View>
 			<View style={styles.title}>
 				<TopBar title="Collection">
-					<MoreHoriz style={styles.actionIcon} fill="white" width={32} height={32} />
-					<FilterList style={styles.actionIcon} fill="white" width={32} height={32} />
+					<TouchableOpacity>
+						<MoreHoriz style={styles.actionIcon} fill="white" width={32} height={32} />
+					</TouchableOpacity>
+					<TouchableOpacity>
+						<FilterList style={styles.actionIcon} fill="white" width={32} height={32} />
+					</TouchableOpacity>
 				</TopBar>
 			</View>
 			<View style={styles.list}>
