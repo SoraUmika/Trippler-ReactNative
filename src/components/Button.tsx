@@ -21,7 +21,7 @@ interface Props {
 	text: string;
 	color: string;
 	width?: number | string;
-	height: number;
+	height: number | string;
 	onPress?: Function;
 	style?: StyleProp<ViewStyle>;
 	textStyle?: StyleProp<TextStyle>;
@@ -59,7 +59,7 @@ export default class Button_ extends Component<Props, State> {
 		const { down } = this.state;
 		return (
 			<View
-				style={{ ...(style as object), width: width, height: height }}
+				style={{ ...(style as object), width: width, height: height, flex: 0 }}
 				onTouchStart={this.onTouchDown}
 				onTouchEnd={this.onTouchUp}
 			>
@@ -67,7 +67,7 @@ export default class Button_ extends Component<Props, State> {
 					style={{
 						...styles.button,
 						backgroundColor: color,
-						height: height - 8,
+						flex: 1,
 						top: down ? 8 : 0
 					}}
 				>
