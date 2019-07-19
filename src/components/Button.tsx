@@ -18,13 +18,11 @@ import { StyleSheet, Text, View, TextStyle, StyleProp, ViewStyle } from "react-n
 import { objectsEqual } from "../util";
 
 interface Props {
-	text: string;
 	color: string;
 	width?: number | string;
 	height: number | string;
 	onPress?: Function;
 	style?: StyleProp<ViewStyle>;
-	textStyle?: StyleProp<TextStyle>;
 	disable?: boolean;
 }
 
@@ -55,7 +53,7 @@ export default class Button_ extends Component<Props, State> {
 	}
 
 	render() {
-		const { text, color, width, height, textStyle, style } = this.props;
+		const { color, width, height, style, children } = this.props;
 		const { down } = this.state;
 		return (
 			<View
@@ -72,14 +70,7 @@ export default class Button_ extends Component<Props, State> {
 					}}
 				>
 					<View style={styles.textContainer}>
-						<Text
-							style={{
-								...styles.text,
-								...((textStyle ? textStyle : {}) as object)
-							}}
-						>
-							{text}
-						</Text>
+						<Text style={styles.text}>{children}</Text>
 					</View>
 				</View>
 				<View

@@ -8,7 +8,9 @@ const MainActionBar: FC = props => {
 		<View style={styles.root}>
 			<View style={styles.subAction} />
 			<View style={styles.mainAction}>
-				<Button text="hi" height="100%" width={60} color="white" />
+				<Button height="100%" width={60} color="white" >
+                    hi
+                </Button>
 			</View>
 		</View>
 	);
