@@ -15,6 +15,7 @@ const CollectionItem: FC<Props> = props => {
 	const { businessId } = props;
     const business = useSelector<State, Business>(state => state.businesses[businessId]);
     const pinned = useSelector<State, boolean>(state => state.collection.items[businessId]);
+    const accentColor = useSelector<State, string>(state => state.theme.accentColor);
 
 	return (
 		<View style={styles.root}>
@@ -24,7 +25,7 @@ const CollectionItem: FC<Props> = props => {
 					<CenterView main>
 						<Text style={styles.name}>{business.name}</Text>
 						{pinned && (
-							<ArrowUpward fill="white" style={styles.pinIcon} opacity={0.75} />
+							<ArrowUpward fill={accentColor} style={styles.pinIcon} opacity={0.75} />
 						)}
 					</CenterView>
 					<View style={styles.statContainer}>
