@@ -5,15 +5,17 @@ import { useSelector } from "react-redux";
 import ArrowUpward from "../svg/ArrowUpward";
 import CenterView from "./CenterView";
 import Business from "../Business";
+import State from "../redux/state"
 
 interface Props {
 	businessId: string;
-	pinned: boolean;
+	pinned?: boolean;
 }
 
 const CollectionItem: FC<Props> = props => {
 	const { businessId, pinned } = props;
-	const business = useSelector<any, Business>(state => state.businesses[businessId]);
+    const business = useSelector<State, Business>(state => state.businesses[businessId]);
+    
 	return (
 		<View style={styles.root}>
 			<View style={styles.container}>
@@ -31,7 +33,7 @@ const CollectionItem: FC<Props> = props => {
 						</CenterView>
 						<View style={styles.ratingContainer}>
 							<Text style={styles.ratingNum}>({business.ratingNum})</Text>
-							<Text style={styles.rating}>{business.rating} </Text>
+							<Text style={styles.rating}>{business.rating}</Text>
 						</View>
 					</View>
 				</View>
@@ -60,15 +62,12 @@ const styles = StyleSheet.create({
 		padding: 16
 	},
 	name: {
-		// paddingLeft: 16,
 		color: "white",
 		opacity: 0.75,
 		fontWeight: "bold",
 		fontSize: 24
-		// backgroundColor: "green"
 	},
 	status: {
-		// paddingLeft: 16,
 		color: "white",
 		opacity: 0.5,
 		fontSize: 16

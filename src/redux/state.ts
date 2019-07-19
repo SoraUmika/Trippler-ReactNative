@@ -14,5 +14,5 @@ export type Businesses = { [index: string]: Business };
 
 export interface Collection {
 	appliedFilters: string[];
-	items: { pinned: boolean; businessId: string }[];
+	items: { [index: string]: boolean };
 }

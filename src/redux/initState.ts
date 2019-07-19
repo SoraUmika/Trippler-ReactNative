@@ -12,11 +12,11 @@ const init_state: State = {
 	},
 	collection: {
 		appliedFilters: [],
-		items: [
-			{pinned: true, businessId: ":)"},
-			{pinned: false, businessId: "hello"},
-			{pinned: false, businessId: "test"},
-		]
+		items: {
+			"test": false,
+			"hello": false,
+			":)": true
+		}
 	}
 };
 
