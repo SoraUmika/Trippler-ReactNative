@@ -5,15 +5,19 @@ import TopBar from "./TopBar";
 import MoreHoriz from "../svg/MoreHoriz";
 import FilterList from "../svg/FilterList";
 import CollectionList from "./CollectionList";
-import MainActionBar from "./MainActionBar"
+import MainActionBar from "./MainActionBar";
+import DashLine from "./DashLine";
 
 interface Props {}
 
 const Collection: FC = props => {
 	return (
 		<View style={styles.container}>
-			<View style={styles.mainAction} >
-				<MainActionBar/>
+			<View style={styles.mainAction}>
+				<MainActionBar />
+			</View>
+			<View style={styles.dashContainer}>
+				<DashLine />
 			</View>
 			<View style={styles.title}>
 				<TopBar title="Collection">
@@ -44,6 +48,11 @@ const styles = StyleSheet.create({
 	},
 	actionIcon: {
 		margin: 8
+	},
+	dashContainer: {
+		flex: 0,
+		padding: 16,
+		paddingBottom: 0
 	}
 });
 
