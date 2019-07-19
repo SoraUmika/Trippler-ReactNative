@@ -9,13 +9,13 @@ import State from "../redux/state"
 
 interface Props {
 	businessId: string;
-	pinned?: boolean;
 }
 
 const CollectionItem: FC<Props> = props => {
-	const { businessId, pinned } = props;
+	const { businessId } = props;
     const business = useSelector<State, Business>(state => state.businesses[businessId]);
-    
+    const pinned = useSelector<State, boolean>(state => state.collection.items[businessId]);
+
 	return (
 		<View style={styles.root}>
 			<View style={styles.container}>

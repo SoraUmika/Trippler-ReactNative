@@ -7,7 +7,7 @@ export default class CollectionList extends Component {
 	render() {
 		return (
 			<ScrollView style={styles.container}>
-				<CollectionItem businessId="test" pinned/>
+				<CollectionItem businessId=":)"/>
 			</ScrollView>
 		);
 	}
