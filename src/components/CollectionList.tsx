@@ -1,3 +1,9 @@
+/**
+ * List of collection items, displayed in collection section of main page.
+ * 
+ * TODO auto reads the collections from store.
+ * TODO edge transparency.
+ */
 import React, { Component } from "react";
 import { View, StyleSheet, ScrollView } from "react-native";
 

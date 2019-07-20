@@ -1,3 +1,9 @@
+/**
+ * Signup screen of Tripplar.
+ * 
+ * TODO improve user friendiness.
+ * TODO server comminication.
+ */
 import React, { FC, useState } from "react";
 import { StyleSheet, View, Text } from "react-native";
 

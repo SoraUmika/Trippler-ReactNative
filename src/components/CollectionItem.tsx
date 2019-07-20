@@ -1,3 +1,10 @@
+/**
+ * Items of the collection list.
+ * 
+ * @param {string} businessId the id of the target business.
+ * 
+ * TODO add icon display.
+ */
 import React, { FC } from "react";
 import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import { useSelector } from "react-redux";

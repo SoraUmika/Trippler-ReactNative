@@ -1,3 +1,9 @@
+/**
+ * The top bar in each sections of main page.
+ * It holds the title and action buttons.
+ * 
+ * @param {string} title The title of the section.
+ */
 import React, { Component } from "react";
 import { StyleSheet, View, Text } from "react-native";
 

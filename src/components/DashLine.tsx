@@ -1,3 +1,6 @@
+/**
+ * A dashed line, wrapper for Dash component from react-native-dash.
+ */
 import React, { Component } from "react";
 import Dash from "react-native-dash";
 

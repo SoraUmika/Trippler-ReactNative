@@ -1,3 +1,10 @@
+/**
+ * The collection section of the main page.
+ * 
+ * TODO add filter functionality.
+ * TODO add selection mode.
+ * TODO add sort functionality.
+ */
 import React, { FC } from "react";
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 
