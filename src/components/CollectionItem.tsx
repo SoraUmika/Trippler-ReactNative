@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import { useSelector } from "react-redux";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 import Color from "color";
@@ -9,16 +9,23 @@ import CenterView from "./CenterView";
 import Business from "../Business";
 import State from "../redux/state";
 import DeleteOutline from "../svg/DeleteOutline";
+import ArrowDownward from "../svg/ArrowDownward";
 
 interface Props {
 	businessId: string;
 }
 
-const RightAction = () => {
+const RightAction = (pinned: boolean, onDelete: Function, onPinToggle: Function) => {
 	return (
 		<View style={styles.rightActionContainer}>
-			<DeleteOutline fill="#D52941" />
-			<Text style={styles.rightActionText}>Delete</Text>
+			<TouchableOpacity style={styles.rightActionButton}>
+				<DeleteOutline fill="#D52941" />
+				<Text style={styles.rightActionDeleteText}>Delete</Text>
+			</TouchableOpacity>
+			<TouchableOpacity style={styles.rightActionButton}>
+				{pinned ? <ArrowDownward fill="#0EAD69" /> : <ArrowUpward fill="#0EAD69" />}
+				<Text style={styles.rightActionPinText}>{pinned ? "Un-pin" : "Pin"}</Text>
+			</TouchableOpacity>
 		</View>
 	);
 };
@@ -30,7 +37,7 @@ const CollectionItem: FC<Props> = props => {
 	const accentColor = useSelector<State, string>(state => state.theme.accentColor);
 
 	return (
-		<Swipeable renderRightActions={RightAction}>
+		<Swipeable renderRightActions={() => RightAction(pinned, () => null, () => null)}>
 			<View style={styles.root}>
 				<View style={styles.container}>
 					<View style={styles.avatar} />
@@ -128,12 +135,23 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 		alignItems: "center",
 		flexDirection: "row",
-		marginBottom: 16
+		marginBottom: 16,
+		marginRight: 16
 	},
-	rightActionText: {
+	rightActionDeleteText: {
 		color: "#D52941",
-		marginRight: 32,
+		marginRight: 16,
 		fontWeight: "bold"
+	},
+	rightActionPinText: {
+		color: "#0EAD69",
+		marginRight: 16,
+		fontWeight: "bold"
+	},
+	rightActionButton: {
+		flex: 0,
+		flexDirection: "row",
+		alignItems: "center"
 	}
 });
 
