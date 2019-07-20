@@ -1,14 +1,31 @@
 import State from "./state";
-import Business from "../Business";
 
 const init_state: State = {
 	theme: {
 		accentColor: "#058ED9"
 	},
 	businesses: {
-		"test": new Business("test", "Egg", "open", 4.3, 123),
-		"hello": new Business("hello", "Foo", "close", 3.1, 10),
-		":)": new Business(":)", "Bar", "open", 4.7, 2031)
+		"test": {
+			id: "test",
+			name: "Egg",
+			status: "open",
+			rating: 4.3,
+			ratingNum: 123
+		},
+		"hello": {
+			id: "hello",
+			name: "Foo",
+			status: "close",
+			rating: 3.1,
+			ratingNum: 10
+		},
+		":)": {
+			id: ":)",
+			name: "Bar",
+			status: "open",
+			rating: 4.7,
+			ratingNum: 2034
+		}
 	},
 	collection: {
 		appliedFilters: [],

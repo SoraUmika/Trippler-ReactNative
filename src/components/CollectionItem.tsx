@@ -6,7 +6,7 @@ import Color from "color";
 
 import ArrowUpward from "../svg/ArrowUpward";
 import CenterView from "./CenterView";
-import Business from "../Business";
+import Business from "../redux/state/Business";
 import State from "../redux/state";
 import DeleteOutline from "../svg/DeleteOutline";
 import ArrowDownward from "../svg/ArrowDownward";

@@ -1,4 +1,4 @@
-import Business from "../Business";
+import Business from "./Business";
 
 export default interface State {
 	theme: Theme;
