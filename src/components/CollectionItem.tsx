@@ -8,6 +8,7 @@ import ArrowUpward from "../svg/ArrowUpward";
 import CenterView from "./CenterView";
 import Business from "../Business";
 import State from "../redux/state";
+import DeleteOutline from "../svg/DeleteOutline";
 
 interface Props {
 	businessId: string;
@@ -15,21 +16,9 @@ interface Props {
 
 const RightAction = () => {
 	return (
-		<View
-			style={{
-				flex: 0,
-				justifyContent: "center",
-				alignItems: "flex-end"
-			}}
-		>
-			<Text
-				style={{
-					color: "white",
-					padding: 8
-				}}
-			>
-				Delete
-			</Text>
+		<View style={styles.rightActionContainer}>
+			<DeleteOutline fill="#D52941" />
+			<Text style={styles.rightActionText}>Delete</Text>
 		</View>
 	);
 };
@@ -133,6 +122,18 @@ const styles = StyleSheet.create({
 		flex: 1,
 		flexDirection: "column",
 		flexWrap: "wrap-reverse"
+	},
+	rightActionContainer: {
+		flex: 0,
+		justifyContent: "center",
+		alignItems: "center",
+		flexDirection: "row",
+		marginBottom: 16
+	},
+	rightActionText: {
+		color: "#D52941",
+		marginRight: 32,
+		fontWeight: "bold"
 	}
 });
 
