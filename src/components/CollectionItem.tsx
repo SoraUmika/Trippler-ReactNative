@@ -1,6 +1,8 @@
 import React, { FC } from "react";
-import { View, StyleSheet, Text, TouchableNativeFeedback } from "react-native";
+import { View, StyleSheet, Text } from "react-native";
 import { useSelector } from "react-redux";
+import Swipeable from "react-native-gesture-handler/Swipeable";
+import Color from "color";
 
 import ArrowUpward from "../svg/ArrowUpward";
 import CenterView from "./CenterView";
@@ -11,6 +13,27 @@ interface Props {
 	businessId: string;
 }
 
+const RightAction = () => {
+	return (
+		<View
+			style={{
+				flex: 0,
+				justifyContent: "center",
+				alignItems: "flex-end"
+			}}
+		>
+			<Text
+				style={{
+					color: "white",
+					padding: 8
+				}}
+			>
+				Delete
+			</Text>
+		</View>
+	);
+};
+
 const CollectionItem: FC<Props> = props => {
 	const { businessId } = props;
 	const business = useSelector<State, Business>(state => state.businesses[businessId]);
@@ -18,7 +41,7 @@ const CollectionItem: FC<Props> = props => {
 	const accentColor = useSelector<State, string>(state => state.theme.accentColor);
 
 	return (
-		<TouchableNativeFeedback>
+		<Swipeable renderRightActions={RightAction}>
 			<View style={styles.root}>
 				<View style={styles.container}>
 					<View style={styles.avatar} />
@@ -45,16 +68,18 @@ const CollectionItem: FC<Props> = props => {
 					</View>
 				</View>
 			</View>
-		</TouchableNativeFeedback>
+		</Swipeable>
 	);
 };
 
 const styles = StyleSheet.create({
 	root: {
-		backgroundColor: "rgba(0, 0, 0, 0.05)",
+		backgroundColor: Color("#3B413C")
+			.darken(0.05)
+			.string(),
 		margin: 16,
 		height: 80,
-        marginTop: 0
+		marginTop: 0
 	},
 	container: {
 		flex: 1,
