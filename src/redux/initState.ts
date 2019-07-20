@@ -64,6 +64,9 @@ const init_state: State = {
 				pinned: true
 			}
 		}
+	},
+	recommendation: {
+		feeds: []
 	}
 };
 

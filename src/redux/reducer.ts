@@ -9,7 +9,8 @@ export default function reducer(
 	return {
 		theme: theme(state.theme, action),
 		businesses: businesses(state.businesses, action),
-		collection: collection(state.collection, action)
+		collection: collection(state.collection, action),
+		recommendation: recommendation(state.recommendation, action)
 	};
 }
 
@@ -26,6 +27,10 @@ function businesses(state: States.Businesses, action: RootAction): States.Busine
 }
 
 function collection(state: States.Collection, action: RootAction): States.Collection {
+	return state;
+}
+
+function recommendation(state: States.Recommendation, action: RootAction): States.Recommendation {
 	return state;
 }
 

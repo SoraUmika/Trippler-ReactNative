@@ -5,6 +5,7 @@ export default interface State {
 	theme: Theme;
 	businesses: Businesses;
 	collection: Collection;
+	recommendation: Recommendation;
 }
 
 export interface Theme {
@@ -16,4 +17,8 @@ export type Businesses = { [index: string]: Business };
 export interface Collection {
 	appliedFilters: string[];
 	items: { [index: string]: CollectionData };
+}
+
+export interface Recommendation {
+	feeds: string[];
 }
