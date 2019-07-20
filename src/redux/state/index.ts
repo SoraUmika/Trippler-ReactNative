@@ -10,6 +10,7 @@ export default interface State {
 
 export interface Theme {
 	accentColor: string;
+	backgroundColor: string;
 }
 
 export type Businesses = { [index: string]: Business };

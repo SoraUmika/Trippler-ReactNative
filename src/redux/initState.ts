@@ -2,7 +2,8 @@ import State from "./state";
 
 const init_state: State = {
 	theme: {
-		accentColor: "#058ED9"
+		accentColor: "#058ED9",
+		backgroundColor: "#3B413C"
 	},
 	businesses: {
 		test: {

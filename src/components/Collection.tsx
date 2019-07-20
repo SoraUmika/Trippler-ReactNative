@@ -1,12 +1,13 @@
 /**
  * The collection section of the main page.
- * 
+ *
  * TODO add filter functionality.
  * TODO add selection mode.
  * TODO add sort functionality.
  */
 import React, { FC } from "react";
 import { StyleSheet, View, TouchableOpacity } from "react-native";
+import { useSelector } from "react-redux";
 
 import TopBar from "./TopBar";
 import MoreHoriz from "../svg/MoreHoriz";
@@ -14,12 +15,15 @@ import FilterList from "../svg/FilterList";
 import CollectionList from "./CollectionList";
 import MainActionBar from "./MainActionBar";
 import DashLine from "./DashLine";
+import State from "../redux/state";
 
 interface Props {}
 
 const Collection: FC = props => {
+	const backgroundColor = useSelector<State, string>(state => state.theme.backgroundColor);
+
 	return (
-		<View style={styles.container}>
+		<View style={[styles.container, { backgroundColor: backgroundColor }]}>
 			<View style={styles.mainAction}>
 				<MainActionBar />
 			</View>
@@ -45,8 +49,7 @@ const Collection: FC = props => {
 
 const styles = StyleSheet.create({
 	container: {
-		flex: 1,
-		backgroundColor: "#3B413C"
+		flex: 1
 	},
 	mainAction: {
 		flex: 1

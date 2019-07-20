@@ -1,8 +1,8 @@
 /**
  * Items of the collection list.
- * 
+ *
  * @param {string} businessId the id of the target business.
- * 
+ *
  * TODO add icon display.
  */
 import React, { FC } from "react";
@@ -45,10 +45,18 @@ const CollectionItem: FC<Props> = props => {
 		state => state.collection.items[businessId]
 	);
 	const accentColor = useSelector<State, string>(state => state.theme.accentColor);
+	const backgroundColor = useSelector<State, string>(state => state.theme.backgroundColor);
 
 	return (
 		<Swipeable renderRightActions={() => RightAction(itemData.pinned, () => null, () => null)}>
-			<View style={styles.root}>
+			<View
+				style={{
+					...styles.root,
+					backgroundColor: Color(backgroundColor)
+						.darken(0.05)
+						.string()
+				}}
+			>
 				<View style={styles.container}>
 					<View style={styles.avatar} />
 					<View style={styles.description}>
@@ -80,9 +88,6 @@ const CollectionItem: FC<Props> = props => {
 
 const styles = StyleSheet.create({
 	root: {
-		backgroundColor: Color("#3B413C")
-			.darken(0.05)
-			.string(),
 		margin: 16,
 		height: 80,
 		marginTop: 0
