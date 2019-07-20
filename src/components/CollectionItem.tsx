@@ -7,6 +7,7 @@ import Color from "color";
 import ArrowUpward from "../svg/ArrowUpward";
 import CenterView from "./CenterView";
 import Business from "../redux/state/Business";
+import CollectionData from "../redux/state/CollectionData";
 import State from "../redux/state";
 import DeleteOutline from "../svg/DeleteOutline";
 import ArrowDownward from "../svg/ArrowDownward";
@@ -33,18 +34,20 @@ const RightAction = (pinned: boolean, onDelete: Function, onPinToggle: Function)
 const CollectionItem: FC<Props> = props => {
 	const { businessId } = props;
 	const business = useSelector<State, Business>(state => state.businesses[businessId]);
-	const pinned = useSelector<State, boolean>(state => state.collection.items[businessId]);
+	const itemData = useSelector<State, CollectionData>(
+		state => state.collection.items[businessId]
+	);
 	const accentColor = useSelector<State, string>(state => state.theme.accentColor);
 
 	return (
-		<Swipeable renderRightActions={() => RightAction(pinned, () => null, () => null)}>
+		<Swipeable renderRightActions={() => RightAction(itemData.pinned, () => null, () => null)}>
 			<View style={styles.root}>
 				<View style={styles.container}>
 					<View style={styles.avatar} />
 					<View style={styles.description}>
 						<CenterView main>
 							<Text style={styles.name}>{business.name}</Text>
-							{pinned && (
+							{itemData.pinned && (
 								<ArrowUpward
 									fill={accentColor}
 									style={styles.pinIcon}

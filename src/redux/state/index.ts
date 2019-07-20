@@ -1,4 +1,5 @@
 import Business from "./Business";
+import CollectionData from "./CollectionData"
 
 export default interface State {
 	theme: Theme;
@@ -14,5 +15,5 @@ export type Businesses = { [index: string]: Business };
 
 export interface Collection {
 	appliedFilters: string[];
-	items: { [index: string]: boolean };
+	items: { [index: string]: CollectionData };
 }

@@ -5,14 +5,14 @@ const init_state: State = {
 		accentColor: "#058ED9"
 	},
 	businesses: {
-		"test": {
+		test: {
 			id: "test",
 			name: "Egg",
 			status: "open",
 			rating: 4.3,
 			ratingNum: 123
 		},
-		"hello": {
+		hello: {
 			id: "hello",
 			name: "Foo",
 			status: "close",
@@ -30,9 +30,15 @@ const init_state: State = {
 	collection: {
 		appliedFilters: [],
 		items: {
-			"test": false,
-			"hello": false,
-			":)": true
+			test: {
+				pinned: false
+			},
+			hello: {
+				pinned: false
+			},
+			":)": {
+				pinned: true
+			}
 		}
 	}
 };
