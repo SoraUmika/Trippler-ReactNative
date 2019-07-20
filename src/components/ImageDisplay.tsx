@@ -4,18 +4,12 @@ import { View, Image, StyleSheet, Button} from 'react-native';
 
 interface Props{
   width?: number,
-  height?: number
+  height?: number,
+  image: string
 }
 
-interface State{
 
-}
-
-export default class ImageDislpay extends Component<Props, State>{
-  state = {
-    img_source: 'https://cdn.dribbble.com/users/371094/screenshots/3884115/ramen.jpg'
-  }
-
+export default class ImageDislpay extends Component<Props>{
   setImageProperties = () => {
     return {width: this.props.width, 
             height: this.props.height,
@@ -28,15 +22,8 @@ export default class ImageDislpay extends Component<Props, State>{
   render(){
     return(
       <View>
-        <Image source={{uri: this.state.img_source}} style={this.setImageProperties()}/>
+        <Image source={{uri: this.props.image}} style={this.setImageProperties()}/>
       </View>        
     )
   }
 }
-
-const styles = StyleSheet.create({
-  image: {
-    width: 100,
-    height: 100,
-  }
-});

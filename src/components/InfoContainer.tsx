@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import { View, StyleSheet, Text} from 'react-native';
 
 interface Props{
+    Info: object
     ItemName?: string,
     ItemAddress?: string,
     ItemOpenTime?: string,
@@ -16,12 +17,12 @@ export default class InfoContainer extends Component<Props, State>{
   render(){
     return(
       <View>
-        <Text style={styles.name}> Name of Restraunt </Text>
-        <Text style={styles.adress}> Address</Text>
+        <Text style={styles.name}> {this.props.Info['names']} </Text>
+        <Text style={styles.adress}> {this.props.Info['address']} </Text>
         <View style={styles.rating_container}>
-          <Text> ratings(will have image of stars here) </Text>
+          <Text> ratings: {this.props.Info['ratings']} (will have image of stars here) </Text>
         </View>
-        <Text style={styles.openTime}> hours: hours</Text>
+        <Text style={styles.openTime}> {this.props.Info['hours']} </Text>
       </View>
     )
   }
