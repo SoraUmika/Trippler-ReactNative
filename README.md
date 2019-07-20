@@ -1,1 +1,0 @@
-# Trippler-Kivy-Dev
