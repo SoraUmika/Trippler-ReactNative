@@ -5,5 +5,13 @@ export default interface Business {
 	name: string;
 	status: BusinessStatus;
 	rating: number;
-	ratingNum: number
+	ratingNum: number;
+	address: string;
+	hours: [string, string];
+	gallery: [
+		{
+			url: string;
+			description: string;
+		}
+	];
 }
