@@ -40,10 +40,6 @@ export default class Button_ extends Component<Props, State> {
 		this.setState({ down: false });
 	};
 
-	shouldComponentUpdate(nextProps: Props, nextState: State) {
-		return nextState.down !== this.state.down || !objectsEqual(nextProps, this.props);
-	}
-
 	render() {
 		const { color, width, height, style, children } = this.props;
 		const { down } = this.state;
