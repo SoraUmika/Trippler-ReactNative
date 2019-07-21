@@ -22,7 +22,7 @@ export default class InfoDetailedContainer extends Component<Props>{
   
   slideCheck = () => {
     if(this.state.slide_current_pos === 'down'){
-      this.slide(-1 * Dimensions.get('window').height);
+      this.slide(-1 * Dimensions.get('window').height+StatusBar.currentHeight);
       this.state.slide_current_pos = 'up';
     }else if(this.state.slide_current_pos === 'up'){
       this.slide(0);
