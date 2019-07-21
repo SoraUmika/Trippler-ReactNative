@@ -8,8 +8,9 @@ import LoginScreen from "./src/components/LoginScreen";
 import SignupScreen from "./src/components/SignupScreen";
 import MainScreen from "./src/components/MainScreen";
 import transitionConfig from "./src/transition";
+import ScreenContainer from './src/components/ScreenContainer'
 
-StatusBar.setHidden(true);
+StatusBar.setHidden(false);
 
 const MainNavigator = createAppContainer(
 	createStackNavigator(
@@ -17,10 +18,11 @@ const MainNavigator = createAppContainer(
 			// Register screens here.
 			Login: { screen: LoginScreen },
 			Signup: { screen: SignupScreen },
-			Main: { screen: MainScreen }
+			Main: { screen: MainScreen },
+			SwipeScreen: { screen: ScreenContainer}
 		},
 		{
-			initialRouteName: "Main",
+			initialRouteName: "Login",
 			defaultNavigationOptions: {
 				header: null
 			},
