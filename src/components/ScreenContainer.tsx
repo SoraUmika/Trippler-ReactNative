@@ -1,4 +1,3 @@
-"use strict";
 import React, { Component } from 'react'
 import { View, StyleSheet, Dimensions, StatusBar, TouchableHighlight, Image } from 'react-native';
 import ImageDisplay from './ImageDisplay'
@@ -6,9 +5,6 @@ import InfoContainer from './InfoContainer'
 import InfoDetailedContainer from './InfoDetailedContainer'
 
 export default class ScreenContainer extends Component{
-  constructor(props){
-    super(props);
-  }
    
   state = {
     currentImageIndex: 0,
@@ -93,7 +89,7 @@ const styles = StyleSheet.create({
     width: Math.round(Dimensions.get('window').width),
     height: 1,
     backgroundColor: 'grey',
-    marginTop: StatusBar.currentHeight,
+    //marginTop: StatusBar.currentHeight,
     
   },
 

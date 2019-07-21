@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {View, StyleSheet, Animated, Button, Dimensions, StatusBar} from 'react-native'
+import Collection from "./Collection";
 
 interface Props{
   slideup?: boolean
@@ -21,7 +22,7 @@ export default class InfoDetailedContainer extends Component<Props>{
   
   slideCheck = () => {
     if(this.state.slide_current_pos === 'down'){
-      this.slide(-1 * Dimensions.get('window').height+StatusBar.currentHeight+10);
+      this.slide(-1 * Dimensions.get('window').height);
       this.state.slide_current_pos = 'up';
     }else if(this.state.slide_current_pos === 'up'){
       this.slide(0);
@@ -40,7 +41,9 @@ export default class InfoDetailedContainer extends Component<Props>{
   render(){
     return(
       <View> 
-        <Animated.View style={{...styles.containerProperties, top: this.state.top_amt}}/>
+        <Animated.View style={{...styles.containerProperties, top: this.state.top_amt}}>
+          <Collection/>
+        </Animated.View>
         <Button title={'Slide Up'} onPress={()=>this.slideCheck()}/>
       </View>
     )
