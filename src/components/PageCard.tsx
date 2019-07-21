@@ -1,5 +1,13 @@
+/**
+ * Container for pages in main screen.
+ * 
+ * @param {number} topPercent The y coordinate of the card in term of percentage of window height.
+ * @param {string} backgroundCard The backgroundColor of the page card.
+ * @param {StyleProp<ViewStyle>} rootStyle The style applied to the root View.
+ * @param {StyleProp<ViewStyle>} containerStyle The style applied to the children container View.
+ */
 import React, { Component } from "react";
-import { StyleSheet, Animated, StyleProp, ViewStyle } from "react-native";
+import { StyleSheet, Animated, StyleProp, ViewStyle, View } from "react-native";
 import {
 	PanGestureHandler,
 	PanGestureHandlerStateChangeEvent,
@@ -10,7 +18,9 @@ import dimension from "../dimension";
 
 interface Props {
 	topPercent: number;
-	style?: StyleProp<ViewStyle>;
+	containerStyle?: StyleProp<ViewStyle>;
+    rootStyle?: StyleProp<ViewStyle>;
+    backgroundColor: string;
 }
 
 export default class PageCard extends Component<Props> {
@@ -37,7 +47,7 @@ export default class PageCard extends Component<Props> {
 	};
 
 	render() {
-		const { children, style } = this.props;
+		const { children, rootStyle, containerStyle, backgroundColor } = this.props;
 		return (
 			<PanGestureHandler
 				onGestureEvent={this.onPanEvent}
@@ -45,17 +55,25 @@ export default class PageCard extends Component<Props> {
 			>
 				<Animated.View
 					style={{
-						...(style as object),
+						...(rootStyle as object),
 						...styles.root,
-						top: -this.minTranslateY,
-						transform: [{ translateY: this.translateY.interpolate({
-                            inputRange: [this.minTranslateY, 0, this.maxTranslateY],
-                            outputRange: [this.minTranslateY, 0, this.maxTranslateY],
-                            extrapolate: "clamp"
-                        }) }]
+                        top: -this.minTranslateY,
+                        backgroundColor: backgroundColor,
+						transform: [
+							{
+								translateY: this.translateY.interpolate({
+									inputRange: [this.minTranslateY, 0, this.maxTranslateY],
+									outputRange: [this.minTranslateY, 0, this.maxTranslateY],
+									extrapolate: "clamp"
+								})
+							}
+						]
 					}}
 				>
-					{children}
+					<View style={styles.handleBarContainer}>
+						<View style={styles.handleBar} />
+					</View>
+					<View style={[containerStyle, styles.childrenContainer]}>{children}</View>
 				</Animated.View>
 			</PanGestureHandler>
 		);
@@ -67,8 +85,24 @@ const styles = StyleSheet.create({
 		position: "absolute",
 		width: "100%",
 		height: "100%",
-        left: 0,
-        borderTopLeftRadius: 24,
-        borderTopRightRadius: 24
+		left: 0,
+		borderTopLeftRadius: 24,
+		borderTopRightRadius: 24
+	},
+	handleBarContainer: {
+		width: "100%",
+		height: 24,
+		justifyContent: "center",
+		alignItems: "center"
+	},
+	handleBar: {
+		width: "33%",
+		height: "35%",
+		backgroundColor: "black",
+		opacity: 0.1,
+		borderRadius: 4
+	},
+	childrenContainer: {
+		flex: 1
 	}
 });
