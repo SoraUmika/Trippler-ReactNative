@@ -1,6 +1,6 @@
 /**
  * Container for pages in main screen.
- * 
+ *
  * @param {number} topPercent The y coordinate of the card in term of percentage of window height.
  * @param {string} backgroundCard The backgroundColor of the page card.
  * @param {StyleProp<ViewStyle>} rootStyle The style applied to the root View.
@@ -19,15 +19,17 @@ import dimension from "../dimension";
 interface Props {
 	topPercent: number;
 	containerStyle?: StyleProp<ViewStyle>;
-    rootStyle?: StyleProp<ViewStyle>;
-    backgroundColor: string;
+	rootStyle?: StyleProp<ViewStyle>;
+	backgroundColor: string;
+	topMargin: number;
+	bottomPadding: number;
 }
 
 export default class PageCard extends Component<Props> {
 	translateY = new Animated.Value(0);
-
-	maxTranslateY = dimension.height(1 - this.props.topPercent);
-	minTranslateY = dimension.height(-this.props.topPercent);
+	yCoord = dimension.height(this.props.topPercent);
+	maxTranslateY = dimension.height(1 - this.props.topPercent) - this.props.bottomPadding;
+	minTranslateY = -this.yCoord + this.props.topMargin;
 
 	onPanEvent = Animated.event([
 		{
@@ -57,8 +59,8 @@ export default class PageCard extends Component<Props> {
 					style={{
 						...(rootStyle as object),
 						...styles.root,
-                        top: -this.minTranslateY,
-                        backgroundColor: backgroundColor,
+						top: this.yCoord,
+						backgroundColor: backgroundColor,
 						transform: [
 							{
 								translateY: this.translateY.interpolate({
