@@ -43,7 +43,7 @@ const LoginScreen: FC<any> = props => {
 					height={60}
 					color="black"
 					onPress={() => {
-						{navigate('SwipeScreen')
+						{navigate('SwipeScreen', {transition: "none"})
 						/*
 						setUserName({ value: userName.value, error: !userName.value.trim() });
 						setPassword({ value: password.value, error: !password.value.trim() });

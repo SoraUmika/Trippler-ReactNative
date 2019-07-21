@@ -1,7 +1,7 @@
 import { TransitionConfig } from "react-navigation";
 import { Animated, Easing } from "react-native";
 
-export type TransitionTypes = "slideUp";
+export type TransitionTypes = "slideUp" | "none";
 
 const transitionCOnfig = (): TransitionConfig => {
 	return {
@@ -31,6 +31,8 @@ const transitionCOnfig = (): TransitionConfig => {
 					});
 
 					return { transform: [{ translateY }] };
+				case "none":
+					return {};
 			}
 		}
 	};
