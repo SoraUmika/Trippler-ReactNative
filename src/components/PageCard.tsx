@@ -6,13 +6,18 @@ import {
 	State
 } from "react-native-gesture-handler";
 
+import dimension from "../dimension";
+
 interface Props {
-	y: number | string;
+	topPercent: number;
 	style?: StyleProp<ViewStyle>;
 }
 
 export default class PageCard extends Component<Props> {
 	translateY = new Animated.Value(0);
+
+	maxTranslateY = dimension.height(1 - this.props.topPercent);
+	minTranslateY = dimension.height(-this.props.topPercent);
 
 	onPanEvent = Animated.event([
 		{
@@ -26,13 +31,13 @@ export default class PageCard extends Component<Props> {
 		if (event.nativeEvent.oldState == State.ACTIVE) {
 			Animated.timing(this.translateY, {
 				toValue: 0,
-				duration: 1000
+				duration: 500
 			}).start();
 		}
 	};
 
 	render() {
-		const { children, y, style } = this.props;
+		const { children, style } = this.props;
 		return (
 			<PanGestureHandler
 				onGestureEvent={this.onPanEvent}
@@ -40,10 +45,14 @@ export default class PageCard extends Component<Props> {
 			>
 				<Animated.View
 					style={{
-                        ...style as object,
+						...(style as object),
 						...styles.root,
-						top: y,
-						transform: [{ translateY: this.translateY }]
+						top: -this.minTranslateY,
+						transform: [{ translateY: this.translateY.interpolate({
+                            inputRange: [this.minTranslateY, 0, this.maxTranslateY],
+                            outputRange: [this.minTranslateY, 0, this.maxTranslateY],
+                            extrapolate: "clamp"
+                        }) }]
 					}}
 				>
 					{children}
@@ -58,6 +67,8 @@ const styles = StyleSheet.create({
 		position: "absolute",
 		width: "100%",
 		height: "100%",
-		left: 0
+        left: 0,
+        borderTopLeftRadius: 24,
+        borderTopRightRadius: 24
 	}
 });
