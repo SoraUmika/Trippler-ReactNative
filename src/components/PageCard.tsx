@@ -95,7 +95,7 @@ export default class PageCard extends Component<Props> {
 	onPanStateChange = (event: PanGestureHandlerStateChangeEvent) => {
 		if (event.nativeEvent.oldState == State.ACTIVE) {
 			Animated.timing(this.translateYPan, {
-				toValue: this.toValue,
+				toValue: this.toValue
 			}).start(() => {
 				this.translateYPan.setOffset(this.translateYRange[this.currentIndex]);
 				this.triggered = false;
@@ -106,33 +106,34 @@ export default class PageCard extends Component<Props> {
 	render() {
 		const { children, rootStyle, containerStyle, backgroundColor } = this.props;
 		return (
-			<PanGestureHandler
-				onGestureEvent={this.onPanEvent}
-				onHandlerStateChange={this.onPanStateChange}
+			<Animated.View
+				style={{
+					...(rootStyle as object),
+					...styles.root,
+					top: this.yCoord,
+					backgroundColor: backgroundColor,
+					transform: [
+						{
+							translateY: this.translateYPan.interpolate({
+								inputRange: this.translateYRange,
+								outputRange: this.translateYRange,
+								extrapolate: "clamp"
+							})
+						}
+					]
+				}}
 			>
-				<Animated.View
-					style={{
-						...(rootStyle as object),
-						...styles.root,
-						top: this.yCoord,
-						backgroundColor: backgroundColor,
-						transform: [
-							{
-								translateY: this.translateYPan.interpolate({
-									inputRange: this.translateYRange,
-									outputRange: this.translateYRange,
-									extrapolate: "clamp"
-								})
-							}
-						]
-					}}
+				<PanGestureHandler
+					onGestureEvent={this.onPanEvent}
+					onHandlerStateChange={this.onPanStateChange}
 				>
 					<View style={styles.handleBarContainer}>
 						<View style={styles.handleBar} />
 					</View>
-					<View style={[containerStyle, styles.childrenContainer]}>{children}</View>
-				</Animated.View>
-			</PanGestureHandler>
+				</PanGestureHandler>
+
+				<View style={[containerStyle, styles.childrenContainer]}>{children}</View>
+			</Animated.View>
 		);
 	}
 }
