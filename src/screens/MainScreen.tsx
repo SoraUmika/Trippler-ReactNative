@@ -5,7 +5,7 @@ import React, { FC } from "react";
 import { StyleSheet, View } from "react-native";
 
 import MainPage from "../pages/MainPage";
-import PageCard from "./PageCard";
+import PageCard from "../components/PageCard";
 
 const MainScreen: FC = props => {
 	return (
