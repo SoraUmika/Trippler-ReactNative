@@ -3,11 +3,13 @@
  *
  * @param {number} topPercent The y coordinate of the card in term of percentage of window height.
  * @param {string} backgroundCard The backgroundColor of the page card.
- * @param {StyleProp<ViewStyle>} rootStyle The style applied to the root View.
- * @param {StyleProp<ViewStyle>} containerStyle The style applied to the children container View.
+ * @param {number} topMargin The top margin of page card when expanded.
+ * @param {number} bottomPadding The bottom padding of page card when collapsed.
+ * @param {StyleProp<ViewStyle>} [rootStyle] The style applied to the root View.
+ * @param {StyleProp<ViewStyle>} [containerStyle] The style applied to the children container View.
  */
 import React, { Component } from "react";
-import { StyleSheet, Animated, StyleProp, ViewStyle, View } from "react-native";
+import { StyleSheet, Animated, StyleProp, ViewStyle, View, Text } from "react-native";
 import {
 	PanGestureHandler,
 	PanGestureHandlerStateChangeEvent,
@@ -23,28 +25,81 @@ interface Props {
 	backgroundColor: string;
 	topMargin: number;
 	bottomPadding: number;
+	triggerMargin: TriggerMargin;
+}
+
+interface TriggerMargin {
+	unCollapse: number;
+	expand: number;
+	collapse: number;
+	unExpand: number;
 }
 
 export default class PageCard extends Component<Props> {
-	translateY = new Animated.Value(0);
+	translateYPan = new Animated.Value(0);
+	// translateYCard = new Animated.Value(0);
 	yCoord = dimension.height(this.props.topPercent);
-	maxTranslateY = dimension.height(1 - this.props.topPercent) - this.props.bottomPadding;
-	minTranslateY = -this.yCoord + this.props.topMargin;
+	originY = this.yCoord;
+	translateYRange = [
+		-this.yCoord + this.props.topMargin,
+		0,
+		dimension.height(1 - this.props.topPercent) - this.props.bottomPadding
+	];
+	currentIndex = 1;
+	toValue = 0;
+	triggered = false;
+
+	constructor(props: Props) {
+		super(props);
+		const { triggerMargin } = props;
+		this.translateYPan.addListener(({ value }) => {
+			const val = value - this.translateYRange[this.currentIndex];
+			if (!this.triggered) {
+				let direction = 0;
+				switch (this.currentIndex) {
+					case 0:
+						if (val >= triggerMargin.unExpand) {
+							direction = 1;
+						}
+						break;
+					case 1:
+						if (val <= -triggerMargin.expand) {
+							direction = -1;
+						} else if (val >= triggerMargin.collapse) {
+							direction = 1;
+						}
+						break;
+					case 2:
+						if (val <= -triggerMargin.unCollapse) {
+							direction = -1;
+						}
+						break;
+				}
+				this.toValue =
+					this.translateYRange[this.currentIndex + direction] -
+					this.translateYRange[this.currentIndex];
+				this.currentIndex += direction;
+				this.triggered = direction != 0;
+			}
+		});
+	}
 
 	onPanEvent = Animated.event([
 		{
 			nativeEvent: {
-				translationY: this.translateY
+				translationY: this.translateYPan
 			}
 		}
 	]);
 
 	onPanStateChange = (event: PanGestureHandlerStateChangeEvent) => {
 		if (event.nativeEvent.oldState == State.ACTIVE) {
-			Animated.timing(this.translateY, {
-				toValue: 0,
-				duration: 500
-			}).start();
+			Animated.timing(this.translateYPan, {
+				toValue: this.toValue,
+			}).start(() => {
+				this.translateYPan.setOffset(this.translateYRange[this.currentIndex]);
+				this.triggered = false;
+			});
 		}
 	};
 
@@ -63,9 +118,9 @@ export default class PageCard extends Component<Props> {
 						backgroundColor: backgroundColor,
 						transform: [
 							{
-								translateY: this.translateY.interpolate({
-									inputRange: [this.minTranslateY, 0, this.maxTranslateY],
-									outputRange: [this.minTranslateY, 0, this.maxTranslateY],
+								translateY: this.translateYPan.interpolate({
+									inputRange: this.translateYRange,
+									outputRange: this.translateYRange,
 									extrapolate: "clamp"
 								})
 							}
