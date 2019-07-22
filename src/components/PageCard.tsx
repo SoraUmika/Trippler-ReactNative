@@ -5,11 +5,19 @@
  * @param {string} backgroundCard The backgroundColor of the page card.
  * @param {number} topMargin The top margin of page card when expanded.
  * @param {number} bottomPadding The bottom padding of page card when collapsed.
+ * @param {TriggerMargin} triggerMargin The margin in which expand/collapse is triggered. More below.
  * @param {StyleProp<ViewStyle>} [rootStyle] The style applied to the root View.
  * @param {StyleProp<ViewStyle>} [containerStyle] The style applied to the children container View.
+ * 
+ * TriggerMargin object
+ * ====================
+ * @param {number} unExpand The expanded -> normal trigger margin.
+ * @param {number} expand The normal -> expanded trigger margin.
+ * @param {number} collapse The normal -> collapsed trigger margin.
+ * @param {number} unCollapse The collapsed -> normal trigger margin.
  */
 import React, { Component } from "react";
-import { StyleSheet, Animated, StyleProp, ViewStyle, View, Text } from "react-native";
+import { StyleSheet, Animated, StyleProp, ViewStyle, View } from "react-native";
 import {
 	PanGestureHandler,
 	PanGestureHandlerStateChangeEvent,

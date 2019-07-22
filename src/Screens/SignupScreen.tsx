@@ -7,9 +7,9 @@
 import React, { FC, useState } from "react";
 import { StyleSheet, View, Text } from "react-native";
 
-import Button from "./Button";
-import Input from "./Input";
-import KeyboardAvoidView from "./KeyboardAvoidView";
+import Button from "../components/Button";
+import Input from "../components/Input";
+import KeyboardAvoidView from "../components/KeyboardAvoidView";
 
 const SignupScreen: FC<any> = props => {
 	const [userName, setUserName] = useState({ value: "", error: false });
@@ -55,7 +55,7 @@ const SignupScreen: FC<any> = props => {
 					onChange={e => setRePassword(e.nativeEvent.text)}
 					textContentType="password"
 					secureTextEntry
-					error={rePasswordError}
+					error={rePasswordError as boolean}
 				/>
 				<Button
 					width="80%"
