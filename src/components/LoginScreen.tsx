@@ -7,9 +7,9 @@
 import React, { FC, useState } from "react";
 import { StyleSheet, View, Text } from "react-native";
 
-import Button from "../components/Button";
-import Input from "../components/Input";
-import KeyboardAvoidView from "../components/KeyboardAvoidView";
+import Button from "./Button";
+import Input from "./Input";
+import KeyboardAvoidView from "./KeyboardAvoidView";
 
 const LoginScreen: FC<any> = props => {
 	const { navigate } = props.navigation;
