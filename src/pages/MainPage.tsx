@@ -8,7 +8,7 @@
 import React, { FC } from "react";
 import { StyleSheet, View } from "react-native";
 
-import Collection from "./Collection";
+import Collection from "../components/Collection";
 
 const MainPage: FC = props => {
 	return <Collection />;

@@ -4,7 +4,7 @@
 import React, { FC } from "react";
 import { StyleSheet, View } from "react-native";
 
-import MainPage from "../components/MainPage";
+import MainPage from "../pages/MainPage";
 import PageCard from "../components/PageCard";
 
 const MainScreen: FC = props => {
