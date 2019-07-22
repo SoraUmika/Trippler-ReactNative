@@ -22,7 +22,7 @@ const MainNavigator = createAppContainer(
 			SwipeScreen: { screen: ScreenContainer}
 		},
 		{
-			initialRouteName: "Login",
+			initialRouteName: "Main",
 			defaultNavigationOptions: {
 				header: null
 			},
