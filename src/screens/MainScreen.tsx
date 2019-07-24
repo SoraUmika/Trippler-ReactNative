@@ -5,13 +5,13 @@ import React, { FC } from "react";
 import { StyleSheet, View } from "react-native";
 
 import MainPage from "../pages/MainPage";
-import PageCard from "../components/PageCard";
+import InfoPage from "../pages/InfoPage";
 
 const MainScreen: FC = props => {
 	return (
 		<View style={styles.container}>
 			<View style={styles.galleryCard} />
-			<PageCard
+			<InfoPage
 				topPercent={0.5}
 				backgroundColor="white"
 				topMargin={50}
@@ -23,6 +23,7 @@ const MainScreen: FC = props => {
 					unCollapse: 150
 				}}
 			/>
+			{/* <MainPage/> */}
 		</View>
 	);
 };
@@ -41,7 +42,8 @@ const styles = StyleSheet.create({
 	},
 	container: {
 		width: "100%",
-		height: "100%"
+		height: "100%",
+		backgroundColor: "black"
 	}
 });
 

@@ -24,7 +24,7 @@ import {
 	State
 } from "react-native-gesture-handler";
 
-import dimension from "../dimension";
+import dimension from "../../dimension";
 
 interface Props {
 	topPercent: number;
@@ -45,18 +45,11 @@ interface TriggerMargin {
 
 const PageCard: FC<Props> = props => {
 	const translateYPan = new Animated.Value(0);
-	const yCoord = dimension.height(props.topPercent);
-	const translateYRange = [
-		-yCoord + props.topMargin,
-		0,
-		dimension.height(1 - props.topPercent) - props.bottomPadding
-	];
+	const translateYRange = [dimension.height(-0.4), 0, dimension.height(0.4)];
 	let currentIndex = 1;
 	let toValue = 0;
 	let isInAnimation = false;
 	let direction = 0;
-
-	const { triggerMargin } = props;
 
 	translateYPan.addListener(({ value }) => {
 		const val = value - translateYRange[currentIndex];
@@ -65,27 +58,27 @@ const PageCard: FC<Props> = props => {
 			direction = 0;
 			switch (currentIndex) {
 				case 0:
-					if (val >= triggerMargin.unExpand) {
+					if (val >= 150) {
 						direction = 1;
 					}
 					break;
 				case 1:
-					if (val <= -triggerMargin.expand) {
+					if (val <= -150) {
 						direction = -1;
-					} else if (val >= triggerMargin.collapse) {
+					} else if (val >= 150) {
 						direction = 1;
 					}
 					break;
 				case 2:
-					if (val <= -triggerMargin.unCollapse) {
+					if (val <= -150) {
 						direction = -1;
 					}
 					break;
 			}
 
-			if (direction == 0){
+			if (direction == 0) {
 				toValue = 0;
-			}else {
+			} else {
 				toValue = translateYRange[currentIndex + direction] - translateYRange[currentIndex];
 			}
 		}
@@ -113,14 +106,10 @@ const PageCard: FC<Props> = props => {
 		}
 	};
 
-	const { children, rootStyle, containerStyle, backgroundColor } = props;
 	return (
 		<Animated.View
 			style={{
-				...(rootStyle as object),
 				...styles.root,
-				top: yCoord,
-				backgroundColor: backgroundColor,
 				transform: [
 					{
 						translateY: translateYPan.interpolate({
@@ -138,7 +127,7 @@ const PageCard: FC<Props> = props => {
 				</View>
 			</PanGestureHandler>
 
-			<View style={[containerStyle, styles.childrenContainer]}>{children}</View>
+			<View style={styles.childrenContainer} />
 		</Animated.View>
 	);
 };
@@ -148,9 +137,11 @@ const styles = StyleSheet.create({
 		position: "absolute",
 		width: "100%",
 		height: "100%",
-		left: 0,
+        left: 0,
+        top: dimension.height(0.5),
 		borderTopLeftRadius: 24,
-		borderTopRightRadius: 24
+        borderTopRightRadius: 24,
+        backgroundColor: "white"
 	},
 	handleBarContainer: {
 		width: "100%",
