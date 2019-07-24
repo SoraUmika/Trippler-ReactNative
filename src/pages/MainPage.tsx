@@ -6,7 +6,7 @@
  * TODO implement Setting section.
  */
 import React, { FC } from "react";
-import { StyleSheet, Animated, View } from "react-native";
+import { StyleSheet, Animated, View, Easing } from "react-native";
 import {
 	PanGestureHandler,
 	PanGestureHandlerStateChangeEvent,
@@ -26,7 +26,6 @@ const MainPage: FC = props => {
 
 	translateYPan.addListener(({ value }) => {
 		const val = value - translateYRange[currentIndex];
-		console.log(val, value);
 		if (!isInAnimation) {
 			direction = 0;
 			switch (currentIndex) {
@@ -44,7 +43,6 @@ const MainPage: FC = props => {
 				toValue = 0;
 			} else {
 				toValue = translateYRange[currentIndex + direction] - translateYRange[currentIndex];
-				console.log(direction, toValue);
 			}
 		}
 	});
@@ -61,7 +59,10 @@ const MainPage: FC = props => {
 		if (event.nativeEvent.oldState == State.ACTIVE) {
 			isInAnimation = true;
 			Animated.timing(translateYPan, {
-				toValue: toValue
+				toValue: toValue,
+				easing: Easing.cubic,
+				useNativeDriver: true,
+				duration: 300
 			}).start(() => {
 				currentIndex += direction;
 				translateYPan.setOffset(translateYRange[currentIndex]);

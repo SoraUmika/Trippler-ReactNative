@@ -21,7 +21,6 @@ const PageCard: FC = () => {
 
 	translateYPan.addListener(({ value }) => {
 		const val = value - translateYRange[currentIndex];
-		console.log(val);
 		if (!isInAnimation) {
 			direction = 0;
 			switch (currentIndex) {
@@ -64,7 +63,9 @@ const PageCard: FC = () => {
 		if (event.nativeEvent.oldState == State.ACTIVE) {
 			isInAnimation = true;
 			Animated.timing(translateYPan, {
-				toValue: toValue
+				toValue: toValue,
+				// useNativeDriver: true,
+				duration: 300
 			}).start(() => {
 				currentIndex += direction;
 				translateYPan.setOffset(translateYRange[currentIndex]);
