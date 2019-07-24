@@ -1,23 +1,8 @@
 /**
  * Container for pages in main screen.
- *
- * @param {number} topPercent The y coordinate of the card in term of percentage of window height.
- * @param {string} backgroundCard The backgroundColor of the page card.
- * @param {number} topMargin The top margin of page card when expanded.
- * @param {number} bottomPadding The bottom padding of page card when collapsed.
- * @param {TriggerMargin} triggerMargin The margin in which expand/collapse is triggered. More below.
- * @param {StyleProp<ViewStyle>} [rootStyle] The style applied to the root View.
- * @param {StyleProp<ViewStyle>} [containerStyle] The style applied to the children container View.
- *
- * TriggerMargin object
- * ====================
- * @param {number} unExpand The expanded -> normal trigger margin.
- * @param {number} expand The normal -> expanded trigger margin.
- * @param {number} collapse The normal -> collapsed trigger margin.
- * @param {number} unCollapse The collapsed -> normal trigger margin.
  */
 import React, { FC } from "react";
-import { StyleSheet, Animated, StyleProp, ViewStyle, View } from "react-native";
+import { StyleSheet, Animated, View } from "react-native";
 import {
 	PanGestureHandler,
 	PanGestureHandlerStateChangeEvent,
@@ -26,26 +11,9 @@ import {
 
 import dimension from "../../dimension";
 
-interface Props {
-	topPercent: number;
-	containerStyle?: StyleProp<ViewStyle>;
-	rootStyle?: StyleProp<ViewStyle>;
-	backgroundColor: string;
-	topMargin: number;
-	bottomPadding: number;
-	triggerMargin: TriggerMargin;
-}
-
-interface TriggerMargin {
-	unCollapse: number;
-	expand: number;
-	collapse: number;
-	unExpand: number;
-}
-
-const PageCard: FC<Props> = props => {
+const PageCard: FC = () => {
 	const translateYPan = new Animated.Value(0);
-	const translateYRange = [dimension.height(-0.4), 0, dimension.height(0.4)];
+	const translateYRange = [dimension.height(-0.4), 0, dimension.height(0.3)];
 	let currentIndex = 1;
 	let toValue = 0;
 	let isInAnimation = false;
@@ -137,11 +105,11 @@ const styles = StyleSheet.create({
 		position: "absolute",
 		width: "100%",
 		height: "100%",
-        left: 0,
-        top: dimension.height(0.5),
+		left: 0,
+		top: "50%",
 		borderTopLeftRadius: 24,
-        borderTopRightRadius: 24,
-        backgroundColor: "white"
+		borderTopRightRadius: 24,
+		backgroundColor: "white"
 	},
 	handleBarContainer: {
 		width: "100%",

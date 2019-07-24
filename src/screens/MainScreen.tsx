@@ -11,19 +11,8 @@ const MainScreen: FC = props => {
 	return (
 		<View style={styles.container}>
 			<View style={styles.galleryCard} />
-			<InfoPage
-				topPercent={0.5}
-				backgroundColor="white"
-				topMargin={50}
-				bottomPadding={100}
-				triggerMargin={{
-					unExpand: 150,
-					expand: 150,
-					collapse: 150,
-					unCollapse: 150
-				}}
-			/>
-			{/* <MainPage/> */}
+			<InfoPage />
+			<MainPage />
 		</View>
 	);
 };

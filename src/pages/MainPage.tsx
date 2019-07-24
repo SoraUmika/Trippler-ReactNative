@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
 		top: "85%",
 		borderTopLeftRadius: 24,
 		borderTopRightRadius: 24,
-		backgroundColor: "white"
+		backgroundColor: "green"
 	},
 	handleBarContainer: {
 		width: "100%",
