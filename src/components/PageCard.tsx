@@ -53,15 +53,16 @@ const PageCard: FC<Props> = props => {
 	];
 	let currentIndex = 1;
 	let toValue = 0;
-	let triggered = false;
+	let isInAnimation = false;
+	let direction = 0;
 
 	const { triggerMargin } = props;
 
 	translateYPan.addListener(({ value }) => {
 		const val = value - translateYRange[currentIndex];
 		console.log(val);
-		if (!triggered) {
-			let direction = 0;
+		if (!isInAnimation) {
+			direction = 0;
 			switch (currentIndex) {
 				case 0:
 					if (val >= triggerMargin.unExpand) {
@@ -82,9 +83,11 @@ const PageCard: FC<Props> = props => {
 					break;
 			}
 
-			toValue = translateYRange[currentIndex + direction] - translateYRange[currentIndex];
-			currentIndex += direction;
-			triggered = direction != 0;
+			if (direction == 0){
+				toValue = 0;
+			}else {
+				toValue = translateYRange[currentIndex + direction] - translateYRange[currentIndex];
+			}
 		}
 	});
 
@@ -98,11 +101,14 @@ const PageCard: FC<Props> = props => {
 
 	const onPanStateChange = (event: PanGestureHandlerStateChangeEvent) => {
 		if (event.nativeEvent.oldState == State.ACTIVE) {
+			isInAnimation = true;
 			Animated.timing(translateYPan, {
 				toValue: toValue
 			}).start(() => {
+				currentIndex += direction;
 				translateYPan.setOffset(translateYRange[currentIndex]);
-				triggered = false;
+				direction = 0;
+				isInAnimation = false;
 			});
 		}
 	};
