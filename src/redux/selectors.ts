@@ -21,7 +21,7 @@ export const getCurrentRecomData = createSelector(
 	(businessData, recomFeed, index) => businessData[recomFeed[index]]
 );
 
-export const getTextColor = createSelector(
+export const getForegroundColor = createSelector(
 	getBackgroundColor,
 	bg => {
 		const nThreshold = 105;

@@ -1,23 +1,25 @@
 /**
  * The top bar in each sections of main page.
  * It holds the title and action buttons.
- * 
+ *
  * @param {string} title The title of the section.
+ * @param {string} color The color of the title.
  */
 import React, { Component } from "react";
 import { StyleSheet, View, Text } from "react-native";
 
 interface Props {
 	title: string;
+	color: string;
 }
 
 export default class TopBar extends Component<Props> {
 	render() {
-		const { title, children } = this.props;
+		const { title, children, color } = this.props;
 		return (
 			<View style={styles.container}>
 				<View style={styles.titleContainer}>
-					<Text style={styles.title}>{title}</Text>
+					<Text style={{ ...styles.title, color: color }}>{title}</Text>
 				</View>
 				<View style={styles.actions}>{children}</View>
 			</View>
@@ -37,8 +39,7 @@ const styles = StyleSheet.create({
 	},
 	title: {
 		fontWeight: "bold",
-        fontSize: 32,
-        color: "white"
+		fontSize: 32
 	},
 	actions: {
 		flex: 1,
