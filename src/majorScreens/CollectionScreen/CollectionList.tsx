@@ -7,28 +7,17 @@
 import React, { FC } from "react";
 import { StyleSheet, ScrollView } from "react-native";
 import { useSelector } from "react-redux";
+import { getCollectionItems } from "../../redux/selectors";
 
 import CollectionItem from "./CollectionItem";
 
 const CollectionList: FC = () => {
-
+	const items = useSelector(getCollectionItems);
 	return (
 		<ScrollView style={styles.container} bounces indicatorStyle="white">
-			<CollectionItem businessId=":)" />
-			<CollectionItem businessId="hello" />
-			<CollectionItem businessId="test" />
-			<CollectionItem businessId=":)" />
-			<CollectionItem businessId="hello" />
-			<CollectionItem businessId="test" />
-			<CollectionItem businessId=":)" />
-			<CollectionItem businessId="hello" />
-			<CollectionItem businessId="test" />
-			<CollectionItem businessId=":)" />
-			<CollectionItem businessId="hello" />
-			<CollectionItem businessId="test" />
-			<CollectionItem businessId=":)" />
-			<CollectionItem businessId="hello" />
-			<CollectionItem businessId="test" />
+			{Object.keys(items).map(id => (
+				<CollectionItem businessId={id} itemData={items[id]} />
+			))}
 		</ScrollView>
 	);
 };

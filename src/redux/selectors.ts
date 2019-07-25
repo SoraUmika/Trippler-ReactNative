@@ -1,11 +1,13 @@
 import State from "./state";
 
-export const accentColor = (state: State) => state.theme.accentColor;
+export const getAccentColor = (state: State) => state.theme.accentColor;
 
-export const businesses = (state: State) => state.businesses;
+export const getBackgroundColor = (state: State) => state.theme.backgroundColor;
 
-export const collectionItems = (state: State) => state.collection.items;
+export const getBusinessData = (state: State) => state.businesses;
 
-export const recomFeed = (state: State) => state.recommendation.feeds;
+export const getCollectionItems = (state: State) => state.collection.items;
 
-export const currentRecomIndex = (state: State) => state.recommendation.currentIndex;
+export const getRecomFeed = (state: State) => state.recommendation.feeds;
+
+export const getCurrentRecomIndex = (state: State) => state.recommendation.currentIndex;
