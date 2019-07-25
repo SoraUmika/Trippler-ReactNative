@@ -4,9 +4,9 @@
  * TODO auto reads the collections from store.
  * TODO edge transparency.
  */
-import React, { FC } from "./node_modules/react";
+import React, { FC } from "react";
 import { StyleSheet, ScrollView } from "react-native";
-import { useSelector } from "./node_modules/react-redux";
+import { useSelector } from "react-redux";
 
 import CollectionItem from "./CollectionItem";
 

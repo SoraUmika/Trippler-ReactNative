@@ -9,13 +9,13 @@ import React, { FC } from "react";
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { useSelector } from "react-redux";
 
-import TopBar from "./CollectionScreenComponents/TopBar";
-import MoreHoriz from "../svg/MoreHoriz";
-import FilterList from "../svg/FilterList";
-import CollectionList from "./CollectionScreenComponents/CollectionList";
-import MainActionBar from "./CollectionScreenComponents/MainActionBar";
-import DashLine from "./CollectionScreenComponents/DashLine";
-import State from "../redux/state";
+import TopBar from "./TopBar";
+import MoreHoriz from "../../svg/MoreHoriz";
+import FilterList from "../../svg/FilterList";
+import CollectionList from "./CollectionList";
+import MainActionBar from "./MainActionBar";
+import DashLine from "./DashLine";
+import State from "../../redux/state";
 
 interface Props {}
 

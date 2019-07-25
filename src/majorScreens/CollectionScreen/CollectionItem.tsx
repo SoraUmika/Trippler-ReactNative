@@ -5,11 +5,11 @@
  *
  * TODO add icon display.
  */
-import React, { FC } from "./node_modules/react";
+import React, { FC } from "react";
 import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
-import { useSelector } from "./node_modules/react-redux";
+import { useSelector } from "react-redux";
 import Swipeable from "react-native-gesture-handler/Swipeable";
-import Color from "./node_modules/color";
+import Color from "color";
 
 import ArrowUpward from "../../svg/ArrowUpward";
 import CenterView from "../../components/CenterView";

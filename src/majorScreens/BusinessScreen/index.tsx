@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import { View, StyleSheet } from 'react-native'
-import SwipeScreenImage from './SwipeScreenComponents/SwipeScreenImage'
+import SwipeScreenImage from './Image'
 
 export default class SwipeScreen extends Component{
   render(){

@@ -6,7 +6,7 @@ import {StatusBar} from "react-native";
 
 import MainScreen from "./src/majorScreens/MainScreen";
 import transitionConfig from "./src/transition";
-import SwipeScreen from './src/majorScreens/SwipeScreen'
+import SwipeScreen from "./src/majorScreens/BusinessScreen"
 
 StatusBar.setHidden(false);
 
