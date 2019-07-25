@@ -1,35 +1,28 @@
 import React from "react";
 import { Provider } from "react-redux";
-import { createStackNavigator, createAppContainer } from "react-navigation";
+import { createAppContainer, createBottomTabNavigator } from "react-navigation";
 import store from "./src/redux/store";
 import {StatusBar} from "react-native";
 
-import LoginScreen from "./src/screens/LoginScreen";
-import SignupScreen from "./src/screens/SignupScreen";
-import MainScreen from "./src/screens/MainScreen";
+import MainScreen from "./src/majorScreens/MainScreen";
 import transitionConfig from "./src/transition";
-import ScreenContainer from './src/components/ScreenContainer'
+import SwipeScreen from './src/majorScreens/SwipeScreen'
 
 StatusBar.setHidden(false);
 
 const MainNavigator = createAppContainer(
-	createStackNavigator(
+	createBottomTabNavigator(
 		{
 			// Register screens here.
-			Login: { screen: LoginScreen },
-			Signup: { screen: SignupScreen },
+			SwipeScreen: { screen: SwipeScreen},	
 			Main: { screen: MainScreen },
-			SwipeScreen: { screen: ScreenContainer}
 		},
 		{
-			initialRouteName: "Main",
-			defaultNavigationOptions: {
-				header: null
-			},
-			transitionConfig: transitionConfig
+			initialRouteName: 'SwipeScreen'
 		}
 	)
 );
+
 
 export default function App() {
 	return (
