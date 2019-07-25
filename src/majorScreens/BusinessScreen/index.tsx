@@ -1,14 +1,14 @@
 import React, {Component} from 'react'
 import { View, StyleSheet } from 'react-native'
-import SwipeScreenImage from './Image'
+import BusinessImage from './Image'
 
-export default class SwipeScreen extends Component{
+export default class BusinessScreen extends Component{
   render(){
     return(
       <View style={styles.formatRules}>
 
         <View style={styles.ImageContainer}>
-          <SwipeScreenImage/>
+          <BusinessImage/>
         </View>
         
       </View>
