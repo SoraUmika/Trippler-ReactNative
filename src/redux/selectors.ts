@@ -1,5 +1,6 @@
 import State from "./state";
 import { createSelector } from "reselect";
+import Color from "color";
 
 export const getAccentColor = (state: State) => state.theme.accentColor;
 
@@ -18,4 +19,16 @@ export const getCurrentRecomData = createSelector(
 	getRecomFeed,
 	getCurrentRecomIndex,
 	(businessData, recomFeed, index) => businessData[recomFeed[index]]
+);
+
+export const getTextColor = createSelector(
+	getBackgroundColor,
+	bg => {
+		const nThreshold = 105;
+		const channels = Color(bg)
+			.rgb()
+			.array();
+		const bgDelta = channels[0] * 0.299 + channels[1] * 0.587 + channels[2] * 0.114;
+		return 255 - bgDelta < nThreshold ? "#000000" : "#ffffff";
+	}
 );
