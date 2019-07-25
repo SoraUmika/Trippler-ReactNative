@@ -4,7 +4,9 @@ import { createAppContainer, createBottomTabNavigator } from "react-navigation";
 import store from "./src/redux/store";
 import { StatusBar } from "react-native";
 
-import MainScreen from "./src/majorScreens/MainScreen";
+import CollectionScreen from "./src/majorScreens/CollectionScreen";
+import AccountScreen from "./src/majorScreens/AccountScreen";
+import SettingScreen from "./src/majorScreens/SettingScreen";
 import transitionConfig from "./src/transition";
 import BusinessScreen from "./src/majorScreens/BusinessScreen";
 import BookmarkBorder from "./src/svg/BookmarkBorder";
@@ -21,8 +23,20 @@ const MainNavigator = createAppContainer(
 					tabBarIcon: ({ tintColor }: any) => <BookmarkBorder fill={tintColor} />
 				}
 			},
-			Main: {
-				screen: MainScreen,
+			Collection: {
+				screen: CollectionScreen,
+				navigationOptions: {
+					tabBarIcon: ({ tintColor }: any) => <BookmarkBorder fill={tintColor} />
+				}
+			},
+			Account: {
+				screen: AccountScreen,
+				navigationOptions: {
+					tabBarIcon: ({ tintColor }: any) => <BookmarkBorder fill={tintColor} />
+				}
+			},
+			Setting: {
+				screen: SettingScreen,
 				navigationOptions: {
 					tabBarIcon: ({ tintColor }: any) => <BookmarkBorder fill={tintColor} />
 				}
