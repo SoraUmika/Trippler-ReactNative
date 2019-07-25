@@ -22,4 +22,5 @@ export interface Collection {
 
 export interface Recommendation {
 	feeds: string[];
+	currentIndex: number;
 }

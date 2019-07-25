@@ -67,7 +67,8 @@ const init_state: State = {
 		}
 	},
 	recommendation: {
-		feeds: ["test", "hello", ":)"]
+		feeds: ["test", "hello", ":)"],
+		currentIndex: 0
 	}
 };
 
