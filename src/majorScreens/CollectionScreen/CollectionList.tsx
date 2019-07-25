@@ -16,7 +16,7 @@ const CollectionList: FC = () => {
 	return (
 		<ScrollView style={styles.container} bounces indicatorStyle="white">
 			{Object.keys(items).map(id => (
-				<CollectionItem businessId={id} itemData={items[id]} />
+				<CollectionItem businessId={id} itemData={items[id]} key={id}/>
 			))}
 		</ScrollView>
 	);
