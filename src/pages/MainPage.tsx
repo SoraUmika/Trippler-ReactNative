@@ -13,7 +13,7 @@ import {
 	State
 } from "react-native-gesture-handler";
 
-import Collection from "../components/Collection";
+import Collection from "../majorScreens/CollectionScreen";
 import dimension from "../dimension";
 
 const MainPage: FC = props => {

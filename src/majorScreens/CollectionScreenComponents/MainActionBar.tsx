@@ -2,13 +2,13 @@ import React, { FC } from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { useSelector } from "react-redux";
 
-import Button from "./Button";
-import BookmarkBorder from "../svg/BookmarkBorder";
-import CenterView from "./CenterView";
-import CircleOff from "../svg/CircleOff";
-import State from "../redux/state";
-import Share from "../svg/Share";
-import Feedback from "../svg/Feedback";
+import Button from "../../components/Button";
+import BookmarkBorder from "../../svg/BookmarkBorder";
+import CenterView from "../../components/CenterView";
+import CircleOff from "../../svg/CircleOff";
+import State from "../../redux/state";
+import Share from "../../svg/Share";
+import Feedback from "../../svg/Feedback";
 
 const MainActionBar: FC = props => {
 	const accentColor = useSelector<State, string>(state => state.theme.accentColor);

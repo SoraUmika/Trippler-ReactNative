@@ -4,7 +4,7 @@
  * TODO improve user friendiness.
  * TODO server comminication.
  */
-import React, { FC, useState } from "react";
+import React, { FC, useState } from "./node_modules/react";
 import { StyleSheet, View, Text } from "react-native";
 
 import Button from "../components/Button";

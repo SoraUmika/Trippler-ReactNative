@@ -5,19 +5,19 @@
  *
  * TODO add icon display.
  */
-import React, { FC } from "react";
+import React, { FC } from "./node_modules/react";
 import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
-import { useSelector } from "react-redux";
+import { useSelector } from "./node_modules/react-redux";
 import Swipeable from "react-native-gesture-handler/Swipeable";
-import Color from "color";
+import Color from "./node_modules/color";
 
-import ArrowUpward from "../svg/ArrowUpward";
-import CenterView from "./CenterView";
-import Business from "../redux/state/Business";
-import CollectionData from "../redux/state/CollectionData";
-import State from "../redux/state";
-import DeleteOutline from "../svg/DeleteOutline";
-import ArrowDownward from "../svg/ArrowDownward";
+import ArrowUpward from "../../svg/ArrowUpward";
+import CenterView from "../../components/CenterView";
+import Business from "../../redux/state/Business";
+import CollectionData from "../../redux/state/CollectionData";
+import State from "../../redux/state";
+import DeleteOutline from "../../svg/DeleteOutline";
+import ArrowDownward from "../../svg/ArrowDownward";
 
 interface Props {
 	businessId: string;

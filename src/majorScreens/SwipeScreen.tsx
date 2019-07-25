@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
-import { View, StyleSheet, Text } from 'react-native'
-import SwipeScreenImage from './SwipeScreenImage'
+import { View, StyleSheet } from 'react-native'
+import SwipeScreenImage from './SwipeScreenComponents/SwipeScreenImage'
 
-export default class SwipeScreenContainer extends Component{
+export default class SwipeScreen extends Component{
   render(){
     return(
       <View style={styles.formatRules}>
