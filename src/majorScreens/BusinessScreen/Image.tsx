@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { View, StyleSheet, ImageBackground } from "react-native";
 import BusinessInfo from "./Info";
-import { useSelector } from "react-redux";
-import {getBusinessData, getRecomFeed} from "../../redux/selectors";
 
 export default class BusinessImage extends Component {
 	render() {

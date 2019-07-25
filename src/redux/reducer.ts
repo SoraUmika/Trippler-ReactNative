@@ -31,6 +31,13 @@ function collection(state: States.Collection, action: RootAction): States.Collec
 }
 
 function recommendation(state: States.Recommendation, action: RootAction): States.Recommendation {
+	switch (action.type) {
+		case "recommendation/currentIndex/INNC":
+			return update(state, {
+				currentIndex:
+					state.currentIndex + (state.currentIndex < state.feeds.length - 1 ? 1 : 0)
+			});
+	}
 	return state;
 }
 
