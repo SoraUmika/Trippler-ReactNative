@@ -10,7 +10,7 @@ const init_state: State = {
 	collection: {
 		appliedFilters: [],
 		sortMethod: "name",
-		ignorePin: false,
+		showPin: true,
 		items: ["hello", "test"],
 		pinnedItems: [":)"]
 	},

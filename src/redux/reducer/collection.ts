@@ -15,7 +15,7 @@ export default function collection(
 	switch (action.type) {
 		case "collection/SET_SORT_METHOD":
 			sort(itemsCopy, isOrdered);
-			if (!state.ignorePin) {
+			if (!state.showPin) {
 				sort(pinnedItemsCopy, isOrdered);
 			}
 			return update(state, {
@@ -49,8 +49,8 @@ export default function collection(
 				items: itemsCopy,
 				pinnedItems: pinnedItemsCopy
 			});
-		case "collection/TOGGLE_IGNORE_PIN":
-			var newVal = !state.ignorePin;
+		case "collection/TOGGLE_SHOW_PIN":
+			var newVal = !state.showPin;
 			if (newVal) {
 				pinnedItemsCopy.forEach(val => arrRemoved(itemsCopy, val));
 				sort(pinnedItemsCopy, isOrdered);
@@ -58,7 +58,7 @@ export default function collection(
 				pinnedItemsCopy.forEach(val => sortedInsert(itemsCopy, val, isOrdered));
 			}
 			return update(state, {
-				ignorePin: newVal,
+				showPin: newVal,
 				pinnedItems: pinnedItemsCopy,
 				items: itemsCopy
 			});

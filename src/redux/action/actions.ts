@@ -17,4 +17,4 @@ export const unPinCollectItem = createStandardAction("collection/UN_PIN_ITEM")<s
 
 export const removedCollectItem = createStandardAction("collection/REMOVED_ITEM")<string>();
 
-export const toggleCollectIgnorePin = createStandardAction("collection/TOGGLE_IGNORE_PIN")();
+export const toggleCollectShowPin = createStandardAction("collection/TOGGLE_SHOW_PIN")();

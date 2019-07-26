@@ -19,7 +19,7 @@ export type Businesses = StrObj<Business>;
 export interface Collection {
 	appliedFilters: string[];
 	sortMethod: SortMethod;
-	ignorePin: boolean;
+	showPin: boolean;
 	items: string[];
 	pinnedItems: string[];
 }
