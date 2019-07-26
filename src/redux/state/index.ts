@@ -22,6 +22,7 @@ export interface Collection {
 	sortMethod: SortMethod | null;
 	ignorePin: boolean;
 	items: StrObj<CollectionData>;
+	order: string[];
 }
 
 export interface Recommendation {

@@ -21,7 +21,8 @@ const init_state: State = {
 			":)": {
 				pinned: true
 			}
-		}
+		},
+		order: [":)", "test", "hello"]
 	},
 	recommendation: {
 		feeds: ["test", "hello", ":)"],

@@ -1,8 +1,9 @@
 import * as States from "./state";
 import RootAction from "./action";
 import initState from "./initState";
-import { sort, sortedInsert } from "../util";
+import { sort, sortedInsert, StrObj } from "../util";
 import getCompareFunc from "./businessSortCompare";
+import Business from "./state/Business";
 
 export default function reducer(
 	state: States.default = initState,
@@ -11,7 +12,7 @@ export default function reducer(
 	return {
 		theme: theme(state.theme, action),
 		businesses: businesses(state.businesses, action),
-		collection: collection(state.collection, action),
+		collection: collection(state.collection, action, state.businesses),
 		recommendation: recommendation(state.recommendation, action)
 	};
 }
@@ -28,12 +29,16 @@ function businesses(state: States.Businesses, action: RootAction): States.Busine
 	return state;
 }
 
-function collection(state: States.Collection, action: RootAction): States.Collection {
+function collection(
+	state: States.Collection,
+	action: RootAction,
+	businesses: StrObj<Business>
+): States.Collection {
 	switch (action.type) {
 		case "collection/sortMethod/SET":
 			return update(state, {
-				sortMethod: action.payload,
-				// items: sort()
+				sortMethod: action.payload
+				// items: sort([...state.items])
 			});
 	}
 	return state;
