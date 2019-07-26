@@ -1,6 +1,8 @@
 import * as States from "./state";
 import RootAction from "./action";
 import initState from "./initState";
+import { sort, sortedInsert } from "../util";
+import getCompareFunc from "./businessSortCompare";
 
 export default function reducer(
 	state: States.default = initState,
@@ -27,6 +29,13 @@ function businesses(state: States.Businesses, action: RootAction): States.Busine
 }
 
 function collection(state: States.Collection, action: RootAction): States.Collection {
+	switch (action.type) {
+		case "collection/sortMethod/SET":
+			return update(state, {
+				sortMethod: action.payload,
+				// items: sort()
+			});
+	}
 	return state;
 }
 

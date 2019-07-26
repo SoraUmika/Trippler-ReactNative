@@ -10,6 +10,7 @@ const init_state: State = {
 	collection: {
 		appliedFilters: [],
 		sortMethod: null,
+		ignorePin: false,
 		items: {
 			test: {
 				pinned: false

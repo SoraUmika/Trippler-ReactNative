@@ -20,6 +20,7 @@ export type Businesses = StrObj<Business>;
 export interface Collection {
 	appliedFilters: string[];
 	sortMethod: SortMethod | null;
+	ignorePin: boolean;
 	items: StrObj<CollectionData>;
 }
 
