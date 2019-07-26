@@ -1,6 +1,7 @@
 import Business from "./Business";
 import CollectionData from "./CollectionData";
 import { SortMethod } from "../businessSortCompare";
+import { StrObj } from "../../util";
 
 export default interface State {
 	theme: Theme;
@@ -14,12 +15,12 @@ export interface Theme {
 	backgroundColor: string;
 }
 
-export type Businesses = { [index: string]: Business };
+export type Businesses = StrObj<Business>;
 
 export interface Collection {
 	appliedFilters: string[];
 	sortMethod: SortMethod | null;
-	items: { [index: string]: CollectionData };
+	items: StrObj<CollectionData>;
 }
 
 export interface Recommendation {
