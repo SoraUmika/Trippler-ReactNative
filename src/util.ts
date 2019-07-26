@@ -26,11 +26,9 @@ export function objectsEqual(a: any = {}, b: any = {}) {
 export type IsOrderedCompare<T> = (left: T, right: T) => any;
 
 export function sort<T>(arr: T[], isOrdered: IsOrderedCompare<T>) {
-	let copy = [...arr];
-	for (let pass = 1; pass < copy.length; pass++) {
-		sortPass(copy, isOrdered, pass);
+	for (let pass = 1; pass < arr.length; pass++) {
+		sortPass(arr, isOrdered, pass);
 	}
-	return copy;
 }
 
 function sortPass<T>(arr: T[], isOrdered: IsOrderedCompare<T>, pass: number) {
@@ -46,10 +44,8 @@ function sortPass<T>(arr: T[], isOrdered: IsOrderedCompare<T>, pass: number) {
 }
 
 export function sortedInsert<T>(arr: T[], val: T, isOrdered: IsOrderedCompare<T>) {
-	let copy = [...arr];
-	const length = copy.push(val);
-	sortPass(copy, isOrdered, length - 1);
-	return copy;
+	const length = arr.push(val);
+	sortPass(arr, isOrdered, length - 1);
 }
 
 export type StrObj<T> = { [index: string]: T };
