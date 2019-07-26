@@ -23,7 +23,7 @@ export function objectsEqual(a: any = {}, b: any = {}) {
 	return true;
 }
 
-type IsOrderedCompare<T> = (left: T, right: T) => any
+export type IsOrderedCompare<T> = (left: T, right: T) => any
 
 export function sort<T>(arr: T[], isOrdered: IsOrderedCompare<T>) {
 	for (let pass = 1; pass < arr.length; pass++) {
