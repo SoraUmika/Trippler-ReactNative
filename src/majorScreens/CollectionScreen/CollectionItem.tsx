@@ -20,31 +20,34 @@ import { getBusinessData, getAccentColor, getBackgroundColor } from "../../redux
 interface Props {
 	businessId: string;
 	pinned?: boolean;
+	showPin?: boolean;
 }
 
-const RightAction = (pinned: boolean | undefined, onDelete: Function, onPinToggle: Function) => {
+const RightAction = (id: string, showPin?: boolean, pinned?: boolean) => {
 	return (
 		<View style={styles.rightActionContainer}>
 			<TouchableOpacity style={styles.rightActionButton}>
 				<DeleteOutline fill="#D52941" />
 				<Text style={styles.rightActionDeleteText}>Delete</Text>
 			</TouchableOpacity>
-			<TouchableOpacity style={styles.rightActionButton}>
-				{pinned ? <ArrowDownward fill="#0EAD69" /> : <ArrowUpward fill="#0EAD69" />}
-				<Text style={styles.rightActionPinText}>{pinned ? "Un-pin" : "Pin"}</Text>
-			</TouchableOpacity>
+			{showPin && (
+				<TouchableOpacity style={styles.rightActionButton}>
+					{pinned ? <ArrowDownward fill="#0EAD69" /> : <ArrowUpward fill="#0EAD69" />}
+					<Text style={styles.rightActionPinText}>{pinned ? "Un-pin" : "Pin"}</Text>
+				</TouchableOpacity>
+			)}
 		</View>
 	);
 };
 
 const CollectionItem: FC<Props> = props => {
-	const { businessId, pinned } = props;
+	const { businessId, pinned, showPin } = props;
 	const business = useSelector(getBusinessData)[businessId];
 	const accentColor = useSelector(getAccentColor);
 	const backgroundColor = useSelector(getBackgroundColor);
 
 	return (
-		<Swipeable renderRightActions={() => RightAction(pinned, () => null, () => null)}>
+		<Swipeable renderRightActions={() => RightAction(businessId, showPin, pinned)}>
 			<View
 				style={{
 					...styles.root,
