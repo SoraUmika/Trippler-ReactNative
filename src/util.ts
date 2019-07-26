@@ -56,3 +56,7 @@ export function arrRemoved(arr: any[], el: any) {
 		arr.splice(index, 1);
 	}
 }
+
+export function update<T>(origin: T, src: Partial<T>): T {
+	return Object.assign({}, origin, src);
+}
