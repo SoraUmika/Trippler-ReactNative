@@ -9,6 +9,7 @@ const init_state: State = {
 	businesses: testData,
 	collection: {
 		appliedFilters: [],
+		sortMethod: null,
 		items: {
 			test: {
 				pinned: false
