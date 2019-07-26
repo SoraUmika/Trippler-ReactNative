@@ -19,7 +19,7 @@ export default function reducer(
 
 function theme(state: States.Theme, action: RootAction): States.Theme {
 	switch (action.type) {
-		case "theme/accentColor/SET":
+		case "theme/SET_ACCENT_COLOR":
 			return update(state, { accentColor: action.payload });
 	}
 	return state;
@@ -35,7 +35,7 @@ function collection(
 	businesses: StrObj<Business>
 ): States.Collection {
 	switch (action.type) {
-		case "collection/sortMethod/SET":
+		case "collection/SET_SORT_METHOD":
 			return update(state, {
 				sortMethod: action.payload
 				// items: sort([...state.items])
@@ -46,7 +46,7 @@ function collection(
 
 function recommendation(state: States.Recommendation, action: RootAction): States.Recommendation {
 	switch (action.type) {
-		case "recommendation/currentIndex/INNC":
+		case "recommendation/NEXT_RECOMMENDATION":
 			return update(state, {
 				currentIndex:
 					state.currentIndex + (state.currentIndex < state.feeds.length - 1 ? 1 : 0)
