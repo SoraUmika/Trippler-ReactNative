@@ -7,7 +7,7 @@
  */
 import React, { FC } from "react";
 import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 import Color from "color";
 
@@ -16,6 +16,7 @@ import CenterView from "../../components/CenterView";
 import DeleteOutline from "../../svg/DeleteOutline";
 import ArrowDownward from "../../svg/ArrowDownward";
 import { getBusinessData, getAccentColor, getBackgroundColor } from "../../redux/selectors";
+import { removedCollectItem, pinCollectItem, unPinCollectItem } from "../../redux/action/actions";
 
 interface Props {
 	businessId: string;
@@ -23,15 +24,24 @@ interface Props {
 	showPin?: boolean;
 }
 
-const RightAction = (id: string, showPin?: boolean, pinned?: boolean) => {
+const RightAction = (
+	onRemoved: () => void,
+	onPin: () => void,
+	onUnPin: () => void,
+	showPin?: boolean,
+	pinned?: boolean
+) => {
 	return (
 		<View style={styles.rightActionContainer}>
-			<TouchableOpacity style={styles.rightActionButton}>
+			<TouchableOpacity style={styles.rightActionButton} onPress={onRemoved}>
 				<DeleteOutline fill="#D52941" />
 				<Text style={styles.rightActionDeleteText}>Delete</Text>
 			</TouchableOpacity>
 			{showPin && (
-				<TouchableOpacity style={styles.rightActionButton}>
+				<TouchableOpacity
+					style={styles.rightActionButton}
+					onPress={pinned ? onUnPin : onPin}
+				>
 					{pinned ? <ArrowDownward fill="#0EAD69" /> : <ArrowUpward fill="#0EAD69" />}
 					<Text style={styles.rightActionPinText}>{pinned ? "Un-pin" : "Pin"}</Text>
 				</TouchableOpacity>
@@ -45,9 +55,20 @@ const CollectionItem: FC<Props> = props => {
 	const business = useSelector(getBusinessData)[businessId];
 	const accentColor = useSelector(getAccentColor);
 	const backgroundColor = useSelector(getBackgroundColor);
+	const dispatch = useDispatch();
 
 	return (
-		<Swipeable renderRightActions={() => RightAction(businessId, showPin, pinned)}>
+		<Swipeable
+			renderRightActions={() =>
+				RightAction(
+					() => dispatch(removedCollectItem(businessId)),
+					() => dispatch(pinCollectItem(businessId)),
+					() => dispatch(unPinCollectItem(businessId)),
+					showPin,
+					pinned
+				)
+			}
+		>
 			<View
 				style={{
 					...styles.root,

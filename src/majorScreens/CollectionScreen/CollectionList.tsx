@@ -21,7 +21,8 @@ const CollectionList: FC = () => {
 	const showPin = useSelector(getCollectionShowPin);
 	return (
 		<ScrollView style={styles.container} bounces indicatorStyle="black">
-			{showPin && itemsPinned.map(id => <CollectionItem businessId={id} pinned key={id} />)}
+			{showPin &&
+				itemsPinned.map(id => <CollectionItem businessId={id} pinned key={id} showPin />)}
 			{items.map(id => (
 				<CollectionItem businessId={id} key={id} showPin={showPin} />
 			))}
