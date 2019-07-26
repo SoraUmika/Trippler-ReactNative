@@ -12,8 +12,12 @@ export const BusinessCompareFunctions: StrObj<IsOrderedCompare<Business>> = {
 export default function getCompareFunc(
 	sortMethod: SortMethod,
 	businesses: StrObj<Business>,
-	ignorePinned: boolean
+	ignorePinned: boolean,
 ): IsOrderedCompare<string> {
-	const compareFunc = BusinessCompareFunctions[sortMethod];
-	return (l, r) => compareFunc(businesses[l], businesses[r]);
+    const compareFunc = BusinessCompareFunctions[sortMethod];
+    if (ignorePinned){
+
+    }
+	return (l, r) =>
+		compareFunc(businesses[l], businesses[r]);
 }

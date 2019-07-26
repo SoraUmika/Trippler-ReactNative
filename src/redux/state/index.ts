@@ -1,5 +1,4 @@
 import Business from "./Business";
-import CollectionData from "./CollectionData";
 import { SortMethod } from "../businessSortCompare";
 import { StrObj } from "../../util";
 
@@ -21,8 +20,8 @@ export interface Collection {
 	appliedFilters: string[];
 	sortMethod: SortMethod;
 	ignorePin: boolean;
-	items: StrObj<CollectionData>;
-	order: string[];
+	items: string[];
+	pinnedItems: string[];
 }
 
 export interface Recommendation {

@@ -11,18 +11,8 @@ const init_state: State = {
 		appliedFilters: [],
 		sortMethod: "name",
 		ignorePin: false,
-		items: {
-			test: {
-				pinned: false
-			},
-			hello: {
-				pinned: false
-			},
-			":)": {
-				pinned: true
-			}
-		},
-		order: [":)", "test", "hello"]
+		items: ["hello", "test"],
+		pinnedItems: [":)"]
 	},
 	recommendation: {
 		feeds: ["test", "hello", ":)"],

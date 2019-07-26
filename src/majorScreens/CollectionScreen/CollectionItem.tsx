@@ -13,17 +13,16 @@ import Color from "color";
 
 import ArrowUpward from "../../svg/ArrowUpward";
 import CenterView from "../../components/CenterView";
-import CollectionData from "../../redux/state/CollectionData";
 import DeleteOutline from "../../svg/DeleteOutline";
 import ArrowDownward from "../../svg/ArrowDownward";
 import { getBusinessData, getAccentColor, getBackgroundColor } from "../../redux/selectors";
 
 interface Props {
 	businessId: string;
-	itemData: CollectionData;
+	pinned?: boolean;
 }
 
-const RightAction = (pinned: boolean, onDelete: Function, onPinToggle: Function) => {
+const RightAction = (pinned: boolean | undefined, onDelete: Function, onPinToggle: Function) => {
 	return (
 		<View style={styles.rightActionContainer}>
 			<TouchableOpacity style={styles.rightActionButton}>
@@ -39,13 +38,13 @@ const RightAction = (pinned: boolean, onDelete: Function, onPinToggle: Function)
 };
 
 const CollectionItem: FC<Props> = props => {
-	const { businessId, itemData } = props;
+	const { businessId, pinned } = props;
 	const business = useSelector(getBusinessData)[businessId];
 	const accentColor = useSelector(getAccentColor);
 	const backgroundColor = useSelector(getBackgroundColor);
 
 	return (
-		<Swipeable renderRightActions={() => RightAction(itemData.pinned, () => null, () => null)}>
+		<Swipeable renderRightActions={() => RightAction(pinned, () => null, () => null)}>
 			<View
 				style={{
 					...styles.root,
@@ -59,7 +58,7 @@ const CollectionItem: FC<Props> = props => {
 					<View style={styles.description}>
 						<CenterView main>
 							<Text style={styles.name}>{business.name}</Text>
-							{itemData.pinned && (
+							{pinned && (
 								<ArrowUpward
 									fill={accentColor}
 									style={styles.pinIcon}
