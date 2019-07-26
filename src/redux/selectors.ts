@@ -14,6 +14,8 @@ export const getRecomFeed = (state: State) => state.recommendation.feeds;
 
 export const getCurrentRecomIndex = (state: State) => state.recommendation.currentIndex;
 
+export const getCollectionOrder = (state: State) => state.collection.order;
+
 export const getCurrentRecomData = createSelector(
 	getBusinessData,
 	getRecomFeed,

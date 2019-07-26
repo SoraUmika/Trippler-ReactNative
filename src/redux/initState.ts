@@ -9,7 +9,7 @@ const init_state: State = {
 	businesses: testData,
 	collection: {
 		appliedFilters: [],
-		sortMethod: null,
+		sortMethod: "name",
 		ignorePin: false,
 		items: {
 			test: {
