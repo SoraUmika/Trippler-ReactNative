@@ -16,6 +16,8 @@ export const getCurrentRecomIndex = (state: State) => state.recommendation.curre
 
 export const getCollectionItemsPinned = (state: State) => state.collection.pinnedItems;
 
+export const getCollectionShowPin = (state: State) => state.collection.showPin;
+
 export const getCurrentRecomData = createSelector(
 	getBusinessData,
 	getRecomFeed,
