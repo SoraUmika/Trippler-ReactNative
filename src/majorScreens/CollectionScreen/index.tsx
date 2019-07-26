@@ -15,13 +15,12 @@ import FilterList from "../../svg/FilterList";
 import CollectionList from "./CollectionList";
 import MainActionBar from "./MainActionBar";
 import DashLine from "./DashLine";
-import { getBackgroundColor, getForegroundColor } from "../../redux/selectors";
+import { getBackgroundColor } from "../../redux/selectors";
 
 interface Props {}
 
 const Collection: FC = props => {
 	const backgroundColor = useSelector(getBackgroundColor);
-	const foregroundColor = useSelector(getForegroundColor);
 
 	return (
 		<View style={[styles.container, { backgroundColor: backgroundColor }]}>
@@ -32,22 +31,12 @@ const Collection: FC = props => {
 				<DashLine />
 			</View> */}
 			<View style={styles.title}>
-				<TopBar title="Collection" color={foregroundColor}>
+				<TopBar title="Collection" color="black">
 					<TouchableOpacity>
-						<MoreHoriz
-							style={styles.actionIcon}
-							fill={foregroundColor}
-							width={32}
-							height={32}
-						/>
+						<MoreHoriz style={styles.actionIcon} fill="black" width={32} height={32} />
 					</TouchableOpacity>
 					<TouchableOpacity>
-						<FilterList
-							style={styles.actionIcon}
-							fill={foregroundColor}
-							width={32}
-							height={32}
-						/>
+						<FilterList style={styles.actionIcon} fill="black" width={32} height={32} />
 					</TouchableOpacity>
 				</TopBar>
 			</View>

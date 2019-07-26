@@ -14,7 +14,7 @@ import CollectionItem from "./CollectionItem";
 const CollectionList: FC = () => {
 	const items = useSelector(getCollectionItems);
 	return (
-		<ScrollView style={styles.container} bounces indicatorStyle="white">
+		<ScrollView style={styles.container} bounces indicatorStyle="black">
 			{Object.keys(items).map(id => (
 				<CollectionItem businessId={id} itemData={items[id]} key={id}/>
 			))}

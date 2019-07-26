@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
 		flexDirection: "row"
 	},
 	avatar: {
-		backgroundColor: "rgba(255, 255, 255, 0.5)",
+		backgroundColor: "rgba(0, 0, 0, 0.5)",
 		width: 80,
 		height: 80
 	},
@@ -103,18 +103,18 @@ const styles = StyleSheet.create({
 		padding: 16
 	},
 	name: {
-		color: "white",
+		color: "black",
 		opacity: 0.75,
 		fontWeight: "bold",
 		fontSize: 24
 	},
 	status: {
-		color: "white",
+		color: "black",
 		opacity: 0.5,
 		fontSize: 16
 	},
 	rating: {
-		color: "white",
+		color: "black",
 		opacity: 0.5,
 		textAlign: "right",
 		fontSize: 16,
@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
 		right: 0
 	},
 	ratingNum: {
-		color: "white",
+		color: "black",
 		opacity: 0.5,
 		textAlign: "right",
 		fontSize: 16,
