@@ -1,40 +1,48 @@
-import React, { Component, ElementType } from "react";
+import React, { FC } from "react";
 import { Modal, StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import { useSelector, useDispatch } from "react-redux";
 
 import dimension from "../../dimension";
 import BookmarkBorder from "../../svg/BookmarkBorder";
+import { getCollectionShowPin } from "../../redux/selectors";
+import { toggleCollectShowPin } from "../../redux/action/actions";
 
 interface Props {
 	visible: boolean;
 	onHide: () => void;
 }
 
-export default class ActionModal extends Component<Props> {
-	render() {
-		const { visible, onHide } = this.props;
+const ActionModal: FC<Props> = props => {
+	const { visible, onHide } = props;
+	const dispatch = useDispatch();
+	const showPin = useSelector(getCollectionShowPin);
 
-		return (
-			<Modal animationType="fade" transparent={true} visible={visible}>
-				<View style={styles.background} onTouchStart={onHide}>
-					<View style={styles.container}>
-						<TouchableOpacity style={styles.optionButton}>
-							<BookmarkBorder/>
-							<Text style={styles.optionText}>Hide pinned</Text>
-						</TouchableOpacity>
-					</View>
+	return (
+		<Modal animationType="fade" transparent={true} visible={visible}>
+			<View style={styles.background} onTouchStart={onHide}>
+				<View style={styles.container} onTouchStart={evt => evt.stopPropagation()}>
+					<TouchableOpacity
+						style={styles.optionButton}
+						onPress={() => dispatch(toggleCollectShowPin())}
+					>
+						<BookmarkBorder />
+						<Text style={styles.optionText}>
+							{showPin ? "Disable pinned" : "Enable pinned"}
+						</Text>
+					</TouchableOpacity>
 				</View>
-			</Modal>
-		);
-	}
-}
+			</View>
+		</Modal>
+	);
+};
 
 const styles = StyleSheet.create({
 	container: {
 		backgroundColor: "white",
-		width: 150,
+		width: 170,
 		height: 66,
 		top: dimension.height(0.08),
-		left: dimension.width() - 166,
+		left: dimension.width() - 186,
 		zIndex: 2,
 		borderRadius: 8,
 		padding: 8
@@ -58,3 +66,5 @@ const styles = StyleSheet.create({
 		fontWeight: "bold"
 	}
 });
+
+export default ActionModal;
