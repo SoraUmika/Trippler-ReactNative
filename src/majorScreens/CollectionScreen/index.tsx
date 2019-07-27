@@ -18,12 +18,14 @@ import CollectionList from "./CollectionList";
 import MainActionBar from "./MainActionBar";
 import DashLine from "../../components/DashLine";
 import ActionModal from "./ActionModal";
+import SortModal from "./SortModal";
 import { getBackgroundColor } from "../../redux/selectors";
 
 interface Props {}
 
 const Collection: FC = props => {
 	const [actionVisible, setActionVisible] = useState(false);
+	const [sortVisible, setSortVisible] = useState(false);
 	const backgroundColor = useSelector(getBackgroundColor);
 
 	return (
@@ -35,12 +37,13 @@ const Collection: FC = props => {
 				<DashLine />
 			</View> */}
 			<ActionModal visible={actionVisible} onHide={() => setActionVisible(false)} />
+			<SortModal visible={sortVisible} onHide={() => setSortVisible(false)} />
 			<View style={styles.title}>
 				<TopBar title="Collection" color="black">
 					<TouchableOpacity onPress={() => setActionVisible(true)}>
 						<MoreHoriz style={styles.actionIcon} fill="black" width={32} height={32} />
 					</TouchableOpacity>
-					<TouchableOpacity>
+					<TouchableOpacity onPress={() => setSortVisible(true)}>
 						<Sort style={styles.actionIcon} fill="black" width={32} height={32} />
 					</TouchableOpacity>
 					<TouchableOpacity>

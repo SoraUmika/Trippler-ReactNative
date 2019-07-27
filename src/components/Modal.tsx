@@ -11,15 +11,16 @@ import {
 interface Props extends Omit<ModalProps, "transparent"> {
 	onHide: () => void;
 	style?: StyleProp<ViewStyle>;
+	shadowStyle?: StyleProp<ViewStyle>;
 }
 
 export default class Modal extends Component<Props> {
 	render() {
-		const { onHide, style, children, ...restProps } = this.props;
+		const { onHide, style, children, shadowStyle, ...restProps } = this.props;
 
 		return (
 			<BuiltInModal {...restProps} transparent={true}>
-				<View style={styles.background} onTouchStart={onHide}>
+				<View style={[styles.background, shadowStyle]} onTouchStart={onHide}>
 					<View style={style} onTouchStart={evt => evt.stopPropagation()}>
 						{children}
 					</View>
