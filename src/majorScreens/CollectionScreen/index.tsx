@@ -10,13 +10,13 @@ import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { useSelector } from "react-redux";
 import { getStatusBarHeight } from "react-native-status-bar-height";
 
-import TopBar from "./TopBar";
+import TopBar from "../../components/TopBar";
 import MoreHoriz from "../../svg/MoreHoriz";
 import FilterList from "../../svg/FilterList";
 import Sort from "../../svg/Sort";
 import CollectionList from "./CollectionList";
 import MainActionBar from "./MainActionBar";
-import DashLine from "./DashLine";
+import DashLine from "../../components/DashLine";
 import ActionModal from "./ActionModal";
 import { getBackgroundColor } from "../../redux/selectors";
 
