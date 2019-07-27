@@ -3,7 +3,7 @@ import { Modal, StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 
 import dimension from "../../dimension";
-import BookmarkBorder from "../../svg/BookmarkBorder";
+import FiberPin from "../../svg/FiberPin";
 import { getCollectionShowPin } from "../../redux/selectors";
 import { toggleCollectShowPin } from "../../redux/action/actions";
 
@@ -25,7 +25,7 @@ const ActionModal: FC<Props> = props => {
 						style={styles.optionButton}
 						onPress={() => dispatch(toggleCollectShowPin())}
 					>
-						<BookmarkBorder />
+						<FiberPin />
 						<Text style={styles.optionText}>
 							{showPin ? "Disable pinned" : "Enable pinned"}
 						</Text>
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
 		height: 50,
 		alignItems: "center",
 		flexDirection: "row",
-		paddingRight: 8
+		paddingRight: 4
 	},
 	optionText: {
 		textAlign: "right",
