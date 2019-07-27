@@ -1,11 +1,12 @@
 import React, { FC } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import Modal from "../../components/Modal";
 import dimension from "../../dimension";
 import { SortMethod } from "../../redux/businessSortCompare";
 import { getCollectionSortMethod } from "../../redux/selectors";
+import { setCollectSortMethod } from "../../redux/action/actions";
 import Check from "../../svg/Check";
 import DashLine from "../../components/DashLine";
 
@@ -23,6 +24,7 @@ const methods: [SortMethod, string][] = [
 const SortModal: FC<Props> = props => {
 	const { visible, onHide } = props;
 	const sortMethod = useSelector(getCollectionSortMethod);
+	const dispatch = useDispatch();
 
 	return (
 		<Modal visible={visible} onHide={onHide} style={styles.container} animationType="fade">
@@ -31,7 +33,16 @@ const SortModal: FC<Props> = props => {
 				<DashLine />
 			</View>
 			{methods.map(val => (
-				<TouchableOpacity style={styles.optionButton} key={val[0]}>
+				<TouchableOpacity
+					style={styles.optionButton}
+					key={val[0]}
+					onPress={() => {
+						if (val[0] != sortMethod) {
+							dispatch(setCollectSortMethod(val[0]));
+							onHide();
+						}
+					}}
+				>
 					{sortMethod == val[0] && <Check />}
 					<Text style={styles.optionText}>{val[1]}</Text>
 				</TouchableOpacity>
