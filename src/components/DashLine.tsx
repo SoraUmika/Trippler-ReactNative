@@ -2,7 +2,7 @@
  * A dashed line, wrapper for Dash component from react-native-dash.
  */
 import React, { Component } from "react";
-let Dash = require("react-native-dash").default;
+import Dash from "react-native-dash"
 
 export default class DashLine extends Component {
 	shouldComponentUpdate() {
