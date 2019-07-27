@@ -1,19 +1,25 @@
-import React, {Component} from 'react'
+import React, {Component, FC} from 'react'
 import { View, StyleSheet } from 'react-native'
 import BusinessImage from './Image'
+import { getCurrentRecomIndex } from "../../redux/selectors";
+import useSelector from 'react-redux'
 
-export default class BusinessScreen extends Component{
-  render(){
-    return(
-      <View style={styles.formatRules}>
+interface Props{
+  currentRecomIndex?: number
+}
 
-        <View style={styles.ImageContainer}>
-          <BusinessImage/>
-        </View>
-        
+const BusinessScreen: FC<Props> = props => {
+  const currentRecomIndex = useSelector(getCurrentRecomIndex);
+
+  return(
+    <View style={styles.formatRules}>
+
+      <View style={styles.ImageContainer}>
+        <BusinessImage/>
       </View>
+        
+    </View>
     )
-  }
 }
 
 const styles = StyleSheet.create({
@@ -30,3 +36,5 @@ const styles = StyleSheet.create({
     borderRadius: 12
   },
 }) 
+
+export default BusinessScreen
