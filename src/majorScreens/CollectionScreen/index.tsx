@@ -13,6 +13,7 @@ import { getStatusBarHeight } from "react-native-status-bar-height";
 import TopBar from "./TopBar";
 import MoreHoriz from "../../svg/MoreHoriz";
 import FilterList from "../../svg/FilterList";
+import Sort from "../../svg/Sort";
 import CollectionList from "./CollectionList";
 import MainActionBar from "./MainActionBar";
 import DashLine from "./DashLine";
@@ -33,11 +34,14 @@ const Collection: FC = props => {
 			<View style={styles.dashContainer}>
 				<DashLine />
 			</View> */}
-			<ActionModal visible={actionVisible} onHide={() => setActionVisible(false)}/>
+			<ActionModal visible={actionVisible} onHide={() => setActionVisible(false)} />
 			<View style={styles.title}>
 				<TopBar title="Collection" color="black">
 					<TouchableOpacity onPress={() => setActionVisible(true)}>
 						<MoreHoriz style={styles.actionIcon} fill="black" width={32} height={32} />
+					</TouchableOpacity>
+					<TouchableOpacity>
+						<Sort style={styles.actionIcon} fill="black" width={32} height={32} />
 					</TouchableOpacity>
 					<TouchableOpacity>
 						<FilterList style={styles.actionIcon} fill="black" width={32} height={32} />
