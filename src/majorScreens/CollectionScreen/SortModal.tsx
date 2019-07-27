@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
 	container: {
 		backgroundColor: "white",
 		width: 150,
-		height: 50 * methods.length + 8 + 40,
+		height: 50 * methods.length + 16 + 40,
 		top: dimension.height(0.08),
 		left: dimension.width() - 150 - 16 - 48,
 		borderRadius: 8,
