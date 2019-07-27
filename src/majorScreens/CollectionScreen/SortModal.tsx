@@ -1,11 +1,18 @@
 import React, { FC } from "react";
-import { Modal, View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 
-interface Props {}
+import Modal from "../../components/Modal";
+
+interface Props {
+	visible: boolean;
+	onHide: () => void;
+}
 
 const SortModal: FC<Props> = props => {
+	const { visible, onHide } = props;
+
 	return (
-		<Modal>
+		<Modal visible={visible} onHide={onHide}>
 			<View />
 		</Modal>
 	);
@@ -13,5 +20,4 @@ const SortModal: FC<Props> = props => {
 
 const styles = StyleSheet.create({});
 
-					
 export default styles;

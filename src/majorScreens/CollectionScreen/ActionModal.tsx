@@ -1,11 +1,12 @@
 import React, { FC } from "react";
-import { Modal, StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 
 import dimension from "../../dimension";
 import FiberPin from "../../svg/FiberPin";
 import { getCollectionShowPin } from "../../redux/selectors";
 import { toggleCollectShowPin } from "../../redux/action/actions";
+import Modal from "../../components/Modal";
 
 interface Props {
 	visible: boolean;
@@ -18,20 +19,16 @@ const ActionModal: FC<Props> = props => {
 	const showPin = useSelector(getCollectionShowPin);
 
 	return (
-		<Modal animationType="fade" transparent={true} visible={visible}>
-			<View style={styles.background} onTouchStart={onHide}>
-				<View style={styles.container} onTouchStart={evt => evt.stopPropagation()}>
-					<TouchableOpacity
-						style={styles.optionButton}
-						onPress={() => dispatch(toggleCollectShowPin())}
-					>
-						<FiberPin />
-						<Text style={styles.optionText}>
-							{showPin ? "Disable pinned" : "Enable pinned"}
-						</Text>
-					</TouchableOpacity>
-				</View>
-			</View>
+		<Modal animationType="fade" visible={visible} onHide={onHide} style={styles.container}>
+			<TouchableOpacity
+				style={styles.optionButton}
+				onPress={() => dispatch(toggleCollectShowPin())}
+			>
+				<FiberPin />
+				<Text style={styles.optionText}>
+					{showPin ? "Disable pinned" : "Enable pinned"}
+				</Text>
+			</TouchableOpacity>
 		</Modal>
 	);
 };

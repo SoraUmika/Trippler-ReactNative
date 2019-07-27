@@ -10,7 +10,7 @@ import {
 
 interface Props extends Omit<ModalProps, "transparent"> {
 	onHide: () => void;
-	style: StyleProp<ViewStyle>;
+	style?: StyleProp<ViewStyle>;
 }
 
 export default class Modal extends Component<Props> {
