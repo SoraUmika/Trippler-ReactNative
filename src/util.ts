@@ -60,5 +60,3 @@ export function arrRemoved(arr: any[], el: any) {
 export function update<T>(origin: T, src: Partial<T>): T {
 	return Object.assign({}, origin, src);
 }
-
-export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
