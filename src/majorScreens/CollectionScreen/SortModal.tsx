@@ -3,13 +3,18 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 
 import Modal from "../../components/Modal";
 import dimension from "../../dimension";
+import { SortMethod } from "../../redux/businessSortCompare";
 
 interface Props {
 	visible: boolean;
 	onHide: () => void;
 }
 
-const methods = ["name", "rating", "avg. rating"];
+const methods: [SortMethod, string][] = [
+	["name", "name"],
+	["rating", "rating"],
+	["avgRating", "avg. rating"]
+];
 
 const SortModal: FC<Props> = props => {
 	const { visible, onHide } = props;
@@ -17,8 +22,8 @@ const SortModal: FC<Props> = props => {
 	return (
 		<Modal visible={visible} onHide={onHide} style={styles.container} animationType="fade">
 			{methods.map(val => (
-				<TouchableOpacity style={styles.optionButton} key={val}>
-					<Text style={styles.optionText}>{val}</Text>
+				<TouchableOpacity style={styles.optionButton} key={val[0]}>
+					<Text style={styles.optionText}>{val[1]}</Text>
 				</TouchableOpacity>
 			))}
 		</Modal>
