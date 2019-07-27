@@ -40,7 +40,6 @@ const styles = StyleSheet.create({
 		height: 66,
 		top: dimension.height(0.08),
 		left: dimension.width() - 186,
-		zIndex: 2,
 		borderRadius: 8,
 		padding: 8
 	},
@@ -48,7 +47,6 @@ const styles = StyleSheet.create({
 		width: "100%",
 		height: "100%",
 		backgroundColor: "rgba(0,0,0,0.1)",
-		zIndex: 1
 	},
 	optionButton: {
 		width: "100%",

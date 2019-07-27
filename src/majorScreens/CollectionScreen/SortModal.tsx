@@ -1,39 +1,51 @@
 import React, { FC } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 
 import Modal from "../../components/Modal";
+import dimension from "../../dimension";
 
 interface Props {
 	visible: boolean;
 	onHide: () => void;
 }
 
+const methods = ["name", "rating", "avg. rating"];
+
 const SortModal: FC<Props> = props => {
 	const { visible, onHide } = props;
 
 	return (
-		<Modal
-			visible={visible}
-			onHide={onHide}
-			style={styles.container}
-			shadowStyle={styles.shadow}
-			animationType="fade"
-		>
-			<View />
+		<Modal visible={visible} onHide={onHide} style={styles.container} animationType="fade">
+			{methods.map(val => (
+				<TouchableOpacity style={styles.optionButton} key={val}>
+					<Text style={styles.optionText}>{val}</Text>
+				</TouchableOpacity>
+			))}
 		</Modal>
 	);
 };
 
 const styles = StyleSheet.create({
 	container: {
-		width: 200,
-		height: 200,
-		backgroundColor: "white"
+		backgroundColor: "white",
+		width: 170,
+		height: 50 * methods.length + 16,
+		top: dimension.height(0.08),
+		left: dimension.width() - 170 - 16 - 48,
+		borderRadius: 8,
+		padding: 8
 	},
-	shadow: {
-		flex: 1,
+	optionButton: {
+		width: "100%",
+		height: 50,
 		alignItems: "center",
-		justifyContent: "center"
+		flexDirection: "row",
+		paddingRight: 4
+	},
+	optionText: {
+		textAlign: "right",
+		flex: 1,
+		fontWeight: "bold"
 	}
 });
 

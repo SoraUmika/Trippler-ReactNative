@@ -18,6 +18,8 @@ export const getCollectionItemsPinned = (state: State) => state.collection.pinne
 
 export const getCollectionShowPin = (state: State) => state.collection.showPin;
 
+export const getCollectionSortMethod = (state: State) => state.collection.sortMethod;
+
 export const getCurrentRecomData = createSelector(
 	getBusinessData,
 	getRecomFeed,
