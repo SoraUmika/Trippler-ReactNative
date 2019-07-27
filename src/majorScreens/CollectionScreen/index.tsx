@@ -5,7 +5,7 @@
  * TODO add selection mode.
  * TODO add sort functionality.
  */
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { useSelector } from "react-redux";
 import { getStatusBarHeight } from "react-native-status-bar-height";
@@ -16,11 +16,13 @@ import FilterList from "../../svg/FilterList";
 import CollectionList from "./CollectionList";
 import MainActionBar from "./MainActionBar";
 import DashLine from "./DashLine";
+import ActionModal from "./ActionModal";
 import { getBackgroundColor } from "../../redux/selectors";
 
 interface Props {}
 
 const Collection: FC = props => {
+	const [actionVisible, setActionVisible] = useState(false);
 	const backgroundColor = useSelector(getBackgroundColor);
 
 	return (
@@ -31,9 +33,10 @@ const Collection: FC = props => {
 			<View style={styles.dashContainer}>
 				<DashLine />
 			</View> */}
+			<ActionModal visible={actionVisible} onHide={() => setActionVisible(false)}/>
 			<View style={styles.title}>
 				<TopBar title="Collection" color="black">
-					<TouchableOpacity>
+					<TouchableOpacity onPress={() => setActionVisible(true)}>
 						<MoreHoriz style={styles.actionIcon} fill="black" width={32} height={32} />
 					</TouchableOpacity>
 					<TouchableOpacity>
