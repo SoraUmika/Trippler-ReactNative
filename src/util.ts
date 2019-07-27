@@ -49,3 +49,14 @@ export function sortedInsert<T>(arr: T[], val: T, isOrdered: IsOrderedCompare<T>
 }
 
 export type StrObj<T> = { [index: string]: T };
+
+export function arrRemoved(arr: any[], el: any) {
+	var index = arr.indexOf(el);
+	if (index > -1) {
+		arr.splice(index, 1);
+	}
+}
+
+export function update<T>(origin: T, src: Partial<T>): T {
+	return Object.assign({}, origin, src);
+}

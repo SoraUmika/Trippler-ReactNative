@@ -10,19 +10,9 @@ const init_state: State = {
 	collection: {
 		appliedFilters: [],
 		sortMethod: "name",
-		ignorePin: false,
-		items: {
-			test: {
-				pinned: false
-			},
-			hello: {
-				pinned: false
-			},
-			":)": {
-				pinned: true
-			}
-		},
-		order: [":)", "test", "hello"]
+		showPin: true,
+		items: ["hello", "test"],
+		pinnedItems: [":)"]
 	},
 	recommendation: {
 		feeds: ["test", "hello", ":)"],

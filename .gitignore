@@ -10,3 +10,4 @@ web-build/
 web-report/
 src/svg/*.svg
 report.*.json
+.vscode
