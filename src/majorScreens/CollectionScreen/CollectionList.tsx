@@ -4,8 +4,8 @@
  * TODO auto reads the collections from store.
  * TODO edge transparency.
  */
-import React, { FC } from "react";
-import { StyleSheet, ScrollView, FlatList } from "react-native";
+import React, { FC, memo } from "react";
+import { FlatList } from "react-native";
 import { useSelector } from "react-redux";
 import {
 	getCollectionItems,
@@ -20,14 +20,8 @@ const CollectionList: FC = () => {
 	const showPin = useSelector(getCollectionShowPin);
 	const itemsPinned = useSelector(getCollectionItemsPinned);
 	const pinnedItemLength = itemsPinned.length;
+
 	return (
-		// <ScrollView style={styles.container} bounces indicatorStyle="black">
-		// 	{showPin &&
-		// 		itemsPinned.map(id => <CollectionItem businessId={id} pinned key={id} showPin />)}
-		// 	{items.map(id => (
-		// 		<CollectionItem businessId={id} key={id} showPin={showPin} />
-		// 	))}
-		// </ScrollView>
 		<FlatList
 			data={[...(showPin ? itemsPinned : []), ...items]}
 			// data={[...(showPin ? itemsPinned : []), ...items, ...items, ...items, ...items, ...items]}
@@ -43,10 +37,4 @@ const CollectionList: FC = () => {
 	);
 };
 
-const styles = StyleSheet.create({
-	container: {
-		flex: 1
-	}
-});
-
-export default CollectionList;
+export default memo(CollectionList, () => true);
