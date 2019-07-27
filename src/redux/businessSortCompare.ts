@@ -4,9 +4,9 @@ import { IsOrderedCompare, StrObj } from "../util";
 export type SortMethod = "name" | "rating" | "avgRating";
 
 export const BusinessCompareFunctions: StrObj<IsOrderedCompare<Business>> = {
-	name: (l, r) => l.name < r.name,
-	rating: (l, r) => l.rating > r.rating,
-	avgRating: (l, r) => l.rating / l.ratingNum > r.rating / r.ratingNum
+	name: (l, r) => l.name <= r.name,
+	rating: (l, r) => l.rating >= r.rating,
+	avgRating: (l, r) => l.rating / l.ratingNum >= r.rating / r.ratingNum
 };
 
 export default function getCompareFunc(

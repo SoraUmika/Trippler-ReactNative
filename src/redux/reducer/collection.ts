@@ -14,9 +14,10 @@ export default function collection(
 	let pinnedItemsCopy = [...state.pinnedItems];
 	switch (action.type) {
 		case "collection/SET_SORT_METHOD":
-			sort(itemsCopy, isOrdered);
-			if (!state.showPin) {
-				sort(pinnedItemsCopy, isOrdered);
+			const newIsOrdered = getCompareFunc(action.payload, businesses);
+			sort(itemsCopy, newIsOrdered);
+			if (state.showPin) {
+				sort(pinnedItemsCopy, newIsOrdered);
 			}
 			return update(state, {
 				sortMethod: action.payload,
