@@ -6,7 +6,10 @@ import CollectionScreen from "../majorScreens/CollectionScreen";
 import AccountScreen from "../majorScreens/AccountScreen";
 import SettingScreen from "../majorScreens/SettingScreen";
 import BusinessScreen from "../majorScreens/BusinessScreen";
-import BookmarkBorder from "../svg/BookmarkBorder";
+import Place from "../svg/Place";
+import CollectionBookmark from "../svg/CollectionsBookmark";
+import AccountCircle from "../svg/AccountCircle";
+import Settings from "../svg/Settings";
 
 const MainNavigator = createAppContainer(
 	createBottomTabNavigator(
@@ -15,25 +18,25 @@ const MainNavigator = createAppContainer(
 			Business: {
 				screen: BusinessScreen,
 				navigationOptions: {
-					tabBarIcon: ({ tintColor }: any) => <BookmarkBorder fill={tintColor} />
+					tabBarIcon: ({ tintColor }: any) => <Place fill={tintColor} />
 				}
 			},
 			Collection: {
 				screen: CollectionScreen,
 				navigationOptions: {
-					tabBarIcon: ({ tintColor }: any) => <BookmarkBorder fill={tintColor} />
+					tabBarIcon: ({ tintColor }: any) => <CollectionBookmark fill={tintColor} />
 				}
 			},
 			Account: {
 				screen: AccountScreen,
 				navigationOptions: {
-					tabBarIcon: ({ tintColor }: any) => <BookmarkBorder fill={tintColor} />
+					tabBarIcon: ({ tintColor }: any) => <AccountCircle fill={tintColor} />
 				}
 			},
 			Setting: {
 				screen: SettingScreen,
 				navigationOptions: {
-					tabBarIcon: ({ tintColor }: any) => <BookmarkBorder fill={tintColor} />
+					tabBarIcon: ({ tintColor }: any) => <Settings fill={tintColor} />
 				}
 			}
 		},
