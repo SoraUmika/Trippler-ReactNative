@@ -62,13 +62,8 @@ const Header = memo(
 					style={styles.clearButton}
 					onPress={() => dispatch(setCollectSearchInput(""))}
 				>
-					<Close fill="#c77" />
+					<Close fill="#777" />
 				</TouchableOpacity>
-				{/* <Input
-					width="85%"
-					placeholder="search"
-					onChange={e => dispatch(setCollectSearchInput(e.nativeEvent.text))}
-				/> */}
 			</View>
 		);
 	},
@@ -99,7 +94,10 @@ const styles = StyleSheet.create({
 		flex: 1
 	},
 	clearButton: {
-		padding: 16
+		padding: 18,
+		backgroundColor: "rgba(0,0,0,0.025)",
+		borderRadius: 8,
+		// borderBottomRightRadius: 8
 	}
 });
 
