@@ -57,7 +57,7 @@ export const getAllCollectionItems = createSelector(
 		sort(pinnedItemsCopy, isOrdered);
 		sort(itemsCopy, isOrdered);
 		let allItems = [...pinnedItemsCopy, ...itemsCopy].filter(val =>
-			businesses[val].name.includes(search)
+			businesses[val].name.toLowerCase().includes(search.toLowerCase())
 		);
 		return [allItems, pinnedItemsCopy.length];
 	}

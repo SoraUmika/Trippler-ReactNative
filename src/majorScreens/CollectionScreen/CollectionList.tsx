@@ -6,9 +6,14 @@
  */
 import React, { FC, memo } from "react";
 import { FlatList, View, StyleSheet } from "react-native";
-import { useSelector } from "react-redux";
-import { getCollectionShowPin, getAllCollectionItems } from "../../redux/selectors";
+import { useSelector, useDispatch } from "react-redux";
 
+import {
+	getCollectionShowPin,
+	getAllCollectionItems,
+	getCollectionSearchInput
+} from "../../redux/selectors";
+import { setCollectSearchInput } from "../../redux/action/actions";
 import CollectionItem from "./CollectionItem";
 import Input from "../../components/Input";
 import Search from "../../svg/Search";
@@ -32,17 +37,29 @@ const CollectionList: FC = () => {
 			ItemSeparatorComponent={() => {
 				return <View style={styles.separator} />;
 			}}
-			ListHeaderComponent={() => {
-				return (
-					<View style={styles.headerContainer}>
-						<Search style={styles.searchIcon} />
-						<Input width="85%" placeholder="search" />
-					</View>
-				);
-			}}
+			ListHeaderComponent={Header}
 		/>
 	);
 };
+
+const Header = memo(
+	() => {
+		const searchInput = useSelector(getCollectionSearchInput);
+		const dispatch = useDispatch();
+
+		return (
+			<View style={styles.headerContainer}>
+				<Search style={styles.searchIcon} fill="#777"/>
+				<Input
+					width="85%"
+					placeholder="search"
+					onChange={e => dispatch(setCollectSearchInput(e.nativeEvent.text))}
+				/>
+			</View>
+		);
+	},
+	() => true
+);
 
 const styles = StyleSheet.create({
 	separator: {
