@@ -8,7 +8,11 @@ const init_state: State = {
 	},
 	businesses: testData,
 	collection: {
-		appliedFilters: [],
+		filter: {
+			status: "all",
+			rating: "all",
+			ratingNum: "all"
+		},
 		sortMethod: "name",
 		showPin: true,
 		items: ["hello", "test", "bqq", "joes", "dump", "loc2", "loc1"],

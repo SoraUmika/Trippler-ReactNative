@@ -1,6 +1,7 @@
 import Business from "./Business";
 import { SortMethod } from "../businessSortCompare";
 import { StrObj } from "../../util";
+import Filter from "./Filter";
 
 export default interface State {
 	theme: Theme;
@@ -17,7 +18,7 @@ export interface Theme {
 export type Businesses = StrObj<Business>;
 
 export interface Collection {
-	appliedFilters: string[];
+	filter: Filter;
 	sortMethod: SortMethod;
 	showPin: boolean;
 	items: string[];
