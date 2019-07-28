@@ -67,6 +67,7 @@ const CollectionItem: FC<Props> = props => {
 					pinned
 				)
 			}
+			overshootFriction={8}
 		>
 			<View
 				style={{
