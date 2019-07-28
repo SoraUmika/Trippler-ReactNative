@@ -47,7 +47,8 @@ const MainNavigator = createAppContainer(
 				activeTintColor: store.getState().theme.accentColor,
 				labelStyle: {
 					fontWeight: "bold"
-				}
+				},
+				showLabel: false
 			}
 		}
 	)
