@@ -22,6 +22,8 @@ export const getCollectionShowPin = (state: State) => state.collection.showPin;
 
 export const getCollectionSortMethod = (state: State) => state.collection.sortMethod;
 
+export const getCollectionSearchInput = (state: State) => state.collection.searchInput;
+
 export const getCurrentRecomData = createSelector(
 	getBusinessData,
 	getRecomFeed,
@@ -47,12 +49,16 @@ export const getAllCollectionItems = createSelector(
 	getBusinessData,
 	getCollectionSortMethod,
 	getCollectionShowPin,
-	(items, pinnedItems, businesses, sortMethod, showPin): [string[], number] => {
+	getCollectionSearchInput,
+	(items, pinnedItems, businesses, sortMethod, showPin, search): [string[], number] => {
 		let pinnedItemsCopy = showPin ? [...pinnedItems] : [];
 		let itemsCopy = showPin ? [...items] : [...pinnedItems, ...items];
 		const isOrdered = getCompareFunc(sortMethod, businesses);
 		sort(pinnedItemsCopy, isOrdered);
 		sort(itemsCopy, isOrdered);
-		return [[...pinnedItemsCopy, ...itemsCopy], pinnedItemsCopy.length];
+		let allItems = [...pinnedItemsCopy, ...itemsCopy].filter(val =>
+			businesses[val].name.includes(search)
+		);
+		return [allItems, pinnedItemsCopy.length];
 	}
 );

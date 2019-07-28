@@ -12,7 +12,8 @@ const init_state: State = {
 		sortMethod: "name",
 		showPin: true,
 		items: ["hello", "test"],
-		pinnedItems: [":)"]
+		pinnedItems: [":)"],
+		searchInput: ""
 	},
 	recommendation: {
 		feeds: ["test", "hello", ":)"],

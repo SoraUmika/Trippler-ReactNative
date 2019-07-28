@@ -22,6 +22,7 @@ export interface Collection {
 	showPin: boolean;
 	items: string[];
 	pinnedItems: string[];
+	searchInput: string;
 }
 
 export interface Recommendation {
