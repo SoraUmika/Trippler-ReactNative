@@ -11,7 +11,7 @@ const init_state: State = {
 		appliedFilters: [],
 		sortMethod: "name",
 		showPin: true,
-		items: ["hello", "test"],
+		items: ["hello", "test", "bqq", "joes", "dump", "loc2", "loc1"],
 		pinnedItems: [":)"],
 		searchInput: ""
 	},
