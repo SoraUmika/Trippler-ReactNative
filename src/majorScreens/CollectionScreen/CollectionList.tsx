@@ -7,25 +7,19 @@
 import React, { FC, memo } from "react";
 import { FlatList, View, StyleSheet } from "react-native";
 import { useSelector } from "react-redux";
-import {
-	getCollectionItems,
-	getCollectionItemsPinned,
-	getCollectionShowPin
-} from "../../redux/selectors";
+import { getCollectionShowPin, getAllCollectionItems } from "../../redux/selectors";
 
 import CollectionItem from "./CollectionItem";
 import Input from "../../components/Input";
 import Search from "../../svg/Search";
 
 const CollectionList: FC = () => {
-	const items = useSelector(getCollectionItems);
+	const [items, pinnedItemLength] = useSelector(getAllCollectionItems);
 	const showPin = useSelector(getCollectionShowPin);
-	const itemsPinned = useSelector(getCollectionItemsPinned);
-	const pinnedItemLength = itemsPinned.length;
 
 	return (
 		<FlatList
-			data={[...(showPin ? itemsPinned : []), ...items]}
+			data={items}
 			// data={[...(showPin ? itemsPinned : []), ...items, ...items, ...items, ...items]}
 			renderItem={({ item, index }) => {
 				if (showPin && index < pinnedItemLength) {
@@ -40,20 +34,8 @@ const CollectionList: FC = () => {
 			}}
 			ListHeaderComponent={() => {
 				return (
-					<View
-						style={{
-							height: 60,
-							// backgroundColor: "black",
-							marginHorizontal: 16,
-							marginBottom: 8,
-							marginTop: 4,
-							alignItems: "center",
-							flexDirection: "row",
-							// backgroundColor: "red",
-							justifyContent: "center"
-						}}
-					>
-						<Search style={{marginRight: 16}}/>
+					<View style={styles.headerContainer}>
+						<Search style={styles.searchIcon} />
 						<Input width="85%" placeholder="search" />
 					</View>
 				);
@@ -68,6 +50,18 @@ const styles = StyleSheet.create({
 		width: "100%",
 		backgroundColor: "#f0f0f0",
 		marginVertical: 8
+	},
+	headerContainer: {
+		height: 60,
+		marginHorizontal: 16,
+		marginBottom: 8,
+		marginTop: 4,
+		alignItems: "center",
+		flexDirection: "row",
+		justifyContent: "center"
+	},
+	searchIcon: {
+		marginRight: 16
 	}
 });
 
