@@ -1,16 +1,20 @@
-import React, {Component} from 'react'
+import React, {Component, FC} from 'react'
 import { View, StyleSheet, Text } from 'react-native'
 
-export default class BusinessInfo extends Component{
-  render(){
+interface Props{
+  currentBusiness: any
+}
+
+const BusinessInfo: FC<Props> = (props) =>{
     return(
       <View style={styles.layoutRule}>
-        <Text style={styles.businessName}> Bussiness Name </Text>
-        <Text style={styles.address}> Ratings </Text>
-        <Text style={styles.address}> 3825 Parsons Blvd, NY, 11354 </Text>
+        <Text style={styles.businessName}> {props.currentBusiness.name} </Text>
+        <Text style={styles.ratings}> {props.currentBusiness.rating} ({props.currentBusiness.ratingNum}) </Text>
+        <Text style={styles.address}> {props.currentBusiness.address} </Text>
+        <Text style={styles.hours}> {props.currentBusiness.hours[0]} - {props.currentBusiness.hours[1]}</Text>
       </View>    
     )    
-  }
+
 }
 
 const styles = StyleSheet.create({
@@ -22,13 +26,28 @@ const styles = StyleSheet.create({
   businessName: {
     fontSize: 25,
     fontStyle: 'italic',
-    color: 'white'
+    color: 'white',
+    marginBottom: 8
   },
 
   address: {
     fontSize: 15,
     fontStyle: 'normal',
     color: 'white'
+  },
+
+  ratings: {
+    fontSize: 15,
+    fontStyle: 'normal',
+    color: 'white'
+  },
+
+  hours: {
+    fontSize: 15,
+    fontStyle: 'normal',
+    color: 'white'
   }
 
 })
+
+export default BusinessInfo

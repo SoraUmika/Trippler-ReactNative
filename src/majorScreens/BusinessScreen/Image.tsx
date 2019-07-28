@@ -1,26 +1,29 @@
-import React, { Component } from "react";
+import React, { Component, FC } from "react";
 import { View, StyleSheet, ImageBackground } from "react-native";
 import BusinessInfo from "./Info";
+import { getCurrentRecomIndex, getRecomFeed, getBusinessData } from "../../redux/selectors";
+import { useSelector} from 'react-redux'
 
-export default class BusinessImage extends Component {
-	render() {
-		return (
-			<View style={{ flex: 1 }}>
-				<ImageBackground
-					style={styles.imageBackground}
-					imageStyle={styles.imageStyle}
-					source={{
-						uri:
-							"https://cdn-image.foodandwine.com/sites/default/files/styles/medium_2x/public/1543591797/collard-greens-ramen-ft-RECIPE0119.jpg?itok=ZmwAvi5t"
-					}}
-				>
-					<View style={styles.InformationContainer}>
-						<BusinessInfo />
-					</View>
-				</ImageBackground>
-			</View>
-		);
-	}
+const BusinessImage: FC = props => {
+  const currentRecomIndex = useSelector(getCurrentRecomIndex)
+  const recomFeed = useSelector(getRecomFeed)
+  const businessData = useSelector(getBusinessData)
+  const currentBusiness  = businessData[recomFeed[currentRecomIndex]]
+
+  return (
+	<View style={{ flex: 1 }}>
+	  <ImageBackground
+		style={styles.imageBackground}
+		imageStyle={styles.imageStyle}
+		source={{
+		uri: currentBusiness.gallery[0].url}}
+		>
+	  <View style={styles.InformationContainer}>
+	  <BusinessInfo currentBusiness={currentBusiness}/>
+	</View>
+	  </ImageBackground>
+	</View>
+	);
 }
 
 const styles = StyleSheet.create({
@@ -41,3 +44,5 @@ const styles = StyleSheet.create({
 		opacity: 0.6
 	}
 });
+
+export default BusinessImage
