@@ -39,6 +39,10 @@ export default function collection(state: Collection, action: RootAction): Colle
 			return update(state, {
 				showPin: !state.showPin
 			});
+		case "collection/SET_SEARCH_INPUT":
+			return update(state, {
+				searchInput: action.payload
+			});
 		default:
 			return state;
 	}
