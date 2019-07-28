@@ -1,19 +1,18 @@
-import React, {Component} from 'react'
+import React, {Component, FC} from 'react'
 import { View, StyleSheet } from 'react-native'
 import BusinessImage from './Image'
 
-export default class BusinessScreen extends Component{
-  render(){
-    return(
-      <View style={styles.formatRules}>
+const BusinessScreen: FC = props => {
+  
+  return(
+    <View style={styles.formatRules}>
 
-        <View style={styles.ImageContainer}>
-          <BusinessImage/>
-        </View>
-        
+      <View style={styles.ImageContainer}>
+        <BusinessImage/>
       </View>
+        
+    </View>
     )
-  }
 }
 
 const styles = StyleSheet.create({
@@ -30,3 +29,5 @@ const styles = StyleSheet.create({
     borderRadius: 12
   },
 }) 
+
+export default BusinessScreen
