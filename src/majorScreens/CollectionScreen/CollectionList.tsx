@@ -44,7 +44,6 @@ const CollectionList: FC = () => {
 
 const Header = memo(
 	() => {
-		const searchInput = useSelector(getCollectionSearchInput);
 		const dispatch = useDispatch();
 
 		return (
