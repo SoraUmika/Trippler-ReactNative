@@ -1,6 +1,8 @@
 import State from "./state";
 import { createSelector } from "reselect";
 import Color from "color";
+import getCompareFunc from "./businessSortCompare";
+import { sort } from "../util";
 
 export const getAccentColor = (state: State) => state.theme.accentColor;
 
@@ -36,5 +38,21 @@ export const getForegroundColor = createSelector(
 			.array();
 		const bgDelta = channels[0] * 0.299 + channels[1] * 0.587 + channels[2] * 0.114;
 		return 255 - bgDelta < nThreshold ? "#000000" : "#ffffff";
+	}
+);
+
+export const getAllCollectionItems = createSelector(
+	getCollectionItems,
+	getCollectionItemsPinned,
+	getBusinessData,
+	getCollectionSortMethod,
+	getCollectionShowPin,
+	(items, pinnedItems, businesses, sortMethod, showPin): [string[], number] => {
+		let pinnedItemsCopy = showPin ? [...pinnedItems] : [];
+		let itemsCopy = showPin ? [...items] : [...pinnedItems, ...items];
+		const isOrdered = getCompareFunc(sortMethod, businesses);
+		sort(pinnedItemsCopy, isOrdered);
+		sort(itemsCopy, isOrdered);
+		return [[...pinnedItemsCopy, ...itemsCopy], pinnedItemsCopy.length];
 	}
 );
