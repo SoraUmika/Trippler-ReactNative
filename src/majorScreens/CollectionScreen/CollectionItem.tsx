@@ -9,7 +9,6 @@ import React, { FC } from "react";
 import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import Swipeable from "react-native-gesture-handler/Swipeable";
-import Color from "color";
 
 import ArrowUpward from "../../svg/ArrowUpward";
 import CenterView from "../../components/CenterView";

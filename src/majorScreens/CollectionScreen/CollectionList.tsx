@@ -5,7 +5,7 @@
  * TODO edge transparency.
  */
 import React, { FC, memo } from "react";
-import { FlatList, View, StyleSheet } from "react-native";
+import { FlatList, View, StyleSheet, TextInput } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 
 import {
@@ -17,6 +17,8 @@ import { setCollectSearchInput } from "../../redux/action/actions";
 import CollectionItem from "./CollectionItem";
 import Input from "../../components/Input";
 import Search from "../../svg/Search";
+import Close from "../../svg/Close";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const CollectionList: FC = () => {
 	const [items, pinnedItemLength] = useSelector(getAllCollectionItems);
@@ -45,15 +47,28 @@ const CollectionList: FC = () => {
 const Header = memo(
 	() => {
 		const dispatch = useDispatch();
+		const searchInput = useSelector(getCollectionSearchInput);
 
 		return (
 			<View style={styles.headerContainer}>
-				<Search style={styles.searchIcon} fill="#777"/>
-				<Input
+				<Search style={styles.searchIcon} fill="#777" />
+				<TextInput
+					placeholder="search"
+					style={styles.searchInput}
+					value={searchInput}
+					onChange={e => dispatch(setCollectSearchInput(e.nativeEvent.text))}
+				/>
+				<TouchableOpacity
+					style={styles.clearButton}
+					onPress={() => dispatch(setCollectSearchInput(""))}
+				>
+					<Close fill="#c77" />
+				</TouchableOpacity>
+				{/* <Input
 					width="85%"
 					placeholder="search"
 					onChange={e => dispatch(setCollectSearchInput(e.nativeEvent.text))}
-				/>
+				/> */}
 			</View>
 		);
 	},
@@ -69,15 +84,22 @@ const styles = StyleSheet.create({
 	},
 	headerContainer: {
 		height: 60,
-		marginHorizontal: 16,
-		marginBottom: 8,
-		marginTop: 4,
+		margin: 16,
 		alignItems: "center",
 		flexDirection: "row",
-		justifyContent: "center"
+		justifyContent: "space-around",
+		backgroundColor: "#f0f0f0",
+		borderRadius: 8,
+		paddingLeft: 16
 	},
 	searchIcon: {
 		marginRight: 16
+	},
+	searchInput: {
+		flex: 1
+	},
+	clearButton: {
+		padding: 16
 	}
 });
 
