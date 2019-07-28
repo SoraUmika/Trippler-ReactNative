@@ -7,7 +7,7 @@ export default function recommendation(state: Recommendation, action: RootAction
 		case "recommendation/NEXT_RECOMMENDATION":
 			return update(state, {
 				currentIndex:
-					state.currentIndex + (state.currentIndex < state.feeds.length - 1 ? 1 : 0)
+					(state.currentIndex < state.feeds.length - 1 ? state.currentIndex + 1 : 0)
 			});
 		default:
 			return state;
