@@ -24,6 +24,8 @@ export const getCollectionSortMethod = (state: State) => state.collection.sortMe
 
 export const getCollectionSearchInput = (state: State) => state.collection.searchInput;
 
+export const getCollectionFilter = (state: State) => state.collection.filter;
+
 export const getCurrentRecomData = createSelector(
 	getBusinessData,
 	getRecomFeed,
@@ -50,15 +52,25 @@ export const getAllCollectionItems = createSelector(
 	getCollectionSortMethod,
 	getCollectionShowPin,
 	getCollectionSearchInput,
-	(items, pinnedItems, businesses, sortMethod, showPin, search): [string[], number] => {
+	getCollectionFilter,
+	(items, pinnedItems, businesses, sortMethod, showPin, search, filter): [string[], number] => {
 		let pinnedItemsCopy = showPin ? [...pinnedItems] : [];
 		let itemsCopy = showPin ? [...items] : [...pinnedItems, ...items];
 		const isOrdered = getCompareFunc(sortMethod, businesses);
 		sort(pinnedItemsCopy, isOrdered);
 		sort(itemsCopy, isOrdered);
-		let allItems = [...pinnedItemsCopy, ...itemsCopy].filter(val =>
-			businesses[val].name.toLowerCase().includes(search.toLowerCase())
-		);
+		let allItems = [...pinnedItemsCopy, ...itemsCopy].filter(val => {
+			const data = businesses[val];
+			return (
+				data.name.toLowerCase().includes(search.toLowerCase()) &&
+				(filter.status == "all" || filter.status == data.status) &&
+				(filter.rating == "all" ||
+					(filter.rating[0] <= data.rating && data.rating <= filter.rating[1])) &&
+				(filter.ratingNum == "all" ||
+					(filter.ratingNum[0] <= data.ratingNum &&
+						data.ratingNum <= filter.ratingNum[1]))
+			);
+		});
 		return [allItems, pinnedItemsCopy.length];
 	}
 );

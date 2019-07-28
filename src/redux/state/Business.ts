@@ -1,4 +1,4 @@
-type BusinessStatus = "open" | "close";
+export type BusinessStatus = "open" | "close";
 
 export default interface Business {
 	id: string;
