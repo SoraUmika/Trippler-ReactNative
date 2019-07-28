@@ -16,7 +16,7 @@ const init_state: State = {
 		searchInput: ""
 	},
 	recommendation: {
-		feeds: ["test", "hello", ":)"],
+		feeds: ["bqq", "joes", "dump", "loc2", "test", "hello", ":)", "loc1"],
 		currentIndex: 0
 	}
 };
