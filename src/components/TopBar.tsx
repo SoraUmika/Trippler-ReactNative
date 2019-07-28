@@ -31,7 +31,9 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		flexDirection: "row",
-		padding: 16
+		padding: 16,
+		borderColor: "#ddd",
+		borderBottomWidth: 1
 	},
 	titleContainer: {
 		flex: 1,

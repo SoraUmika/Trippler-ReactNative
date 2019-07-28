@@ -9,7 +9,6 @@ import React, { FC } from "react";
 import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import Swipeable from "react-native-gesture-handler/Swipeable";
-import Color from "color";
 
 import ArrowUpward from "../../svg/ArrowUpward";
 import CenterView from "../../components/CenterView";
@@ -68,13 +67,12 @@ const CollectionItem: FC<Props> = props => {
 					pinned
 				)
 			}
+			overshootFriction={8}
 		>
 			<View
 				style={{
 					...styles.root,
-					backgroundColor: Color(backgroundColor)
-						.darken(0.05)
-						.string()
+					backgroundColor: backgroundColor
 				}}
 			>
 				<View style={styles.container}>
@@ -108,9 +106,8 @@ const CollectionItem: FC<Props> = props => {
 
 const styles = StyleSheet.create({
 	root: {
-		margin: 16,
 		height: 80,
-		marginTop: 0
+		paddingHorizontal: 16
 	},
 	container: {
 		flex: 1,
@@ -118,8 +115,10 @@ const styles = StyleSheet.create({
 	},
 	avatar: {
 		backgroundColor: "rgba(0, 0, 0, 0.5)",
-		width: 80,
-		height: 80
+		width: 60,
+		height: 60,
+		borderRadius: 30,
+		margin: 10
 	},
 	description: {
 		flex: 1,
@@ -170,7 +169,6 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 		alignItems: "center",
 		flexDirection: "row",
-		marginBottom: 16,
 		marginRight: 16
 	},
 	rightActionDeleteText: {

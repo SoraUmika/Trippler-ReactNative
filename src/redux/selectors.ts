@@ -1,6 +1,8 @@
 import State from "./state";
 import { createSelector } from "reselect";
 import Color from "color";
+import getCompareFunc from "./businessSortCompare";
+import { sort } from "../util";
 
 export const getAccentColor = (state: State) => state.theme.accentColor;
 
@@ -20,6 +22,8 @@ export const getCollectionShowPin = (state: State) => state.collection.showPin;
 
 export const getCollectionSortMethod = (state: State) => state.collection.sortMethod;
 
+export const getCollectionSearchInput = (state: State) => state.collection.searchInput;
+
 export const getCurrentRecomData = createSelector(
 	getBusinessData,
 	getRecomFeed,
@@ -36,5 +40,25 @@ export const getForegroundColor = createSelector(
 			.array();
 		const bgDelta = channels[0] * 0.299 + channels[1] * 0.587 + channels[2] * 0.114;
 		return 255 - bgDelta < nThreshold ? "#000000" : "#ffffff";
+	}
+);
+
+export const getAllCollectionItems = createSelector(
+	getCollectionItems,
+	getCollectionItemsPinned,
+	getBusinessData,
+	getCollectionSortMethod,
+	getCollectionShowPin,
+	getCollectionSearchInput,
+	(items, pinnedItems, businesses, sortMethod, showPin, search): [string[], number] => {
+		let pinnedItemsCopy = showPin ? [...pinnedItems] : [];
+		let itemsCopy = showPin ? [...items] : [...pinnedItems, ...items];
+		const isOrdered = getCompareFunc(sortMethod, businesses);
+		sort(pinnedItemsCopy, isOrdered);
+		sort(itemsCopy, isOrdered);
+		let allItems = [...pinnedItemsCopy, ...itemsCopy].filter(val =>
+			businesses[val].name.toLowerCase().includes(search.toLowerCase())
+		);
+		return [allItems, pinnedItemsCopy.length];
 	}
 );

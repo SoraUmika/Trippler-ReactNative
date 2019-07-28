@@ -10,11 +10,15 @@ export default function reducer(
 	state: States.default = initState,
 	action: RootAction
 ): States.default {
-	console.log(Object.entries(action).map((val: string[]) => val.join(" = ")).join(", "));
+	console.log(
+		Object.entries(action)
+			.map((val: string[]) => val.join(" = "))
+			.join(", ")
+	);
 	return {
 		theme: theme(state.theme, action),
 		businesses: businesses(state.businesses, action),
-		collection: collection(state.collection, action, state.businesses),
+		collection: collection(state.collection, action),
 		recommendation: recommendation(state.recommendation, action)
 	};
 }

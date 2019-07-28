@@ -38,8 +38,8 @@ const styles = StyleSheet.create({
 		backgroundColor: "white",
 		width: 170,
 		height: 66,
-		top: dimension.height(0.08),
-		left: dimension.width() - 186,
+		top: dimension.height(0.09),
+		left: dimension.width() - 170 - 8,
 		borderRadius: 8,
 		padding: 8
 	},
