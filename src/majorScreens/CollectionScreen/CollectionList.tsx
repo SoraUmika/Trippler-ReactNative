@@ -5,7 +5,7 @@
  * TODO edge transparency.
  */
 import React, { FC, memo } from "react";
-import { FlatList } from "react-native";
+import { FlatList, View } from "react-native";
 import { useSelector } from "react-redux";
 import {
 	getCollectionItems,
@@ -23,16 +23,24 @@ const CollectionList: FC = () => {
 
 	return (
 		<FlatList
-			// data={[...(showPin ? itemsPinned : []), ...items]}
-			data={[...(showPin ? itemsPinned : []), ...items, ...items, ...items, ...items]}
+			data={[...(showPin ? itemsPinned : []), ...items]}
+			// data={[...(showPin ? itemsPinned : []), ...items, ...items, ...items, ...items]}
 			renderItem={({ item, index }) => {
 				if (showPin && index < pinnedItemLength) {
 					return <CollectionItem businessId={item} pinned showPin />;
 				}
 				return <CollectionItem businessId={item} showPin={showPin} />;
 			}}
-			// keyExtractor={item => item}
-			keyExtractor={(item, index) => `${index}`}
+			keyExtractor={item => item}
+			// keyExtractor={(item, index) => `${index}`}
+			ItemSeparatorComponent={() => {
+				return <View style={{
+					height: 1,
+					width: "100%",
+					backgroundColor: "#f0f0f0",
+					marginVertical: 8
+				}}/>
+			}}
 		/>
 	);
 };
