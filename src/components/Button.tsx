@@ -12,7 +12,7 @@
 import React, { Component } from "react";
 import { StyleSheet, View, StyleProp, ViewStyle } from "react-native";
 
-import { objectsEqual } from "../util";
+import { objectsEqual } from "../util/object";
 
 interface Props {
 	color: string;

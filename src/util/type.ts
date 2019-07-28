@@ -1,0 +1,1 @@
+export type StrObj<T> = { [index: string]: T };

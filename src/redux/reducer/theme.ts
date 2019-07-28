@@ -1,6 +1,6 @@
 import { Theme } from "../state";
 import RootAction from "../action";
-import { update } from "../../util";
+import { update } from "../../util/object";
 
 export default function theme(state: Theme, action: RootAction): Theme {
 	switch (action.type) {

@@ -1,6 +1,7 @@
 import { Collection } from "../state";
 import RootAction from "../action";
-import { arrRemoved, update } from "../../util";
+import { update } from "../../util/object";
+import { arrRemoved } from "../../util/array";
 
 export default function collection(state: Collection, action: RootAction): Collection {
 	switch (action.type) {

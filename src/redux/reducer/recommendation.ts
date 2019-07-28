@@ -1,6 +1,6 @@
 import { Recommendation } from "../state";
 import RootAction from "../action";
-import { update } from "../../util";
+import { update } from "../../util/object";
 
 export default function recommendation(state: Recommendation, action: RootAction): Recommendation {
 	switch (action.type) {

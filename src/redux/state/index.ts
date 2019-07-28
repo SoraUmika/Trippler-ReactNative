@@ -1,6 +1,6 @@
 import Business from "./Business";
 import { SortMethod } from "../businessSortCompare";
-import { StrObj } from "../../util";
+import { StrObj } from "../../util/type";
 import Filter from "./Filter";
 
 export default interface State {

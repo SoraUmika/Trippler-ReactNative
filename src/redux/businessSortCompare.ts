@@ -1,5 +1,6 @@
 import Business from "./state/Business";
-import { IsOrderedCompare, StrObj } from "../util";
+import { StrObj } from "../util/type";
+import { IsOrderedCompare } from "../util/array";
 
 export type SortMethod = "name" | "rating" | "avgRating";
 

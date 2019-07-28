@@ -2,7 +2,7 @@ import State from "./state";
 import { createSelector } from "reselect";
 import Color from "color";
 import getCompareFunc from "./businessSortCompare";
-import { sort } from "../util";
+import { sort } from "../util/array";
 
 export const getAccentColor = (state: State) => state.theme.accentColor;
 
