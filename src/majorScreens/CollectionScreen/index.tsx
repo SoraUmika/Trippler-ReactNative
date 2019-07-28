@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
 		flex: 1
 	},
 	list: {
-		flex: 8
+		flex: 10
 	},
 	actionIcon: {
 		margin: 8

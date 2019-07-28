@@ -23,16 +23,16 @@ const CollectionList: FC = () => {
 
 	return (
 		<FlatList
-			data={[...(showPin ? itemsPinned : []), ...items]}
-			// data={[...(showPin ? itemsPinned : []), ...items, ...items, ...items, ...items, ...items]}
+			// data={[...(showPin ? itemsPinned : []), ...items]}
+			data={[...(showPin ? itemsPinned : []), ...items, ...items, ...items, ...items]}
 			renderItem={({ item, index }) => {
 				if (showPin && index < pinnedItemLength) {
 					return <CollectionItem businessId={item} pinned showPin />;
 				}
 				return <CollectionItem businessId={item} showPin={showPin} />;
 			}}
-			keyExtractor={item => item}
-			// keyExtractor={(item, index) => `${index}`}
+			// keyExtractor={item => item}
+			keyExtractor={(item, index) => `${index}`}
 		/>
 	);
 };
