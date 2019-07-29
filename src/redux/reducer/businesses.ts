@@ -1,3 +1,6 @@
+/**
+ * Provide sub reducer for the 'businesses' sub state.
+ */
 import { Businesses } from "../state";
 import RootAction from "../action";
 

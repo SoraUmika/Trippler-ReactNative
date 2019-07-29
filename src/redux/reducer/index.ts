@@ -1,3 +1,9 @@
+/**
+ * Provide the reducer.
+ * 
+ * This is the index file for the root reducer.
+ * All sub reducers have their own individual files.
+ */
 import * as States from "../state";
 import RootAction from "../action";
 import initState from "../initState";
@@ -10,7 +16,7 @@ export default function reducer(
 	state: States.default = initState,
 	action: RootAction
 ): States.default {
-	console.log(
+	console.log(  //! for debug.
 		Object.entries(action)
 			.map((val: string[]) => val.join(" = "))
 			.join(", ")

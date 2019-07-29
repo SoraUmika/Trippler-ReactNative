@@ -1,3 +1,6 @@
+/**
+ * Provide sub reducer for the 'theme' sub state.
+ */
 import { Theme } from "../state";
 import RootAction from "../action";
 import { update } from "../../util/object";
