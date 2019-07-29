@@ -1,3 +1,6 @@
+/**
+ * Provides selectors.
+ */
 import State from "./state";
 import { createSelector } from "reselect";
 import Color from "color";
@@ -35,6 +38,8 @@ export const getCurrentRecomData = createSelector(
 	(businessData, recomFeed, index) => businessData[recomFeed[index]]
 );
 
+// Return black or white depend on the backgroundColor state.
+//! Idk how it works btw :3
 export const getForegroundColor = createSelector(
 	getBackgroundColor,
 	bg => {
@@ -52,6 +57,7 @@ export const getAreBusinessesOpen = createSelector(
 	businesses => {
 		let openData: { [index: string]: boolean } = {};
 		const [currentTime, currentDay] = getCurrentDate();
+		// Fill up openData with map between business id and a boolean.
 		Object.entries(businesses).forEach(
 			([id, data]) => (openData[id] = isBusinessOpen(data, currentTime, currentDay))
 		);
@@ -78,18 +84,27 @@ export const getAllCollectionItems = createSelector(
 		filter,
 		openData
 	): [string[], number] => {
+		// If showPin is false, then no pinned item is rendered, so it is an empty array.
+		// All of the pinned item is then included in normal items.
 		let pinnedItemsCopy = showPin ? [...pinnedItems] : [];
 		let itemsCopy = showPin ? [...items] : [...pinnedItems, ...items];
+
 		const isOrdered = getCompareFunc(sortMethod, businesses);
+
 		sort(pinnedItemsCopy, isOrdered);
 		sort(itemsCopy, isOrdered);
+
 		let allItems = [...pinnedItemsCopy, ...itemsCopy].filter(val => {
 			const data = businesses[val];
 			const isOpen = openData[val];
 			return (
+				// Filtering using search input,
 				data.name.toLowerCase().includes(search.toLowerCase()) &&
+				// Filtering business status.
 				(filter.status == "all" || (filter.status == "open" ? isOpen : !isOpen)) &&
+				// Filtering rating.
 				(filter.rating == "all" || filter.rating.include(data.rating)) &&
+				// Filtering ratingNum.
 				(filter.ratingNum == "all" || filter.ratingNum.include(data.ratingNum))
 			);
 		});

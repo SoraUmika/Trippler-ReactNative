@@ -1,3 +1,6 @@
+/**
+ * Stores the initial value of store state.
+ */
 import State from "./state";
 import testData from "./testData";
 import { NumberRange } from "../util/type";
