@@ -33,11 +33,11 @@ export default class Button_ extends Component<Props, State> {
 
 	onTouchDown = () => {
 		this.setState({ down: true });
-		this.props.onPress && this.props.onPress();
 	};
 
 	onTouchUp = () => {
 		this.setState({ down: false });
+		this.props.onPress && this.props.onPress();
 	};
 
 	render() {

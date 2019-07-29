@@ -4,12 +4,13 @@ import { useSelector, useDispatch } from "react-redux";
 
 import Button from "../../components/Button";
 import BookmarkBorder from "../../svg/BookmarkBorder";
-import CircleOff from "../../svg/CircleOff";
+import ArrowForward from "../../svg/ArrowForward";
 import { getAccentColor } from "../../redux/selectors";
 import { toNextRecom } from "../../redux/action/actions";
 
 const Action: FC = () => {
 	const accentColor = useSelector(getAccentColor);
+	const dispatch = useDispatch();
 
 	return (
 		<View style={styles.root}>
@@ -19,9 +20,14 @@ const Action: FC = () => {
 					<Text style={styles.buttonText}>Save</Text>
 				</View>
 			</Button>
-			<Button height="100%" color="black" style={styles.button}>
+			<Button
+				height="100%"
+				color="black"
+				style={styles.button}
+				onPress={() => dispatch(toNextRecom())}
+			>
 				<View style={styles.buttonContent}>
-					<CircleOff fill="white" />
+					<ArrowForward fill="white" />
 					<Text style={styles.buttonText}>Next</Text>
 				</View>
 			</Button>
