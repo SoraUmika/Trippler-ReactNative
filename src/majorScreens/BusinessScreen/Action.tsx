@@ -42,8 +42,8 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		justifyContent: "space-around",
 		backgroundColor: "#eee",
-		borderTopLeftRadius: 16,
-		borderTopRightRadius: 16
+		borderTopLeftRadius: 24,
+		borderTopRightRadius: 24
 	},
 	button: {
 		flex: 1,

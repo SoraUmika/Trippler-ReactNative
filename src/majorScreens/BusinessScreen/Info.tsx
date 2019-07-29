@@ -58,8 +58,8 @@ const styles = StyleSheet.create({
 	root: {
 		width: "100%",
 		backgroundColor: "white",
-		borderTopLeftRadius: 16,
-		borderTopRightRadius: 16,
+		borderTopLeftRadius: 24,
+		borderTopRightRadius: 24,
 		padding: 16
 	},
 	businessName: {
