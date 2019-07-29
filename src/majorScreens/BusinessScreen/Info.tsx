@@ -9,8 +9,8 @@ interface Props{
 const BusinessInfo: FC<Props> = (props) =>{
 
     return(
-        <View style={styles.layoutRule}>
-          <Text style={styles.businessName}> {props.currentBusiness.name} </Text>
+        <View style={styles.root}>
+          <Text style={styles.businessName}>{props.currentBusiness.name}</Text>
           <Text style={styles.ratings}> {props.currentBusiness.rating} {props.currentBusiness.ratingNum} </Text>
           <Text style={styles.address}> {props.currentBusiness.address} </Text>
           <Text style={styles.hours}> {props.currentBusiness.hours[0].toString()} </Text>
@@ -20,34 +20,32 @@ const BusinessInfo: FC<Props> = (props) =>{
 }
 
 const styles = StyleSheet.create({
-  layoutRule: {
-    flexDirection: 'column',
-    alignItems: 'center'
+  root: {
+    width: "100%",
+		backgroundColor: "white",
+		borderTopLeftRadius: 16,
+    borderTopRightRadius: 16,
+    padding: 16
   },
 
   businessName: {
-    fontSize: 25,
-    fontStyle: 'italic',
-    color: 'white',
-    marginBottom: 8
+    fontSize: 40,
+    fontWeight: "bold"
   },
 
   address: {
     fontSize: 15,
     fontStyle: 'normal',
-    color: 'white'
   },
 
   ratings: {
     fontSize: 15,
     fontStyle: 'normal',
-    color: 'white'
   },
 
   hours: {
     fontSize: 15,
     fontStyle: 'normal',
-    color: 'white'
   }
 
 })
