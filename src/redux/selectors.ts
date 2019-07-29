@@ -83,12 +83,14 @@ export const getAllCollectionItems = createSelector(
 		const isOrdered = getCompareFunc(sortMethod, businesses);
 		sort(pinnedItemsCopy, isOrdered);
 		sort(itemsCopy, isOrdered);
+		console.log(filter.status);
 		let allItems = [...pinnedItemsCopy, ...itemsCopy].filter(val => {
 			const data = businesses[val];
 			const isOpen = openData[val];
+			console.log(data.name, isOpen);
 			return (
 				data.name.toLowerCase().includes(search.toLowerCase()) &&
-				(filter.status == "all" || filter.status == "open" ? isOpen : !isOpen) &&
+				(filter.status == "all" || (filter.status == "open" ? isOpen : !isOpen)) &&
 				(filter.rating == "all" || filter.rating.include(data.rating)) &&
 				(filter.ratingNum == "all" || filter.ratingNum.include(data.ratingNum))
 			);

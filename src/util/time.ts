@@ -24,6 +24,9 @@ export class TimeRange extends Range<Time> {
 			timeCompare
 		);
 	}
+	toString() {
+		return timeToString(this.from) + " - " + timeToString(this.to);
+	}
 }
 
 export type WeekDayNum = 0 | 1 | 2 | 3 | 4 | 5 | 6;
