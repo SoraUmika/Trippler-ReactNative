@@ -1,9 +1,13 @@
+/**
+ * Provide the transitionConfig option value for the 
+ * react navigation's stack navigator.
+ */
 import { TransitionConfig } from "react-navigation";
 import { Animated, Easing } from "react-native";
 
 export type TransitionTypes = "slideUp" | "none";
 
-const transitionCOnfig = (): TransitionConfig => {
+const transitionConfig = (): TransitionConfig => {
 	return {
 		transitionSpec: {
 			duration: 750,
@@ -38,4 +42,4 @@ const transitionCOnfig = (): TransitionConfig => {
 	};
 };
 
-export default transitionCOnfig;
+export default transitionConfig;

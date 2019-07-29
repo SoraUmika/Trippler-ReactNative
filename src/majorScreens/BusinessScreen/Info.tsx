@@ -1,6 +1,5 @@
 import React, {FC} from 'react'
 import { View, StyleSheet, Text, TouchableHighlight } from 'react-native'
-import {timeToString} from "../../util/time";
 import Business from "../../redux/state/Business";
 
 interface Props{
