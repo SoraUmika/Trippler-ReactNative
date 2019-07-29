@@ -17,7 +17,11 @@ export function timeToString(time: Time) {
 }
 
 export class TimeRange extends Range<Time> {
-	constructor(from: Time, to: Time) {
-		super(from, to, timeCompare);
+	constructor(fromHour: number, fromMinute: number, toHour: number, toMinute: number) {
+		super(
+			{ hour: fromHour, minute: fromMinute },
+			{ hour: toHour, minute: toMinute },
+			timeCompare
+		);
 	}
 }

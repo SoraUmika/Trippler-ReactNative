@@ -1,3 +1,5 @@
+import { TimeRange } from "../../util/time";
+
 export type BusinessStatus = "open" | "close";
 
 export default interface Business {
@@ -7,7 +9,8 @@ export default interface Business {
 	rating: number;
 	ratingNum: number;
 	address: string;
-	hours: [string, string];
+	hours: TimeRange[];
+	days: (1 | 2 | 3 | 4 | 5 | 6 | 7)[];
 	gallery: [
 		{
 			url: string;
