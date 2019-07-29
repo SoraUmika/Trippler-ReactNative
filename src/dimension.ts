@@ -31,7 +31,7 @@ class DimensionGetter {
      * @example width(0.25)
      * 
      * @param [multiplier=1] The number that multiplied to the width.
-     * @return The width of window multiplied by the multiplier. 
+     * @returns The width of window multiplied by the multiplier. 
      */
 	width(multiplier: number = 1) {
 		return this.windowWidth * multiplier;
@@ -46,7 +46,7 @@ class DimensionGetter {
      * @example height(0.25)
      * 
      * @param [multiplier=1] The number that multiplied to the height.
-     * @return The height of window multiplied by the multiplier. 
+     * @returns The height of window multiplied by the multiplier. 
      */
 	height(multiplier: number = 1) {
 		return this.windowHeight * multiplier;
