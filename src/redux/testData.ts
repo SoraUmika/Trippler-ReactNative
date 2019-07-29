@@ -1,3 +1,7 @@
+/**
+ * Provides dummy business data.
+ * It is used in initState.ts, as part of initial store state.
+ */
 import { Businesses } from "./state";
 import { TimeRange } from "../util/time";
 
