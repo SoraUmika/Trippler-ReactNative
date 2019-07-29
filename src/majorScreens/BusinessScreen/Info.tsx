@@ -1,53 +1,103 @@
-import React, {FC} from 'react'
-import { View, StyleSheet, Text, TouchableHighlight } from 'react-native'
+import React, { FC } from "react";
+import { View, StyleSheet, Text } from "react-native";
+import { useSelector } from "react-redux";
+
 import Business from "../../redux/state/Business";
+import Star from "../../svg/Star";
+import StarHalf from "../../svg/StarHalf";
+import StarBorder from "../../svg/StarBorder";
+import DashLine from "../../components/DashLine";
+import { getAreBusinessesOpen } from "../../redux/selectors";
 
-interface Props{
-  currentBusiness: Business
+interface Props {
+	currentBusiness: Business;
 }
 
-const BusinessInfo: FC<Props> = (props) =>{
+const BusinessInfo: FC<Props> = props => {
+	const {
+		currentBusiness: { name, rating, ratingNum, hours, id }
+	} = props;
+	const isOpen = useSelector(getAreBusinessesOpen)[id];
 
-    return(
-        <View style={styles.root}>
-          <Text style={styles.businessName}>{props.currentBusiness.name}</Text>
-          <Text style={styles.ratings}> {props.currentBusiness.rating} {props.currentBusiness.ratingNum} </Text>
-          <Text style={styles.address}> {props.currentBusiness.address} </Text>
-          <Text style={styles.hours}> {props.currentBusiness.hours[0].toString()} </Text>
-        </View>    
-    )    
+	return (
+		<View style={styles.root}>
+			<Text style={styles.businessName}>{name}</Text>
+			<View style={styles.ratingContainer}>
+				{Stars(rating)}
+				<Text style={styles.ratingText}>{rating}</Text>
+				<Text style={styles.ratingNumText}> ({ratingNum})</Text>
+			</View>
+			<Text style={styles.descriptionText}>
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+			</Text>
+			<DashLine />
+			<View style={styles.statusContainer}>
+				<Text style={styles.statusText}>{hours[0].toString()}</Text>
+				<Text style={styles.statusText}>Currently {isOpen ? "open" : "close"}</Text>
+			</View>
+		</View>
+	);
+};
 
-}
+const Stars = (rating: number) => {
+	let stars: JSX.Element[] = [];
+	for (let n = 0; n < 5; n++) {
+		if (rating >= 1) {
+			stars.push(<Star key={n} fill="#404040" />);
+		} else if (rating <= 0) {
+			stars.push(<StarBorder key={n} fill="#404040" />);
+		} else {
+			stars.push(<StarHalf key={n} fill="#404040" />);
+		}
+		rating -= 1;
+	}
+	return stars;
+};
 
 const styles = StyleSheet.create({
-  root: {
-    width: "100%",
+	root: {
+		width: "100%",
 		backgroundColor: "white",
 		borderTopLeftRadius: 16,
-    borderTopRightRadius: 16,
-    padding: 16
-  },
+		borderTopRightRadius: 16,
+		padding: 16
+	},
+	businessName: {
+		fontSize: 40,
+		fontWeight: "bold"
+	},
+	ratingContainer: {
+		flexDirection: "row",
+		alignItems: "center",
+		marginVertical: 16
+	},
+	ratingText: {
+		marginLeft: 24,
+		fontSize: 16,
+		opacity: 0.75,
+		fontStyle: "italic",
+		fontWeight: "500"
+	},
+	ratingNumText: {
+		fontSize: 16,
+		opacity: 0.5,
+		fontStyle: "italic"
+	},
+	descriptionText: {
+		fontSize: 16,
+		fontWeight: "500",
+		opacity: 0.75,
+		marginBottom: 16
+	},
+	statusContainer: {
+		marginTop: 16,
+		flexDirection: "row"
+	},
+	statusText: {
+		width: "50%",
+		fontSize: 16,
+		opacity: 0.5
+	}
+});
 
-  businessName: {
-    fontSize: 40,
-    fontWeight: "bold"
-  },
-
-  address: {
-    fontSize: 15,
-    fontStyle: 'normal',
-  },
-
-  ratings: {
-    fontSize: 15,
-    fontStyle: 'normal',
-  },
-
-  hours: {
-    fontSize: 15,
-    fontStyle: 'normal',
-  }
-
-})
-
-export default BusinessInfo
+export default BusinessInfo;

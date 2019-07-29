@@ -14,21 +14,19 @@ const BusinessImage: FC = props => {
 	const dispatch = useDispatch();
 
 	return (
-		<View style={{ flex: 1 }}>
-			<TouchableHighlight
-				style={{ flex: 1 }}
-				onPress={() => dispatch({ type: "recommendation/NEXT_RECOMMENDATION" })}
+		<View
+			style={{ flex: 1 }}
+			// onTouchStart={() => dispatch({ type: "recommendation/NEXT_RECOMMENDATION" })}
+		>
+			<ImageBackground
+				style={styles.imageBackground}
+				imageStyle={styles.imageStyle}
+				source={{
+					uri: currentBusiness.gallery[0].url
+				}}
 			>
-				<ImageBackground
-					style={styles.imageBackground}
-					imageStyle={styles.imageStyle}
-					source={{
-						uri: currentBusiness.gallery[0].url
-					}}
-				>
-					<BusinessInfo currentBusiness={currentBusiness} />
-				</ImageBackground>
-			</TouchableHighlight>
+				<BusinessInfo currentBusiness={currentBusiness} />
+			</ImageBackground>
 		</View>
 	);
 };
