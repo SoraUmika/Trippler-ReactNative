@@ -1,3 +1,6 @@
+/**
+ * Individual actions are defined here.
+ */
 import { createStandardAction } from "typesafe-actions";
 import { SortMethod } from "../businessSortCompare";
 
