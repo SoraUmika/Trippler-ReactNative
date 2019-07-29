@@ -25,3 +25,10 @@ export class TimeRange extends Range<Time> {
 		);
 	}
 }
+
+export type WeekDayNum = 0 | 1 | 2 | 3 | 4 | 5 | 6;
+
+export function getCurrentDate(): [Time, WeekDayNum] {
+	let today = new Date();
+	return [{ hour: today.getHours(), minute: today.getMinutes() }, today.getDay() as WeekDayNum];
+}
