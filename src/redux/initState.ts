@@ -1,5 +1,6 @@
 import State from "./state";
 import testData from "./testData";
+import { NumberRange } from "../util/type";
 
 const init_state: State = {
 	theme: {

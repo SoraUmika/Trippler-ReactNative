@@ -64,11 +64,8 @@ export const getAllCollectionItems = createSelector(
 			return (
 				data.name.toLowerCase().includes(search.toLowerCase()) &&
 				(filter.status == "all" || filter.status == data.status) &&
-				(filter.rating == "all" ||
-					(filter.rating[0] <= data.rating && data.rating <= filter.rating[1])) &&
-				(filter.ratingNum == "all" ||
-					(filter.ratingNum[0] <= data.ratingNum &&
-						data.ratingNum <= filter.ratingNum[1]))
+				(filter.rating == "all" || filter.rating.include(data.rating)) &&
+				(filter.ratingNum == "all" || filter.ratingNum.include(data.ratingNum))
 			);
 		});
 		return [allItems, pinnedItemsCopy.length];
