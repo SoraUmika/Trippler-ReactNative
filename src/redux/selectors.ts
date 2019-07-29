@@ -3,6 +3,8 @@ import { createSelector } from "reselect";
 import Color from "color";
 import getCompareFunc from "./businessSortCompare";
 import { sort } from "../util/array";
+import { getCurrentDate } from "../util/time";
+import { isBusinessOpen } from "./state/Business";
 
 export const getAccentColor = (state: State) => state.theme.accentColor;
 
@@ -45,6 +47,18 @@ export const getForegroundColor = createSelector(
 	}
 );
 
+export const getAreBusinessesOpen = createSelector(
+	getBusinessData,
+	businesses => {
+		let openData: { [index: string]: boolean } = {};
+		const [currentTime, currentDay] = getCurrentDate();
+		Object.entries(businesses).forEach(
+			([id, data]) => (openData[id] = isBusinessOpen(data, currentTime, currentDay))
+		);
+		return openData;
+	}
+);
+
 export const getAllCollectionItems = createSelector(
 	getCollectionItems,
 	getCollectionItemsPinned,
@@ -53,7 +67,17 @@ export const getAllCollectionItems = createSelector(
 	getCollectionShowPin,
 	getCollectionSearchInput,
 	getCollectionFilter,
-	(items, pinnedItems, businesses, sortMethod, showPin, search, filter): [string[], number] => {
+	getAreBusinessesOpen,
+	(
+		items,
+		pinnedItems,
+		businesses,
+		sortMethod,
+		showPin,
+		search,
+		filter,
+		openData
+	): [string[], number] => {
 		let pinnedItemsCopy = showPin ? [...pinnedItems] : [];
 		let itemsCopy = showPin ? [...items] : [...pinnedItems, ...items];
 		const isOrdered = getCompareFunc(sortMethod, businesses);
@@ -61,9 +85,10 @@ export const getAllCollectionItems = createSelector(
 		sort(itemsCopy, isOrdered);
 		let allItems = [...pinnedItemsCopy, ...itemsCopy].filter(val => {
 			const data = businesses[val];
+			const isOpen = openData[val];
 			return (
 				data.name.toLowerCase().includes(search.toLowerCase()) &&
-				(filter.status == "all" || filter.status == data.status) &&
+				(filter.status == "all" || filter.status == "open" ? isOpen : !isOpen) &&
 				(filter.rating == "all" || filter.rating.include(data.rating)) &&
 				(filter.ratingNum == "all" || filter.ratingNum.include(data.ratingNum))
 			);

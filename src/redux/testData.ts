@@ -5,7 +5,6 @@ const data: Businesses = {
 	bqq: {
 		id: "bbq",
 		name: "Gyu-Kaku Japanese BBQ",
-		status: "open",
 		rating: 4.9,
 		ratingNum: 623,
 		address: "40-52 Main St floor 2, Flushing, NY 11354",
@@ -23,7 +22,6 @@ const data: Businesses = {
 	joes: {
 		id: "joes",
 		name: "Joe's Shanghai",
-		status: "open",
 		rating: 4.6,
 		ratingNum: 86,
 		address: "136-21 37th Avenue, Flushing, NY 11354",
@@ -39,7 +37,6 @@ const data: Businesses = {
 	dump: {
 		id: "dump",
 		name: "Dumpling Galaxy",
-		status: "open",
 		rating: 4.0,
 		ratingNum: 442,
 		address: "42-35 Main St, Flushing, NY 11355",
@@ -56,7 +53,6 @@ const data: Businesses = {
 	loc2: {
 		id: "loc2",
 		name: "Spring Shabu-Shabu",
-		status: "open",
 		rating: 4.5,
 		ratingNum: 85,
 		address: "136-20 38th Ave 2nd Floor, Flushing, NY 1134",
@@ -74,12 +70,11 @@ const data: Businesses = {
 	loc1: {
 		id: "loc1",
 		name: "Cha Cha Tang",
-		status: "open",
 		rating: 4.3,
 		ratingNum: 1232,
 		address: "45 Mott St, New York, NY 10013",
 		hours: [new TimeRange(7, 0, 22, 0)],
-		days: [1, 2, 3, 4, 5, 6, 7],
+		days: [1, 2, 3, 4, 5, 6, 0],
 		gallery: [
 			{
 				url:
@@ -91,12 +86,11 @@ const data: Businesses = {
 	test: {
 		id: "test",
 		name: "Ramen store",
-		status: "open",
 		rating: 4.3,
 		ratingNum: 123,
 		address: "111 ST NY, 11223",
 		hours: [new TimeRange(7, 0, 20, 0)],
-		days: [4, 5, 6, 7],
+		days: [4, 5, 6, 0],
 		gallery: [
 			{
 				url: "https://cdn.dribbble.com/users/371094/screenshots/3884115/ramen.jpg",
@@ -107,12 +101,11 @@ const data: Businesses = {
 	hello: {
 		id: "hello",
 		name: "Donut store",
-		status: "close",
 		rating: 3.1,
 		ratingNum: 10,
 		address: "222 ST NY, 12031",
 		hours: [new TimeRange(9, 0, 17, 0)],
-		days: [2, 3, 4, 5, 6, 7],
+		days: [2, 3, 4, 5, 6, 0],
 		gallery: [
 			{
 				url: "https://exploremcallen.com/wp-content/uploads/2018/05/mcallen-donut-day.jpg",
@@ -123,7 +116,6 @@ const data: Businesses = {
 	":)": {
 		id: ":)",
 		name: "Chinese food store",
-		status: "open",
 		rating: 4.7,
 		ratingNum: 2034,
 		address: "333 ST NY, 11223",

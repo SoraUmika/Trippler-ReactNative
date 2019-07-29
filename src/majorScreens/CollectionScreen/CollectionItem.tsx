@@ -14,7 +14,12 @@ import ArrowUpward from "../../svg/ArrowUpward";
 import CenterView from "../../components/CenterView";
 import DeleteOutline from "../../svg/DeleteOutline";
 import ArrowDownward from "../../svg/ArrowDownward";
-import { getBusinessData, getAccentColor, getBackgroundColor } from "../../redux/selectors";
+import {
+	getBusinessData,
+	getAccentColor,
+	getBackgroundColor,
+	getAreBusinessesOpen
+} from "../../redux/selectors";
 import { removedCollectItem, pinCollectItem, unPinCollectItem } from "../../redux/action/actions";
 
 interface Props {
@@ -52,6 +57,7 @@ const RightAction = (
 const CollectionItem: FC<Props> = props => {
 	const { businessId, pinned, showPin } = props;
 	const business = useSelector(getBusinessData)[businessId];
+	const isOpen = useSelector(getAreBusinessesOpen)[businessId];
 	const accentColor = useSelector(getAccentColor);
 	const backgroundColor = useSelector(getBackgroundColor);
 	const dispatch = useDispatch();
@@ -90,7 +96,9 @@ const CollectionItem: FC<Props> = props => {
 						</CenterView>
 						<View style={styles.statContainer}>
 							<CenterView main>
-								<Text style={styles.status}>Currently {business.status}</Text>
+								<Text style={styles.status}>
+									Currently {isOpen ? "open" : "close"}
+								</Text>
 							</CenterView>
 							<View style={styles.ratingContainer}>
 								<Text style={styles.ratingNum}>({business.ratingNum})</Text>
