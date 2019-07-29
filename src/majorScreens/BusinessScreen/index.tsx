@@ -1,33 +1,38 @@
-import React, {Component, FC} from 'react'
-import { View, StyleSheet } from 'react-native'
-import BusinessImage from './Image'
+import React, { FC } from "react";
+import { View, StyleSheet } from "react-native";
 
-const BusinessScreen: FC = props => {
-  
-  return(
-    <View style={styles.formatRules}>
+import Data from "./Data";
+import Action from "./Action";
 
-      <View style={styles.ImageContainer}>
-        <BusinessImage/>
-      </View>
-        
-    </View>
-    )
-}
+const BusinessScreen: FC = () => {
+	return (
+		<View style={styles.formatRules}>
+			<View style={styles.dataContainer}>
+				<Data />
+			</View>
+			<View style={styles.actionContainer}>
+				<Action />
+			</View>
+		</View>
+	);
+};
 
 const styles = StyleSheet.create({
-  formatRules: {
-    flexDirection: 'column',
-    flex: 1
+	formatRules: {
+		flexDirection: "column",
+		flex: 1
+	},
 
-  },
+	dataContainer: {
+		flex: 9,
+		backgroundColor: "grey",
+		justifyContent: "center",
+		borderRadius: 12
+	},
 
-  ImageContainer: {
-    flex: 1,
-    backgroundColor: 'grey',
-    justifyContent: 'center',
-    borderRadius: 12
-  },
-}) 
+	actionContainer: {
+		flex: 1
+	}
+});
 
-export default BusinessScreen
+export default BusinessScreen;

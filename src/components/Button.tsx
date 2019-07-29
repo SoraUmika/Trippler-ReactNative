@@ -45,7 +45,7 @@ export default class Button_ extends Component<Props, State> {
 		const { down } = this.state;
 		return (
 			<View
-				style={[style, { width: width, height: height, flex: 0 }]}
+				style={[styles.root, { width: width, height: height, flex: 0 }, style]}
 				onTouchStart={this.onTouchDown}
 				onTouchEnd={this.onTouchUp}
 			>
@@ -72,6 +72,9 @@ export default class Button_ extends Component<Props, State> {
 }
 
 const styles = StyleSheet.create({
+	root: {
+		marginTop: 4
+	},
 	button: {
 		borderRadius: 8,
 		zIndex: 2
