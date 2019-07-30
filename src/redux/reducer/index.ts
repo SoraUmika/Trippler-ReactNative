@@ -11,6 +11,7 @@ import theme from "./theme";
 import businesses from "./businesses";
 import collection from "./collection";
 import recommendation from "./recommendation";
+import app from "./app"
 
 export default function reducer(
 	state: States.default = initState,
@@ -25,6 +26,7 @@ export default function reducer(
 		theme: theme(state.theme, action),
 		businesses: businesses(state.businesses, action),
 		collection: collection(state.collection, action),
-		recommendation: recommendation(state.recommendation, action)
+		recommendation: recommendation(state.recommendation, action),
+		app: app(state.app, action)
 	};
 }

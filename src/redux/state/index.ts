@@ -12,6 +12,7 @@ export default interface State {
 	businesses: Businesses;
 	collection: Collection;
 	recommendation: Recommendation;
+	app: App;
 }
 
 // sub states below.
@@ -35,4 +36,8 @@ export interface Collection {
 export interface Recommendation {
 	feeds: string[];
 	currentIndex: number;
+}
+
+export interface App {
+	fontLoaded: boolean;
 }

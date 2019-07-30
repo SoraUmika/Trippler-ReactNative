@@ -23,3 +23,5 @@ export const removedCollectItem = createStandardAction("collection/REMOVED_ITEM"
 export const toggleCollectShowPin = createStandardAction("collection/TOGGLE_SHOW_PIN")();
 
 export const setCollectSearchInput = createStandardAction("collection/SET_SEARCH_INPUT")<string>();
+
+export const fontLoaded = createStandardAction("app/FONT_LOADED")();

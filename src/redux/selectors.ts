@@ -31,6 +31,8 @@ export const getCollectionSearchInput = (state: State) => state.collection.searc
 
 export const getCollectionFilter = (state: State) => state.collection.filter;
 
+export const getIsFontLoaded = (state: State) => state.app.fontLoaded;
+
 export const getCurrentRecomData = createSelector(
 	getBusinessData,
 	getRecomFeed,

@@ -26,6 +26,9 @@ const init_state: State = {
 	recommendation: {
 		feeds: ["bqq", "joes", "dump", "loc2", "test", "hello", ":)", "loc1"],
 		currentIndex: 0
+	},
+	app: {
+		fontLoaded: false
 	}
 };
 
