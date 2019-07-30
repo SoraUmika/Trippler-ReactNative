@@ -5,8 +5,8 @@
  * TODO add selection mode.
  * TODO add sort functionality.
  */
-import React, { FC, useState } from "react";
-import { StyleSheet, View, TouchableOpacity } from "react-native";
+import React, { FC, useState, memo } from "react";
+import { StyleSheet, View, TouchableOpacity, createElement } from "react-native";
 import { useSelector } from "react-redux";
 import { getStatusBarHeight } from "react-native-status-bar-height";
 
@@ -21,9 +21,8 @@ import ActionModal from "./ActionModal";
 import SortModal from "./SortModal";
 import { getBackgroundColor } from "../../redux/selectors";
 
-interface Props {}
-
-const Collection: FC = props => {
+const Collection: FC = () => {
+	console.log("!!");
 	const [actionVisible, setActionVisible] = useState(false);
 	const [sortVisible, setSortVisible] = useState(false);
 	const backgroundColor = useSelector(getBackgroundColor);
@@ -60,8 +59,8 @@ const Collection: FC = props => {
 
 const styles = StyleSheet.create({
 	container: {
-		flex: 1,
-		paddingTop: getStatusBarHeight()
+		flex: 1
+		// paddingTop: getStatusBarHeight()
 	},
 	mainAction: {
 		flex: 1
@@ -82,4 +81,16 @@ const styles = StyleSheet.create({
 	}
 });
 
-export default Collection;
+let isRendered = false;
+let renderedScreen: JSX.Element | null = null;
+
+const LazyLoad: FC = () => {
+	console.log(isRendered);
+	if (!isRendered) {
+		renderedScreen = Collection({});
+		isRendered = true;
+	}
+	return renderedScreen;
+};
+
+export default LazyLoad;

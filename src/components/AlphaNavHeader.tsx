@@ -1,12 +1,12 @@
-import React, { FC } from "react";
-import { View, StyleSheet, TouchableOpacity, Switch, Text } from "react-native";
+import React, { FC, memo } from "react";
+import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { getStatusBarHeight } from "react-native-status-bar-height";
 
 import AccountCircle from "../svg/AccountCircle";
 import Settings from "../svg/Settings";
 import LogoSwitch from "./LogoSwitch";
 
-const AlphaNavHeader: FC = () => {
+const AlphaNavHeader: FC<any> = props => {
 	return (
 		<React.Fragment>
 			<View style={styles.root}>
@@ -54,4 +54,4 @@ const styles = StyleSheet.create({
 	}
 });
 
-export default AlphaNavHeader;
+export default memo(AlphaNavHeader, () => true);

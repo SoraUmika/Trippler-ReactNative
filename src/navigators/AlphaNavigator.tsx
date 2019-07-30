@@ -14,8 +14,9 @@ const RootNavigator = createAppContainer(
 		{
 			initialRouteName: "Business",
 			defaultNavigationOptions: {
-				header: () => <AlphaNavHeader/>
-			}
+				header: () => <AlphaNavHeader />
+			},
+			headerMode: "float"
 		}
 	)
 );
