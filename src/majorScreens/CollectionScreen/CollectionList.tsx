@@ -5,7 +5,7 @@
  * TODO edge transparency.
  */
 import React, { FC, memo } from "react";
-import { FlatList, View, StyleSheet, TextInput } from "react-native";
+import { FlatList, View, StyleSheet, TextInput, Text } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 
 import {
@@ -40,6 +40,11 @@ const CollectionList: FC = () => {
 				return <View style={styles.separator} />;
 			}}
 			ListHeaderComponent={Header}
+			removeClippedSubviews
+			getItemLayout={(data, index) => ({ length: 87, offset: 97 * index, index })}
+			ListFooterComponent={() => (
+				<Text style={styles.footerText}>hello</Text>
+			)}
 		/>
 	);
 };
@@ -96,8 +101,14 @@ const styles = StyleSheet.create({
 	clearButton: {
 		padding: 18,
 		backgroundColor: "rgba(0,0,0,0.025)",
-		borderRadius: 8,
-		// borderBottomRightRadius: 8
+		borderRadius: 8
+	},
+	footerText: {
+		textAlign: "center",
+		padding: 8,
+		opacity: 0.5,
+		fontStyle: "italic",
+		fontWeight: "500"
 	}
 });
 

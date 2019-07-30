@@ -5,7 +5,7 @@
  *
  * TODO add icon display.
  */
-import React, { FC } from "react";
+import React, { FC, memo } from "react";
 import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import Swipeable from "react-native-gesture-handler/Swipeable";
@@ -196,4 +196,4 @@ const styles = StyleSheet.create({
 	}
 });
 
-export default CollectionItem;
+export default memo(CollectionItem, () => true);

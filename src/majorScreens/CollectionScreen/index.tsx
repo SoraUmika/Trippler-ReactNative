@@ -81,16 +81,4 @@ const styles = StyleSheet.create({
 	}
 });
 
-let isRendered = false;
-let renderedScreen: JSX.Element | null = null;
-
-const LazyLoad: FC = () => {
-	console.log(isRendered);
-	if (!isRendered) {
-		renderedScreen = Collection({});
-		isRendered = true;
-	}
-	return renderedScreen;
-};
-
-export default LazyLoad;
+export default Collection;
