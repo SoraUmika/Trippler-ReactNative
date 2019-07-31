@@ -3,10 +3,12 @@ import { View, StyleSheet } from "react-native";
 
 import Data from "./Data";
 import Action from "./Action";
+import Header from "../../components/NavHeader";
 
 const BusinessScreen: FC = () => {
 	return (
 		<View style={styles.formatRules}>
+			<Header />
 			<View style={styles.dataContainer}>
 				<Data />
 			</View>
@@ -25,9 +27,7 @@ const styles = StyleSheet.create({
 
 	dataContainer: {
 		flex: 9,
-		backgroundColor: "grey",
 		justifyContent: "center",
-		borderRadius: 12
 	},
 
 	actionContainer: {

@@ -4,8 +4,7 @@ import { createAppContainer, createStackNavigator } from "react-navigation";
 
 import LoginScreen from "../entryScreens/LoginScreen";
 import SignupScreen from "../entryScreens/SignupScreen";
-import MainNavigator from "./MainNavigator";
-import AlphaNavigator from "./AlphaNavigator";
+import AlphaNavigator from "./MainNavigator";
 
 const RootNavigator = createAppContainer(
 	createStackNavigator(

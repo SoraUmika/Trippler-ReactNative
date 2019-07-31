@@ -1,9 +1,8 @@
 import React, { FC } from "react";
-import { View, StyleSheet, ImageBackground, TouchableHighlight } from "react-native";
+import { View, StyleSheet, ImageBackground } from "react-native";
 import BusinessInfo from "./Info";
 import { getCurrentRecomIndex, getRecomFeed, getBusinessData } from "../../redux/selectors";
-import { useSelector, useDispatch } from "react-redux";
-import { toNextRecom } from "../../redux/action/actions";
+import { useSelector } from "react-redux";
 
 const BusinessImage: FC = props => {
 	const currentRecomIndex = useSelector(getCurrentRecomIndex);
@@ -11,21 +10,16 @@ const BusinessImage: FC = props => {
 	const businessData = useSelector(getBusinessData);
 	const currentBusiness = businessData[recomFeed[currentRecomIndex]];
 
-	const dispatch = useDispatch();
-
 	return (
-		<View
-			style={{ flex: 1 }}
-			// onTouchStart={() => dispatch({ type: "recommendation/NEXT_RECOMMENDATION" })}
-		>
+		<View style={{ flex: 1 }}>
 			<ImageBackground
 				style={styles.imageBackground}
-				imageStyle={styles.imageStyle}
 				source={{
 					uri: currentBusiness.gallery[0].url
 				}}
 			>
 				<BusinessInfo currentBusiness={currentBusiness} />
+				<View style={styles.topShadow} />
 			</ImageBackground>
 		</View>
 	);
@@ -34,11 +28,13 @@ const BusinessImage: FC = props => {
 const styles = StyleSheet.create({
 	imageBackground: {
 		flexDirection: "column-reverse",
-		flex: 1
+		flex: 1,
+		justifyContent: "space-between"
 	},
-
-	imageStyle: {
-		// borderRadius: 20
+	topShadow: {
+		height: 8,
+		backgroundColor: "white",
+		opacity: 0.5
 	}
 });
 

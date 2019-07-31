@@ -5,10 +5,17 @@ import { withNavigation } from "react-navigation";
 
 import { getIsFontLoaded } from "../redux/selectors";
 
-const LogoSwitch: FC<any> = props => {
-	const [state, setState] = useState(false);
+interface Props {
+	isCollection?: boolean;
+	navigation?: any;
+}
+
+const LogoSwitch: FC<Props> = props => {
 	const isFontLoaded = useSelector(getIsFontLoaded);
-	const { navigate } = props.navigation;
+	const {
+		navigation: { navigate },
+		isCollection
+	} = props;
 
 	if (!isFontLoaded) return null;
 
@@ -16,12 +23,11 @@ const LogoSwitch: FC<any> = props => {
 		<View
 			style={styles.root}
 			onTouchEnd={() => {
-				navigate(state ? "Business" : "Collection");
-				setState(!state);
+				navigate(isCollection ? "Business" : "Collection");
 			}}
 		>
-			<Text style={[styles.text, { marginBottom: state ? 0 : 8 }]}>Trip</Text>
-			<Text style={[styles.text, { marginBottom: state ? 8 : 0 }]}>plar</Text>
+			<Text style={[styles.text, { marginBottom: isCollection ? 0 : 8 }]}>Trip</Text>
+			<Text style={[styles.text, { marginBottom: isCollection ? 8 : 0 }]}>plar</Text>
 		</View>
 	);
 };

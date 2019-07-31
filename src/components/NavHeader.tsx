@@ -6,22 +6,23 @@ import AccountCircle from "../svg/AccountCircle";
 import Settings from "../svg/Settings";
 import LogoSwitch from "./LogoSwitch";
 
-const AlphaNavHeader: FC<any> = props => {
+interface Props {
+	isCollection?: boolean;
+}
+
+const AlphaNavHeader: FC<Props> = props => {
 	return (
-		<React.Fragment>
-			<View style={styles.root}>
-				<TouchableOpacity style={styles.button}>
-					<AccountCircle fill="black" width={32} height={32} />
-				</TouchableOpacity>
-				<View style={styles.switch}>
-					<LogoSwitch />
-				</View>
-				<TouchableOpacity style={styles.button}>
-					<Settings fill="black" width={32} height={32} />
-				</TouchableOpacity>
+		<View style={styles.root}>
+			<TouchableOpacity style={styles.button}>
+				<AccountCircle fill="black" width={32} height={32} />
+			</TouchableOpacity>
+			<View style={styles.switch}>
+				<LogoSwitch {...props}/>
 			</View>
-			<View style={styles.shadow} />
-		</React.Fragment>
+			<TouchableOpacity style={styles.button}>
+				<Settings fill="black" width={32} height={32} />
+			</TouchableOpacity>
+		</View>
 	);
 };
 
@@ -30,7 +31,6 @@ const styles = StyleSheet.create({
 		marginTop: getStatusBarHeight(),
 		height: 65,
 		flexDirection: "row",
-		zIndex: 1,
 		backgroundColor: "white"
 	},
 	button: {
@@ -41,16 +41,6 @@ const styles = StyleSheet.create({
 	},
 	switch: {
 		flex: 2
-	},
-	shadow: {
-		position: "absolute",
-		width: "100%",
-		height: 65,
-		backgroundColor: "white",
-		opacity: 0.5,
-		top: 0,
-		left: 0,
-		marginTop: getStatusBarHeight() + 8
 	}
 });
 

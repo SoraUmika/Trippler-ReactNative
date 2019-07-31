@@ -5,8 +5,8 @@
  * TODO add selection mode.
  * TODO add sort functionality.
  */
-import React, { FC, useState, memo } from "react";
-import { StyleSheet, View, TouchableOpacity, createElement } from "react-native";
+import React, { FC, useState } from "react";
+import { StyleSheet, View, TouchableOpacity, Text } from "react-native";
 import { useSelector } from "react-redux";
 import { getStatusBarHeight } from "react-native-status-bar-height";
 
@@ -20,9 +20,9 @@ import DashLine from "../../components/DashLine";
 import ActionModal from "./ActionModal";
 import SortModal from "./SortModal";
 import { getBackgroundColor } from "../../redux/selectors";
+import Header from "../../components/NavHeader";
 
 const Collection: FC = () => {
-	console.log("!!");
 	const [actionVisible, setActionVisible] = useState(false);
 	const [sortVisible, setSortVisible] = useState(false);
 	const backgroundColor = useSelector(getBackgroundColor);
@@ -35,6 +35,7 @@ const Collection: FC = () => {
 			<View style={styles.dashContainer}>
 				<DashLine />
 			</View> */}
+			<Header isCollection />
 			<ActionModal visible={actionVisible} onHide={() => setActionVisible(false)} />
 			<SortModal visible={sortVisible} onHide={() => setSortVisible(false)} />
 			<View style={styles.title}>
