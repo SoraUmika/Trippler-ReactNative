@@ -1,5 +1,5 @@
-import React, { FC, memo, useState } from "react";
-import { View, StyleSheet, Text } from "react-native";
+import React, { FC, memo } from "react";
+import { View, StyleSheet, Animated, Easing } from "react-native";
 import { useSelector } from "react-redux";
 import { withNavigation } from "react-navigation";
 
@@ -12,6 +12,8 @@ interface Props {
 
 const LogoSwitch: FC<Props> = props => {
 	const isFontLoaded = useSelector(getIsFontLoaded);
+	const margin = new Animated.Value(8);
+	const otherMargin = new Animated.Value(0);
 	const {
 		navigation: { navigate },
 		isCollection
@@ -23,11 +25,34 @@ const LogoSwitch: FC<Props> = props => {
 		<View
 			style={styles.root}
 			onTouchEnd={() => {
-				navigate(isCollection ? "Business" : "Collection");
+				Animated.parallel([
+					Animated.timing(margin, {
+						toValue: 0,
+						duration: 200,
+						easing: Easing.back(5)
+					}),
+					Animated.timing(otherMargin, {
+						toValue: 8,
+						duration: 200,
+						easing: Easing.back(5)
+					})
+				]).start(() => {
+					navigate(isCollection ? "Business" : "Collection");
+					margin.setValue(8);
+					otherMargin.setValue(0);
+				});
 			}}
 		>
-			<Text style={[styles.text, { marginBottom: isCollection ? 0 : 8 }]}>Trip</Text>
-			<Text style={[styles.text, { marginBottom: isCollection ? 8 : 0 }]}>plar</Text>
+			<Animated.Text
+				style={[styles.text, { marginBottom: isCollection ? otherMargin : margin }]}
+			>
+				Trip
+			</Animated.Text>
+			<Animated.Text
+				style={[styles.text, { marginBottom: isCollection ? margin : otherMargin }]}
+			>
+				plar
+			</Animated.Text>
 		</View>
 	);
 };
