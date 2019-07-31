@@ -68,10 +68,10 @@ const LoginScreen: FC<any> = props => {
 const styles = StyleSheet.create({
 	container: {},
 	top: {
-		flex: 2
+		flex: 4
 	},
 	form: {
-		flex: 1,
+		flex: 2,
 		justifyContent: "space-around",
 		alignItems: "center"
 	},

@@ -27,7 +27,6 @@ const CollectionList: FC = () => {
 	return (
 		<FlatList
 			data={items}
-			// data={[...(showPin ? itemsPinned : []), ...items, ...items, ...items, ...items]}
 			renderItem={({ item, index }) => {
 				if (showPin && index < pinnedItemLength) {
 					return <CollectionItem businessId={item} pinned showPin />;
@@ -35,7 +34,6 @@ const CollectionList: FC = () => {
 				return <CollectionItem businessId={item} showPin={showPin} />;
 			}}
 			keyExtractor={item => item}
-			// keyExtractor={(item, index) => `${index}`}
 			ItemSeparatorComponent={() => {
 				return <View style={styles.separator} />;
 			}}

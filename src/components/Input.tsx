@@ -4,54 +4,42 @@
  * @param {number|string} width The width of the input.
  * @param {boolean} [error] Is true, the underline will be red.
  */
-import React, { FC, useState, memo } from "react";
+import React, { FC, memo } from "react";
 import { StyleSheet, TextInput, View, TextInputProps } from "react-native";
-import { useSelector } from "react-redux";
-
-import State from "../redux/state";
 
 interface Props extends TextInputProps {
-	width: number | string;
+	width?: number | string;
 	error?: boolean;
 }
 
 const Input: FC<Props> = props => {
-	const { width, error, ...inputProps } = props;
-
-	const accentColor = useSelector((state: State) => state.theme.accentColor);
-
-	const [focus, setFocus] = useState(false);
+	const { width, error, style, ...inputProps } = props;
 
 	return (
 		<View
-			style={{
-				width: width
-			}}
+			style={[
+				styles.container,
+				{ width: width },
+				error ? { backgroundColor: "#fff0f0" } : {}
+			]}
 		>
-			<TextInput
-				{...inputProps}
-				onFocus={() => setFocus(true)}
-				onEndEditing={() => setFocus(false)}
-				style={styles.input}
-			/>
-			<View
-				style={{
-					...styles.underline,
-					backgroundColor: error ? "#DD1C1A" : focus ? accentColor : "#808080"
-				}}
-			/>
+			<TextInput style={[styles.input, style]} {...inputProps} />
 		</View>
 	);
 };
 
 const styles = StyleSheet.create({
-	underline: {
-		height: 3,
-		top: -3,
-		borderRadius: 1.5
+	container: {
+		height: 60,
+		alignItems: "center",
+		flexDirection: "row",
+		justifyContent: "space-around",
+		backgroundColor: "#f0f0f0",
+		borderRadius: 8,
+		paddingHorizontal: 16
 	},
 	input: {
-		width: "100%"
+		flex: 1
 	}
 });
 

@@ -86,7 +86,7 @@ const SignupScreen: FC<any> = props => {
 const styles = StyleSheet.create({
 	container: {},
 	titleContainer: {
-		flex: 1,
+		flex: 2,
 		justifyContent: "center"
 	},
 	title: {
@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
 		textAlign: "center"
 	},
 	formContainer: {
-		flex: 1,
+		flex: 2,
 		justifyContent: "space-around",
 		alignItems: "center",
 		height: 400

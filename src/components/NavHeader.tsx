@@ -13,7 +13,6 @@ interface Props {
 
 const AlphaNavHeader: FC<Props> = props => {
 	const [feedbackOpen, setFeedbackOpen] = useState(false);
-	console.log(feedbackOpen);
 
 	return (
 		<React.Fragment>

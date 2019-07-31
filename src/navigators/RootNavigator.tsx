@@ -14,7 +14,7 @@ const RootNavigator = createAppContainer(
 			Main: { screen: AlphaNavigator }
 		},
 		{
-            initialRouteName: "Main",
+            initialRouteName: "Login",
             defaultNavigationOptions: {
                 header: null
             }

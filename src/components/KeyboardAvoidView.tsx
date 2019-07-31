@@ -32,6 +32,7 @@ export default class KeyboardAvoidView extends Component<Props, State> {
 	state: State = {
 		shift: new Animated.Value(0)
 	};
+
 	kbShowListener: EmitterSubscription;
 	kbHideListener: EmitterSubscription;
 
@@ -61,7 +62,7 @@ export default class KeyboardAvoidView extends Component<Props, State> {
 			}
 			Animated.timing(this.state.shift, {
 				toValue: gap,
-				duration: 1000,
+				duration: 100,
 				useNativeDriver: true
 			}).start();
 		});
@@ -70,7 +71,7 @@ export default class KeyboardAvoidView extends Component<Props, State> {
 	onKbHide = () => {
 		Animated.timing(this.state.shift, {
 			toValue: 0,
-			duration: 1000,
+			duration: 100,
 			useNativeDriver: true
 		}).start();
 	};

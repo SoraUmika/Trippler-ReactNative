@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 
 import Modal from "./Modal";
 
@@ -17,16 +17,17 @@ const FeedbackModal: FC<Props> = props => {
 			visible={visible}
 			style={styles.root}
 			backgroundStyle={styles.background}
-		/>
+		>
+			<Text>Your feedback is very important to us {"<"}3</Text>
+		</Modal>
 	);
 };
 
 const styles = StyleSheet.create({
 	root: {
-		width: "80%",
-		height: "80%",
-        backgroundColor: "white",
-        borderRadius: 16
+		backgroundColor: "white",
+        borderRadius: 16,
+        padding: 16
 	},
 	background: {
 		alignItems: "center",
