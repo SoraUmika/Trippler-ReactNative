@@ -1,28 +1,35 @@
-import React, { FC, memo } from "react";
+import React, { FC, memo, useState } from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { getStatusBarHeight } from "react-native-status-bar-height";
 
-import AccountCircle from "../svg/AccountCircle";
 import Settings from "../svg/Settings";
 import LogoSwitch from "./LogoSwitch";
+import Feedback from "../svg/Feedback";
+import FeedbackModal from "./FeedbackModal";
 
 interface Props {
 	isCollection?: boolean;
 }
 
 const AlphaNavHeader: FC<Props> = props => {
+	const [feedbackOpen, setFeedbackOpen] = useState(false);
+	console.log(feedbackOpen);
+
 	return (
-		<View style={styles.root}>
-			<TouchableOpacity style={styles.button}>
-				<AccountCircle fill="black" width={32} height={32} />
-			</TouchableOpacity>
-			<View style={styles.switch}>
-				<LogoSwitch {...props}/>
+		<React.Fragment>
+			<FeedbackModal visible={feedbackOpen} onHide={() => setFeedbackOpen(false)} />
+			<View style={styles.root}>
+				<TouchableOpacity style={styles.button} onPress={() => setFeedbackOpen(true)}>
+					<Feedback fill="#47A025" width={32} height={32} />
+				</TouchableOpacity>
+				<View style={styles.switch}>
+					<LogoSwitch {...props} />
+				</View>
+				<TouchableOpacity style={styles.button}>
+					<Settings fill="black" width={32} height={32} />
+				</TouchableOpacity>
 			</View>
-			<TouchableOpacity style={styles.button}>
-				<Settings fill="black" width={32} height={32} />
-			</TouchableOpacity>
-		</View>
+		</React.Fragment>
 	);
 };
 
