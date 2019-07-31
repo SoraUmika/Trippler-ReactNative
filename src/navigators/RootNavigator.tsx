@@ -1,23 +1,17 @@
 import React from "react";
-import {} from "react-native";
-import { createAppContainer, createStackNavigator } from "react-navigation";
+import { createAppContainer, createSwitchNavigator } from "react-navigation";
 
-import LoginScreen from "../entryScreens/LoginScreen";
-import SignupScreen from "../entryScreens/SignupScreen";
-import AlphaNavigator from "./MainNavigator";
+import AuthNavigator from "./AuthNavigator";
+import MainNavigator from "./MainNavigator";
 
 const RootNavigator = createAppContainer(
-	createStackNavigator(
+	createSwitchNavigator(
 		{
-			Login: { screen: LoginScreen },
-			Signup: { screen: SignupScreen },
-			Main: { screen: AlphaNavigator }
+			Auth: AuthNavigator,
+			Main: MainNavigator
 		},
 		{
-            initialRouteName: "Login",
-            defaultNavigationOptions: {
-                header: null
-            }
+			initialRouteName: "Auth"
 		}
 	)
 );

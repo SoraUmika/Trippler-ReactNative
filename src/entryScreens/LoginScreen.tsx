@@ -1,10 +1,10 @@
 /**
  * Login page component.
- * 
+ *
  * TODO improve user friendiness.
  * TODO server communication.
  */
-import React, { FC, useState } from 'react';
+import React, { FC, useState } from "react";
 import { StyleSheet, View, Text } from "react-native";
 
 import Button from "../components/Button";
@@ -42,16 +42,7 @@ const LoginScreen: FC<any> = props => {
 					width="80%"
 					height={60}
 					color="black"
-					onPress={() => {
-						{navigate('SwipeScreen', {transition: "none"})
-						/*
-						setUserName({ value: userName.value, error: !userName.value.trim() });
-						setPassword({ value: password.value, error: !password.value.trim() });
-						if (!(userName.error || password.error)) {
-							console.log(userName.value, password.value);
-						} */}
-
-					}}
+					onPress={() => navigate("Main", { transition: "none" })}
 				>
 					<Text style={{ color: "white", textAlign: "center" }}>Login</Text>
 				</Button>
