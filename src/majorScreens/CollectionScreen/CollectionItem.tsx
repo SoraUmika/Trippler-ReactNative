@@ -13,7 +13,7 @@ import Swipeable from "react-native-gesture-handler/Swipeable";
 import ArrowUpward from "../../svg/ArrowUpward";
 import CenterView from "../../components/CenterView";
 import DeleteOutline from "../../svg/DeleteOutline";
-import ArrowDownward from "../../svg/ArrowDownward";
+// import ArrowDownward from "../../svg/ArrowDownward";
 import {
 	getBusinessData,
 	getAccentColor,
@@ -41,7 +41,7 @@ const RightAction = (
 				<DeleteOutline fill="#D52941" />
 				<Text style={styles.rightActionDeleteText}>Delete</Text>
 			</TouchableOpacity>
-			{showPin && (
+			{/* {showPin && (
 				<TouchableOpacity
 					style={styles.rightActionButton}
 					onPress={pinned ? onUnPin : onPin}
@@ -49,7 +49,7 @@ const RightAction = (
 					{pinned ? <ArrowDownward fill="#0EAD69" /> : <ArrowUpward fill="#0EAD69" />}
 					<Text style={styles.rightActionPinText}>{pinned ? "Un-pin" : "Pin"}</Text>
 				</TouchableOpacity>
-			)}
+			)} */}
 		</View>
 	);
 };

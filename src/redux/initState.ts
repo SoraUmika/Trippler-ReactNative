@@ -18,7 +18,7 @@ const init_state: State = {
 			ratingNum: "all"
 		},
 		sortMethod: "name",
-		showPin: true,
+		showPin: false,
 		items: ["hello", "test", "bqq", "joes", "dump", "loc2", "loc1"],
 		pinnedItems: [":)"],
 		searchInput: ""
