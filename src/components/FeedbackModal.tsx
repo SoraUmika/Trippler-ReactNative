@@ -23,6 +23,8 @@ const FeedbackModal: FC<Props> = props => {
 				containerStyle={styles.inputContainer}
 				style={styles.input}
 				placeholder="Type here"
+				autoFocus
+				autoCorrect
 			/>
 
 			<View style={styles.action}>
@@ -42,7 +44,6 @@ const styles = StyleSheet.create({
 		width: "100%",
 		height: "100%",
 		backgroundColor: "white",
-		borderRadius: 8,
 		padding: 16,
 		bottom: 0,
 		left: 0,
