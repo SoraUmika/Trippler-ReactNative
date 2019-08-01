@@ -21,7 +21,7 @@ import {
 const { State: TextInputState } = TextInput;
 
 interface Props {
-	style: StyleProp<ViewStyle>;
+	style?: StyleProp<ViewStyle>;
 }
 
 interface State {

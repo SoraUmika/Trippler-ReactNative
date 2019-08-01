@@ -5,20 +5,22 @@
  * @param {boolean} [error] Is true, the underline will be red.
  */
 import React, { FC, memo } from "react";
-import { StyleSheet, TextInput, View, TextInputProps } from "react-native";
+import { StyleSheet, TextInput, View, TextInputProps, StyleProp, ViewStyle } from "react-native";
 
 interface Props extends TextInputProps {
 	width?: number | string;
 	error?: boolean;
+	containerStyle?: StyleProp<ViewStyle>;
 }
 
 const Input: FC<Props> = props => {
-	const { width, error, style, ...inputProps } = props;
+	const { width, error, containerStyle, style, ...inputProps } = props;
 
 	return (
 		<View
 			style={[
 				styles.container,
+				containerStyle,
 				{ width: width },
 				error ? { backgroundColor: "#fff0f0" } : {}
 			]}
