@@ -1,6 +1,6 @@
 /**
  * Signup screen of Tripplar.
- * 
+ *
  * TODO improve user friendiness.
  * TODO server comminication.
  */
@@ -22,9 +22,9 @@ const SignupScreen: FC<any> = props => {
 	const rePasswordError = rePassword && password.value !== rePassword;
 
 	return (
-		<KeyboardAvoidView style={styles.container}>
+		<KeyboardAvoidView>
 			<View style={styles.titleContainer}>
-				<Text style={styles.title}>Sign Up</Text>
+				<Text style={styles.title}>Join us ♥</Text>
 			</View>
 			<View style={styles.formContainer}>
 				<Input
@@ -33,6 +33,7 @@ const SignupScreen: FC<any> = props => {
 					onChange={e => setUserName({ value: e.nativeEvent.text, error: false })}
 					textContentType="username"
 					error={userName.error}
+					containerStyle={styles.input}
 				/>
 				<Input
 					width="80%"
@@ -40,6 +41,7 @@ const SignupScreen: FC<any> = props => {
 					onChange={e => setEmail({ value: e.nativeEvent.text, error: false })}
 					textContentType="emailAddress"
 					error={email.error}
+					containerStyle={styles.input}
 				/>
 				<Input
 					width="80%"
@@ -48,6 +50,7 @@ const SignupScreen: FC<any> = props => {
 					textContentType="newPassword"
 					secureTextEntry
 					error={password.error}
+					containerStyle={styles.input}
 				/>
 				<Input
 					width="80%"
@@ -56,6 +59,7 @@ const SignupScreen: FC<any> = props => {
 					textContentType="password"
 					secureTextEntry
 					error={rePasswordError as boolean}
+					containerStyle={styles.input}
 				/>
 				<Button
 					width="80%"
@@ -74,45 +78,41 @@ const SignupScreen: FC<any> = props => {
 					<Text style={{ color: "white", textAlign: "center" }}>Confirm</Text>
 				</Button>
 			</View>
-			<View style={styles.cancelContainer}>
-				<Text onPress={() => navigate("Login")} style={styles.cancelText}>
-					cancel
-				</Text>
-			</View>
+			<Text onPress={() => navigate("Login")} style={styles.cancelText}>
+				cancel
+			</Text>
 		</KeyboardAvoidView>
 	);
 };
 
 const styles = StyleSheet.create({
-	container: {},
-	titleContainer: {
-		flex: 2,
-		justifyContent: "center"
-	},
-	title: {
-		fontSize: 32,
-		textAlign: "center"
-	},
 	formContainer: {
-		flex: 2,
-		justifyContent: "space-around",
+		flex: 3,
+		justifyContent: "center",
 		alignItems: "center",
 		height: 400
 	},
-	confirmButton: {
-		marginTop: 20
+	input: {
+		marginVertical: 16
 	},
-	cancelContainer: {
-		flex: 0.5,
-		flexDirection: "column-reverse"
+	confirmButton: {
+		marginTop: 32
 	},
 	cancelText: {
-		textDecorationLine: "underline",
-		textAlign: "right",
-		right: "10%",
-		bottom: "-20%",
-		marginLeft: "auto",
-		fontSize: 20
+		textAlign: "center",
+		fontSize: 20,
+		width: "100%",
+		fontWeight: "bold",
+		marginBottom: 32
+	},
+	titleContainer: {
+		flex: 1,
+		alignItems: "center",
+		justifyContent: "center"
+	},
+	title: {
+		fontSize: 48,
+		fontFamily: "FredokaOne"
 	}
 });
 

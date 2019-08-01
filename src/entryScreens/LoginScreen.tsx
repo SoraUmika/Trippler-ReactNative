@@ -70,7 +70,6 @@ const styles = StyleSheet.create({
 	},
 	signUpText: {
 		textAlign: "center",
-		marginLeft: "auto",
 		fontSize: 20,
 		width: "100%",
 		fontWeight: "bold",
