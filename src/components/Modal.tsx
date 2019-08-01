@@ -20,7 +20,13 @@ export default class Modal extends Component<Props> {
 
 		return (
 			<BuiltInModal {...restProps} transparent={true}>
-				<View style={[styles.background, backgroundStyle]} onTouchStart={onHide}>
+				<View
+					style={[styles.background, backgroundStyle]}
+					onTouchStart={evt => {
+						onHide();
+						evt.stopPropagation();
+					}}
+				>
 					<View style={style} onTouchStart={evt => evt.stopPropagation()}>
 						{children}
 					</View>
