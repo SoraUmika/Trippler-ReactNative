@@ -6,27 +6,33 @@ import Modal from "./Modal";
 import Input from "./Input";
 import Close from "../svg/Close";
 import Check from "../svg/Check";
-import DashLine from "./DashLine";
+import BugReport from "../svg/BugReport";
+import Accessibility from "../svg/Accessibility";
+import Mood from "../svg/Mood";
+import Schedule from "../svg/Schedule";
+import Category from "../svg/Category";
 
 interface Props {
 	onHide: () => void;
 	visible: boolean;
 }
 
-type categoryTypes = "Bug" | "UI/UX" | "Performance" | "Suggestion";
+type categoryTypes = "Bug" | "UI/UX" | "Performance" | "Suggestion" | "Other";
 
 const categories: [ReactNode, categoryTypes][] = [
-	[<Check />, "Bug"],
-	[<Check />, "Performance"],
-	[<Check />, "Suggestion"],
-	[<Check />, "UI/UX"]
+	[<BugReport />, "Bug"],
+	[<Schedule />, "Performance"],
+	[<Mood />, "Suggestion"],
+	[<Accessibility />, "UI/UX"],
+	[<Category />, "Other"]
 ];
 
 const instructions = {
 	Bug: "Describe what is the bug and how to reproduce it.",
 	"UI/UX": "Describe the issue.",
 	Performance: "Describe the issue",
-	Suggestion: "Describe the suggestion"
+	Suggestion: "Describe the suggestion",
+	Other: "Type whatever you want to say to use :)"
 };
 
 const FeedbackModal: FC<Props> = props => {
@@ -43,8 +49,8 @@ const FeedbackModal: FC<Props> = props => {
 					return (
 						<TouchableOpacity
 							style={[styles.categoryButton, isSelected ? styles.buttonActive : {}]}
-							key={text}
 							onPress={() => !isSelected && setCategory(text)}
+							key={text}
 						>
 							{icon}
 							<Text style={styles.categoryText}>{text}</Text>
@@ -98,7 +104,6 @@ const styles = StyleSheet.create({
 	},
 	title: {
 		fontSize: 32,
-		// fontFamily: "FredokaOne",
 		fontWeight: "500"
 	},
 	action: {
@@ -128,19 +133,22 @@ const styles = StyleSheet.create({
 	},
 	categoryContainer: {
 		flexDirection: "row",
-		marginVertical: 16
+		marginVertical: 16,
+		flexWrap: "wrap"
 	},
 	categoryButton: {
-		justifyContent: "center",
+		justifyContent: "flex-start",
 		alignItems: "center",
-		marginRight: 16,
+		// marginRight: 16,
 		flexDirection: "row",
-		padding: 8
+		padding: 8,
+		width: "33%"
 	},
 	buttonActive: {
 		borderRadius: 8,
 		borderWidth: 2,
-		borderColor: "#47A02533"
+		borderColor: "#47A02533",
+		padding: 6
 	},
 	categoryText: {
 		marginLeft: 4
