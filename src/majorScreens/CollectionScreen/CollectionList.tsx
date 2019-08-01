@@ -40,9 +40,7 @@ const CollectionList: FC = () => {
 			ListHeaderComponent={Header}
 			removeClippedSubviews
 			getItemLayout={(data, index) => ({ length: 87, offset: 97 * index, index })}
-			ListFooterComponent={() => (
-				<Text style={styles.footerText}>hello</Text>
-			)}
+			ListFooterComponent={() => <Text style={styles.footerText}>hello</Text>}
 		/>
 	);
 };
@@ -53,21 +51,21 @@ const Header = memo(
 		const searchInput = useSelector(getCollectionSearchInput);
 
 		return (
-			<View style={styles.headerContainer}>
-				<Search style={styles.searchIcon} fill="#777" />
-				<TextInput
-					placeholder="search"
-					style={styles.searchInput}
-					value={searchInput}
-					onChange={e => dispatch(setCollectSearchInput(e.nativeEvent.text))}
-				/>
-				<TouchableOpacity
-					style={styles.clearButton}
-					onPress={() => dispatch(setCollectSearchInput(""))}
-				>
-					<Close fill="#777" />
-				</TouchableOpacity>
-			</View>
+			<Input
+				leftComponent={<Search style={styles.searchIcon} fill="#777" />}
+				rightComponent={
+					<TouchableOpacity
+						style={styles.clearButton}
+						onPress={() => dispatch(setCollectSearchInput(""))}
+					>
+						<Close fill="#777" />
+					</TouchableOpacity>
+				}
+				containerStyle={styles.headerContainer}
+				placeholder="search"
+				value={searchInput}
+				onChange={e => dispatch(setCollectSearchInput(e.nativeEvent.text))}
+			/>
 		);
 	},
 	() => true
@@ -81,14 +79,8 @@ const styles = StyleSheet.create({
 		marginVertical: 8
 	},
 	headerContainer: {
-		height: 60,
 		margin: 16,
-		alignItems: "center",
-		flexDirection: "row",
-		justifyContent: "space-around",
-		backgroundColor: "#f0f0f0",
-		borderRadius: 8,
-		paddingLeft: 16
+		paddingRight: 0
 	},
 	searchIcon: {
 		marginRight: 16

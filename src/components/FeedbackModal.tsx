@@ -18,7 +18,7 @@ const FeedbackModal: FC<Props> = props => {
 			style={styles.root}
 			backgroundStyle={styles.background}
 		>
-			<Text>Your feedback is very important to us {"<"}3</Text>
+			<Text>Help us to improve Tripplar ♥</Text>
 		</Modal>
 	);
 };

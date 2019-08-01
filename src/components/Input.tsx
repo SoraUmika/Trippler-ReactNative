@@ -4,17 +4,27 @@
  * @param {number|string} width The width of the input.
  * @param {boolean} [error] Is true, the underline will be red.
  */
-import React, { FC, memo } from "react";
+import React, { FC, memo, ReactNode } from "react";
 import { StyleSheet, TextInput, View, TextInputProps, StyleProp, ViewStyle } from "react-native";
 
 interface Props extends TextInputProps {
 	width?: number | string;
 	error?: boolean;
 	containerStyle?: StyleProp<ViewStyle>;
+	leftComponent?: ReactNode;
+	rightComponent?: ReactNode;
 }
 
 const Input: FC<Props> = props => {
-	const { width, error, containerStyle, style, ...inputProps } = props;
+	const {
+		width,
+		error,
+		containerStyle,
+		leftComponent = null,
+		rightComponent = null,
+		style,
+		...inputProps
+	} = props;
 
 	return (
 		<View
@@ -25,7 +35,9 @@ const Input: FC<Props> = props => {
 				error ? { backgroundColor: "#fff0f0" } : {}
 			]}
 		>
+			{leftComponent}
 			<TextInput style={[styles.input, style]} {...inputProps} />
+			{rightComponent}
 		</View>
 	);
 };
@@ -46,7 +58,7 @@ const styles = StyleSheet.create({
 });
 
 function areEqual(prevProps: Props, nextProps: Props) {
-	return prevProps.error === nextProps.error;
+	return prevProps.error === nextProps.error && prevProps.value === nextProps.value;
 }
 
 export default memo(Input, areEqual);
