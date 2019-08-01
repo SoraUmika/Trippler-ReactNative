@@ -10,6 +10,9 @@ import { StyleSheet, View, Text } from "react-native";
 import Button from "../components/Button";
 import Input from "../components/Input";
 import KeyboardAvoidView from "../components/KeyboardAvoidView";
+import AccountCircle from "../svg/AccountCircle";
+import Lock from "../svg/Lock";
+import Mail from "../svg/Mail";
 
 const SignupScreen: FC<any> = props => {
 	const [userName, setUserName] = useState({ value: "", error: false });
@@ -34,6 +37,7 @@ const SignupScreen: FC<any> = props => {
 					textContentType="username"
 					error={userName.error}
 					containerStyle={styles.input}
+					leftComponent={<AccountCircle style={styles.inputIcon} fill="#888" />}
 				/>
 				<Input
 					width="80%"
@@ -42,6 +46,7 @@ const SignupScreen: FC<any> = props => {
 					textContentType="emailAddress"
 					error={email.error}
 					containerStyle={styles.input}
+					leftComponent={<Mail style={styles.inputIcon} fill="#888" />}
 				/>
 				<Input
 					width="80%"
@@ -51,6 +56,7 @@ const SignupScreen: FC<any> = props => {
 					secureTextEntry
 					error={password.error}
 					containerStyle={styles.input}
+					leftComponent={<Lock style={styles.inputIcon} fill="#888" />}
 				/>
 				<Input
 					width="80%"
@@ -60,6 +66,7 @@ const SignupScreen: FC<any> = props => {
 					secureTextEntry
 					error={rePasswordError as boolean}
 					containerStyle={styles.input}
+					leftComponent={<Lock style={styles.inputIcon} fill="#888" />}
 				/>
 				<Button
 					width="80%"
@@ -113,6 +120,9 @@ const styles = StyleSheet.create({
 	title: {
 		fontSize: 48,
 		fontFamily: "FredokaOne"
+	},
+	inputIcon: {
+		marginRight: 16
 	}
 });
 
