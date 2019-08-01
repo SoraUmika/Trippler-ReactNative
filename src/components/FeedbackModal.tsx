@@ -1,5 +1,6 @@
 import React, { FC, memo, useState, ReactNode } from "react";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import Color from "color";
 
 import Modal from "./Modal";
 import Input from "./Input";
@@ -35,9 +36,7 @@ const FeedbackModal: FC<Props> = props => {
 	return (
 		<Modal onHide={onHide} visible={visible} style={styles.root} animationType="slide">
 			<Text style={styles.title}>Feedback</Text>
-
 			<Text style={styles.description}>Help us to improve Tripplar ♥</Text>
-			<DashLine />
 			<View style={styles.categoryContainer}>
 				{categories.map(([icon, text]) => {
 					const isSelected = category == text;
@@ -76,16 +75,18 @@ const FeedbackModal: FC<Props> = props => {
 const styles = StyleSheet.create({
 	root: {
 		width: "100%",
-		height: "100%",
+		// height: "100%",
 		backgroundColor: "white",
 		padding: 16,
 		bottom: 0,
 		left: 0,
 		position: "absolute",
+		borderTopLeftRadius: 16,
+		borderTopRightRadius: 16
 	},
 	description: {
-		marginBottom: 16,
-		fontSize: 24
+		marginVertical: 24,
+		fontSize: 20
 	},
 	inputContainer: {
 		height: 200,
@@ -97,26 +98,33 @@ const styles = StyleSheet.create({
 	},
 	title: {
 		fontSize: 32,
-		// marginBottom: 16,
-		fontFamily: "FredokaOne"
+		// fontFamily: "FredokaOne",
+		fontWeight: "500"
 	},
 	action: {
 		width: "100%",
 		flex: 1,
 		flexDirection: "row-reverse",
 		alignItems: "flex-end",
-		padding: 16
+		padding: 32,
+		paddingBottom: 16
 	},
 	checkButton: {
 		marginLeft: 32,
-		backgroundColor: "#47A0250f",
+		backgroundColor: Color("#47A025")
+			.lighten(1.5)
+			.toString(),
 		borderRadius: 8,
-		padding: 8
+		padding: 8,
+		width: 48
 	},
 	closeButton: {
 		padding: 8,
-		backgroundColor: "#b0b0b00f",
-		borderRadius: 8
+		backgroundColor: Color("#b0b0b0")
+			.lighten(0.4)
+			.toString(),
+		borderRadius: 8,
+		width: 48
 	},
 	categoryContainer: {
 		flexDirection: "row",
@@ -131,7 +139,7 @@ const styles = StyleSheet.create({
 	},
 	buttonActive: {
 		borderRadius: 8,
-		borderWidth: 1,
+		borderWidth: 2,
 		borderColor: "#47A02533"
 	},
 	categoryText: {
