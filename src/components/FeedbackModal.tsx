@@ -32,7 +32,7 @@ const instructions = {
 	"UI/UX": "Describe the issue.",
 	Performance: "Describe the issue",
 	Suggestion: "Describe the suggestion",
-	Other: "Type whatever you want to say to use :)"
+	Other: "Type whatever you want to say to us :)"
 };
 
 const FeedbackModal: FC<Props> = props => {

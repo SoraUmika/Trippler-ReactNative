@@ -1,6 +1,5 @@
 import React, { FC, memo, useState } from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
-import { getStatusBarHeight } from "react-native-status-bar-height";
 import { withNavigation } from "react-navigation";
 
 import Settings from "../svg/Settings";
@@ -40,7 +39,6 @@ const AlphaNavHeader: FC<Props> = props => {
 
 const styles = StyleSheet.create({
 	root: {
-		marginTop: getStatusBarHeight(),
 		height: 65,
 		flexDirection: "row",
 		backgroundColor: "white"
@@ -56,4 +54,4 @@ const styles = StyleSheet.create({
 	}
 });
 
-export default withNavigation(memo(AlphaNavHeader, () => true));
+export default withNavigation<Props>(memo(AlphaNavHeader, () => true));

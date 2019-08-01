@@ -37,13 +37,13 @@ const Action: FC = () => {
 
 const styles = StyleSheet.create({
 	root: {
-		flex: 1,
 		padding: 8,
 		flexDirection: "row",
 		justifyContent: "space-around",
 		backgroundColor: "#eee",
 		borderTopLeftRadius: 24,
-		borderTopRightRadius: 24
+		borderTopRightRadius: 24,
+		height: 75
 	},
 	button: {
 		flex: 1,

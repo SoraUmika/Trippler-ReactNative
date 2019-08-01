@@ -8,6 +8,7 @@
 import React, { FC, useState } from "react";
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { useSelector } from "react-redux";
+import { getStatusBarHeight } from "react-native-status-bar-height";
 
 import TopBar from "../../components/TopBar";
 // import MoreHoriz from "../../svg/MoreHoriz";
@@ -51,8 +52,8 @@ const Collection: FC = () => {
 
 const styles = StyleSheet.create({
 	container: {
-		flex: 1
-		// paddingTop: getStatusBarHeight()
+		flex: 1,
+		paddingTop: getStatusBarHeight()
 	},
 	mainAction: {
 		flex: 1

@@ -1,6 +1,11 @@
 import React, { FC } from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, Text, Animated, Easing } from "react-native";
 import { useSelector } from "react-redux";
+import {
+	PanGestureHandler,
+	PanGestureHandlerStateChangeEvent,
+	State
+} from "react-native-gesture-handler";
 
 import Business from "../../redux/state/Business";
 import Star from "../../svg/Star";
@@ -18,6 +23,7 @@ const BusinessInfo: FC<Props> = props => {
 		currentBusiness: { name, rating, ratingNum, hours, id }
 	} = props;
 	const isOpen = useSelector(getAreBusinessesOpen)[id];
+
 
 	return (
 		<View style={styles.root}>
@@ -57,9 +63,6 @@ const Stars = (rating: number) => {
 const styles = StyleSheet.create({
 	root: {
 		width: "100%",
-		backgroundColor: "white",
-		borderTopLeftRadius: 24,
-		borderTopRightRadius: 24,
 		padding: 16
 	},
 	businessName: {
