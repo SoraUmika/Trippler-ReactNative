@@ -11,7 +11,7 @@ const RootNavigator = createAppContainer(
 			Main: MainNavigator
 		},
 		{
-			initialRouteName: "Main"
+			initialRouteName: "Auth"
 		}
 	)
 );

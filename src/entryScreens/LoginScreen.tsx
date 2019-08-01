@@ -12,6 +12,8 @@ import Button from "../components/Button";
 import Input from "../components/Input";
 import KeyboardAvoidView from "../components/KeyboardAvoidView";
 import { getIsFontLoaded } from "../redux/selectors";
+import AccountCircle from "../svg/AccountCircle";
+import Lock from "../svg/Lock";
 
 const LoginScreen: FC<any> = props => {
 	const { navigate } = props.navigation;
@@ -34,6 +36,7 @@ const LoginScreen: FC<any> = props => {
 					autoCompleteType="username"
 					error={userName.error}
 					containerStyle={styles.input}
+					leftComponent={<AccountCircle style={styles.inputIcon} fill="#888" />}
 				/>
 				<Input
 					width="80%"
@@ -44,6 +47,7 @@ const LoginScreen: FC<any> = props => {
 					secureTextEntry
 					error={password.error}
 					containerStyle={styles.input}
+					leftComponent={<Lock style={styles.inputIcon} fill="#888" />}
 				/>
 				<Button
 					width="80%"
@@ -89,6 +93,9 @@ const styles = StyleSheet.create({
 	logo: {
 		fontSize: 48,
 		fontFamily: "FredokaOne"
+	},
+	inputIcon: {
+		marginRight: 16
 	}
 });
 
