@@ -1,6 +1,7 @@
 import React, { FC, memo, useState } from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { getStatusBarHeight } from "react-native-status-bar-height";
+import { withNavigation } from "react-navigation";
 
 import Settings from "../svg/Settings";
 import LogoSwitch from "./LogoSwitch";
@@ -9,9 +10,14 @@ import FeedbackModal from "./FeedbackModal";
 
 interface Props {
 	isCollection?: boolean;
+	navigation?: any;
 }
 
 const AlphaNavHeader: FC<Props> = props => {
+	const {
+		navigation: { navigate },
+		isCollection
+	} = props;
 	const [feedbackOpen, setFeedbackOpen] = useState(false);
 
 	return (
@@ -22,9 +28,9 @@ const AlphaNavHeader: FC<Props> = props => {
 					<Feedback fill="#47A025" width={32} height={32} />
 				</TouchableOpacity>
 				<View style={styles.switch}>
-					<LogoSwitch {...props} />
+					<LogoSwitch isCollection={isCollection} navigate={navigate} />
 				</View>
-				<TouchableOpacity style={styles.button}>
+				<TouchableOpacity style={styles.button} onPress={() => navigate("Setting")}>
 					<Settings fill="black" width={32} height={32} />
 				</TouchableOpacity>
 			</View>
@@ -50,4 +56,4 @@ const styles = StyleSheet.create({
 	}
 });
 
-export default memo(AlphaNavHeader, () => true);
+export default withNavigation(memo(AlphaNavHeader, () => true));

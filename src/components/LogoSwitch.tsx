@@ -1,13 +1,12 @@
 import React, { FC, memo } from "react";
 import { View, StyleSheet, Animated, Easing } from "react-native";
 import { useSelector } from "react-redux";
-import { withNavigation } from "react-navigation";
 
 import { getIsFontLoaded } from "../redux/selectors";
 
 interface Props {
 	isCollection?: boolean;
-	navigation?: any;
+	navigate?: any;
 }
 
 const LogoSwitch: FC<Props> = props => {
@@ -15,7 +14,7 @@ const LogoSwitch: FC<Props> = props => {
 	const margin = new Animated.Value(8);
 	const otherMargin = new Animated.Value(0);
 	const {
-		navigation: { navigate },
+		navigate,
 		isCollection
 	} = props;
 
@@ -70,4 +69,4 @@ const styles = StyleSheet.create({
 	}
 });
 
-export default withNavigation(memo(LogoSwitch, () => true));
+export default memo(LogoSwitch, () => true);
