@@ -38,7 +38,7 @@ const BusinessScreen: FC = () => {
 
 	translateY.addListener(({ value }) => {
 		const val = value - translateYRange[currentDisplayState];
-		console.log(val);
+		// console.log(val);
 		if (!isInAnimation) {
 			direction = 0;
 			switch (currentDisplayState) {
