@@ -30,7 +30,7 @@ enum DisplayState {
 
 const BusinessScreen: FC = () => {
 	const translateY = new Animated.Value(0);
-	let translateYRange = [dimension.height(-1) + 182, 0, 0, 99];
+	let translateYRange = [dimension.height(-1) + 188, 0, 0, 99];
 	let currentDisplayState: DisplayState = DisplayState.infoNormal;
 	let isInAnimation = false;
 	let toValue = 0;
@@ -150,12 +150,7 @@ const Component: FC<Props> = props => {
 								})
 							}
 						],
-						borderTopLeftRadius: translateY.interpolate({
-							inputRange: translateYRange,
-							outputRange: [0, 24],
-							extrapolate: "clamp"
-						}),
-						borderTopRightRadius: translateY.interpolate({
+						borderRadius: translateY.interpolate({
 							inputRange: translateYRange,
 							outputRange: [0, 24],
 							extrapolate: "clamp"
@@ -190,9 +185,7 @@ const styles = StyleSheet.create({
 	},
 	infoCard: {
 		backgroundColor: "white",
-		borderTopLeftRadius: 24,
-		borderTopRightRadius: 24,
-		height: "50%",
+		height: "100%",
 		width: "100%",
 		position: "absolute",
 		left: 0,
