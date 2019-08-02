@@ -21,6 +21,7 @@ const PageCard: FC = () => {
 
 	translateYPan.addListener(({ value }) => {
 		const val = value - translateYRange[currentIndex];
+		console.log(val);
 		if (!isInAnimation) {
 			direction = 0;
 			switch (currentIndex) {
@@ -42,12 +43,6 @@ const PageCard: FC = () => {
 					}
 					break;
 			}
-
-			if (direction == 0) {
-				toValue = 0;
-			} else {
-				toValue = translateYRange[currentIndex + direction] - translateYRange[currentIndex];
-			}
 		}
 	});
 
@@ -61,6 +56,11 @@ const PageCard: FC = () => {
 
 	const onPanStateChange = (event: PanGestureHandlerStateChangeEvent) => {
 		if (event.nativeEvent.oldState == State.ACTIVE) {
+			if (direction == 0) {
+				toValue = 0;
+			} else {
+				toValue = translateYRange[currentIndex + direction] - translateYRange[currentIndex];
+			}
 			isInAnimation = true;
 			Animated.timing(translateYPan, {
 				toValue: toValue,

@@ -1,11 +1,6 @@
 import React, { FC } from "react";
-import { View, StyleSheet, Text, Animated, Easing } from "react-native";
+import { View, StyleSheet, Text, LayoutChangeEvent } from "react-native";
 import { useSelector } from "react-redux";
-import {
-	PanGestureHandler,
-	PanGestureHandlerStateChangeEvent,
-	State
-} from "react-native-gesture-handler";
 
 import Business from "../../redux/state/Business";
 import Star from "../../svg/Star";
@@ -16,17 +11,18 @@ import { getAreBusinessesOpen } from "../../redux/selectors";
 
 interface Props {
 	currentBusiness: Business;
+	onLayout?: (event: LayoutChangeEvent) => void;
 }
 
 const BusinessInfo: FC<Props> = props => {
 	const {
-		currentBusiness: { name, rating, ratingNum, hours, id }
+		currentBusiness: { name, rating, ratingNum, hours, id },
+		onLayout
 	} = props;
 	const isOpen = useSelector(getAreBusinessesOpen)[id];
 
-
 	return (
-		<View style={styles.root}>
+		<View style={styles.root} onLayout={onLayout}>
 			<Text style={styles.businessName}>{name}</Text>
 			<View style={styles.ratingContainer}>
 				{Stars(rating)}
