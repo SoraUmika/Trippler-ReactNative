@@ -30,7 +30,7 @@ enum DisplayState {
 
 const BusinessScreen: FC = () => {
 	const translateY = new Animated.Value(0);
-	let translateYRange = [dimension.height(-1) + getStatusBarHeight() + 182, 0, 0, 99];
+	let translateYRange = [dimension.height(-1) + 182, 0, 0, 99];
 	let currentDisplayState: DisplayState = DisplayState.infoNormal;
 	let isInAnimation = false;
 	let toValue = 0;
@@ -38,7 +38,7 @@ const BusinessScreen: FC = () => {
 
 	translateY.addListener(({ value }) => {
 		const val = value - translateYRange[currentDisplayState];
-		// console.log(val);
+		console.log(val);
 		if (!isInAnimation) {
 			direction = 0;
 			switch (currentDisplayState) {
@@ -81,10 +81,9 @@ const BusinessScreen: FC = () => {
 					translateYRange[currentDisplayState];
 			}
 			isInAnimation = true;
-			Animated.timing(translateY, {
+			Animated.spring(translateY, {
 				toValue: toValue,
-				easing: Easing.cubic,
-				duration: 300
+				speed: 20
 			}).start(() => {
 				currentDisplayState += direction;
 				translateY.setOffset(translateYRange[currentDisplayState]);
@@ -116,7 +115,7 @@ const BusinessScreen: FC = () => {
 			}}
 			onPanEvent={onPanEvent}
 			onPanStateChange={onPanStateChange}
-			translateYRange={translateYRange}
+			translateYRange={[translateYRange[0], translateYRange[1]]}
 		/>
 	);
 };
@@ -126,7 +125,7 @@ interface Props {
 	onLayout: (event: LayoutChangeEvent) => void;
 	onPanEvent: (...args: any[]) => void;
 	onPanStateChange: (event: PanGestureHandlerStateChangeEvent) => void;
-	translateYRange: number[];
+	translateYRange: [number, number];
 }
 
 const Component: FC<Props> = props => {
@@ -141,7 +140,7 @@ const Component: FC<Props> = props => {
 			<PanGestureHandler onGestureEvent={onPanEvent} onHandlerStateChange={onPanStateChange}>
 				<Animated.View
 					style={{
-						...styles.viewContainer,
+						...styles.infoCard,
 						transform: [
 							{
 								translateY: translateY.interpolate({
@@ -150,7 +149,17 @@ const Component: FC<Props> = props => {
 									extrapolate: "clamp"
 								})
 							}
-						]
+						],
+						borderTopLeftRadius: translateY.interpolate({
+							inputRange: translateYRange,
+							outputRange: [0, 24],
+							extrapolate: "clamp"
+						}),
+						borderTopRightRadius: translateY.interpolate({
+							inputRange: translateYRange,
+							outputRange: [0, 24],
+							extrapolate: "clamp"
+						})
 					}}
 				>
 					<View style={styles.handleContainer}>
@@ -179,7 +188,7 @@ const styles = StyleSheet.create({
 		backgroundColor: "white",
 		opacity: 0.5
 	},
-	viewContainer: {
+	infoCard: {
 		backgroundColor: "white",
 		borderTopLeftRadius: 24,
 		borderTopRightRadius: 24,
