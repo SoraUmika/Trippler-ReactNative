@@ -30,7 +30,7 @@ enum DisplayState {
 
 const BusinessScreen: FC = () => {
 	const translateY = new Animated.Value(0);
-	let translateYRange = [dimension.height(-1) + 188, 0, 0, 99];
+	let translateYRange = [dimension.height(-1) + 187, 0, 0, 99];
 	let currentDisplayState: DisplayState = DisplayState.infoNormal;
 	let isInAnimation = false;
 	let toValue = 0;
@@ -43,19 +43,19 @@ const BusinessScreen: FC = () => {
 			direction = 0;
 			switch (currentDisplayState) {
 				case DisplayState.galleryNormal:
-					if (val <= -150) {
+					if (val <= -50) {
 						direction = -1;
 					}
 					break;
 				case DisplayState.infoNormal:
-					if (val >= 150) {
+					if (val >= 80) {
 						direction = 1;
-					} else if (val <= -150) {
+					} else if (val <= -100) {
 						direction = -1;
 					}
 					break;
 				case DisplayState.infoFull:
-					if (val >= 150) {
+					if (val >= 100) {
 						direction = 1;
 					}
 					break;
@@ -83,7 +83,9 @@ const BusinessScreen: FC = () => {
 			isInAnimation = true;
 			Animated.spring(translateY, {
 				toValue: toValue,
-				speed: 20
+				speed: 20,
+				bounciness:
+					currentDisplayState == DisplayState.infoFull && !direction ? 0 : undefined
 			}).start(() => {
 				currentDisplayState += direction;
 				translateY.setOffset(translateYRange[currentDisplayState]);
