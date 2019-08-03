@@ -1,5 +1,6 @@
 import React, { FC, memo } from "react";
 import { View, StyleSheet, Text } from "react-native";
+import Swipeable from "react-native-gesture-handler/Swipeable";
 
 interface Props {
 	text: string;
@@ -11,8 +12,18 @@ const GalleryDescription: FC<Props> = props => {
 	const { text, index, imageNum } = props;
 
 	return (
-		<View style={styles.root}>
-			<Text style={styles.text}>{text}</Text>
+		<View style={styles.root} onTouchStart={evt => evt.stopPropagation()}>
+			<Swipeable
+				renderRightActions={() => (
+					<View style={{ width: 20, height: "100%", backgroundColor: "red" }} />
+				)}
+				onSwipeableRightWillOpen={() => console.log("right")}
+				onSwipeableLeftWillOpen={() => console.log("left")}
+			>
+				<View style={styles.container}>
+					<Text style={styles.text}>{text}</Text>
+				</View>
+			</Swipeable>
 			<View style={styles.indexIndicatorContainer}>
 				{getIndexIndicators(index, imageNum)}
 			</View>
@@ -42,13 +53,18 @@ const styles = StyleSheet.create({
 		width: "80%",
 		height: 100
 	},
+	container: {
+		width: "100%",
+        height: "100%",
+        backgroundColor: "red"
+	},
 	text: {
-        fontWeight: "500"
-    },
+		fontWeight: "500"
+	},
 	indexIndicatorContainer: {
 		marginTop: "auto",
-        width: "100%",
-        flexDirection: "row"
+		width: "100%",
+		flexDirection: "row"
 	},
 	indexIndicator: {
 		width: 8,
