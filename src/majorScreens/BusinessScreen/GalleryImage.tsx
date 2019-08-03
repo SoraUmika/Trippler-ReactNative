@@ -16,6 +16,12 @@ const galleryTransXOffset = -dimension.width() - 24;
 const GalleryImage: FC<Props> = props => {
 	const { gallery, index, animation } = props;
 
+	const outputRange = [
+		index < gallery.length - 1 ? animation.imageWidth * -1 : dimension.width(-0.2),
+		0,
+		index ? animation.imageWidth : dimension.width(0.2)
+	];
+
 	return (
 		<Animated.View
 			style={[
@@ -25,7 +31,7 @@ const GalleryImage: FC<Props> = props => {
 						{
 							translateX: animation.translateX.interpolate({
 								inputRange: animation.translateXRange,
-								outputRange: [animation.imageWidth * -1, 0, animation.imageWidth],
+								outputRange: outputRange,
 								extrapolate: "clamp"
 							})
 						},
@@ -65,13 +71,15 @@ const styles = StyleSheet.create({
 	},
 	image: {
 		width: "100%",
-        height: "100%",
-        backgroundColor: "black"
+		height: "100%",
+		backgroundColor: "black"
 	},
 	imageSeparator: {
 		width: 24,
 		height: "100%",
-		backgroundColor: "black"
+		backgroundColor: "black",
+		borderColor: "black",
+		borderWidth: 1
 	}
 });
 

@@ -43,8 +43,8 @@ export default class GalleryAnimationManager {
 	update = () => {
 		this.isInAnimation = true;
 		Animated.timing(this.translateX, {
-            toValue: this.imageWidth * this.direction * -1,
-            easing: Easing.quad
+			toValue: this.imageWidth * this.direction * -1,
+			easing: Easing.quad
 		}).start(() => {
 			this.setGalleryIndex(this.currentGalleryIndex + this.direction);
 			this.currentGalleryIndex += this.direction;
