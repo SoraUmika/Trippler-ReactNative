@@ -44,10 +44,6 @@ const styles = StyleSheet.create({
 		borderTopLeftRadius: 24,
 		borderTopRightRadius: 24,
 		height: 75,
-		position: "absolute",
-		left: 0,
-		bottom: 0,
-		width: "100%"
 	},
 	button: {
 		flex: 1,

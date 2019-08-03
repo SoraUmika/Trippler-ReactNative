@@ -52,6 +52,8 @@ const BusinessScreen: FC = () => {
 				case DisplayState.galleryNormal:
 					if (val <= -50) {
 						direction = -1;
+					} else if (val >= 70) {
+						direction = 1;
 					}
 					break;
 				case DisplayState.infoNormal:
@@ -102,12 +104,13 @@ const BusinessScreen: FC = () => {
 				translateYRange[currentDisplayState];
 		}
 		isInAnimation = true;
+		const noBounce =
+			(currentDisplayState == DisplayState.infoFull && !direction) ||
+			(currentDisplayState == DisplayState.galleryNormal && direction == 1);
 		Animated.spring(translateY, {
 			toValue: toValue,
 			speed: 20,
-			// There will be no bounce if the expanded info page is moved and didn't trigger a
-			// change in `DisplayState`.
-			bounciness: currentDisplayState == DisplayState.infoFull && !direction ? 0 : undefined
+			bounciness: noBounce ? 0 : undefined
 		}).start(() => {
 			currentDisplayState += direction;
 			translateY.extractOffset();
@@ -188,23 +191,25 @@ const Component: FC<Props> = props => {
 					onHandlerStateChange={onPanStateChange}
 				>
 					<Animated.View
-						style={{
-							...styles.infoCard,
-							transform: [
-								{
-									translateY: translateY.interpolate({
-										inputRange: translateYRange,
-										outputRange: translateYRange,
-										extrapolate: "clamp"
-									})
-								}
-							],
-							borderRadius: translateY.interpolate({
-								inputRange: translateYRange,
-								outputRange: [0, 24],
-								extrapolate: "clamp"
-							})
-						}}
+						style={[
+							styles.infoCard,
+							{
+								transform: [
+									{
+										translateY: translateY.interpolate({
+											inputRange: translateYRange,
+											outputRange: translateYRange,
+											extrapolate: "clamp"
+										})
+									}
+								],
+								borderRadius: translateY.interpolate({
+									inputRange: translateYRange,
+									outputRange: [0, 24],
+									extrapolate: "clamp"
+								})
+							}
+						]}
 						onTouchStart={(evt: any) => evt.stopPropagation()}
 					>
 						<View style={styles.handleContainer}>
@@ -213,7 +218,24 @@ const Component: FC<Props> = props => {
 						<Info currentBusiness={currentData} onLayout={onLayout} />
 					</Animated.View>
 				</PanGestureHandler>
-				<Action />
+				<Animated.View
+					style={[
+						styles.actionContainer,
+						{
+							transform: [
+								{
+									translateY: translateY.interpolate({
+										inputRange: [0, 119],
+										outputRange: [0, 75],
+										extrapolate: "clamp"
+									})
+								}
+							]
+						}
+					]}
+				>
+					<Action />
+				</Animated.View>
 			</ImageBackground>
 		</View>
 	);
@@ -254,6 +276,12 @@ const styles = StyleSheet.create({
 		backgroundColor: "black",
 		opacity: 0.1,
 		borderRadius: 4
+	},
+	actionContainer: {
+		position: "absolute",
+		left: 0,
+		bottom: 0,
+		width: "100%"
 	}
 });
 
