@@ -2,7 +2,7 @@
  * Root component for the business screen.
  */
 import React, { FC, useState } from "react";
-import { View, StyleSheet, Animated, LayoutChangeEvent, Image, Dimensions } from "react-native";
+import { View, StyleSheet, Animated, LayoutChangeEvent } from "react-native";
 import { useSelector } from "react-redux";
 import { getStatusBarHeight } from "react-native-status-bar-height";
 import { PanGestureHandler, PanGestureHandlerStateChangeEvent } from "react-native-gesture-handler";
@@ -14,8 +14,7 @@ import { getCurrentRecomData } from "../../redux/selectors";
 import dimension from "../../dimension";
 import GalleryDescription from "./GalleryDescription";
 import GalleryImage from "./GalleryImage";
-
-const { width } = Dimensions.get("window");
+import InfoCardAnimationManager from "./animationManager/infoCard";
 
 export enum DisplayState {
 	infoFull,
@@ -25,13 +24,7 @@ export enum DisplayState {
 }
 
 interface Props {
-	translateY: Animated.Value;
-	onLayout: (event: LayoutChangeEvent) => void;
-	onPanEvent: (...args: any[]) => void;
-	onPanStateChange: (event: PanGestureHandlerStateChangeEvent) => void;
-	translateYRange: number[];
-	onGalleryClick: () => void;
-	provideDisplayStateSetter: (setter: Function) => void;
+	infoCard: InfoCardAnimationManager;
 }
 
 const actionHeight = 75;
@@ -39,37 +32,26 @@ const bottomHeight = actionHeight + 44;
 const headerHeigh = 73 + getStatusBarHeight();
 const galleryDEscriptionY = bottomHeight + 24 + 100;
 const fullBorderRadius = 24;
-const galleryTransXOffset = -width - 24;
 
 const Screen: FC<Props> = props => {
 	const currentData = useSelector(getCurrentRecomData);
 	const [displayState, setDisplayState] = useState<DisplayState>(DisplayState.infoNormal);
 	const [galleryIndex, setGalleryIndex] = useState(1);
-	const {
-		translateY,
-		onPanEvent,
-		onPanStateChange,
-		onLayout,
-		translateYRange,
-		onGalleryClick,
-		provideDisplayStateSetter
-	} = props;
+	const { infoCard } = props;
 
-	provideDisplayStateSetter(setDisplayState);
+	infoCard.provideDisplayStateSetter(setDisplayState);
 
 	return (
-		<View style={styles.background} onTouchStart={onGalleryClick}>
-			{/* <ImageBackground
-				source={{ uri: currentData.gallery[galleryIndex].url }}
-				style={styles.background}
-            > */}
+		<View style={styles.background}>
 			<GalleryImage gallery={currentData.gallery} index={galleryIndex} />
+
+			<View style={styles.clickDetector} onTouchStart={infoCard.onGalleryClick} />
 
 			<Animated.View
 				style={{
 					transform: [
 						{
-							translateY: translateY.interpolate({
+							translateY: infoCard.translateY.interpolate({
 								inputRange: [0, bottomHeight],
 								outputRange: [0, -headerHeigh],
 								extrapolate: "clamp"
@@ -88,7 +70,7 @@ const Screen: FC<Props> = props => {
 					{
 						transform: [
 							{
-								translateY: translateY.interpolate({
+								translateY: infoCard.translateY.interpolate({
 									inputRange: [0, bottomHeight],
 									outputRange: [0, galleryDEscriptionY],
 									extrapolate: "clamp"
@@ -102,22 +84,25 @@ const Screen: FC<Props> = props => {
 					<GalleryDescription gallery={currentData.gallery} index={galleryIndex} />
 				)}
 			</Animated.View>
-			<PanGestureHandler onGestureEvent={onPanEvent} onHandlerStateChange={onPanStateChange}>
+			<PanGestureHandler
+				onGestureEvent={infoCard.onPanEvent}
+				onHandlerStateChange={infoCard.onPanStateChange}
+			>
 				<Animated.View
 					style={[
 						styles.infoCard,
 						{
 							transform: [
 								{
-									translateY: translateY.interpolate({
-										inputRange: translateYRange,
-										outputRange: translateYRange,
+									translateY: infoCard.translateY.interpolate({
+										inputRange: infoCard.translateYRange,
+										outputRange: infoCard.translateYRange,
 										extrapolate: "clamp"
 									})
 								}
 							],
-							borderRadius: translateY.interpolate({
-								inputRange: translateYRange,
+							borderRadius: infoCard.translateY.interpolate({
+								inputRange: infoCard.translateYRange,
 								outputRange: [
 									0,
 									fullBorderRadius,
@@ -133,7 +118,7 @@ const Screen: FC<Props> = props => {
 					<View style={styles.handleContainer}>
 						<View style={styles.handle} />
 					</View>
-					<Info currentBusiness={currentData} onLayout={onLayout} />
+					<Info currentBusiness={currentData} onLayout={infoCard.onLayout} />
 				</Animated.View>
 			</PanGestureHandler>
 			<Animated.View
@@ -142,15 +127,15 @@ const Screen: FC<Props> = props => {
 					{
 						transform: [
 							{
-								translateY: translateY.interpolate({
+								translateY: infoCard.translateY.interpolate({
 									inputRange: [0, bottomHeight],
 									outputRange: [0, actionHeight],
 									extrapolate: "clamp"
 								})
 							}
 						],
-						borderRadius: translateY.interpolate({
-							inputRange: translateYRange,
+						borderRadius: infoCard.translateY.interpolate({
+							inputRange: infoCard.translateYRange,
 							outputRange: [0, fullBorderRadius, fullBorderRadius, fullBorderRadius],
 							extrapolate: "clamp"
 						})
@@ -169,23 +154,13 @@ const styles = StyleSheet.create({
 	background: {
 		flex: 1
 	},
-	gallery: {
+	clickDetector: {
 		position: "absolute",
 		top: 0,
 		left: 0,
 		width: "100%",
 		height: "100%",
-		flexDirection: "row",
-		flexWrap: "nowrap"
-	},
-	image: {
-		width: "100%",
-		height: "100%"
-	},
-	imageSeparator: {
-		width: 24,
-		height: "100%",
-		backgroundColor: "black"
+		zIndex: 10
 	},
 	statusBarBlocker: {
 		height: getStatusBarHeight(),

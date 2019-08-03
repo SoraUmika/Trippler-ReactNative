@@ -2,15 +2,14 @@ import React, { FC } from "react";
 import { View, StyleSheet, Image, Animated, Dimensions } from "react-native";
 
 import { GalleryImageData } from "../../redux/state/Business";
-
-const { width } = Dimensions.get("window");
+import dimension from "../../dimension";
 
 interface Props {
 	gallery: GalleryImageData[];
 	index: number;
 }
 
-const galleryTransXOffset = -width - 24;
+const galleryTransXOffset = -dimension.width() - 24;
 
 const GalleryImage: FC<Props> = props => {
 	const { gallery, index } = props;
