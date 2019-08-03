@@ -174,6 +174,7 @@ interface Props {
 const Component: FC<Props> = props => {
 	const currentData = useSelector(getCurrentRecomData);
 	const [displayState, setDisplayState] = useState<DisplayState>(DisplayState.infoNormal);
+	const [galleryIndex, setGalleryIndex] = useState(0);
 	const {
 		translateY,
 		onPanEvent,
@@ -190,7 +191,10 @@ const Component: FC<Props> = props => {
 
 	return (
 		<View style={styles.background} onTouchStart={onGalleryClick}>
-			<ImageBackground source={{ uri: currentData.gallery[0].url }} style={styles.background}>
+			<ImageBackground
+				source={{ uri: currentData.gallery[galleryIndex].url }}
+				style={styles.background}
+			>
 				<Animated.View
 					style={{
 						transform: [
@@ -226,9 +230,9 @@ const Component: FC<Props> = props => {
 				>
 					{displayState >= DisplayState.galleryNormal && (
 						<GalleryDescription
-							text={currentData.gallery[0].description}
-							index={0}
-							imageNum={1}
+							text={currentData.gallery[galleryIndex].description}
+							index={galleryIndex}
+							imageNum={currentData.gallery.length}
 						/>
 					)}
 				</Animated.View>

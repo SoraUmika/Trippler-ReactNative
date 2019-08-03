@@ -20,6 +20,11 @@ const data: Businesses = {
 				url:
 					"https://cdn.vox-cdn.com/thumbor/JrW3NVsZfxSF6k6IMqGD6_tWUSc=/0x0:2048x1365/1200x800/filters:focal(861x520:1187x846)/cdn.vox-cdn.com/uploads/chorus_image/image/63306268/Gyu_Kaku.0.jpg",
 				description: "BEST BBQ EVER"
+			},
+			{
+				url:
+					"https://cdn.vox-cdn.com/thumbor/JrW3NVsZfxSF6k6IMqGD6_tWUSc=/0x0:2048x1365/1200x800/filters:focal(861x520:1187x846)/cdn.vox-cdn.com/uploads/chorus_image/image/63306268/Gyu_Kaku.0.jpg",
+				description: "BEST BBQ EVER"
 			}
 		]
 	},
