@@ -13,6 +13,7 @@ export default interface Business {
 	address: string;
 	hours: TimeRange[];
 	days: WeekDayNum[];
+	description: string;
 	gallery: [
 		{
 			url: string;

@@ -16,7 +16,7 @@ interface Props {
 
 const BusinessInfo: FC<Props> = props => {
 	const {
-		currentBusiness: { name, rating, ratingNum, hours, id },
+		currentBusiness: { name, rating, ratingNum, hours, id, description },
 		onLayout
 	} = props;
 	const isOpen = useSelector(getAreBusinessesOpen)[id];
@@ -29,9 +29,7 @@ const BusinessInfo: FC<Props> = props => {
 				<Text style={styles.ratingText}>{rating}</Text>
 				<Text style={styles.ratingNumText}> ({ratingNum})</Text>
 			</View>
-			<Text style={styles.descriptionText}>
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-			</Text>
+			<Text style={styles.descriptionText}>{description}</Text>
 			<DashLine />
 			<View style={styles.statusContainer}>
 				<Text style={styles.statusText}>{hours[0].toString()}</Text>

@@ -14,6 +14,7 @@ const data: Businesses = {
 		address: "40-52 Main St floor 2, Flushing, NY 11354",
 		hours: [new TimeRange(11, 30, 10, 45)],
 		days: [1, 2, 3],
+		description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
 		gallery: [
 			{
 				url:
@@ -31,6 +32,7 @@ const data: Businesses = {
 		address: "136-21 37th Avenue, Flushing, NY 11354",
 		hours: [new TimeRange(11, 0, 22, 30)],
 		days: [4, 5, 6],
+		description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
 		gallery: [
 			{
 				url: "http://images.foodmento.com/U3P1248F11148-1399142793-208.jpg",
@@ -46,6 +48,7 @@ const data: Businesses = {
 		address: "42-35 Main St, Flushing, NY 11355",
 		hours: [new TimeRange(9, 0, 22, 0)],
 		days: [1, 4, 5],
+		description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
 		gallery: [
 			{
 				url:
@@ -62,6 +65,7 @@ const data: Businesses = {
 		address: "136-20 38th Ave 2nd Floor, Flushing, NY 1134",
 		hours: [new TimeRange(11, 0, 22, 0)],
 		days: [1, 2, 3, 4, 5],
+		description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
 		gallery: [
 			{
 				url:
@@ -79,6 +83,7 @@ const data: Businesses = {
 		address: "45 Mott St, New York, NY 10013",
 		hours: [new TimeRange(7, 0, 22, 0)],
 		days: [1, 2, 3, 4, 5, 6, 0],
+		description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
 		gallery: [
 			{
 				url:
@@ -95,6 +100,7 @@ const data: Businesses = {
 		address: "111 ST NY, 11223",
 		hours: [new TimeRange(7, 0, 20, 0)],
 		days: [4, 5, 6, 0],
+		description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
 		gallery: [
 			{
 				url: "https://cdn.dribbble.com/users/371094/screenshots/3884115/ramen.jpg",
@@ -110,6 +116,7 @@ const data: Businesses = {
 		address: "222 ST NY, 12031",
 		hours: [new TimeRange(9, 0, 17, 0)],
 		days: [2, 3, 4, 5, 6, 0],
+		description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
 		gallery: [
 			{
 				url: "https://exploremcallen.com/wp-content/uploads/2018/05/mcallen-donut-day.jpg",
@@ -125,6 +132,7 @@ const data: Businesses = {
 		address: "333 ST NY, 11223",
 		hours: [new TimeRange(9, 0, 18, 0)],
 		days: [3, 4, 5],
+		description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
 		gallery: [
 			{
 				url:
