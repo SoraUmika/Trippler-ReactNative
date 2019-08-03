@@ -16,6 +16,7 @@ import Action from "./Action";
 import Header from "../../components/NavHeader";
 import { getCurrentRecomData } from "../../redux/selectors";
 import dimension from "../../dimension";
+import GalleryDescription from "./GalleryDescription";
 
 enum DisplayState {
 	infoFull,
@@ -150,7 +151,7 @@ const BusinessScreen: FC = () => {
 			}}
 			onPanEvent={onPanEvent}
 			onPanStateChange={onPanStateChange}
-			translateYRange={[translateYRange[0], translateYRange[3]]}
+			translateYRange={translateYRange}
 			onGalleryClick={onGalleryClick}
 		/>
 	);
@@ -161,7 +162,7 @@ interface Props {
 	onLayout: (event: LayoutChangeEvent) => void;
 	onPanEvent: (...args: any[]) => void;
 	onPanStateChange: (event: PanGestureHandlerStateChangeEvent) => void;
-	translateYRange: [number, number];
+	translateYRange: number[];
 	onGalleryClick: () => void;
 }
 
@@ -200,6 +201,28 @@ const Component: FC<Props> = props => {
 					<Header />
 					<View style={styles.headerShadow} />
 				</Animated.View>
+				<Animated.View
+					style={[
+						styles.galleryDescriptionContainer,
+						{
+							transform: [
+								{
+									translateY: translateY.interpolate({
+										inputRange: [0, 119],
+										outputRange: [0, 119 + 24 + 100],
+										extrapolate: "clamp"
+									})
+								}
+							]
+						}
+					]}
+				>
+					<GalleryDescription
+						text={currentData.gallery[0].description}
+						index={0}
+						imageNum={1}
+					/>
+				</Animated.View>
 				<PanGestureHandler
 					onGestureEvent={onPanEvent}
 					onHandlerStateChange={onPanStateChange}
@@ -219,7 +242,7 @@ const Component: FC<Props> = props => {
 								],
 								borderRadius: translateY.interpolate({
 									inputRange: translateYRange,
-									outputRange: [0, 24],
+									outputRange: [0, 24, 24, 24],
 									extrapolate: "clamp"
 								})
 							}
@@ -244,7 +267,12 @@ const Component: FC<Props> = props => {
 										extrapolate: "clamp"
 									})
 								}
-							]
+							],
+							borderRadius: translateY.interpolate({
+								inputRange: translateYRange,
+								outputRange: [0, 24, 24, 24],
+								extrapolate: "clamp"
+							})
 						}
 					]}
 				>
@@ -295,7 +323,17 @@ const styles = StyleSheet.create({
 		position: "absolute",
 		left: 0,
 		bottom: 0,
-		width: "100%"
+		width: "100%",
+		borderBottomLeftRadius: 0,
+		borderBottomRightRadius: 0,
+		backgroundColor: "#eee"
+	},
+	galleryDescriptionContainer: {
+		position: "absolute",
+		width: "100%",
+		left: 0,
+		bottom: 119 + 24,
+		alignItems: "center"
 	}
 });
 
