@@ -183,9 +183,23 @@ const Component: FC<Props> = props => {
 	return (
 		<View style={styles.background} onTouchStart={onGalleryClick}>
 			<ImageBackground source={{ uri: currentData.gallery[0].url }} style={styles.background}>
-				<View style={styles.statusBarBlocker} />
-				<Header />
-				<View style={styles.headerShadow} />
+				<Animated.View
+					style={{
+						transform: [
+							{
+								translateY: translateY.interpolate({
+									inputRange: [0, 119],
+									outputRange: [0, -73 - getStatusBarHeight()],
+									extrapolate: "clamp"
+								})
+							}
+						]
+					}}
+				>
+					<View style={styles.statusBarBlocker} />
+					<Header />
+					<View style={styles.headerShadow} />
+				</Animated.View>
 				<PanGestureHandler
 					onGestureEvent={onPanEvent}
 					onHandlerStateChange={onPanStateChange}
