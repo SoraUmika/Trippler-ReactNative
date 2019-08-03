@@ -15,12 +15,8 @@ const galleryTransXOffset = -dimension.width() - 24;
 
 const GalleryImage: FC<Props> = props => {
 	const { gallery, index, animation } = props;
-
-	const outputRange = [
-		index < gallery.length - 1 ? animation.imageWidth * -1 : dimension.width(-0.2),
-		0,
-		index ? animation.imageWidth : dimension.width(0.2)
-	];
+	const leftIndex = index ? index - 1 : gallery.length - 1;
+	const rightIndex = index == gallery.length - 1 ? 0 : index + 1;
 
 	return (
 		<Animated.View
@@ -31,7 +27,7 @@ const GalleryImage: FC<Props> = props => {
 						{
 							translateX: animation.translateX.interpolate({
 								inputRange: animation.translateXRange,
-								outputRange: outputRange,
+								outputRange: [animation.imageWidth * -1, animation.imageWidth],
 								extrapolate: "clamp"
 							})
 						},
@@ -42,19 +38,11 @@ const GalleryImage: FC<Props> = props => {
 				}
 			]}
 		>
-			{index ? (
-				<Image style={styles.image} source={{ uri: gallery[index - 1].url }} />
-			) : (
-				<View style={styles.image} />
-			)}
+			<Image style={styles.image} source={{ uri: gallery[leftIndex].url }} />
 			<View style={styles.imageSeparator} />
 			<Image style={styles.image} source={{ uri: gallery[index].url }} />
 			<View style={styles.imageSeparator} />
-			{index < gallery.length - 1 ? (
-				<Image style={styles.image} source={{ uri: gallery[index + 1].url }} />
-			) : (
-				<View style={styles.image} />
-			)}
+			<Image style={styles.image} source={{ uri: gallery[rightIndex].url }} />
 		</Animated.View>
 	);
 };
@@ -77,9 +65,7 @@ const styles = StyleSheet.create({
 	imageSeparator: {
 		width: 24,
 		height: "100%",
-		backgroundColor: "black",
-		borderColor: "black",
-		borderWidth: 1
+		backgroundColor: "black"
 	}
 });
 
