@@ -96,7 +96,6 @@ export default class InfoCardAnimationManager {
 	};
 
 	onGalleryClick = () => {
-        console.log('!');
 		if (!this.isInAnimation) {
 			this.direction = this.currentDisplayState < DisplayState.galleryFull ? 1 : -1;
 			this.update();

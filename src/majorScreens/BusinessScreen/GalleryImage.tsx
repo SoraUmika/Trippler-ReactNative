@@ -3,12 +3,15 @@ import { View, StyleSheet, Image, Animated } from "react-native";
 
 import { GalleryImageData } from "../../redux/state/Business";
 import GalleryAnimationManager from "./animationManager/gallery";
+import dimension from "../../dimension";
 
 interface Props {
 	gallery: GalleryImageData[];
 	index: number;
 	animation: GalleryAnimationManager;
 }
+
+const galleryTransXOffset = -dimension.width() - 24;
 
 const GalleryImage: FC<Props> = props => {
 	const { gallery, index, animation } = props;
@@ -20,7 +23,14 @@ const GalleryImage: FC<Props> = props => {
 				{
 					transform: [
 						{
-							translateX: animation.translateX
+							translateX: animation.translateX.interpolate({
+								inputRange: animation.translateXRange,
+								outputRange: [animation.imageWidth * -1, 0, animation.imageWidth],
+								extrapolate: "clamp"
+							})
+						},
+						{
+							translateX: galleryTransXOffset
 						}
 					]
 				}
@@ -34,7 +44,11 @@ const GalleryImage: FC<Props> = props => {
 			<View style={styles.imageSeparator} />
 			<Image style={styles.image} source={{ uri: gallery[index].url }} />
 			<View style={styles.imageSeparator} />
-			<Image style={styles.image} source={{ uri: gallery[index + 1].url }} />
+			{index < gallery.length - 1 ? (
+				<Image style={styles.image} source={{ uri: gallery[index + 1].url }} />
+			) : (
+				<View style={styles.image} />
+			)}
 		</Animated.View>
 	);
 };
@@ -51,7 +65,8 @@ const styles = StyleSheet.create({
 	},
 	image: {
 		width: "100%",
-		height: "100%"
+        height: "100%",
+        backgroundColor: "black"
 	},
 	imageSeparator: {
 		width: 24,

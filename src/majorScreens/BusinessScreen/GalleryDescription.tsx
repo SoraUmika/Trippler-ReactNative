@@ -1,34 +1,33 @@
 import React, { FC } from "react";
-import { View, StyleSheet, Text } from "react-native";
-import Swipeable from "react-native-gesture-handler/Swipeable";
+import { View, StyleSheet, Text, Animated } from "react-native";
+import { PanGestureHandler } from "react-native-gesture-handler";
 
 import { GalleryImageData } from "../../redux/state/Business";
+import GalleryAnimationManager from "./animationManager/gallery";
 
 interface Props {
 	index: number;
 	gallery: GalleryImageData[];
+	animation: GalleryAnimationManager;
 }
 
 const GalleryDescription: FC<Props> = props => {
-	const { index, gallery } = props;
+	const { index, gallery, animation } = props;
 
 	return (
-		<View style={styles.root} onTouchStart={evt => evt.stopPropagation()}>
-			<Swipeable
-				renderRightActions={() => (
-					<View style={{ width: 20, height: "100%", backgroundColor: "red" }} />
-				)}
-				onSwipeableRightWillOpen={() => console.log("right")}
-				onSwipeableLeftWillOpen={() => console.log("left")}
-			>
+		<PanGestureHandler
+			onGestureEvent={animation.onPanEvent}
+			onHandlerStateChange={animation.onPanStateChange}
+		>
+			<View style={styles.root} onTouchStart={evt => evt.stopPropagation()}>
 				<View style={styles.container}>
 					<Text style={styles.text}>{gallery[index].description}</Text>
 				</View>
-			</Swipeable>
-			<View style={styles.indexIndicatorContainer}>
-				{getIndexIndicators(index, gallery.length)}
+				<View style={styles.indexIndicatorContainer}>
+					{getIndexIndicators(index, gallery.length)}
+				</View>
 			</View>
-		</View>
+		</PanGestureHandler>
 	);
 };
 
@@ -52,12 +51,12 @@ const styles = StyleSheet.create({
 		borderRadius: 16,
 		padding: 16,
 		width: "80%",
-		height: 100
+		height: 100,
+		overflow: "hidden"
 	},
 	container: {
 		width: "100%",
-		height: "100%",
-		backgroundColor: "red"
+		height: "100%"
 	},
 	text: {
 		fontWeight: "500"
@@ -70,12 +69,12 @@ const styles = StyleSheet.create({
 	indexIndicator: {
 		width: 8,
 		height: 8,
-		backgroundColor: "#ccc",
+		backgroundColor: "#aaa",
 		borderRadius: 4,
 		marginRight: 4
 	},
 	indicatorActive: {
-		backgroundColor: "#aaa"
+		backgroundColor: "#888"
 	}
 });
 

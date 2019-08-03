@@ -38,10 +38,12 @@ const fullBorderRadius = 24;
 const Screen: FC<Props> = props => {
 	const currentData = useSelector(getCurrentRecomData);
 	const [displayState, setDisplayState] = useState<DisplayState>(DisplayState.infoNormal);
-	const [galleryIndex, setGalleryIndex] = useState(1);
+	const [galleryIndex, setGalleryIndex] = useState(0);
 	const { infoCard, gallery } = props;
 
 	infoCard.provideDisplayStateSetter(setDisplayState);
+	gallery.provideGalleryIndexSetter(setGalleryIndex);
+	gallery.updateGalleryLength(currentData.gallery.length);
 
 	return (
 		<View style={styles.background}>
@@ -83,7 +85,11 @@ const Screen: FC<Props> = props => {
 				]}
 			>
 				{displayState >= DisplayState.galleryNormal && (
-					<GalleryDescription gallery={currentData.gallery} index={galleryIndex} />
+					<GalleryDescription
+						gallery={currentData.gallery}
+						index={galleryIndex}
+						animation={gallery}
+					/>
 				)}
 			</Animated.View>
 			<PanGestureHandler
