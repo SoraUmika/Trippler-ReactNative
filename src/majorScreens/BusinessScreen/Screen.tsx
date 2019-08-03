@@ -2,7 +2,7 @@
  * Root component for the business screen.
  */
 import React, { FC, useState } from "react";
-import { View, StyleSheet, ImageBackground, Animated, LayoutChangeEvent } from "react-native";
+import { View, StyleSheet, Animated, LayoutChangeEvent, Image, Dimensions } from "react-native";
 import { useSelector } from "react-redux";
 import { getStatusBarHeight } from "react-native-status-bar-height";
 import { PanGestureHandler, PanGestureHandlerStateChangeEvent } from "react-native-gesture-handler";
@@ -13,6 +13,9 @@ import Header from "../../components/NavHeader";
 import { getCurrentRecomData } from "../../redux/selectors";
 import dimension from "../../dimension";
 import GalleryDescription from "./GalleryDescription";
+import GalleryImage from "./GalleryImage";
+
+const { width } = Dimensions.get("window");
 
 export enum DisplayState {
 	infoFull,
@@ -31,10 +34,17 @@ interface Props {
 	provideDisplayStateSetter: (setter: Function) => void;
 }
 
+const actionHeight = 75;
+const bottomHeight = actionHeight + 44;
+const headerHeigh = 73 + getStatusBarHeight();
+const galleryDEscriptionY = bottomHeight + 24 + 100;
+const fullBorderRadius = 24;
+const galleryTransXOffset = -width - 24;
+
 const Screen: FC<Props> = props => {
 	const currentData = useSelector(getCurrentRecomData);
 	const [displayState, setDisplayState] = useState<DisplayState>(DisplayState.infoNormal);
-	const [galleryIndex, setGalleryIndex] = useState(0);
+	const [galleryIndex, setGalleryIndex] = useState(1);
 	const {
 		translateY,
 		onPanEvent,
@@ -49,108 +59,108 @@ const Screen: FC<Props> = props => {
 
 	return (
 		<View style={styles.background} onTouchStart={onGalleryClick}>
-			<ImageBackground
+			{/* <ImageBackground
 				source={{ uri: currentData.gallery[galleryIndex].url }}
 				style={styles.background}
+            > */}
+			<GalleryImage gallery={currentData.gallery} index={galleryIndex} />
+
+			<Animated.View
+				style={{
+					transform: [
+						{
+							translateY: translateY.interpolate({
+								inputRange: [0, bottomHeight],
+								outputRange: [0, -headerHeigh],
+								extrapolate: "clamp"
+							})
+						}
+					]
+				}}
 			>
-				<Animated.View
-					style={{
+				<View style={styles.statusBarBlocker} />
+				<Header />
+				<View style={styles.headerShadow} />
+			</Animated.View>
+			<Animated.View
+				style={[
+					styles.galleryDescriptionContainer,
+					{
 						transform: [
 							{
 								translateY: translateY.interpolate({
-									inputRange: [0, 119],
-									outputRange: [0, -73 - getStatusBarHeight()],
+									inputRange: [0, bottomHeight],
+									outputRange: [0, galleryDEscriptionY],
 									extrapolate: "clamp"
 								})
 							}
 						]
-					}}
-				>
-					<View style={styles.statusBarBlocker} />
-					<Header />
-					<View style={styles.headerShadow} />
-				</Animated.View>
+					}
+				]}
+			>
+				{displayState >= DisplayState.galleryNormal && (
+					<GalleryDescription gallery={currentData.gallery} index={galleryIndex} />
+				)}
+			</Animated.View>
+			<PanGestureHandler onGestureEvent={onPanEvent} onHandlerStateChange={onPanStateChange}>
 				<Animated.View
 					style={[
-						styles.galleryDescriptionContainer,
+						styles.infoCard,
 						{
 							transform: [
 								{
 									translateY: translateY.interpolate({
-										inputRange: [0, 119],
-										outputRange: [0, 119 + 24 + 100],
-										extrapolate: "clamp"
-									})
-								}
-							]
-						}
-					]}
-				>
-					{displayState >= DisplayState.galleryNormal && (
-						<GalleryDescription
-							text={currentData.gallery[galleryIndex].description}
-							index={galleryIndex}
-							imageNum={currentData.gallery.length}
-						/>
-					)}
-				</Animated.View>
-				<PanGestureHandler
-					onGestureEvent={onPanEvent}
-					onHandlerStateChange={onPanStateChange}
-				>
-					<Animated.View
-						style={[
-							styles.infoCard,
-							{
-								transform: [
-									{
-										translateY: translateY.interpolate({
-											inputRange: translateYRange,
-											outputRange: translateYRange,
-											extrapolate: "clamp"
-										})
-									}
-								],
-								borderRadius: translateY.interpolate({
-									inputRange: translateYRange,
-									outputRange: [0, 24, 24, 24],
-									extrapolate: "clamp"
-								})
-							}
-						]}
-						onTouchStart={(evt: any) => evt.stopPropagation()}
-					>
-						<View style={styles.handleContainer}>
-							<View style={styles.handle} />
-						</View>
-						<Info currentBusiness={currentData} onLayout={onLayout} />
-					</Animated.View>
-				</PanGestureHandler>
-				<Animated.View
-					style={[
-						styles.actionContainer,
-						{
-							transform: [
-								{
-									translateY: translateY.interpolate({
-										inputRange: [0, 119],
-										outputRange: [0, 75],
+										inputRange: translateYRange,
+										outputRange: translateYRange,
 										extrapolate: "clamp"
 									})
 								}
 							],
 							borderRadius: translateY.interpolate({
 								inputRange: translateYRange,
-								outputRange: [0, 24, 24, 24],
+								outputRange: [
+									0,
+									fullBorderRadius,
+									fullBorderRadius,
+									fullBorderRadius
+								],
 								extrapolate: "clamp"
 							})
 						}
 					]}
 					onTouchStart={(evt: any) => evt.stopPropagation()}
 				>
-					<Action />
+					<View style={styles.handleContainer}>
+						<View style={styles.handle} />
+					</View>
+					<Info currentBusiness={currentData} onLayout={onLayout} />
 				</Animated.View>
-			</ImageBackground>
+			</PanGestureHandler>
+			<Animated.View
+				style={[
+					styles.actionContainer,
+					{
+						transform: [
+							{
+								translateY: translateY.interpolate({
+									inputRange: [0, bottomHeight],
+									outputRange: [0, actionHeight],
+									extrapolate: "clamp"
+								})
+							}
+						],
+						borderRadius: translateY.interpolate({
+							inputRange: translateYRange,
+							outputRange: [0, fullBorderRadius, fullBorderRadius, fullBorderRadius],
+							extrapolate: "clamp"
+						})
+					}
+				]}
+				onTouchStart={(evt: any) => evt.stopPropagation()}
+			>
+				<Action />
+			</Animated.View>
+			{/* </ImageBackground> */}
 		</View>
 	);
 };
@@ -158,6 +168,24 @@ const Screen: FC<Props> = props => {
 const styles = StyleSheet.create({
 	background: {
 		flex: 1
+	},
+	gallery: {
+		position: "absolute",
+		top: 0,
+		left: 0,
+		width: "100%",
+		height: "100%",
+		flexDirection: "row",
+		flexWrap: "nowrap"
+	},
+	image: {
+		width: "100%",
+		height: "100%"
+	},
+	imageSeparator: {
+		width: 24,
+		height: "100%",
+		backgroundColor: "black"
 	},
 	statusBarBlocker: {
 		height: getStatusBarHeight(),
@@ -176,7 +204,7 @@ const styles = StyleSheet.create({
 		width: "100%",
 		position: "absolute",
 		left: 0,
-		top: dimension.height() - 75 - 24 - 20
+		top: dimension.height() - bottomHeight
 	},
 	handleContainer: {
 		height: 24,
@@ -204,7 +232,7 @@ const styles = StyleSheet.create({
 		position: "absolute",
 		width: "100%",
 		left: 0,
-		bottom: 119 + 24,
+		bottom: bottomHeight + 24,
 		alignItems: "center"
 	}
 });

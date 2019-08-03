@@ -14,10 +14,12 @@ export default interface Business {
 	hours: TimeRange[];
 	days: WeekDayNum[];
 	description: string;
-	gallery: {
-		url: string;
-		description: string;
-	}[];
+	gallery: GalleryImageData[];
+}
+
+export interface GalleryImageData {
+	url: string;
+	description: string;
 }
 
 /**

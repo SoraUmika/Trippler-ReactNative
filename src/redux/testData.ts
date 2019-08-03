@@ -17,14 +17,18 @@ const data: Businesses = {
 		description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
 		gallery: [
 			{
+				url: "http://images.foodmento.com/U3P1248F11148-1399142793-208.jpg",
+				description: "Joes ShangHai"
+			},
+			{
 				url:
 					"https://cdn.vox-cdn.com/thumbor/JrW3NVsZfxSF6k6IMqGD6_tWUSc=/0x0:2048x1365/1200x800/filters:focal(861x520:1187x846)/cdn.vox-cdn.com/uploads/chorus_image/image/63306268/Gyu_Kaku.0.jpg",
 				description: "BEST BBQ EVER"
 			},
 			{
 				url:
-					"https://cdn.vox-cdn.com/thumbor/JrW3NVsZfxSF6k6IMqGD6_tWUSc=/0x0:2048x1365/1200x800/filters:focal(861x520:1187x846)/cdn.vox-cdn.com/uploads/chorus_image/image/63306268/Gyu_Kaku.0.jpg",
-				description: "BEST BBQ EVER"
+					"https://cdn.vox-cdn.com/thumbor/tDEOFSKAoWZibSnnns_EgzaEFGk=/0x0:2300x1533/1200x800/filters:focal(772x310:1140x678)/cdn.vox-cdn.com/uploads/chorus_image/image/61805805/dumplinggalaxy_dumplinghotpot.0.0.jpg",
+				description: "ITS DUMPLING!"
 			}
 		]
 	},

@@ -1,15 +1,16 @@
-import React, { FC, memo } from "react";
+import React, { FC } from "react";
 import { View, StyleSheet, Text } from "react-native";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 
+import { GalleryImageData } from "../../redux/state/Business";
+
 interface Props {
-	text: string;
 	index: number;
-	imageNum: number;
+	gallery: GalleryImageData[];
 }
 
 const GalleryDescription: FC<Props> = props => {
-	const { text, index, imageNum } = props;
+	const { index, gallery } = props;
 
 	return (
 		<View style={styles.root} onTouchStart={evt => evt.stopPropagation()}>
@@ -21,11 +22,11 @@ const GalleryDescription: FC<Props> = props => {
 				onSwipeableLeftWillOpen={() => console.log("left")}
 			>
 				<View style={styles.container}>
-					<Text style={styles.text}>{text}</Text>
+					<Text style={styles.text}>{gallery[index].description}</Text>
 				</View>
 			</Swipeable>
 			<View style={styles.indexIndicatorContainer}>
-				{getIndexIndicators(index, imageNum)}
+				{getIndexIndicators(index, gallery.length)}
 			</View>
 		</View>
 	);
@@ -55,8 +56,8 @@ const styles = StyleSheet.create({
 	},
 	container: {
 		width: "100%",
-        height: "100%",
-        backgroundColor: "red"
+		height: "100%",
+		backgroundColor: "red"
 	},
 	text: {
 		fontWeight: "500"
@@ -78,4 +79,4 @@ const styles = StyleSheet.create({
 	}
 });
 
-export default memo(GalleryDescription, (p, c) => p.text == c.text);
+export default GalleryDescription;
