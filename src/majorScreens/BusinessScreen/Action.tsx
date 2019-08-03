@@ -13,7 +13,7 @@ const Action: FC = () => {
 	const dispatch = useDispatch();
 
 	return (
-		<View style={styles.root}>
+		<View style={styles.root} onTouchStart={evt => evt.stopPropagation()}>
 			<Button height="100%" color={accentColor} style={styles.button}>
 				<View style={styles.buttonContent}>
 					<BookmarkBorder fill="white" />

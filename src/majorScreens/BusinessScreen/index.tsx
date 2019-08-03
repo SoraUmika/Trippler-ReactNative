@@ -35,7 +35,7 @@ const BusinessScreen: FC = () => {
 	// The value at index of `DisplayState.infoNormal`(1) is 0,
 	// because its value can't be known beforehand.
 	// Its value is determind by the `onLayout` callback below.
-	let translateYRange = [dimension.height(-1) + 187, 0, 0, 99];
+	let translateYRange = [dimension.height(-1) + 207, 0, 0, 119];
 	let currentDisplayState: DisplayState = DisplayState.infoNormal;
 	let isInAnimation = false;
 	// This variable describe how to move to the next `DisplayState`.
@@ -80,31 +80,47 @@ const BusinessScreen: FC = () => {
 
 	const onPanStateChange = (event: PanGestureHandlerStateChangeEvent) => {
 		if (event.nativeEvent.oldState == State.ACTIVE) {
-			let toValue;
-			// Calculate the `toValue` paramter.
-			if (direction == 0) {
-				// If the `DisplayState` didn't change, move to the origin.
-				toValue = 0;
-			} else {
-				// Get the difference between the y translations of current and next `DisplayState`.
-				toValue =
-					translateYRange[currentDisplayState + direction] -
-					translateYRange[currentDisplayState];
-			}
-			isInAnimation = true;
-			Animated.spring(translateY, {
-				toValue: toValue,
-				speed: 20,
-				// There will be no bounce if the expanded info page is moved and didn't trigger a
-				// change in `DisplayState`.
-				bounciness:
-					currentDisplayState == DisplayState.infoFull && !direction ? 0 : undefined
-			}).start(() => {
-				currentDisplayState += direction; // update `DisplayState`.
-				translateY.setOffset(translateYRange[currentDisplayState]); // update origin.
-				direction = 0;
-				isInAnimation = false;
-			});
+			update();
+		}
+	};
+
+	const update = () => {
+		let toValue;
+		// Calculate the `toValue` paramter.
+		if (direction == 0) {
+			// If the `DisplayState` didn't change, move to the origin.
+			toValue = 0;
+		} else {
+			// Get the difference between the y translations of current and next `DisplayState`.
+			console.log(
+				translateYRange[currentDisplayState],
+				" -> ",
+				translateYRange[currentDisplayState + direction]
+			);
+			toValue =
+				translateYRange[currentDisplayState + direction] -
+				translateYRange[currentDisplayState];
+		}
+		isInAnimation = true;
+		Animated.spring(translateY, {
+			toValue: toValue,
+			speed: 20,
+			// There will be no bounce if the expanded info page is moved and didn't trigger a
+			// change in `DisplayState`.
+			bounciness: currentDisplayState == DisplayState.infoFull && !direction ? 0 : undefined
+		}).start(() => {
+			currentDisplayState += direction;
+			translateY.extractOffset();
+			translateY.setOffset(translateYRange[currentDisplayState]);
+			direction = 0;
+			isInAnimation = false;
+		});
+	};
+
+	const onGalleryClick = () => {
+		if (!isInAnimation) {
+			direction = currentDisplayState < DisplayState.galleryFull ? 1 : -1;
+			update();
 		}
 	};
 
@@ -114,10 +130,11 @@ const BusinessScreen: FC = () => {
 			onLayout={e => {
 				const height = e.nativeEvent.layout.height;
 				if (height) {
+					const yTranslate = -height + 20;
 					if (currentDisplayState == DisplayState.infoNormal) {
 						isInAnimation = true;
 						Animated.spring(translateY, {
-							toValue: -height - translateYRange[DisplayState.infoNormal],
+							toValue: yTranslate - translateYRange[DisplayState.infoNormal],
 							speed: 20
 						}).start(() => {
 							translateY.setOffset(translateYRange[currentDisplayState]);
@@ -125,12 +142,13 @@ const BusinessScreen: FC = () => {
 							isInAnimation = false;
 						});
 					}
-					translateYRange[DisplayState.infoNormal] = -height;
+					translateYRange[DisplayState.infoNormal] = yTranslate;
 				}
 			}}
 			onPanEvent={onPanEvent}
 			onPanStateChange={onPanStateChange}
-			translateYRange={[translateYRange[0], translateYRange[1]]}
+			translateYRange={[translateYRange[0], translateYRange[3]]}
+			onGalleryClick={onGalleryClick}
 		/>
 	);
 };
@@ -141,6 +159,7 @@ interface Props {
 	onPanEvent: (...args: any[]) => void;
 	onPanStateChange: (event: PanGestureHandlerStateChangeEvent) => void;
 	translateYRange: [number, number];
+	onGalleryClick: () => void;
 }
 
 /**
@@ -149,41 +168,54 @@ interface Props {
  */
 const Component: FC<Props> = props => {
 	const currentData = useSelector(getCurrentRecomData);
-	const { translateY, onPanEvent, onPanStateChange, onLayout, translateYRange } = props;
+	const {
+		translateY,
+		onPanEvent,
+		onPanStateChange,
+		onLayout,
+		translateYRange,
+		onGalleryClick
+	} = props;
 
 	return (
-		<ImageBackground source={{ uri: currentData.gallery[0].url }} style={styles.background}>
-			<View style={styles.statusBarBlocker} />
-			<Header />
-			<View style={styles.headerShadow} />
-			<PanGestureHandler onGestureEvent={onPanEvent} onHandlerStateChange={onPanStateChange}>
-				<Animated.View
-					style={{
-						...styles.infoCard,
-						transform: [
-							{
-								translateY: translateY.interpolate({
-									inputRange: translateYRange,
-									outputRange: translateYRange,
-									extrapolate: "clamp"
-								})
-							}
-						],
-						borderRadius: translateY.interpolate({
-							inputRange: translateYRange,
-							outputRange: [0, 24],
-							extrapolate: "clamp"
-						})
-					}}
+		<View style={styles.background} onTouchStart={onGalleryClick}>
+			<ImageBackground source={{ uri: currentData.gallery[0].url }} style={styles.background}>
+				<View style={styles.statusBarBlocker} />
+				<Header />
+				<View style={styles.headerShadow} />
+				<PanGestureHandler
+					onGestureEvent={onPanEvent}
+					onHandlerStateChange={onPanStateChange}
 				>
-					<View style={styles.handleContainer}>
-						<View style={styles.handle} />
-					</View>
-					<Info currentBusiness={currentData} onLayout={onLayout} />
-				</Animated.View>
-			</PanGestureHandler>
-			<Action />
-		</ImageBackground>
+					<Animated.View
+						style={{
+							...styles.infoCard,
+							transform: [
+								{
+									translateY: translateY.interpolate({
+										inputRange: translateYRange,
+										outputRange: translateYRange,
+										extrapolate: "clamp"
+									})
+								}
+							],
+							borderRadius: translateY.interpolate({
+								inputRange: translateYRange,
+								outputRange: [0, 24],
+								extrapolate: "clamp"
+							})
+						}}
+						onTouchStart={(evt: any) => evt.stopPropagation()}
+					>
+						<View style={styles.handleContainer}>
+							<View style={styles.handle} />
+						</View>
+						<Info currentBusiness={currentData} onLayout={onLayout} />
+					</Animated.View>
+				</PanGestureHandler>
+				<Action />
+			</ImageBackground>
+		</View>
 	);
 };
 
@@ -208,7 +240,7 @@ const styles = StyleSheet.create({
 		width: "100%",
 		position: "absolute",
 		left: 0,
-		top: dimension.height() - 75 - 24
+		top: dimension.height() - 75 - 24 - 20
 	},
 	handleContainer: {
 		height: 24,

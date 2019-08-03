@@ -22,7 +22,7 @@ const AlphaNavHeader: FC<Props> = props => {
 	return (
 		<React.Fragment>
 			<FeedbackModal visible={feedbackOpen} onHide={() => setFeedbackOpen(false)} />
-			<View style={styles.root}>
+			<View style={styles.root} onTouchStart={evt => evt.stopPropagation()}>
 				<TouchableOpacity style={styles.button} onPress={() => setFeedbackOpen(true)}>
 					<Feedback fill="#47A025" width={32} height={32} />
 				</TouchableOpacity>
