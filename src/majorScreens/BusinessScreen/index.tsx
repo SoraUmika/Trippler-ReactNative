@@ -1,7 +1,7 @@
 /**
  * Root component for the business screen.
  */
-import React, { FC, memo } from "react";
+import React, { FC, memo, useState } from "react";
 import { View, StyleSheet, ImageBackground, Animated, LayoutChangeEvent } from "react-native";
 import { useSelector } from "react-redux";
 import { getStatusBarHeight } from "react-native-status-bar-height";
@@ -38,6 +38,7 @@ const BusinessScreen: FC = () => {
 	// Its value is determind by the `onLayout` callback below.
 	let translateYRange = [dimension.height(-1) + 207, 0, 0, 119];
 	let currentDisplayState: DisplayState = DisplayState.infoNormal;
+	let setCurrentDisplayState: Function = () => null;
 	let isInAnimation = false;
 	// This variable describe how to move to the next `DisplayState`.
 	// The new `DisplayState` is calculated by adding this variable to the old one.
@@ -95,16 +96,12 @@ const BusinessScreen: FC = () => {
 			toValue = 0;
 		} else {
 			// Get the difference between the y translations of current and next `DisplayState`.
-			console.log(
-				translateYRange[currentDisplayState],
-				" -> ",
-				translateYRange[currentDisplayState + direction]
-			);
 			toValue =
 				translateYRange[currentDisplayState + direction] -
 				translateYRange[currentDisplayState];
 		}
 		isInAnimation = true;
+		setCurrentDisplayState(currentDisplayState + direction);
 		const noBounce =
 			(currentDisplayState == DisplayState.infoFull && !direction) ||
 			(currentDisplayState == DisplayState.galleryNormal && direction == 1);
@@ -127,6 +124,8 @@ const BusinessScreen: FC = () => {
 			update();
 		}
 	};
+
+	const provideDisplayStateSetter = (setter: Function) => (setCurrentDisplayState = setter);
 
 	return (
 		<Component
@@ -153,6 +152,7 @@ const BusinessScreen: FC = () => {
 			onPanStateChange={onPanStateChange}
 			translateYRange={translateYRange}
 			onGalleryClick={onGalleryClick}
+			provideDisplayStateSetter={provideDisplayStateSetter}
 		/>
 	);
 };
@@ -164,6 +164,7 @@ interface Props {
 	onPanStateChange: (event: PanGestureHandlerStateChangeEvent) => void;
 	translateYRange: number[];
 	onGalleryClick: () => void;
+	provideDisplayStateSetter: (setter: Function) => void;
 }
 
 /**
@@ -172,14 +173,20 @@ interface Props {
  */
 const Component: FC<Props> = props => {
 	const currentData = useSelector(getCurrentRecomData);
+	const [displayState, setDisplayState] = useState<DisplayState>(DisplayState.infoNormal);
 	const {
 		translateY,
 		onPanEvent,
 		onPanStateChange,
 		onLayout,
 		translateYRange,
-		onGalleryClick
+		onGalleryClick,
+		provideDisplayStateSetter
 	} = props;
+
+	provideDisplayStateSetter(setDisplayState);
+
+	console.log(displayState);
 
 	return (
 		<View style={styles.background} onTouchStart={onGalleryClick}>
@@ -217,11 +224,13 @@ const Component: FC<Props> = props => {
 						}
 					]}
 				>
-					<GalleryDescription
-						text={currentData.gallery[0].description}
-						index={0}
-						imageNum={1}
-					/>
+					{displayState >= DisplayState.galleryNormal && (
+						<GalleryDescription
+							text={currentData.gallery[0].description}
+							index={0}
+							imageNum={1}
+						/>
+					)}
 				</Animated.View>
 				<PanGestureHandler
 					onGestureEvent={onPanEvent}
