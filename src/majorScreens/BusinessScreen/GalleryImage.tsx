@@ -1,18 +1,17 @@
 import React, { FC } from "react";
-import { View, StyleSheet, Image, Animated, Dimensions } from "react-native";
+import { View, StyleSheet, Image, Animated } from "react-native";
 
 import { GalleryImageData } from "../../redux/state/Business";
-import dimension from "../../dimension";
+import GalleryAnimationManager from "./animationManager/gallery";
 
 interface Props {
 	gallery: GalleryImageData[];
 	index: number;
+	animation: GalleryAnimationManager;
 }
 
-const galleryTransXOffset = -dimension.width() - 24;
-
 const GalleryImage: FC<Props> = props => {
-	const { gallery, index } = props;
+	const { gallery, index, animation } = props;
 
 	return (
 		<Animated.View
@@ -21,7 +20,7 @@ const GalleryImage: FC<Props> = props => {
 				{
 					transform: [
 						{
-							translateX: galleryTransXOffset - 100
+							translateX: animation.translateX
 						}
 					]
 				}

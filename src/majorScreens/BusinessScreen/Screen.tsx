@@ -2,10 +2,10 @@
  * Root component for the business screen.
  */
 import React, { FC, useState } from "react";
-import { View, StyleSheet, Animated, LayoutChangeEvent } from "react-native";
+import { View, StyleSheet, Animated } from "react-native";
 import { useSelector } from "react-redux";
 import { getStatusBarHeight } from "react-native-status-bar-height";
-import { PanGestureHandler, PanGestureHandlerStateChangeEvent } from "react-native-gesture-handler";
+import { PanGestureHandler } from "react-native-gesture-handler";
 
 import Info from "./Info";
 import Action from "./Action";
@@ -15,6 +15,7 @@ import dimension from "../../dimension";
 import GalleryDescription from "./GalleryDescription";
 import GalleryImage from "./GalleryImage";
 import InfoCardAnimationManager from "./animationManager/infoCard";
+import GalleryAnimationManager from "./animationManager/gallery";
 
 export enum DisplayState {
 	infoFull,
@@ -25,6 +26,7 @@ export enum DisplayState {
 
 interface Props {
 	infoCard: InfoCardAnimationManager;
+	gallery: GalleryAnimationManager;
 }
 
 const actionHeight = 75;
@@ -37,13 +39,13 @@ const Screen: FC<Props> = props => {
 	const currentData = useSelector(getCurrentRecomData);
 	const [displayState, setDisplayState] = useState<DisplayState>(DisplayState.infoNormal);
 	const [galleryIndex, setGalleryIndex] = useState(1);
-	const { infoCard } = props;
+	const { infoCard, gallery } = props;
 
 	infoCard.provideDisplayStateSetter(setDisplayState);
 
 	return (
 		<View style={styles.background}>
-			<GalleryImage gallery={currentData.gallery} index={galleryIndex} />
+			<GalleryImage gallery={currentData.gallery} index={galleryIndex} animation={gallery} />
 
 			<View style={styles.clickDetector} onTouchStart={infoCard.onGalleryClick} />
 
