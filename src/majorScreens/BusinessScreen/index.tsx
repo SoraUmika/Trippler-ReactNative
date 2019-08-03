@@ -275,6 +275,7 @@ const Component: FC<Props> = props => {
 							})
 						}
 					]}
+					onTouchStart={(evt: any) => evt.stopPropagation()}
 				>
 					<Action />
 				</Animated.View>

@@ -13,7 +13,7 @@ const Action: FC = () => {
 	const dispatch = useDispatch();
 
 	return (
-		<View style={styles.root} onTouchStart={evt => evt.stopPropagation()}>
+		<View style={styles.root}>
 			<Button height="100%" color={accentColor} style={styles.button}>
 				<View style={styles.buttonContent}>
 					<BookmarkBorder fill="white" />
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
 		padding: 8,
 		flexDirection: "row",
 		justifyContent: "space-around",
-		height: 75,
+		height: 75
 	},
 	button: {
 		flex: 1,
