@@ -40,4 +40,6 @@ export interface Recommendation {
 
 export interface App {
 	fontLoaded: boolean;
+	openedBusiness: "recommendation" | string;
+	galleryIndex: number;
 }

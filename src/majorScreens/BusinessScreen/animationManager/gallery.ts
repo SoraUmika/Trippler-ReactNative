@@ -63,4 +63,6 @@ export default class GalleryAnimationManager {
 	provideGalleryIndexSetter = (setter: Function) => (this.setGalleryIndex = setter);
 
 	updateGalleryLength = (length: number) => (this.galleryLength = length);
+
+	resetIndex = () => (this.currentGalleryIndex = 0);
 }
