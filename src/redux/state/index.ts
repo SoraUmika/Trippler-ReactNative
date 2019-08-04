@@ -13,9 +13,14 @@ export default interface State {
 	collection: Collection;
 	recommendation: Recommendation;
 	app: App;
+	server: Server
 }
-
 // sub states below.
+
+export interface Server{
+	isFetching: false, 
+	cache: {}
+}
 
 export interface Theme {
 	accentColor: string;
