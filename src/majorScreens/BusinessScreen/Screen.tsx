@@ -10,7 +10,7 @@ import { PanGestureHandler } from "react-native-gesture-handler";
 import Info from "./Info";
 import Action from "./Action";
 import Header from "../../components/NavHeader";
-import { getCurrentOpenedData } from "../../redux/selectors";
+import { getOpenedData } from "../../redux/selectors";
 import dimension from "../../dimension";
 import GalleryDescription from "./GalleryDescription";
 import GalleryImage from "./GalleryImage";
@@ -36,7 +36,7 @@ const galleryDEscriptionY = bottomHeight + 24 + 100;
 const fullBorderRadius = 24;
 
 const Screen: FC<Props> = props => {
-	const currentData = useSelector(getCurrentOpenedData);
+	const currentData = useSelector(getOpenedData);
 	const [displayState, setDisplayState] = useState<DisplayState>(DisplayState.infoNormal);
 	const [galleryIndex, setGalleryIndex] = useState(0);
 	const { infoCard, gallery } = props;

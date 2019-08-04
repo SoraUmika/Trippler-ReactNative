@@ -37,7 +37,7 @@ export const getOpenedBusinessId = (state: State) => state.app.openedBusinessId;
 
 export const getGalleryIndex = (state: State) => state.app.galleryIndex;
 
-export const getCurrentOpenedData = createSelector(
+export const getOpenedData = createSelector(
 	getBusinessData,
 	getRecomFeed,
 	getCurrentRecomIndex,

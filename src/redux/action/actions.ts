@@ -25,3 +25,11 @@ export const toggleCollectShowPin = createStandardAction("collection/TOGGLE_SHOW
 export const setCollectSearchInput = createStandardAction("collection/SET_SEARCH_INPUT")<string>();
 
 export const fontLoaded = createStandardAction("app/FONT_LOADED")();
+
+export const nextGalleryIndex = createStandardAction("app/NEXT_GALLERY_INDEX")<
+	"forward" | "backward"
+>();
+
+export const resetGalleryIndex = createStandardAction("app/RESET_GALLERY_INDEX")();
+
+export const openBusiness = createStandardAction("app/OPEN_BUSINESS")<null | string>();
