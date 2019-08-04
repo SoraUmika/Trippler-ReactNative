@@ -25,13 +25,14 @@ export default function app(state: App, action: RootAction, all: State): App {
 			return update(state, {
 				galleryIndex: nextIndex
 			});
-		case "app/RESET_GALLERY_INDEX":
+		case "recommendation/NEXT_RECOMMENDATION":
 			return update(state, {
 				galleryIndex: 0
 			});
 		case "app/OPEN_BUSINESS":
 			return update(state, {
-				openedBusinessId: action.payload
+				openedBusinessId: action.payload,
+				galleryIndex: 0
 			});
 		default:
 			return state;

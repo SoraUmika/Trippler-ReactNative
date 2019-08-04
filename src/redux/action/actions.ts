@@ -30,6 +30,4 @@ export const nextGalleryIndex = createStandardAction("app/NEXT_GALLERY_INDEX")<
 	"forward" | "backward"
 >();
 
-export const resetGalleryIndex = createStandardAction("app/RESET_GALLERY_INDEX")();
-
 export const openBusiness = createStandardAction("app/OPEN_BUSINESS")<null | string>();
