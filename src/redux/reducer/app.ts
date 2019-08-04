@@ -18,7 +18,7 @@ export default function app(state: App, action: RootAction, all: State): App {
 			if (action.payload == "forward" && state.galleryIndex == maxIndex) {
 				nextIndex = 0;
 			} else if (action.payload == "backward" && !state.galleryIndex) {
-				nextIndex = maxIndex - 1;
+				nextIndex = maxIndex;
 			} else {
 				nextIndex = state.galleryIndex + (action.payload == "forward" ? 1 : -1);
 			}
