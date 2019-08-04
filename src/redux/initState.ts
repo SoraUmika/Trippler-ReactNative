@@ -30,6 +30,9 @@ const init_state: State = {
 		fontLoaded: false,
 		openedBusinessId: null,
 		galleryIndex: 0
+	},
+	server: {
+		isFetching: false
 	}
 };
 
