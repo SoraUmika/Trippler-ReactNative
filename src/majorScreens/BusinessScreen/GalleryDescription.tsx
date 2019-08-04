@@ -64,17 +64,23 @@ const styles = StyleSheet.create({
 	indexIndicatorContainer: {
 		marginTop: "auto",
 		width: "100%",
-		flexDirection: "row"
+		flexDirection: "row",
+		alignItems: "center"
 	},
 	indexIndicator: {
-		width: 8,
-		height: 8,
+		width: 6,
+		height: 6,
 		backgroundColor: "#aaa",
-		borderRadius: 4,
-		marginRight: 4
+		borderRadius: 3,
+		margin: 2,
+		marginRight: 6
 	},
 	indicatorActive: {
-		backgroundColor: "#888"
+		backgroundColor: "#888",
+		width: 8,
+		height: 8,
+		borderRadius: 4,
+		marginRight: 4
 	}
 });
 
