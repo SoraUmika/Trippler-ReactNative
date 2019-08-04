@@ -32,7 +32,10 @@ const init_state: State = {
 		galleryIndex: 0
 	},
 	server: {
-		isFetching: false
+		isFetching: false,
+		cache: {
+			
+		}
 	}
 };
 
