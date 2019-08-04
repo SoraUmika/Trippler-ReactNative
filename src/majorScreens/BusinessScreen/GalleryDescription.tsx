@@ -15,19 +15,24 @@ const GalleryDescription: FC<Props> = props => {
 	const { index, gallery, animation } = props;
 
 	return (
-		<PanGestureHandler
-			onGestureEvent={animation.onPanEvent}
-			onHandlerStateChange={animation.onPanStateChange}
-		>
-			<View style={styles.root} onTouchStart={evt => evt.stopPropagation()}>
-				<View style={styles.container}>
-					<Text style={styles.text}>{gallery[index].description}</Text>
-				</View>
-				<View style={styles.indexIndicatorContainer}>
-					{getIndexIndicators(index, gallery.length)}
-				</View>
+		// <PanGestureHandler
+		// 	onGestureEvent={animation.onPanEvent}
+		// 	onHandlerStateChange={animation.onPanStateChange}
+		// >
+		<View style={styles.root} onTouchStart={evt => evt.stopPropagation()}>
+			<View style={styles.clickView} onTouchStart={() => animation.move(-1)} />
+			<View
+				style={[styles.clickView, styles.rightClickView]}
+				onTouchStart={() => animation.move(1)}
+			/>
+			<View style={styles.container}>
+				<Text style={styles.text}>{gallery[index].description}</Text>
 			</View>
-		</PanGestureHandler>
+			<View style={styles.indexIndicatorContainer}>
+				{getIndexIndicators(index, gallery.length)}
+			</View>
+		</View>
+		// </PanGestureHandler>
 	);
 };
 
@@ -81,6 +86,15 @@ const styles = StyleSheet.create({
 		height: 8,
 		borderRadius: 4,
 		marginRight: 4
+	},
+	clickView: {
+		position: "absolute",
+		width: "50%",
+		height: 100,
+		opacity: 0.5
+	},
+	rightClickView: {
+		right: 0
 	}
 });
 

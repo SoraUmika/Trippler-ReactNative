@@ -11,47 +11,44 @@ export default class GalleryAnimationManager {
 	currentGalleryIndex = 0;
 	imageWidth = dimension.width() + 24;
 	isInAnimation = false;
-	direction: -1 | 0 | 1 = 0;
+	// direction: -1 | 0 | 1 = 0;
 
 	constructor() {
-		this.translateX.addListener(({ value }) => {
-			if (!this.isInAnimation) {
-				this.direction = 0;
-				if (value >= 100) {
-					this.direction = -1;
-				} else if (value <= -100) {
-					this.direction = 1;
-				}
-			}
-		});
+		// this.translateX.addListener(({ value }) => {
+		// 	if (!this.isInAnimation) {
+		// 		this.direction = 0;
+		// 		if (value >= 100) {
+		// 			this.direction = -1;
+		// 		} else if (value <= -100) {
+		// 			this.direction = 1;
+		// 		}
+		// 	}
+		// });
 	}
 
-	onPanEvent = Animated.event([
-		{
-			nativeEvent: {
-				translationX: this.translateX
-			}
-		}
-	]);
+	// onPanEvent = Animated.event([
+	// 	{
+	// 		nativeEvent: {
+	// 			translationX: this.translateX
+	// 		}
+	// 	}
+	// ]);
 
-	onPanStateChange = (event: PanGestureHandlerStateChangeEvent) => {
-		if (event.nativeEvent.oldState == State.ACTIVE) {
-			this.update();
-		}
-	};
+	// onPanStateChange = (event: PanGestureHandlerStateChangeEvent) => {
+	// 	if (event.nativeEvent.oldState == State.ACTIVE) {
+	// 		this.update();
+	// 	}
+	// };
 
-	update = () => {
+	update = (direction: 1 | -1) => {
 		this.isInAnimation = true;
 		Animated.timing(this.translateX, {
-			toValue: this.imageWidth * this.direction * -1,
+			toValue: this.imageWidth * direction * -1,
 			easing: Easing.quad
 		}).start(() => {
 			this.translateX.setValue(0);
 			this.isInAnimation = false;
-			if (this.direction) {
-				store.dispatch(nextGalleryIndex(this.direction == 1 ? "forward" : "backward"));
-			}
-			this.direction = 0;
+			store.dispatch(nextGalleryIndex(direction == 1 ? "forward" : "backward"));
 		});
 	};
 
@@ -59,5 +56,5 @@ export default class GalleryAnimationManager {
 		this.currentGalleryIndex = index;
 	};
 
-	resetIndex = () => (this.currentGalleryIndex = 0);
+	move = (direction: 1 | -1) => this.update(direction);
 }
