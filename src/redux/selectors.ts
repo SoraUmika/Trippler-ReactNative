@@ -33,15 +33,21 @@ export const getCollectionFilter = (state: State) => state.collection.filter;
 
 export const getIsFontLoaded = (state: State) => state.app.fontLoaded;
 
-export const getCurrentRecomData = createSelector(
+export const getOpenedBusinessId = (state: State) => state.app.openedBusinessId;
+
+export const getGalleryIndex = (state: State) => state.app.galleryIndex;
+
+export const getCurrentOpenedData = createSelector(
 	getBusinessData,
 	getRecomFeed,
 	getCurrentRecomIndex,
-	(businessData, recomFeed, index) => businessData[recomFeed[index]]
+	getOpenedBusinessId,
+	(businessData, recomFeed, index, openedBusinessId) =>
+		openedBusinessId ? businessData[openedBusinessId] : businessData[recomFeed[index]]
 );
 
 // Return black or white depend on the backgroundColor state.
-//! Idk how it works btw :3
+//* Idk how it works btw :3
 export const getForegroundColor = createSelector(
 	getBackgroundColor,
 	bg => {
