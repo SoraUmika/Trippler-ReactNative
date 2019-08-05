@@ -12,7 +12,7 @@ import businesses from "./businesses";
 import collection from "./collection";
 import recommendation from "./recommendation";
 import app from "./app";
-import requests from "./requests"
+import requests from "./requests";
 
 export default function reducer(
 	state: States.default = initState,
@@ -21,7 +21,7 @@ export default function reducer(
 	console.log(
 		//! for debug.
 		Object.entries(action)
-			.map((val: string[]) => val.join(" = "))
+			.map((val: [string, string | null]) => val.join(" = "))
 			.join(", ")
 	);
 	return {

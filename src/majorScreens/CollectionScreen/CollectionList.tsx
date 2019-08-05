@@ -39,7 +39,7 @@ const CollectionList: FC = () => {
 			}}
 			ListHeaderComponent={Header}
 			removeClippedSubviews
-			getItemLayout={(data, index) => ({ length: 87, offset: 97 * index, index })}
+			getItemLayout={(data, index) => ({ length: 97, offset: 97 * index, index })}
 			ListFooterComponent={() => <Text style={styles.footerText}>hello</Text>}
 		/>
 	);
