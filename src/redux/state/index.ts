@@ -5,7 +5,7 @@ import Business from "./Business";
 import { SortMethod } from "../businessSortCompare";
 import { StrObj } from "../../util/type";
 import Filter from "./Filter";
-import * as serverType from './server'
+import * as requestTypes from './requests'
 
 // The root state,
 export default interface State {
@@ -14,14 +14,14 @@ export default interface State {
 	collection: Collection;
 	recommendation: Recommendation;
 	app: App;
-	server: Server
+	requests: Requests;
 }
 // sub states below.
 
-export interface Server{
-	grab_random_bussiness: serverType.RandomBussiness,
-	insert_new_user: serverType.NewUser,
-	login_authentication: serverType.LoginAuthentication
+export interface Requests{
+	grab_random_bussiness: requestTypes.RandomBussiness,
+	insert_new_user: requestTypes.NewUser,
+	login_authentication: requestTypes.LoginAuthentication
 }
 
 export interface Theme {

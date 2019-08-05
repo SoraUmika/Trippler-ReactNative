@@ -31,7 +31,8 @@ const init_state: State = {
 		openedBusinessId: null,
 		galleryIndex: 0
 	},
-	server: {
+	requests: {
+		//for requests, all the following data can be considered "cache" where the informations remain unless otherwise fetched
 		grab_random_bussiness: {
 			isFetching: false,
 		},

@@ -12,6 +12,7 @@ import businesses from "./businesses";
 import collection from "./collection";
 import recommendation from "./recommendation";
 import app from "./app";
+import requests from "./requests"
 
 export default function reducer(
 	state: States.default = initState,
@@ -28,6 +29,7 @@ export default function reducer(
 		businesses: businesses(state.businesses, action),
 		collection: collection(state.collection, action),
 		recommendation: recommendation(state.recommendation, action),
-		app: app(state.app, action, state)
+		app: app(state.app, action, state),
+		requests: requests(state.requests, action)
 	};
 }
