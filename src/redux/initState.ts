@@ -32,10 +32,21 @@ const init_state: State = {
 		galleryIndex: 0
 	},
 	server: {
-		isFetching: false,
-		cache: {
-			
+		grab_random_bussiness: {
+			isFetching: false,
+		},
+		insert_new_user: {
+			isFetching: false,
+			email: "undefined",
+			username: "undefined",
+			password: "undefined"
+		},
+		login_authentication: {
+			isFetching: false,
+			username: "undefined",
+			password: "undefined"
 		}
+		
 	}
 };
 
