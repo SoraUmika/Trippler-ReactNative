@@ -11,6 +11,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 
 import ArrowUpward from "../../svg/ArrowUpward";
+import Business from "../../svg/Business";
 import CenterView from "../../components/CenterView";
 import DeleteOutline from "../../svg/DeleteOutline";
 // import ArrowDownward from "../../svg/ArrowDownward";
@@ -95,6 +96,13 @@ const CollectionItem: FC<Props> = props => {
 							<Text style={styles.name}>{business.name}</Text>
 							{pinned && (
 								<ArrowUpward
+									fill={accentColor}
+									style={styles.pinIcon}
+									opacity={0.75}
+								/>
+							)}
+							{isRecom && (
+								<Business
 									fill={accentColor}
 									style={styles.pinIcon}
 									opacity={0.75}
