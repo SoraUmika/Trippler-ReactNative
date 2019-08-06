@@ -17,6 +17,7 @@ import GalleryDescription from "./GalleryDescription";
 import GalleryImage from "./GalleryImage";
 import InfoCardAnimationManager from "./animationManager/infoCard";
 import GalleryAnimationManager from "./animationManager/gallery";
+import Status from "./Status";
 
 export enum DisplayState {
 	infoFull,
@@ -32,7 +33,7 @@ interface Props {
 
 const actionHeight = 75;
 const bottomHeight = actionHeight + 44;
-const headerHeigh = 73 + getStatusBarHeight();
+const headerHeigh = 65 + 8 + 48 + getStatusBarHeight();
 const galleryDEscriptionY = bottomHeight + 24 + 100;
 const fullBorderRadius = 24;
 
@@ -68,6 +69,9 @@ const Screen: FC<Props> = props => {
 				<View style={styles.statusBarBlocker} />
 				<Header />
 				<View style={styles.headerShadow} />
+				<View style={styles.statusContainer}>
+					<Status type={openedType} />
+				</View>
 			</Animated.View>
 			<Animated.View
 				style={[
@@ -219,6 +223,9 @@ const styles = StyleSheet.create({
 		left: 0,
 		bottom: bottomHeight + 24,
 		alignItems: "center"
+	},
+	statusContainer: {
+		padding: 8
 	}
 });
 
