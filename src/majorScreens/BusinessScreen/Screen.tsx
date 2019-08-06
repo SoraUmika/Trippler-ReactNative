@@ -8,7 +8,7 @@ import { getStatusBarHeight } from "react-native-status-bar-height";
 import { PanGestureHandler } from "react-native-gesture-handler";
 
 import Info from "./Info";
-import Action from "./Action";
+import Action from "./RecomAction";
 import Header from "../../components/NavHeader";
 import { getOpenedData, getGalleryIndex, getOpenedType } from "../../redux/selectors";
 import dimension from "../../dimension";

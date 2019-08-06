@@ -11,7 +11,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 
 import ArrowUpward from "../../svg/ArrowUpward";
-import Business from "../../svg/Business";
+import Explore from "../../svg/Explore";
 import CenterView from "../../components/CenterView";
 import DeleteOutline from "../../svg/DeleteOutline";
 // import ArrowDownward from "../../svg/ArrowDownward";
@@ -112,7 +112,7 @@ const CollectionItem: FC<Props> = props => {
 								/>
 							)}
 							{isRecom && (
-								<Business
+								<Explore
 									fill={accentColor}
 									style={styles.pinIcon}
 									opacity={0.75}
