@@ -23,7 +23,7 @@ const init_state: State = {
 		searchInput: ""
 	},
 	recommendation: {
-		feeds: ["bqq", "joes", "dump", "loc2", "loc1"],
+		feeds: ["bbq", "joes", "dump", "loc2", "loc1"],
 		currentIndex: 0
 	},
 	app: {

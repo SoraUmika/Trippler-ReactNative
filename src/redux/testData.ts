@@ -6,7 +6,7 @@ import { Businesses } from "./state";
 import { TimeRange } from "../util/time";
 
 const data: Businesses = {
-	bqq: {
+	bbq: {
 		id: "bbq",
 		name: "Gyu-Kaku Japanese BBQ",
 		rating: 4.9,
