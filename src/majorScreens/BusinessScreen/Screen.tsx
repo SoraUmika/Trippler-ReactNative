@@ -8,7 +8,8 @@ import { getStatusBarHeight } from "react-native-status-bar-height";
 import { PanGestureHandler } from "react-native-gesture-handler";
 
 import Info from "./Info";
-import Action from "./RecomAction";
+import RecomAction from "./RecomAction";
+import CollectAction from "./CollectAction";
 import Header from "../../components/NavHeader";
 import { getOpenedData, getGalleryIndex, getOpenedType } from "../../redux/selectors";
 import dimension from "../../dimension";
@@ -151,7 +152,7 @@ const Screen: FC<Props> = props => {
 				]}
 				onTouchStart={(evt: any) => evt.stopPropagation()}
 			>
-				{openedType == "recommendation" && <Action />}
+				{openedType == "recommendation" ? <RecomAction /> : <CollectAction />}
 			</Animated.View>
 			{/* </ImageBackground> */}
 		</View>

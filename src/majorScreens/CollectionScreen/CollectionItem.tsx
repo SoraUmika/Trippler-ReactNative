@@ -47,7 +47,7 @@ const RightAction = (
 		<View style={styles.rightActionContainer}>
 			<TouchableOpacity style={styles.rightActionButton} onPress={onRemoved}>
 				<DeleteOutline fill="#D52941" />
-				<Text style={styles.rightActionDeleteText}>Delete</Text>
+				<Text style={styles.rightActionDeleteText}>Remove</Text>
 			</TouchableOpacity>
 			{/* {showPin && (
 				<TouchableOpacity

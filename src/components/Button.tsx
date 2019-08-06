@@ -15,9 +15,9 @@ import { StyleSheet, View, StyleProp, ViewStyle } from "react-native";
 import { objectsEqual } from "../util/object";
 
 interface Props {
-	color: string;
+	color?: string;
 	width?: number | string;
-	height: number | string;
+	height?: number | string;
 	onPress?: Function;
 	style?: StyleProp<ViewStyle>;
 }
@@ -41,7 +41,7 @@ export default class Button_ extends Component<Props, State> {
 	};
 
 	render() {
-		const { color, width, height, style, children } = this.props;
+		const { color = "black", width, height = "100%", style, children = null } = this.props;
 		const { down } = this.state;
 		return (
 			<View
