@@ -157,7 +157,7 @@ const Screen: FC<Props> = props => {
 				onTouchStart={(evt: any) => evt.stopPropagation()}
 			>
 				{openedType == "recommendation" ? (
-					<RecomAction />
+					<RecomAction businessId={currentData.id} />
 				) : (
 					<CollectAction businessId={currentData.id} />
 				)}

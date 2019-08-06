@@ -112,11 +112,7 @@ const CollectionItem: FC<Props> = props => {
 								/>
 							)}
 							{isRecom && (
-								<Explore
-									fill={accentColor}
-									style={styles.pinIcon}
-									opacity={0.75}
-								/>
+								<Explore fill={accentColor} style={styles.pinIcon} opacity={0.75} />
 							)}
 						</CenterView>
 						<View style={styles.statContainer}>
@@ -230,4 +226,4 @@ const styles = StyleSheet.create({
 	}
 });
 
-export default memo(CollectionItem, () => true);
+export default memo(CollectionItem, (p, n) => p.isRecom == n.isRecom);

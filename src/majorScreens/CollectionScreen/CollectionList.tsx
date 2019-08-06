@@ -26,6 +26,8 @@ const CollectionList: FC = () => {
 	const showPin = useSelector(getCollectionShowPin);
 	const recomId = useSelector(getCurrentRecomData).id;
 
+	console.log(recomId);
+
 	return (
 		<FlatList
 			data={items}
