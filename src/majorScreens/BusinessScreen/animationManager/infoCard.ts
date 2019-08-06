@@ -84,7 +84,6 @@ export default class InfoCardAnimationManager {
 			(this.currentDisplayState == DisplayState.galleryNormal && this.direction == 1);
 		Animated.spring(this.translateY, {
 			toValue: toValue,
-			speed: 20,
 			bounciness: noBounce ? 0 : undefined
 		}).start(() => {
 			this.currentDisplayState += this.direction;
@@ -111,8 +110,7 @@ export default class InfoCardAnimationManager {
 			if (this.currentDisplayState == DisplayState.infoNormal) {
 				this.isInAnimation = true;
 				Animated.spring(this.translateY, {
-					toValue: yTranslate - this.translateYRange[DisplayState.infoNormal],
-					speed: 20
+					toValue: yTranslate - this.translateYRange[DisplayState.infoNormal]
 				}).start(() => {
 					this.translateY.setOffset(this.translateYRange[this.currentDisplayState]);
 					this.translateY.setValue(0);
