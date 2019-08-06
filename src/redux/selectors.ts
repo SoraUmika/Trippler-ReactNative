@@ -46,6 +46,13 @@ export const getOpenedData = createSelector(
 		openedBusinessId ? businessData[openedBusinessId] : businessData[recomFeed[index]]
 );
 
+export const getCurrentRecomData = createSelector(
+	getBusinessData,
+	getRecomFeed,
+	getCurrentRecomIndex,
+	(data, feed, index) => data[feed[index]]
+);
+
 // Return black or white depend on the backgroundColor state.
 //* Idk how it works btw :3
 export const getForegroundColor = createSelector(
@@ -82,6 +89,7 @@ export const getAllCollectionItems = createSelector(
 	getCollectionSearchInput,
 	getCollectionFilter,
 	getAreBusinessesOpen,
+	getCurrentRecomData,
 	(
 		items,
 		pinnedItems,
@@ -90,12 +98,15 @@ export const getAllCollectionItems = createSelector(
 		showPin,
 		search,
 		filter,
-		openData
+		openData,
+		recomData
 	): [string[], number] => {
 		// If showPin is false, then no pinned item is rendered, so it is an empty array.
 		// All of the pinned item is then included in normal items.
 		let pinnedItemsCopy = showPin ? [...pinnedItems] : [];
-		let itemsCopy = showPin ? [...items] : [...pinnedItems, ...items];
+		let itemsCopy = showPin
+			? [...items, recomData.id]
+			: [...pinnedItems, ...items, recomData.id];
 
 		const isOrdered = getCompareFunc(sortMethod, businesses);
 

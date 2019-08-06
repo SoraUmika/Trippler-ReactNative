@@ -18,12 +18,12 @@ const init_state: State = {
 		},
 		sortMethod: "name",
 		showPin: false,
-		items: ["hello", "test", "bqq", "joes", "dump", "loc2", "loc1"],
+		items: ["hello", "test"],
 		pinnedItems: [":)"],
 		searchInput: ""
 	},
 	recommendation: {
-		feeds: ["bqq", "joes", "dump", "loc2", "test", "hello", ":)", "loc1"],
+		feeds: ["bqq", "joes", "dump", "loc2", "loc1"],
 		currentIndex: 0
 	},
 	app: {
@@ -34,7 +34,7 @@ const init_state: State = {
 	requests: {
 		//for requests, all the following data can be considered "cache" where the informations remain unless otherwise fetched
 		grab_random_bussiness: {
-			isFetching: false,
+			isFetching: false
 		},
 		insert_new_user: {
 			isFetching: false,
@@ -47,7 +47,6 @@ const init_state: State = {
 			username: "undefined",
 			password: "undefined"
 		}
-		
 	}
 };
 
