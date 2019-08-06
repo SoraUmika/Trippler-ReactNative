@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Text } from "react-native";
 
 import Explore from "../../svg/Explore";
 import BookmarkBorder from "../../svg/BookmarkBorder";
@@ -15,8 +15,10 @@ const Status: FC<Props> = props => {
 	return (
 		<View style={styles.root}>
 			{type == "collection" ? <BookmarkBorder /> : <Explore />}
+			<Text style={styles.text}>{type == "collection" ? "Saved" : "Recommended"}</Text>
 			<View style={styles.separator} />
 			<Restaurant />
+			<Text style={styles.text}>Restaurant</Text>
 		</View>
 	);
 };
@@ -29,14 +31,19 @@ const styles = StyleSheet.create({
 		opacity: 0.5,
 		borderRadius: 8,
 		marginRight: "auto",
-		flexDirection: "row"
+		flexDirection: "row",
+		alignItems: "center"
 	},
 	separator: {
 		width: 2,
 		height: 24,
 		backgroundColor: "black",
-		marginHorizontal: 4,
+		marginHorizontal: 8,
 		opacity: 0.5
+	},
+	text: {
+		marginLeft: 8,
+		fontWeight: "bold"
 	}
 });
 

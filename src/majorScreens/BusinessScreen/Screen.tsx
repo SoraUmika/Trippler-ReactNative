@@ -17,7 +17,7 @@ import GalleryDescription from "./GalleryDescription";
 import GalleryImage from "./GalleryImage";
 import InfoCardAnimationManager from "./animationManager/infoCard";
 import GalleryAnimationManager from "./animationManager/gallery";
-import Status from "./Status";
+import Type from "./Type";
 
 export enum DisplayState {
 	infoFull,
@@ -33,7 +33,8 @@ interface Props {
 
 const actionHeight = 75;
 const bottomHeight = actionHeight + 44;
-const headerHeigh = 65 + 8 + 48 + getStatusBarHeight();
+const headerHeigh = 65 + 8 + getStatusBarHeight();
+const typeY = 48 + headerHeigh;
 const galleryDEscriptionY = bottomHeight + 24 + 100;
 const fullBorderRadius = 24;
 
@@ -58,8 +59,8 @@ const Screen: FC<Props> = props => {
 					transform: [
 						{
 							translateY: infoCard.translateY.interpolate({
-								inputRange: [0, bottomHeight],
-								outputRange: [0, -headerHeigh],
+								inputRange: infoCard.translateYRange,
+								outputRange: [0, 0, -typeY, -typeY],
 								extrapolate: "clamp"
 							})
 						}
@@ -70,9 +71,10 @@ const Screen: FC<Props> = props => {
 				<Header />
 				<View style={styles.headerShadow} />
 				<View style={styles.statusContainer}>
-					<Status type={openedType} />
+					<Type type={openedType} />
 				</View>
 			</Animated.View>
+
 			<Animated.View
 				style={[
 					styles.galleryDescriptionContainer,
@@ -97,6 +99,7 @@ const Screen: FC<Props> = props => {
 					/>
 				)}
 			</Animated.View>
+
 			<PanGestureHandler
 				onGestureEvent={infoCard.onPanEvent}
 				onHandlerStateChange={infoCard.onPanStateChange}
@@ -134,6 +137,7 @@ const Screen: FC<Props> = props => {
 					<Info currentBusiness={currentData} onLayout={infoCard.onLayout} />
 				</Animated.View>
 			</PanGestureHandler>
+
 			<Animated.View
 				style={[
 					styles.actionContainer,
