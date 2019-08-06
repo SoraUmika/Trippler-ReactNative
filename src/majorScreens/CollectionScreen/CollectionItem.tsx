@@ -19,9 +19,15 @@ import {
 	getBusinessData,
 	getAccentColor,
 	getBackgroundColor,
-	getAreBusinessesOpen
+	getAreBusinessesOpen,
+	getOpenedData
 } from "../../redux/selectors";
-import { removedCollectItem, pinCollectItem, unPinCollectItem } from "../../redux/action/actions";
+import {
+	removedCollectItem,
+	pinCollectItem,
+	unPinCollectItem,
+	openBusiness
+} from "../../redux/action/actions";
 
 interface Props {
 	businessId: string;
@@ -62,7 +68,10 @@ const CollectionItem: FC<Props> = props => {
 	const isOpen = useSelector(getAreBusinessesOpen)[businessId];
 	const accentColor = useSelector(getAccentColor);
 	const backgroundColor = useSelector(getBackgroundColor);
+	const openedBusinessId = useSelector(getOpenedData).id;
 	const dispatch = useDispatch();
+
+	const isOpened = openedBusinessId == businessId;
 
 	return (
 		<Swipeable
@@ -85,8 +94,9 @@ const CollectionItem: FC<Props> = props => {
 					...styles.root,
 					backgroundColor: backgroundColor
 				}}
+				onTouchEnd={() => dispatch(openBusiness(isRecom ? null : businessId))}
 			>
-				{isRecom && (
+				{isOpened && (
 					<View style={{ ...styles.recomIndicator, backgroundColor: accentColor }} />
 				)}
 				<View style={styles.container}>
@@ -137,9 +147,9 @@ const styles = StyleSheet.create({
 		left: -100,
 		top: 0,
 		height: "100%",
-		width: 108,
-		borderTopRightRadius: 8,
-		borderBottomRightRadius: 8
+		width: 104,
+		borderTopRightRadius: 4,
+		borderBottomRightRadius: 4
 	},
 	container: {
 		flex: 1,
