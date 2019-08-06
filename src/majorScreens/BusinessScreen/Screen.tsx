@@ -10,7 +10,7 @@ import { PanGestureHandler } from "react-native-gesture-handler";
 import Info from "./Info";
 import Action from "./Action";
 import Header from "../../components/NavHeader";
-import { getOpenedData, getGalleryIndex } from "../../redux/selectors";
+import { getOpenedData, getGalleryIndex, getOpenedType } from "../../redux/selectors";
 import dimension from "../../dimension";
 import GalleryDescription from "./GalleryDescription";
 import GalleryImage from "./GalleryImage";
@@ -38,6 +38,7 @@ const fullBorderRadius = 24;
 const Screen: FC<Props> = props => {
 	const currentData = useSelector(getOpenedData);
 	const galleryIndex = useSelector(getGalleryIndex);
+	const openedType = useSelector(getOpenedType);
 	const [displayState, setDisplayState] = useState<DisplayState>(DisplayState.infoNormal);
 	const { infoCard, gallery } = props;
 
@@ -150,7 +151,7 @@ const Screen: FC<Props> = props => {
 				]}
 				onTouchStart={(evt: any) => evt.stopPropagation()}
 			>
-				<Action />
+				{openedType == "recommendation" && <Action />}
 			</Animated.View>
 			{/* </ImageBackground> */}
 		</View>
@@ -208,7 +209,8 @@ const styles = StyleSheet.create({
 		width: "100%",
 		borderBottomLeftRadius: 0,
 		borderBottomRightRadius: 0,
-		backgroundColor: "#eee"
+		backgroundColor: "#eee",
+		height: 75
 	},
 	galleryDescriptionContainer: {
 		position: "absolute",

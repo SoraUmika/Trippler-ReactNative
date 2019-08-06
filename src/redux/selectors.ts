@@ -46,6 +46,11 @@ export const getOpenedData = createSelector(
 		openedBusinessId ? businessData[openedBusinessId] : businessData[recomFeed[index]]
 );
 
+export const getOpenedType = createSelector(
+	getOpenedBusinessId,
+	openedBusinessId => (openedBusinessId == null ? "recommendation" : "collection")
+);
+
 export const getCurrentRecomData = createSelector(
 	getBusinessData,
 	getRecomFeed,
