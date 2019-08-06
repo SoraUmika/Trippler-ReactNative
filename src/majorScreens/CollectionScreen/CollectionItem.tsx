@@ -11,6 +11,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 
 import ArrowUpward from "../../svg/ArrowUpward";
+import Explore from "../../svg/Explore";
 import CenterView from "../../components/CenterView";
 import DeleteOutline from "../../svg/DeleteOutline";
 // import ArrowDownward from "../../svg/ArrowDownward";
@@ -18,14 +19,21 @@ import {
 	getBusinessData,
 	getAccentColor,
 	getBackgroundColor,
-	getAreBusinessesOpen
+	getAreBusinessesOpen,
+	getOpenedData
 } from "../../redux/selectors";
-import { removedCollectItem, pinCollectItem, unPinCollectItem } from "../../redux/action/actions";
+import {
+	removedCollectItem,
+	pinCollectItem,
+	unPinCollectItem,
+	openBusiness
+} from "../../redux/action/actions";
 
 interface Props {
 	businessId: string;
 	pinned?: boolean;
 	showPin?: boolean;
+	isRecom?: boolean;
 }
 
 const RightAction = (
@@ -39,7 +47,7 @@ const RightAction = (
 		<View style={styles.rightActionContainer}>
 			<TouchableOpacity style={styles.rightActionButton} onPress={onRemoved}>
 				<DeleteOutline fill="#D52941" />
-				<Text style={styles.rightActionDeleteText}>Delete</Text>
+				<Text style={styles.rightActionDeleteText}>Remove</Text>
 			</TouchableOpacity>
 			{/* {showPin && (
 				<TouchableOpacity
@@ -55,23 +63,29 @@ const RightAction = (
 };
 
 const CollectionItem: FC<Props> = props => {
-	const { businessId, pinned, showPin } = props;
+	const { businessId, pinned, showPin, isRecom } = props;
 	const business = useSelector(getBusinessData)[businessId];
 	const isOpen = useSelector(getAreBusinessesOpen)[businessId];
 	const accentColor = useSelector(getAccentColor);
 	const backgroundColor = useSelector(getBackgroundColor);
+	const openedBusinessId = useSelector(getOpenedData).id;
 	const dispatch = useDispatch();
+
+	const isOpened = openedBusinessId == businessId;
 
 	return (
 		<Swipeable
-			renderRightActions={() =>
-				RightAction(
-					() => dispatch(removedCollectItem(businessId)),
-					() => dispatch(pinCollectItem(businessId)),
-					() => dispatch(unPinCollectItem(businessId)),
-					showPin,
-					pinned
-				)
+			renderRightActions={
+				isRecom
+					? undefined
+					: () =>
+							RightAction(
+								() => dispatch(removedCollectItem(businessId)),
+								() => dispatch(pinCollectItem(businessId)),
+								() => dispatch(unPinCollectItem(businessId)),
+								showPin,
+								pinned
+							)
 			}
 			overshootFriction={8}
 		>
@@ -80,7 +94,11 @@ const CollectionItem: FC<Props> = props => {
 					...styles.root,
 					backgroundColor: backgroundColor
 				}}
+				onTouchEnd={() => dispatch(openBusiness(isRecom ? null : businessId))}
 			>
+				{isOpened && (
+					<View style={{ ...styles.recomIndicator, backgroundColor: accentColor }} />
+				)}
 				<View style={styles.container}>
 					<View style={styles.avatar} />
 					<View style={styles.description}>
@@ -92,6 +110,9 @@ const CollectionItem: FC<Props> = props => {
 									style={styles.pinIcon}
 									opacity={0.75}
 								/>
+							)}
+							{isRecom && (
+								<Explore fill={accentColor} style={styles.pinIcon} opacity={0.75} />
 							)}
 						</CenterView>
 						<View style={styles.statContainer}>
@@ -116,6 +137,15 @@ const styles = StyleSheet.create({
 	root: {
 		height: 80,
 		paddingHorizontal: 16
+	},
+	recomIndicator: {
+		position: "absolute",
+		left: -100,
+		top: 0,
+		height: "100%",
+		width: 104,
+		borderTopRightRadius: 4,
+		borderBottomRightRadius: 4
 	},
 	container: {
 		flex: 1,
@@ -196,4 +226,4 @@ const styles = StyleSheet.create({
 	}
 });
 
-export default memo(CollectionItem, () => true);
+export default memo(CollectionItem, (p, n) => p.isRecom == n.isRecom);

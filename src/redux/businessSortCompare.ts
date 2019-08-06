@@ -3,8 +3,8 @@
  * represented in their ids.
  * A sort compare or order compare function is a function that takes in a left and
  * right values, and determines if they are in right order.
- * 
- * See the `sort` and `sortedInsert` in util/array. 
+ *
+ * See the `sort` and `sortedInsert` in util/array.
  */
 import Business from "./state/Business";
 import { StrObj } from "../util/type";
@@ -25,10 +25,10 @@ export const BusinessCompareFunctions: StrObj<IsOrderedCompare<Business>> = {
 /**
  * Returns a sort compare function that is used to sort an array of
  * Business ids with given sorting method.
- * 
- * @param sortMethod The method of sorting. 
+ *
+ * @param sortMethod The method of sorting.
  * @param businesses The map between business id and Business object.
- * @returns A sort compare function that is used to sort an array of 
+ * @returns A sort compare function that is used to sort an array of
  * 			Business ids with given sorting method.
  */
 export default function getCompareFunc(

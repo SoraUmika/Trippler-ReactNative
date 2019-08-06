@@ -8,14 +8,16 @@ import { getStatusBarHeight } from "react-native-status-bar-height";
 import { PanGestureHandler } from "react-native-gesture-handler";
 
 import Info from "./Info";
-import Action from "./Action";
+import RecomAction from "./RecomAction";
+import CollectAction from "./CollectAction";
 import Header from "../../components/NavHeader";
-import { getOpenedData, getGalleryIndex } from "../../redux/selectors";
+import { getOpenedData, getGalleryIndex, getOpenedType } from "../../redux/selectors";
 import dimension from "../../dimension";
 import GalleryDescription from "./GalleryDescription";
 import GalleryImage from "./GalleryImage";
 import InfoCardAnimationManager from "./animationManager/infoCard";
 import GalleryAnimationManager from "./animationManager/gallery";
+import Status from "./Status";
 
 export enum DisplayState {
 	infoFull,
@@ -31,13 +33,14 @@ interface Props {
 
 const actionHeight = 75;
 const bottomHeight = actionHeight + 44;
-const headerHeigh = 73 + getStatusBarHeight();
+const headerHeigh = 65 + 8 + 48 + getStatusBarHeight();
 const galleryDEscriptionY = bottomHeight + 24 + 100;
 const fullBorderRadius = 24;
 
 const Screen: FC<Props> = props => {
 	const currentData = useSelector(getOpenedData);
 	const galleryIndex = useSelector(getGalleryIndex);
+	const openedType = useSelector(getOpenedType);
 	const [displayState, setDisplayState] = useState<DisplayState>(DisplayState.infoNormal);
 	const { infoCard, gallery } = props;
 
@@ -66,6 +69,9 @@ const Screen: FC<Props> = props => {
 				<View style={styles.statusBarBlocker} />
 				<Header />
 				<View style={styles.headerShadow} />
+				<View style={styles.statusContainer}>
+					<Status type={openedType} />
+				</View>
 			</Animated.View>
 			<Animated.View
 				style={[
@@ -150,7 +156,11 @@ const Screen: FC<Props> = props => {
 				]}
 				onTouchStart={(evt: any) => evt.stopPropagation()}
 			>
-				<Action />
+				{openedType == "recommendation" ? (
+					<RecomAction businessId={currentData.id} />
+				) : (
+					<CollectAction businessId={currentData.id} />
+				)}
 			</Animated.View>
 			{/* </ImageBackground> */}
 		</View>
@@ -208,7 +218,8 @@ const styles = StyleSheet.create({
 		width: "100%",
 		borderBottomLeftRadius: 0,
 		borderBottomRightRadius: 0,
-		backgroundColor: "#eee"
+		backgroundColor: "#eee",
+		height: 75
 	},
 	galleryDescriptionContainer: {
 		position: "absolute",
@@ -216,6 +227,9 @@ const styles = StyleSheet.create({
 		left: 0,
 		bottom: bottomHeight + 24,
 		alignItems: "center"
+	},
+	statusContainer: {
+		padding: 8
 	}
 });
 
