@@ -26,6 +26,7 @@ interface Props {
 	businessId: string;
 	pinned?: boolean;
 	showPin?: boolean;
+	isRecom?: boolean;
 }
 
 const RightAction = (
@@ -55,7 +56,7 @@ const RightAction = (
 };
 
 const CollectionItem: FC<Props> = props => {
-	const { businessId, pinned, showPin } = props;
+	const { businessId, pinned, showPin, isRecom } = props;
 	const business = useSelector(getBusinessData)[businessId];
 	const isOpen = useSelector(getAreBusinessesOpen)[businessId];
 	const accentColor = useSelector(getAccentColor);
@@ -64,14 +65,17 @@ const CollectionItem: FC<Props> = props => {
 
 	return (
 		<Swipeable
-			renderRightActions={() =>
-				RightAction(
-					() => dispatch(removedCollectItem(businessId)),
-					() => dispatch(pinCollectItem(businessId)),
-					() => dispatch(unPinCollectItem(businessId)),
-					showPin,
-					pinned
-				)
+			renderRightActions={
+				isRecom
+					? undefined
+					: () =>
+							RightAction(
+								() => dispatch(removedCollectItem(businessId)),
+								() => dispatch(pinCollectItem(businessId)),
+								() => dispatch(unPinCollectItem(businessId)),
+								showPin,
+								pinned
+							)
 			}
 			overshootFriction={8}
 		>
@@ -81,6 +85,9 @@ const CollectionItem: FC<Props> = props => {
 					backgroundColor: backgroundColor
 				}}
 			>
+				{isRecom && (
+					<View style={{ ...styles.recomIndicator, backgroundColor: accentColor }} />
+				)}
 				<View style={styles.container}>
 					<View style={styles.avatar} />
 					<View style={styles.description}>
@@ -116,6 +123,15 @@ const styles = StyleSheet.create({
 	root: {
 		height: 80,
 		paddingHorizontal: 16
+	},
+	recomIndicator: {
+		position: "absolute",
+		left: -100,
+		top: 0,
+		height: "100%",
+		width: 108,
+		borderTopRightRadius: 8,
+		borderBottomRightRadius: 8
 	},
 	container: {
 		flex: 1,

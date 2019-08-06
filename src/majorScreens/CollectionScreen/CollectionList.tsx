@@ -5,13 +5,14 @@
  * TODO edge transparency.
  */
 import React, { FC, memo } from "react";
-import { FlatList, View, StyleSheet, TextInput, Text } from "react-native";
+import { FlatList, View, StyleSheet, Text } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 
 import {
 	getCollectionShowPin,
 	getAllCollectionItems,
-	getCollectionSearchInput
+	getCollectionSearchInput,
+	getCurrentRecomData
 } from "../../redux/selectors";
 import { setCollectSearchInput } from "../../redux/action/actions";
 import CollectionItem from "./CollectionItem";
@@ -23,6 +24,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 const CollectionList: FC = () => {
 	const [items, pinnedItemLength] = useSelector(getAllCollectionItems);
 	const showPin = useSelector(getCollectionShowPin);
+	const recomId = useSelector(getCurrentRecomData).id;
 
 	return (
 		<FlatList
@@ -31,7 +33,9 @@ const CollectionList: FC = () => {
 				if (showPin && index < pinnedItemLength) {
 					return <CollectionItem businessId={item} pinned showPin />;
 				}
-				return <CollectionItem businessId={item} showPin={showPin} />;
+				return (
+					<CollectionItem businessId={item} showPin={showPin} isRecom={item == recomId} />
+				);
 			}}
 			keyExtractor={item => item}
 			ItemSeparatorComponent={() => {
