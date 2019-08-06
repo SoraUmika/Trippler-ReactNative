@@ -156,7 +156,11 @@ const Screen: FC<Props> = props => {
 				]}
 				onTouchStart={(evt: any) => evt.stopPropagation()}
 			>
-				{openedType == "recommendation" ? <RecomAction /> : <CollectAction />}
+				{openedType == "recommendation" ? (
+					<RecomAction />
+				) : (
+					<CollectAction businessId={currentData.id} />
+				)}
 			</Animated.View>
 			{/* </ImageBackground> */}
 		</View>

@@ -4,14 +4,27 @@ import { useDispatch } from "react-redux";
 
 import Button from "../../components/Button";
 import DeleteOutline from "../../svg/DeleteOutline";
-import { removedCollectItem } from "../../redux/action/actions";
+import { removedCollectItem, openBusiness } from "../../redux/action/actions";
 
-const Action: FC = () => {
+interface Props {
+	businessId: string;
+}
+
+const Action: FC<Props> = props => {
+	const { businessId } = props;
 	const dispatch = useDispatch();
 
 	return (
 		<View style={styles.root}>
-			<Button height="100%" color="black" style={styles.button}>
+			<Button
+				height="100%"
+				color="black"
+				style={styles.button}
+				onPress={() => {
+					dispatch(removedCollectItem(businessId));
+					dispatch(openBusiness(null));
+				}}
+			>
 				<View style={styles.buttonContent}>
 					<DeleteOutline fill="white" />
 					<Text style={styles.buttonText}>Remove</Text>

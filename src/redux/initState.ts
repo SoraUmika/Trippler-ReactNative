@@ -28,7 +28,7 @@ const init_state: State = {
 	},
 	app: {
 		fontLoaded: false,
-		openedBusinessId: null,
+		openedBusinessId: ":)",
 		galleryIndex: 0
 	},
 	requests: {
