@@ -1,11 +1,12 @@
 import Business from './Business'
 
 interface Fetch{
-    isFetching: boolean
+    isFetching: boolean,
+    err: string,
 }
 
 export interface RandomBussiness extends Fetch{
-
+    data: {}
 }
 
 export interface LoginAuthentication extends Fetch{

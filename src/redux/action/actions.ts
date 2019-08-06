@@ -31,3 +31,34 @@ export const nextGalleryIndex = createStandardAction("app/NEXT_GALLERY_INDEX")<
 >();
 
 export const openBusiness = createStandardAction("app/OPEN_BUSINESS")<null | string>();
+
+export const grabRandBussiness = () => {
+	return(dispatch: any, getState: any) => {
+		dispatch({type: 'getRandomBuss'})
+		fetch('http://35.168.17.106:3000/database', {
+			method: 'POST',
+			headers: {
+				"Content-Type": 'application/json',
+			},
+			body: JSON.stringify({type: 'grab_random_bussiness', message: 'wow'})
+		})
+		.then(res => res.json())
+		.then(data => {
+			if(data.ErrorFromServer){
+				console.log(data)
+				dispatch({type: 'fetchSuccess', payload: data})
+			}
+		})
+		.catch(err => {
+			dispatch({type: 'fetchFailure', payload: err})
+		})
+	}
+}
+
+export const insertNewUser = () => {
+
+}
+
+export const loginAuthentication = () => {
+
+} 

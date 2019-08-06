@@ -34,18 +34,22 @@ const init_state: State = {
 	requests: {
 		//for requests, all the following data can be considered "cache" where the informations remain unless otherwise fetched
 		grab_random_bussiness: {
-			isFetching: false
+			isFetching: false,
+			err: "None",
+			data: {}
 		},
 		insert_new_user: {
 			isFetching: false,
 			email: "undefined",
 			username: "undefined",
-			password: "undefined"
+			password: "undefined",
+			err: "None"
 		},
 		login_authentication: {
 			isFetching: false,
 			username: "undefined",
-			password: "undefined"
+			password: "undefined",
+			err: "None"
 		}
 	}
 };
