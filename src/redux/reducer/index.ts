@@ -18,12 +18,6 @@ export default function reducer(
 	state: States.default = initState,
 	action: RootAction
 ): States.default {
-	console.log(
-		//! for debug.
-		Object.entries(action)
-			.map((val: [string, string | null]) => val.join(" = "))
-			.join(", ")
-	);
 	return {
 		theme: theme(state.theme, action),
 		businesses: businesses(state.businesses, action),
