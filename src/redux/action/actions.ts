@@ -32,9 +32,13 @@ export const nextGalleryIndex = createStandardAction("app/NEXT_GALLERY_INDEX")<
 
 export const openBusiness = createStandardAction("app/OPEN_BUSINESS")<null | string>();
 
+export const requestRandBuss = createStandardAction('requests/RAND_BUSSINESS')()
+export const receiveRandBuss = createStandardAction('receive/RAND_BUSSINESS')<{}>()
+export const errorRandBuss = createStandardAction('error/RAND_BUSSINESS')<{}>()
+
 export const grabRandBussiness = () => {
 	return(dispatch: any, getState: any) => {
-		dispatch({type: 'getRandomBuss'})
+		dispatch({type: 'requests/RAND_BUSSINESS'})
 		fetch('http://35.168.17.106:3000/database', {
 			method: 'POST',
 			headers: {
@@ -46,11 +50,11 @@ export const grabRandBussiness = () => {
 		.then(data => {
 			if(data.ErrorFromServer){
 				console.log(data)
-				dispatch({type: 'fetchSuccess', payload: data})
+				dispatch({type: 'receive/RAND_BUSSINESS', payload: data})
 			}
 		})
 		.catch(err => {
-			dispatch({type: 'fetchFailure', payload: err})
+			dispatch({type: 'error/RAND_BUSSINESS', payload: err})
 		})
 	}
 }

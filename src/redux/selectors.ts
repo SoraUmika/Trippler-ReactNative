@@ -37,7 +37,7 @@ export const getOpenedBusinessId = (state: State) => state.app.openedBusinessId;
 
 export const getGalleryIndex = (state: State) => state.app.galleryIndex;
 
-export const getRequestedBuss = (state: State) => state.requests.grab_random_bussiness
+export const getRequestedBuss = (state: State) => state.requests.grab_random_bussiness.data
 
 export const getOpenedData = createSelector(
 	getBusinessData,
