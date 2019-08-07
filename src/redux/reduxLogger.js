@@ -11,7 +11,7 @@ export default function reduxLogger({ getState }) {
 				for (let state in prevState[stateGroup]) {
 					if (prevState[stateGroup][state] != nextState[stateGroup][state]) {
 						console.log(
-							`${stateGroup}.${state}\t${prevState[stateGroup][state]} -> ${nextState[stateGroup][state]}`
+							`${stateGroup}.${state}: ${prevState[stateGroup][state]} -> ${nextState[stateGroup][state]}`
 						);
 					}
 				}
