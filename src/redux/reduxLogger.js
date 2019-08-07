@@ -4,19 +4,21 @@ export default function reduxLogger({ getState }) {
 		const returnValue = next(action);
 		const nextState = getState();
 
-		console.log("-".repeat(40));
 		console.log(`${action.type} payload=${action.payload}`);
 		for (let stateGroup in prevState) {
 			if (prevState[stateGroup] != nextState[stateGroup]) {
 				for (let state in prevState[stateGroup]) {
 					if (prevState[stateGroup][state] != nextState[stateGroup][state]) {
 						console.log(
-							`${stateGroup}.${state}: ${prevState[stateGroup][state]} -> ${nextState[stateGroup][state]}`
+							`${stateGroup}.${state}: ${prevState[stateGroup][state]} -> ${
+								nextState[stateGroup][state]
+							}`
 						);
 					}
 				}
 			}
 		}
+		console.log("-".repeat(40));
 
 		return returnValue;
 	};
