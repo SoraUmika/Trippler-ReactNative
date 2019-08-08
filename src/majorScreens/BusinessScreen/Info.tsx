@@ -10,9 +10,9 @@ import StarBorder from "../../svg/StarBorder";
 import DashLine from "../../components/DashLine";
 import { getAreBusinessesOpen } from "../../redux/selectors";
 
-//testing
+//testing(delete if needed)
 import { grabRandBussiness } from "../../redux/action/actions";
-import { getRequestedBuss, getFetchStatus } from "../../redux/selectors";
+import { getRequestedBuss, getFetchStatus, getFetchError } from "../../redux/selectors";
 //testing
 
 interface Props {
@@ -31,6 +31,7 @@ const BusinessInfo: FC<Props> = props => {
 	const dispatch = useDispatch()
 	const data = useSelector(getRequestedBuss)
 	const fetchStatus = useSelector(getFetchStatus)
+	const fetchError = useSelector(getFetchError)
 	//TEST
 
 	return (
@@ -50,7 +51,7 @@ const BusinessInfo: FC<Props> = props => {
 
 			{/* testing */}
 			<View style={styles.testingPurpose}>
-				<Text style={{color: 'white'}}>{JSON.stringify(data)}</Text>
+				<Text style={{color: 'white'}}>{JSON.stringify(data)}{" \nErrorStatus: " + JSON.stringify(fetchError)}</Text>
 			</View>
 			<Button title={"Fetching Status: " + fetchStatus.toString()} onPress={() => dispatch(grabRandBussiness())}/> 
 			{/* testing */}

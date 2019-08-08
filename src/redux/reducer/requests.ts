@@ -6,12 +6,12 @@ export default function requests(state: Requests, action: RootAction): Requests 
     switch(action.type){
         case 'requests/RAND_BUSSINESS':
             return Object.assign({}, state, {
-                grab_random_bussiness: {isFetching: true, err: "None", data: {}}
+                grab_random_bussiness: {isFetching: true, err: "No Error", data: {}}
             })
 
         case "receive/RAND_BUSSINESS":
             return Object.assign({}, state, {
-                grab_random_bussiness: {isFetching: false, err: "None", data: action.payload}
+                grab_random_bussiness: {isFetching: false, err: "No Error", data: action.payload}
             })
         
         case "error/RAND_BUSSINESS":

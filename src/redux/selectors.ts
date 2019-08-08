@@ -39,6 +39,10 @@ export const getGalleryIndex = (state: State) => state.app.galleryIndex;
 
 export const getRequestedBuss = (state: State) => state.requests.grab_random_bussiness.data
 
+export const getFetchStatus = (state: State) => state.requests.grab_random_bussiness.isFetching
+
+export const getFetchError = (state: State) => state.requests.grab_random_bussiness.err
+
 export const getOpenedData = createSelector(
 	getBusinessData,
 	getRecomFeed,

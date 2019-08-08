@@ -35,7 +35,7 @@ const init_state: State = {
 		//for requests, all the following data can be considered "cache" where the informations remain unless otherwise fetched
 		grab_random_bussiness: {
 			isFetching: false,
-			err: "None",
+			err: "No Error",
 			data: {}
 		},
 		insert_new_user: {
