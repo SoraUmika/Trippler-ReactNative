@@ -31,7 +31,6 @@ const BusinessInfo: FC<Props> = props => {
 	const dispatch = useDispatch()
 	const data = useSelector(getRequestedBuss)
 	const fetchStatus = useSelector(getFetchStatus)
-	console.log(data)
 	//TEST
 
 	return (
