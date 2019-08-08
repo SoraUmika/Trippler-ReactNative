@@ -1,6 +1,7 @@
 import React, { FC } from "react";
-import { View, StyleSheet, Text, LayoutChangeEvent } from "react-native";
+import { View, StyleSheet, Text, LayoutChangeEvent, Button } from "react-native";
 import { useSelector } from "react-redux";
+import { useDispatch } from 'react-redux'
 
 import Business from "../../redux/state/Business";
 import Star from "../../svg/Star";
@@ -8,6 +9,11 @@ import StarHalf from "../../svg/StarHalf";
 import StarBorder from "../../svg/StarBorder";
 import DashLine from "../../components/DashLine";
 import { getAreBusinessesOpen } from "../../redux/selectors";
+
+//testing
+import { grabRandBussiness } from "../../redux/action/actions";
+import { getRequestedBuss, getFetchStatus } from "../../redux/selectors";
+//testing
 
 interface Props {
 	currentBusiness: Business;
@@ -20,6 +26,13 @@ const BusinessInfo: FC<Props> = props => {
 		onLayout
 	} = props;
 	const isOpen = useSelector(getAreBusinessesOpen)[id];
+	
+	//TEST
+	const dispatch = useDispatch()
+	const data = useSelector(getRequestedBuss)
+	const fetchStatus = useSelector(getFetchStatus)
+	console.log(data)
+	//TEST
 
 	return (
 		<View style={styles.root} onLayout={onLayout}>
@@ -35,6 +48,14 @@ const BusinessInfo: FC<Props> = props => {
 				<Text style={styles.statusText}>{hours[0].toString()}</Text>
 				<Text style={styles.statusText}>Currently {isOpen ? "open" : "close"}</Text>
 			</View>
+
+			{/* testing */}
+			<View style={styles.testingPurpose}>
+				<Text style={{color: 'white'}}>{JSON.stringify(data)}</Text>
+			</View>
+			<Button title={"Fetching Status: " + fetchStatus.toString()} onPress={() => dispatch(grabRandBussiness())}/> 
+			{/* testing */}
+
 		</View>
 	);
 };
@@ -94,7 +115,18 @@ const styles = StyleSheet.create({
 		width: "50%",
 		fontSize: 16,
 		opacity: 0.5
+	},
+	
+	//tesing
+	testingPurpose: {
+		backgroundColor: 'black', 
+		position: 'absolute', 
+		width: '100%', 
+		height: '95%', 
+		marginLeft: 24,
+		flexDirection: 'column-reverse',
 	}
+	//testing
 });
 
 export default BusinessInfo;

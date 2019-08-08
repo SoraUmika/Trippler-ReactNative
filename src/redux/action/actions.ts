@@ -38,7 +38,7 @@ export const errorRandBuss = createStandardAction('error/RAND_BUSSINESS')<{}>()
 
 export const grabRandBussiness = () => {
 	return(dispatch: any, getState: any) => {
-		dispatch({type: 'requests/RAND_BUSSINESS'})
+		dispatch(requestRandBuss())
 		fetch('http://35.168.17.106:3000/database', {
 			method: 'POST',
 			headers: {
@@ -50,11 +50,12 @@ export const grabRandBussiness = () => {
 		.then(data => {
 			if(data.ErrorFromServer){
 				console.log(data)
-				dispatch({type: 'receive/RAND_BUSSINESS', payload: data})
+			}else{
+				dispatch(receiveRandBuss(data))
 			}
 		})
 		.catch(err => {
-			dispatch({type: 'error/RAND_BUSSINESS', payload: err})
+			dispatch(errorRandBuss(err))
 		})
 	}
 }
