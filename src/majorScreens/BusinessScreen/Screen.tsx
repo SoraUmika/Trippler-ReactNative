@@ -54,12 +54,11 @@ const Screen: FC<Props> = props => {
 
 			<View
 				style={styles.clickDetector}
-				onTouchStart={() => {
-					console.log(displayState);
+				onTouchStart={() => 
 					setDisplayState(
 						displayState + (displayState < DisplayState.galleryFull ? 1 : -2)
-					);
-				}}
+					)
+				}
 			/>
 
 			<View style={StyleSheet.absoluteFill}>
