@@ -1,29 +1,30 @@
 import React, { FC } from "react";
 import { View, StyleSheet, Text, Animated } from "react-native";
 import { PanGestureHandler } from "react-native-gesture-handler";
+import { useDispatch } from "react-redux";
 
 import { GalleryImageData } from "../../redux/state/Business";
 import GalleryAnimationManager from "./animationManager/gallery";
+import { nextGalleryIndex } from "../../redux/action/actions";
 
 interface Props {
 	index: number;
 	gallery: GalleryImageData[];
-	animation: GalleryAnimationManager;
 }
 
 const GalleryDescription: FC<Props> = props => {
-	const { index, gallery, animation } = props;
+	const { index, gallery } = props;
+	const dispatch = useDispatch();
 
 	return (
-		// <PanGestureHandler
-		// 	onGestureEvent={animation.onPanEvent}
-		// 	onHandlerStateChange={animation.onPanStateChange}
-		// >
 		<View style={styles.root} onTouchStart={evt => evt.stopPropagation()}>
-			<View style={styles.clickView} onTouchStart={() => animation.move(-1)} />
+			<View
+				style={styles.clickView}
+				onTouchStart={() => dispatch(nextGalleryIndex("backward"))}
+			/>
 			<View
 				style={[styles.clickView, styles.rightClickView]}
-				onTouchStart={() => animation.move(1)}
+				onTouchStart={() => dispatch(nextGalleryIndex("forward"))}
 			/>
 			<View style={styles.container}>
 				<Text style={styles.text}>{gallery[index].description}</Text>
@@ -32,7 +33,6 @@ const GalleryDescription: FC<Props> = props => {
 				{getIndexIndicators(index, gallery.length)}
 			</View>
 		</View>
-		// </PanGestureHandler>
 	);
 };
 

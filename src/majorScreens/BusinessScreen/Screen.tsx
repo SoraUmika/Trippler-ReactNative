@@ -26,147 +26,76 @@ export enum DisplayState {
 	galleryFull
 }
 
-interface Props {
-	infoCard: InfoCardAnimationManager;
-	gallery: GalleryAnimationManager;
-}
-
-const actionHeight = 75;
-const bottomHeight = actionHeight + 44;
-const headerHeigh = 65 + 8 + getStatusBarHeight();
-const typeY = 48 + headerHeigh;
-const galleryDEscriptionY = bottomHeight + 24 + 100;
-const fullBorderRadius = 24;
+interface Props {}
 
 const Screen: FC<Props> = props => {
 	const currentData = useSelector(getOpenedData);
 	const galleryIndex = useSelector(getGalleryIndex);
 	const openedType = useSelector(getOpenedType);
+	const [infoHeight, setInfoHeight] = useState<number>(0);
 	const [displayState, setDisplayState] = useState<DisplayState>(DisplayState.infoNormal);
-	const { infoCard, gallery } = props;
 
-	infoCard.provideDisplayStateSetter(setDisplayState);
-	gallery.updateGalleryIndex(galleryIndex);
+	let infoCardTop = dimension.height();
+
+	switch (displayState) {
+		case DisplayState.infoFull:
+			infoCardTop = 207;
+			break;
+		case DisplayState.infoNormal:
+			infoCardTop -= infoHeight;
+		case DisplayState.galleryNormal:
+			infoCardTop -= 119;
+			break;
+	}
 
 	return (
 		<View style={styles.background}>
-			<GalleryImage gallery={currentData.gallery} index={galleryIndex} animation={gallery} />
+			<GalleryImage gallery={currentData.gallery} index={galleryIndex} />
 
-			<View style={styles.clickDetector} onTouchStart={infoCard.onGalleryClick} />
-
-			<Animated.View
-				style={{
-					transform: [
-						{
-							translateY: infoCard.translateY.interpolate({
-								inputRange: infoCard.translateYRange,
-								outputRange: [0, 0, -typeY, -typeY],
-								extrapolate: "clamp"
-							})
-						}
-					]
+			<View
+				style={styles.clickDetector}
+				onTouchStart={() => {
+					console.log(displayState);
+					setDisplayState(
+						displayState + (displayState < DisplayState.galleryFull ? 1 : -1)
+					);
 				}}
-			>
+			/>
+
+			<View style={StyleSheet.absoluteFill}>
 				<View style={styles.statusBarBlocker} />
 				<Header />
 				<View style={styles.headerShadow} />
-				<View style={styles.statusContainer}>
-					<Type type={openedType} />
-				</View>
-			</Animated.View>
+			</View>
 
-			<Animated.View
-				style={[
-					styles.galleryDescriptionContainer,
-					{
-						transform: [
-							{
-								translateY: infoCard.translateY.interpolate({
-									inputRange: [0, bottomHeight],
-									outputRange: [0, galleryDEscriptionY],
-									extrapolate: "clamp"
-								})
-							}
-						]
-					}
-				]}
-			>
+			<View style={styles.galleryDescriptionContainer}>
 				{displayState >= DisplayState.galleryNormal && (
-					<GalleryDescription
-						gallery={currentData.gallery}
-						index={galleryIndex}
-						animation={gallery}
-					/>
+					<GalleryDescription gallery={currentData.gallery} index={galleryIndex} />
 				)}
-			</Animated.View>
+			</View>
 
-			<PanGestureHandler
-				onGestureEvent={infoCard.onPanEvent}
-				onHandlerStateChange={infoCard.onPanStateChange}
-			>
-				<Animated.View
-					style={[
-						styles.infoCard,
-						{
-							transform: [
-								{
-									translateY: infoCard.translateY.interpolate({
-										inputRange: infoCard.translateYRange,
-										outputRange: infoCard.translateYRange,
-										extrapolate: "clamp"
-									})
-								}
-							],
-							borderRadius: infoCard.translateY.interpolate({
-								inputRange: infoCard.translateYRange,
-								outputRange: [
-									0,
-									fullBorderRadius,
-									fullBorderRadius,
-									fullBorderRadius
-								],
-								extrapolate: "clamp"
-							})
-						}
-					]}
-					onTouchStart={(evt: any) => evt.stopPropagation()}
-				>
-					<View style={styles.handleContainer}>
-						<View style={styles.handle} />
-					</View>
-					<Info currentBusiness={currentData} onLayout={infoCard.onLayout} />
-				</Animated.View>
-			</PanGestureHandler>
+			<View style={[styles.infoCard, { top: infoCardTop }]}>
+				<View style={styles.handleContainer}>
+					<View style={styles.handle} />
+				</View>
+				<Info
+					currentBusiness={currentData}
+					onLayout={evt => setInfoHeight(evt.nativeEvent.layout.height)}
+				/>
+			</View>
 
-			<Animated.View
+			<View
 				style={[
 					styles.actionContainer,
-					{
-						transform: [
-							{
-								translateY: infoCard.translateY.interpolate({
-									inputRange: [0, bottomHeight],
-									outputRange: [0, actionHeight],
-									extrapolate: "clamp"
-								})
-							}
-						],
-						borderRadius: infoCard.translateY.interpolate({
-							inputRange: infoCard.translateYRange,
-							outputRange: [0, fullBorderRadius, fullBorderRadius, fullBorderRadius],
-							extrapolate: "clamp"
-						})
-					}
+					{ height: displayState == DisplayState.galleryFull ? 0 : 75 }
 				]}
-				onTouchStart={(evt: any) => evt.stopPropagation()}
 			>
 				{openedType == "recommendation" ? (
 					<RecomAction businessId={currentData.id} />
 				) : (
 					<CollectAction businessId={currentData.id} />
 				)}
-			</Animated.View>
-			{/* </ImageBackground> */}
+			</View>
 		</View>
 	);
 };
@@ -199,8 +128,8 @@ const styles = StyleSheet.create({
 		height: "100%",
 		width: "100%",
 		position: "absolute",
-		left: 0,
-		top: dimension.height() - bottomHeight
+		borderTopLeftRadius: 24,
+		borderTopRightRadius: 24
 	},
 	handleContainer: {
 		height: 24,
@@ -217,19 +146,17 @@ const styles = StyleSheet.create({
 	},
 	actionContainer: {
 		position: "absolute",
-		left: 0,
 		bottom: 0,
 		width: "100%",
-		borderBottomLeftRadius: 0,
-		borderBottomRightRadius: 0,
-		backgroundColor: "#eee",
-		height: 75
+		borderTopLeftRadius: 24,
+		borderTopRightRadius: 24,
+		backgroundColor: "#eee"
 	},
 	galleryDescriptionContainer: {
 		position: "absolute",
 		width: "100%",
 		left: 0,
-		bottom: bottomHeight + 24,
+		bottom: 119 + 24,
 		alignItems: "center"
 	},
 	statusContainer: {

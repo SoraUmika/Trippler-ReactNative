@@ -8,42 +8,15 @@ import dimension from "../../dimension";
 interface Props {
 	gallery: GalleryImageData[];
 	index: number;
-	animation: GalleryAnimationManager;
 }
 
-const galleryTransXOffset = -dimension.width() - 24;
-
 const GalleryImage: FC<Props> = props => {
-	const { gallery, index, animation } = props;
-	const leftIndex = index ? index - 1 : gallery.length - 1;
-	const rightIndex = index == gallery.length - 1 ? 0 : index + 1;
+	const { gallery, index } = props;
 
 	return (
-		<Animated.View
-			style={[
-				styles.gallery,
-				{
-					transform: [
-						{
-							translateX: animation.translateX.interpolate({
-								inputRange: animation.translateXRange,
-								outputRange: [animation.imageWidth * -1, animation.imageWidth],
-								extrapolate: "clamp"
-							})
-						},
-						{
-							translateX: galleryTransXOffset
-						}
-					]
-				}
-			]}
-		>
-			<Image style={styles.image} source={{ uri: gallery[leftIndex].url }} />
-			<View style={styles.imageSeparator} />
+		<View>
 			<Image style={styles.image} source={{ uri: gallery[index].url }} />
-			<View style={styles.imageSeparator} />
-			<Image style={styles.image} source={{ uri: gallery[rightIndex].url }} />
-		</Animated.View>
+		</View>
 	);
 };
 

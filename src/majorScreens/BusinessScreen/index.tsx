@@ -12,10 +12,7 @@ import GalleryAnimationManager from "./animationManager/gallery";
  * The actual presentational component is down below.
  */
 const AnimationManager: FC = () => {
-	const infoCardAnimationManager = new InfoCardAnimationManager();
-	const galleryAnimationManager = new GalleryAnimationManager();
-
-	return <Screen infoCard={infoCardAnimationManager} gallery={galleryAnimationManager} />;
+	return <Screen />;
 };
 
 export default memo(AnimationManager, () => true);
