@@ -57,7 +57,7 @@ const Screen: FC<Props> = props => {
 				onTouchStart={() => {
 					console.log(displayState);
 					setDisplayState(
-						displayState + (displayState < DisplayState.galleryFull ? 1 : -1)
+						displayState + (displayState < DisplayState.galleryFull ? 1 : -2)
 					);
 				}}
 			/>
@@ -69,7 +69,7 @@ const Screen: FC<Props> = props => {
 			</View>
 
 			<View style={styles.galleryDescriptionContainer}>
-				{displayState >= DisplayState.galleryNormal && (
+				{displayState == DisplayState.galleryNormal && (
 					<GalleryDescription gallery={currentData.gallery} index={galleryIndex} />
 				)}
 			</View>
